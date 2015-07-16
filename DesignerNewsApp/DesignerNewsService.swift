@@ -13,7 +13,7 @@ struct DesignerNewsService {
     // Designer News API Doc: http://developers.news.layervault.com
     //                    V2: https://github.com/metalabdesign/dn_api_v2
 
-    private static let baseURL = "https://www.designernews.co"
+    private static let baseURL = "http://172.28.1.53"
     private static let clientID = "750ab22aac78be1c6d4bbe584f0e3477064f646720f327c5464bc127100a1a6d"
     private static let clientSecret = "53e3822c49287190768e009a8f8e55d09041c5bf26d0ef982693f215c72d87da"
 
@@ -27,7 +27,8 @@ struct DesignerNewsService {
 
         var description: String {
             switch self {
-            case .Login: return "/oauth/token"
+            case .Login: return "/api/login"
+                
             case .Stories: return "/api/v1/stories"
             case .StoryUpvote(let id): return "/api/v1/stories/\(id)/upvote"
             case .StoryReply(let id): return "/api/v1/stories/\(id)/reply"
@@ -49,24 +50,43 @@ struct DesignerNewsService {
             response(stories)
         }
     }
-
+    
     static func loginWithEmail(email: String, password: String, response: (token: String?) -> ()) {
+        
         let urlString = baseURL + ResourcePath.Login.description
+        
         let parameters = [
-            "grant_type": "password",
-            "username": email,
-            "password": password,
-            "client_id": clientID,
-            "client_secret": clientSecret
+            "Item": [
+                "Username": email,
+                "Password": password
+            ]
         ]
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json == nil ){
+                response(token: nil)
+            }
+    
+            let jsonObject = JSON(json!)
+            
+            println(jsonObject)
 
-        Alamofire.request(.POST, urlString, parameters: parameters)
-            .responseJSON { (_, _, json, _) in
-                let responseDictionary = json as? NSDictionary
-                let token = responseDictionary?["access_token"] as? String
-                response(token: token)
+            let IsSuccess = jsonObject["IsSuccess"].bool
+            
+            if(IsSuccess?.boolValue == true)
+            {
+                let TokenNumber = jsonObject["Item"]["TokenNumber"].string
+                response(token: TokenNumber)
+            }
+            else
+            {
+                response(token: nil)
+            }
+            
         }
     }
+
 
     static func upvoteStoryWithId(storyId: Int, token: String, response: (successful: Bool) -> ()) {
         let resourcePath = ResourcePath.StoryUpvote(storyId: storyId)

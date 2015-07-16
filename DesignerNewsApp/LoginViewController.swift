@@ -42,17 +42,32 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     
     // MARK: Button
     @IBAction func signupButtonPressed(sender: AnyObject) {
+        DoLogin()
+    }
+    
+    func DoLogin(){
+        
         view.showLoading()
+        
         DesignerNewsService.loginWithEmail(emailTextField.text, password: passwordTextField.text) { token in
+            
             self.view.hideLoading()
+            
             if let token = token {
+                
+                //println(token)
+                
                 LocalStore.setAccessToken(token)
+                
                 self.dialogView.animation = "zoomOut"
                 self.dialogView.animate()
                 self.dismissViewControllerAnimated(true, completion: nil)
-                UIApplication.sharedApplication().sendAction("reset:", to: nil, from: self, forEvent: nil)
-                self.delegate?.loginViewControllerDidLogin(self)
-            } else {
+                
+                self.performSegueWithIdentifier("AfterLogin", sender: self)
+                
+            }
+            else
+            {
                 self.dialogView.animation = "shake"
                 self.dialogView.animate()
             }
@@ -95,5 +110,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
 
     func dragDropBehavior(behavior: DragDropBehavior, viewDidDrop view: UIView) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        DoLogin()
+        
+        textField.resignFirstResponder()
+        return true
     }
 }

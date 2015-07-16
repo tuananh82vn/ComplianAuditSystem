@@ -10,21 +10,19 @@ import UIKit
 import Spring
 
 protocol MenuViewControllerDelegate : class {
-    func menuViewControllerDidSelectTopStories(controller:MenuViewController)
-    func menuViewControllerDidSelectRecent(controller:MenuViewController)
-    func menuViewControllerDidSelectLogout(controller:MenuViewController)
-    func menuViewControllerDidSelectLogin(controller:MenuViewController)
     func menuViewControllerDidSelectCloseMenu(controller:MenuViewController)
 }
 
 class MenuViewController: UIViewController {
     
     weak var delegate: MenuViewControllerDelegate?
+    
     @IBOutlet weak var dialogView: SpringView!
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var recentLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
     @IBOutlet weak var loginLabel: UILabel!
+    
     private var loginAction : LoginAction?
     private var loginStateHandler: LoginStateHandler?
     
@@ -47,15 +45,9 @@ class MenuViewController: UIViewController {
     
     // MARK: Buttons
     @IBAction func topButtonPressed(sender: AnyObject) {
-        animateView()
-        delegate?.menuViewControllerDidSelectTopStories(self)
-        closeButtonPressed(self)
     }
     
     @IBAction func recentButtonPressed(sender: AnyObject) {
-        animateView()
-        delegate?.menuViewControllerDidSelectRecent(self)
-        closeButtonPressed(self)
     }
     
     @IBAction func creditsButtonPressed(sender: AnyObject) {
@@ -63,19 +55,6 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(sender: AnyObject) {
-        animateView()
-        if LocalStore.accessToken() == nil {
-            loginAction = LoginAction(viewController: self, completion: { [weak self] () -> () in
-                if let strongSelf = self {
-                    strongSelf.dismissViewControllerAnimated(true, completion: nil)
-                    strongSelf.delegate?.menuViewControllerDidSelectLogin(strongSelf)
-                }
-            })
-        } else {
-            LogoutAction()
-            delegate?.menuViewControllerDidSelectLogout(self)
-            dismissViewControllerAnimated(true, completion: nil)
-        }
     }
 
     @IBAction func closeButtonPressed(sender: AnyObject) {

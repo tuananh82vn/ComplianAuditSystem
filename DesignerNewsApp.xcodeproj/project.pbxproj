@@ -37,15 +37,21 @@
 		1AB33B591A7660E800E3AB55 /* libDTCoreText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB33B501A7660B300E3AB55 /* libDTCoreText.a */; };
 		1AB6351C1AB6D46900064D14 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB6351B1AB6D46900064D14 /* ContainerViewController.swift */; };
 		1AED4A711A7BBCCA004C689E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED4A701A7BBCCA004C689E /* Error.swift */; };
+		667F4A5F1B563F4400257DF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F4A5D1B563F4400257DF8 /* Main.storyboard */; };
+		66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF71B56260C0058FF09 /* SwiftyJSON.swift */; };
+		66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF91B5626200058FF09 /* LoginModel.swift */; };
+		66919EFC1B5626F30058FF09 /* FlickrSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EFB1B5626F30058FF09 /* FlickrSearcher.swift */; };
+		66919EFE1B5627020058FF09 /* FlickrPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EFD1B5627020058FF09 /* FlickrPhotosViewController.swift */; };
+		66919F001B56279E0058FF09 /* FlickrCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EFF1B56279E0058FF09 /* FlickrCell.swift */; };
+		66919F021B5627A30058FF09 /* FlickrPhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919F011B5627A30058FF09 /* FlickrPhotoHeaderView.swift */; };
+		669B2EFA1B57620B00F8D82D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669B2EF91B57620B00F8D82D /* MainViewController.swift */; };
 		961889B81A680D3800295A64 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961889B71A680D3800295A64 /* LearnViewController.swift */; };
 		9631F5A81AC1A9A800418E0E /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9631F5A71AC1A9A800418E0E /* IntroViewController.swift */; };
 		964892151A62A84600214D53 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964892141A62A84600214D53 /* ReplyViewController.swift */; };
 		964892671A63F5D900214D53 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964892661A63F5D900214D53 /* MenuViewController.swift */; };
 		966128551A4DA63100A54A23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966128541A4DA63100A54A23 /* AppDelegate.swift */; };
-		9661285A1A4DA63100A54A23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 966128581A4DA63100A54A23 /* Main.storyboard */; };
 		9661285C1A4DA63100A54A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9661285B1A4DA63100A54A23 /* Images.xcassets */; };
 		9661285F1A4DA63100A54A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9661285D1A4DA63100A54A23 /* LaunchScreen.xib */; };
-		9661286B1A4DA63100A54A23 /* DesignerNewsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661286A1A4DA63100A54A23 /* DesignerNewsAppTests.swift */; };
 		967CFD061A5C10700044B4E3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967CFD051A5C10700044B4E3 /* LoginViewController.swift */; };
 		96879AA01A6E786D00717E59 /* Spring.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4FDA711A6E44B70099D309 /* Spring.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9694F2051A5FF13900A6376A /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9694F2041A5FF13900A6376A /* CommentsTableViewController.swift */; };
@@ -156,13 +162,6 @@
 			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
 			remoteInfo = Alamofire;
 		};
-		966128651A4DA63100A54A23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 966128471A4DA63100A54A23 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9661284E1A4DA63100A54A23;
-			remoteInfo = DesignerNewsApp;
-		};
 		96A5800A1A5E4DF500FDE099 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96A580051A5E4DF400FDE099 /* Alamofire.xcodeproj */;
@@ -246,6 +245,14 @@
 		1AB33B3F1A7660B300E3AB55 /* DTCoreText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTCoreText.xcodeproj; path = DTCoreText/DTCoreText.xcodeproj; sourceTree = "<group>"; };
 		1AB6351B1AB6D46900064D14 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		1AED4A701A7BBCCA004C689E /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		667F4A5E1B563F4400257DF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		66919EF71B56260C0058FF09 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		66919EF91B5626200058FF09 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		66919EFB1B5626F30058FF09 /* FlickrSearcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrSearcher.swift; sourceTree = "<group>"; };
+		66919EFD1B5627020058FF09 /* FlickrPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrPhotosViewController.swift; sourceTree = "<group>"; };
+		66919EFF1B56279E0058FF09 /* FlickrCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrCell.swift; sourceTree = "<group>"; };
+		66919F011B5627A30058FF09 /* FlickrPhotoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrPhotoHeaderView.swift; sourceTree = "<group>"; };
+		669B2EF91B57620B00F8D82D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		961889B71A680D3800295A64 /* LearnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
 		9631F5A71AC1A9A800418E0E /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		964892141A62A84600214D53 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
@@ -253,12 +260,8 @@
 		9661284F1A4DA63100A54A23 /* DesignerNewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesignerNewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		966128531A4DA63100A54A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		966128541A4DA63100A54A23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		966128591A4DA63100A54A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9661285B1A4DA63100A54A23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9661285E1A4DA63100A54A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		966128641A4DA63100A54A23 /* DesignerNewsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesignerNewsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		966128691A4DA63100A54A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9661286A1A4DA63100A54A23 /* DesignerNewsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerNewsAppTests.swift; sourceTree = "<group>"; };
 		967CFD051A5C10700044B4E3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9694F2041A5FF13900A6376A /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		9694F20A1A6123D000A6376A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -295,13 +298,6 @@
 				1A8D9C811A75E3000032DA0F /* ImageIO.framework in Frameworks */,
 				1A908E671A753B6C00F30022 /* libxml2.dylib in Frameworks */,
 				1A6D23BD1AB6AD2E000F080A /* HockeySDK.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		966128611A4DA63100A54A23 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +401,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		66919EF61B5625FD0058FF09 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				66919EFB1B5626F30058FF09 /* FlickrSearcher.swift */,
+				66919EF71B56260C0058FF09 /* SwiftyJSON.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		966128461A4DA63100A54A23 = {
 			isa = PBXGroup;
 			children = (
@@ -412,7 +417,6 @@
 				1A935E251A837A670059BCBC /* Libraries */,
 				1A8D9C7F1A75E2A70032DA0F /* Externals */,
 				1A8D9C881A75E31F0032DA0F /* Frameworks */,
-				966128671A4DA63100A54A23 /* DesignerNewsAppTests */,
 				966128501A4DA63100A54A23 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -421,7 +425,6 @@
 			isa = PBXGroup;
 			children = (
 				9661284F1A4DA63100A54A23 /* DesignerNewsApp.app */,
-				966128641A4DA63100A54A23 /* DesignerNewsAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -429,7 +432,7 @@
 		966128511A4DA63100A54A23 /* DesignerNewsApp */ = {
 			isa = PBXGroup;
 			children = (
-				966128581A4DA63100A54A23 /* Main.storyboard */,
+				667F4A5D1B563F4400257DF8 /* Main.storyboard */,
 				B78F903F1A6EFB9800883A5B /* Models */,
 				B70191151A76566700ED4D3D /* Views */,
 				B70190FA1A754DC900ED4D3D /* View Controllers */,
@@ -438,6 +441,7 @@
 				B779F6A41AB7553B00DDF3AA /* Activities */,
 				B70191001A7550B600ED4D3D /* Behaviours */,
 				B70191221A7656AF00ED4D3D /* Bridging */,
+				66919EF61B5625FD0058FF09 /* Utility */,
 				966128521A4DA63100A54A23 /* Supporting Files */,
 			);
 			path = DesignerNewsApp;
@@ -451,23 +455,6 @@
 				9661285D1A4DA63100A54A23 /* LaunchScreen.xib */,
 				9661285B1A4DA63100A54A23 /* Images.xcassets */,
 				966128531A4DA63100A54A23 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		966128671A4DA63100A54A23 /* DesignerNewsAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				9661286A1A4DA63100A54A23 /* DesignerNewsAppTests.swift */,
-				966128681A4DA63100A54A23 /* Supporting Files */,
-			);
-			path = DesignerNewsAppTests;
-			sourceTree = "<group>";
-		};
-		966128681A4DA63100A54A23 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				966128691A4DA63100A54A23 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -487,15 +474,17 @@
 			isa = PBXGroup;
 			children = (
 				967CFD051A5C10700044B4E3 /* LoginViewController.swift */,
+				669B2EF91B57620B00F8D82D /* MainViewController.swift */,
+				964892661A63F5D900214D53 /* MenuViewController.swift */,
+				1AB6351B1AB6D46900064D14 /* ContainerViewController.swift */,
 				96AF96141A5EAA41003926E2 /* StoriesTableViewController.swift */,
 				9694F2041A5FF13900A6376A /* CommentsTableViewController.swift */,
 				964892141A62A84600214D53 /* ReplyViewController.swift */,
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
-				964892661A63F5D900214D53 /* MenuViewController.swift */,
 				961889B71A680D3800295A64 /* LearnViewController.swift */,
 				966128541A4DA63100A54A23 /* AppDelegate.swift */,
-				1AB6351B1AB6D46900064D14 /* ContainerViewController.swift */,
 				9631F5A71AC1A9A800418E0E /* IntroViewController.swift */,
+				66919EFD1B5627020058FF09 /* FlickrPhotosViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -550,6 +539,7 @@
 		B78F903F1A6EFB9800883A5B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				66919EF91B5626200058FF09 /* LoginModel.swift */,
 				B78F90401A6EFBAF00883A5B /* Story.swift */,
 				B78F90421A6EFF2100883A5B /* Comment.swift */,
 				1AED4A701A7BBCCA004C689E /* Error.swift */,
@@ -561,6 +551,8 @@
 		B7E4D3311A719831001DC9B6 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				66919F011B5627A30058FF09 /* FlickrPhotoHeaderView.swift */,
+				66919EFF1B56279E0058FF09 /* FlickrCell.swift */,
 				96AF96161A5EABC9003926E2 /* StoryTableViewCell.swift */,
 				B7E4D3361A719855001DC9B6 /* CommentTableViewCell.swift */,
 				1A2331C31A78DFAF002F8D80 /* LoadingTableViewCell.swift */,
@@ -591,24 +583,6 @@
 			productReference = 9661284F1A4DA63100A54A23 /* DesignerNewsApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		966128631A4DA63100A54A23 /* DesignerNewsAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 966128711A4DA63100A54A23 /* Build configuration list for PBXNativeTarget "DesignerNewsAppTests" */;
-			buildPhases = (
-				966128601A4DA63100A54A23 /* Sources */,
-				966128611A4DA63100A54A23 /* Frameworks */,
-				966128621A4DA63100A54A23 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				966128661A4DA63100A54A23 /* PBXTargetDependency */,
-			);
-			name = DesignerNewsAppTests;
-			productName = DesignerNewsAppTests;
-			productReference = 966128641A4DA63100A54A23 /* DesignerNewsAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -616,16 +590,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = "Meng To";
+				ORGANIZATIONNAME = Synotive;
 				TargetAttributes = {
 					9661284E1A4DA63100A54A23 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 68WS2M23VC;
-					};
-					966128631A4DA63100A54A23 = {
-						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 68WS2M23VC;
-						TestTargetID = 9661284E1A4DA63100A54A23;
+						DevelopmentTeam = 2Y52JE3P8G;
 					};
 				};
 			};
@@ -657,7 +626,6 @@
 			projectRoot = "";
 			targets = (
 				9661284E1A4DA63100A54A23 /* DesignerNewsApp */,
-				966128631A4DA63100A54A23 /* DesignerNewsAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -775,19 +743,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9661285A1A4DA63100A54A23 /* Main.storyboard in Resources */,
 				1A6D23BF1AB6AD2E000F080A /* HockeySDKResources.bundle in Resources */,
 				9661285F1A4DA63100A54A23 /* LaunchScreen.xib in Resources */,
 				1A935E391A837B980059BCBC /* refresh.wav in Resources */,
+				667F4A5F1B563F4400257DF8 /* Main.storyboard in Resources */,
 				1A935E3A1A837B980059BCBC /* upvote.wav in Resources */,
 				9661285C1A4DA63100A54A23 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		966128621A4DA63100A54A23 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,13 +760,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				964892671A63F5D900214D53 /* MenuViewController.swift in Sources */,
+				66919F021B5627A30058FF09 /* FlickrPhotoHeaderView.swift in Sources */,
 				961889B81A680D3800295A64 /* LearnViewController.swift in Sources */,
 				1A2849971AB9D3F900940CE3 /* LoginService.swift in Sources */,
+				66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */,
 				1AB6351C1AB6D46900064D14 /* ContainerViewController.swift in Sources */,
 				966128551A4DA63100A54A23 /* AppDelegate.swift in Sources */,
+				66919EFC1B5626F30058FF09 /* FlickrSearcher.swift in Sources */,
 				B773D86F1A7BC101008E8A65 /* LocalStore.swift in Sources */,
 				1A7D78A01A70F8FE0061D6F6 /* DragDropBehavior.swift in Sources */,
 				1A935E311A837A670059BCBC /* TPKeyboardAvoidingTableView.m in Sources */,
+				66919F001B56279E0058FF09 /* FlickrCell.swift in Sources */,
 				1AED4A711A7BBCCA004C689E /* Error.swift in Sources */,
 				B78F903E1A6EFAAA00883A5B /* JSONParser.swift in Sources */,
 				1A908E471A74A44600F30022 /* Replyable.swift in Sources */,
@@ -820,8 +785,11 @@
 				B78F90411A6EFBAF00883A5B /* Story.swift in Sources */,
 				1A935E301A837A670059BCBC /* TPKeyboardAvoidingScrollView.m in Sources */,
 				96AF96171A5EABC9003926E2 /* StoryTableViewCell.swift in Sources */,
+				66919EFE1B5627020058FF09 /* FlickrPhotosViewController.swift in Sources */,
+				669B2EFA1B57620B00F8D82D /* MainViewController.swift in Sources */,
 				1A9183091A75EE1900606F35 /* CoreTextView.swift in Sources */,
 				1A935E3C1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift in Sources */,
+				66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */,
 				B7E4D3371A719855001DC9B6 /* CommentTableViewCell.swift in Sources */,
 				1A2331D21A78E1AF002F8D80 /* StoriesLoader.swift in Sources */,
 				967CFD061A5C10700044B4E3 /* LoginViewController.swift in Sources */,
@@ -830,14 +798,6 @@
 				B790E5311A82C6BC0007B392 /* MenuControl.swift in Sources */,
 				B779F6B41AB7570700DDF3AA /* ChromeActivity.swift in Sources */,
 				9631F5A81AC1A9A800418E0E /* IntroViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		966128601A4DA63100A54A23 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9661286B1A4DA63100A54A23 /* DesignerNewsAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -854,18 +814,13 @@
 			name = Alamofire;
 			targetProxy = 964892121A62818A00214D53 /* PBXContainerItemProxy */;
 		};
-		966128661A4DA63100A54A23 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9661284E1A4DA63100A54A23 /* DesignerNewsApp */;
-			targetProxy = 966128651A4DA63100A54A23 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		966128581A4DA63100A54A23 /* Main.storyboard */ = {
+		667F4A5D1B563F4400257DF8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				966128591A4DA63100A54A23 /* Base */,
+				667F4A5E1B563F4400257DF8 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -987,7 +942,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "Externals/DTCoreText/Core/** Externals/DTCoreText/Externals/DTFoundation/Core/**";
 			};
 			name = Debug;
@@ -1019,44 +974,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "Externals/DTCoreText/Core/** Externals/DTCoreText/Externals/DTFoundation/Core/**";
-			};
-			name = Release;
-		};
-		966128721A4DA63100A54A23 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DesignerNewsAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DesignerNewsApp.app/DesignerNewsApp";
-			};
-			name = Debug;
-		};
-		966128731A4DA63100A54A23 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DesignerNewsAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DesignerNewsApp.app/DesignerNewsApp";
 			};
 			name = Release;
 		};
@@ -1077,15 +996,6 @@
 			buildConfigurations = (
 				9661286F1A4DA63100A54A23 /* Debug */,
 				966128701A4DA63100A54A23 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		966128711A4DA63100A54A23 /* Build configuration list for PBXNativeTarget "DesignerNewsAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				966128721A4DA63100A54A23 /* Debug */,
-				966128731A4DA63100A54A23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

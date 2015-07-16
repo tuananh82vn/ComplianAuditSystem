@@ -14,6 +14,7 @@ struct LocalStore {
     private static let repliedStoriesKey = "repliedStoriesKey"
     private static let upvotedCommentsKey = "upvotedCommentsKey"
     private static let accessTokenKey = "accessTokenKey"
+    
     private static let userDefaults = NSUserDefaults.standardUserDefaults()
 
     static func setIntroAsVisited() {

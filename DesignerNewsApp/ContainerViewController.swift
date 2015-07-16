@@ -15,33 +15,39 @@ class ContainerViewController: UIPageViewController {
     @IBOutlet weak var pageIndicator: UIPageControl!
 
     private var loginAction : LoginAction?
+
     private var loginStateChange : LoginStateHandler?
 
     lazy var _controllers : [StoriesTableViewController] = {
+        
         let topStories = self.storyboard?.instantiateViewControllerWithIdentifier("StoriesTableViewController") as! StoriesTableViewController
 
         let recentStories = self.storyboard?.instantiateViewControllerWithIdentifier("StoriesTableViewController") as! StoriesTableViewController
+        
         recentStories.storySection = .Recent
 
         let searchStories = self.storyboard?.instantiateViewControllerWithIdentifier("StoriesTableViewController") as! StoriesTableViewController
+        
         searchStories.storySection = .Search("")
 
         return [topStories, recentStories, searchStories]
     }()
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "MenuSegue" {
-            let menuViewController = segue.destinationViewController as! MenuViewController
-            menuViewController.delegate = self
-        }
-    }
+//    // call menu
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "MenuSegue" {
+//            let menuViewController = segue.destinationViewController as! MenuViewController
+//            menuViewController.delegate = self
+//        }
+//    }
 
     @IBAction func pageControlValueChanged(sender: UIPageControl) {
-        turnToPage(sender.currentPage)
+        //turnToPage(sender.currentPage)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = UIColor.whiteColor()
 
         dataSource = self
@@ -59,14 +65,14 @@ class ContainerViewController: UIPageViewController {
             }
         })
 
-        turnToPage(0)
+        //turnToPage(0)
         
-        if !LocalStore.isIntroVisited() {
-            performSegueWithIdentifier("IntroSegue", sender: self)
-            LocalStore.setIntroAsVisited()
-        }
+//        if !LocalStore.isIntroVisited() {
+//            performSegueWithIdentifier("IntroSegue", sender: self)
+//            LocalStore.setIntroAsVisited()
+//        }
 
-        pageIndicator.numberOfPages = _controllers.count
+        //pageIndicator.numberOfPages = _controllers.count
         pageIndicator.transform = CGAffineTransformMakeScale(0.6, 0.6)
     }
 
@@ -74,20 +80,20 @@ class ContainerViewController: UIPageViewController {
         let title = controller.navigationItem.title
         navTitleLabel.text = title
 
-        for (index, vc) in enumerate(_controllers) {
-            // when more than one scroll view on screen
-            // 1. Fix scroll to top
-            // 2. Update page indicator
-            if controller === vc {
-                vc.tableView.scrollsToTop = true
-                pageIndicator.currentPage = index
-                animateTitle()
-            } else {
-                vc.tableView.scrollsToTop = false
-            }
-
-        }
-    }
+//        for (index, vc) in enumerate(_controllers) {
+//            // when more than one scroll view on screen
+//            // 1. Fix scroll to top
+//            // 2. Update page indicator
+//            if controller === vc {
+//                vc.tableView.scrollsToTop = true
+//                pageIndicator.currentPage = index
+//                animateTitle()
+//            } else {
+//                vc.tableView.scrollsToTop = false
+//            }
+//
+//        }
+//   }
     
     func animateTitle() {
         pageIndicator.alpha = 0
@@ -98,26 +104,26 @@ class ContainerViewController: UIPageViewController {
         })
     }
 
-    func turnToPage(index: Int) {
-        let controller = _controllers[index]
-
-        var direction = UIPageViewControllerNavigationDirection.Forward
-
-        if let currentViewController = viewControllers.first as? UIViewController {
-            let currentIndex = (_controllers as NSArray).indexOfObject(currentViewController)
-
-            if currentIndex > index {
-                direction = UIPageViewControllerNavigationDirection.Reverse
-            }
-        }
-
-        configureForDisplayingViewController(controller)
-        setViewControllers([controller],
-            direction: direction,
-            animated: true) { (completion) -> Void in
-
-        }
-    }
+//    func turnToPage(index: Int) {
+//        let controller = _controllers[index]
+//
+//        var direction = UIPageViewControllerNavigationDirection.Forward
+//
+//        if let currentViewController = viewControllers.first as? UIViewController {
+//            let currentIndex = (_controllers as NSArray).indexOfObject(currentViewController)
+//
+//            if currentIndex > index {
+//                direction = UIPageViewControllerNavigationDirection.Reverse
+//            }
+//        }
+//
+//        configureForDisplayingViewController(controller)
+//        setViewControllers([controller],
+//            direction: direction,
+//            animated: true) { (completion) -> Void in
+//
+//        }
+}
 
     func animateMenuButton() {
         if let button = navigationItem.leftBarButtonItem?.customView as? MenuControl {
@@ -137,8 +143,8 @@ class ContainerViewController: UIPageViewController {
             LogoutAction()
         }
     }
-
 }
+
 
 extension ContainerViewController : UIPageViewControllerDataSource {
 
@@ -180,27 +186,26 @@ extension ContainerViewController : UIPageViewControllerDelegate {
 
 }
 
-extension  ContainerViewController : MenuViewControllerDelegate {
-
-    // MARK: MenuViewControllerDelegate
-    func menuViewControllerDidSelectTopStories(controller: MenuViewController) {
-        turnToPage(0)
-    }
-
-    func menuViewControllerDidSelectRecent(controller: MenuViewController) {
-        turnToPage(1)
-    }
-
-    func menuViewControllerDidSelectCloseMenu(controller: MenuViewController) {
-        animateMenuButton()
-    }
-
-    func menuViewControllerDidSelectLogin(controller: MenuViewController) {
-        animateMenuButton()
-    }
-
-    func menuViewControllerDidSelectLogout(controller: MenuViewController) {
-        animateMenuButton()
-    }
-
-}
+//extension  ContainerViewController : MenuViewControllerDelegate {
+//
+//    // MARK: MenuViewControllerDelegate
+//    func menuViewControllerDidSelectTopStories(controller: MenuViewController) {
+//        turnToPage(0)
+//    }
+//
+//    func menuViewControllerDidSelectRecent(controller: MenuViewController) {
+//        turnToPage(1)
+//    }
+//
+//    func menuViewControllerDidSelectCloseMenu(controller: MenuViewController) {
+//        animateMenuButton()
+//    }
+//
+//    func menuViewControllerDidSelectLogin(controller: MenuViewController) {
+//        animateMenuButton()
+//    }
+//
+//    func menuViewControllerDidSelectLogout(controller: MenuViewController) {
+//        animateMenuButton()
+//    }
+//}
