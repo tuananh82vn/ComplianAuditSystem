@@ -11,6 +11,9 @@ import Spring
 
 protocol MenuViewControllerDelegate : class {
     func menuViewControllerDidSelectCloseMenu(controller:MenuViewController)
+    
+    func menuViewControllerDidSelectActivitiesMenu(controller:MenuViewController)
+    
 }
 
 class MenuViewController: UIViewController {
@@ -21,16 +24,9 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var recentLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
-    @IBOutlet weak var loginLabel: UILabel!
-    
-    private var loginAction : LoginAction?
-    private var loginStateHandler: LoginStateHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let token = LocalStore.accessToken()
-        loginLabel.text = token == nil ? "Login" : "Logout"
     }
     
     var firstTime = true
@@ -38,7 +34,6 @@ class MenuViewController: UIViewController {
         super.viewDidAppear(true)
         if firstTime {
             dialogView.animate()
-            
             firstTime = false
         }
     }
@@ -47,7 +42,10 @@ class MenuViewController: UIViewController {
     @IBAction func topButtonPressed(sender: AnyObject) {
     }
     
-    @IBAction func recentButtonPressed(sender: AnyObject) {
+    @IBAction func ActivitiesButtonPressed(sender: AnyObject) {
+        animateView()
+        delegate?.menuViewControllerDidSelectActivitiesMenu(self)
+        closeButtonPressed(self)
     }
     
     @IBAction func creditsButtonPressed(sender: AnyObject) {

@@ -13,7 +13,7 @@ struct DesignerNewsService {
     // Designer News API Doc: http://developers.news.layervault.com
     //                    V2: https://github.com/metalabdesign/dn_api_v2
 
-    private static let baseURL = "http://172.28.1.53"
+    private static let baseURL = "http://complianceauditsystem.softwarestaging.com.au"
     private static let clientID = "750ab22aac78be1c6d4bbe584f0e3477064f646720f327c5464bc127100a1a6d"
     private static let clientSecret = "53e3822c49287190768e009a8f8e55d09041c5bf26d0ef982693f215c72d87da"
 
@@ -131,12 +131,17 @@ struct DesignerNewsService {
         request.HTTPBody = "comment[body]=\(body)".dataUsingEncoding(NSUTF8StringEncoding)
 
         Alamofire.request(request).responseJSON { (_, urlResponse, json, error) in
-            if let message = json?["error"] as? String {
+            if let message = json?["error"] as? String
+            {
                 response(comment: nil, error: Error(message: message, code: urlResponse?.statusCode ?? 0))
-            } else if let commentDict = json?["comment"] as? NSDictionary {
+            }
+            else if let commentDict = json?["comment"] as? NSDictionary
+            {
                 let comment = JSONParser.parseComment(commentDict)
                 response(comment: comment, error: nil)
-            } else {
+            }
+            else
+            {
                 response(comment: nil, error: Error(message: error?.localizedDescription ?? "Something went wrong", code: error?.code ?? 0))
             }
         }

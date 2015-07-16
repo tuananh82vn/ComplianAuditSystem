@@ -11,6 +11,7 @@ import Spring
 
 protocol LoginViewControllerDelegate : class {
     func loginViewControllerDidLogin(controller:LoginViewController)
+    
 }
 
 class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehaviorDelegate {

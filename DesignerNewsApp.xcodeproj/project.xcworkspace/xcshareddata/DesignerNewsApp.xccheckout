@@ -7,13 +7,13 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>1EB55E8E-587E-4698-8839-EC213CD1E4ED</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>DesignerNewsApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2CC69C7EFC439AC727F09E33B49EFBD1D2365CBA</key>
 		<string>https://github.com/Cocoanetics/DTCoreText.git</string>
 		<key>30465C3FE587DE41DC8D7C50D84E40C5B622D54F</key>
-		<string>https://github.com/MengTo/DesignerNewsApp.git</string>
+		<string>https://github.com/tuananh82vn/ComplianAuditSystem.git</string>
 		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
 		<string>https://github.com/Alamofire/Alamofire.git</string>
 		<key>71F5D8D885CFF6BD7151066D7BFF25CC48A5235E</key>
@@ -22,22 +22,22 @@
 		<string>https://github.com/Cocoanetics/DTFoundation.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DesignerNewsApp.xcodeproj/project.xcworkspace</string>
+	<string>DesignerNewsApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2CC69C7EFC439AC727F09E33B49EFBD1D2365CBA</key>
-		<string>../..Externals/DTCoreText/</string>
+		<string>../..Externals/DTCoreText</string>
 		<key>30465C3FE587DE41DC8D7C50D84E40C5B622D54F</key>
 		<string>../..</string>
 		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>../..Externals/Alamofire/</string>
+		<string>../..Externals/Alamofire</string>
 		<key>71F5D8D885CFF6BD7151066D7BFF25CC48A5235E</key>
-		<string>../..Externals/Spring/</string>
+		<string>../..Externals/Spring</string>
 		<key>F501F6253A6AEB746530F92C6B0EA8E3AD06410B</key>
-		<string>../..Externals/DTCoreText/Externals/DTFoundation/</string>
+		<string>../..Externals/DTCoreText/Externals/DTFoundation</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/MengTo/DesignerNewsApp.git</string>
+	<string>https://github.com/tuananh82vn/ComplianAuditSystem.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

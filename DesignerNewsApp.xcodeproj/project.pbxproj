@@ -37,6 +37,9 @@
 		1AB33B591A7660E800E3AB55 /* libDTCoreText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB33B501A7660B300E3AB55 /* libDTCoreText.a */; };
 		1AB6351C1AB6D46900064D14 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB6351B1AB6D46900064D14 /* ContainerViewController.swift */; };
 		1AED4A711A7BBCCA004C689E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED4A701A7BBCCA004C689E /* Error.swift */; };
+		662C80DD1B57950300371598 /* AuditRequestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */; };
+		665CEB941B577FC500A5C8BA /* AuditActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */; };
+		665CEBA41B5782ED00A5C8BA /* AuditRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */; };
 		667F4A5F1B563F4400257DF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F4A5D1B563F4400257DF8 /* Main.storyboard */; };
 		66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF71B56260C0058FF09 /* SwiftyJSON.swift */; };
 		66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF91B5626200058FF09 /* LoginModel.swift */; };
@@ -245,6 +248,9 @@
 		1AB33B3F1A7660B300E3AB55 /* DTCoreText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTCoreText.xcodeproj; path = DTCoreText/DTCoreText.xcodeproj; sourceTree = "<group>"; };
 		1AB6351B1AB6D46900064D14 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		1AED4A701A7BBCCA004C689E /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestCollectionViewCell.swift; sourceTree = "<group>"; };
+		665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivitiesViewController.swift; sourceTree = "<group>"; };
+		665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestModel.swift; sourceTree = "<group>"; };
 		667F4A5E1B563F4400257DF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66919EF71B56260C0058FF09 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		66919EF91B5626200058FF09 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -476,6 +482,8 @@
 				967CFD051A5C10700044B4E3 /* LoginViewController.swift */,
 				669B2EF91B57620B00F8D82D /* MainViewController.swift */,
 				964892661A63F5D900214D53 /* MenuViewController.swift */,
+				665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */,
+				66919EFD1B5627020058FF09 /* FlickrPhotosViewController.swift */,
 				1AB6351B1AB6D46900064D14 /* ContainerViewController.swift */,
 				96AF96141A5EAA41003926E2 /* StoriesTableViewController.swift */,
 				9694F2041A5FF13900A6376A /* CommentsTableViewController.swift */,
@@ -484,7 +492,6 @@
 				961889B71A680D3800295A64 /* LearnViewController.swift */,
 				966128541A4DA63100A54A23 /* AppDelegate.swift */,
 				9631F5A71AC1A9A800418E0E /* IntroViewController.swift */,
-				66919EFD1B5627020058FF09 /* FlickrPhotosViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -544,6 +551,7 @@
 				B78F90421A6EFF2100883A5B /* Comment.swift */,
 				1AED4A701A7BBCCA004C689E /* Error.swift */,
 				1A908E461A74A44600F30022 /* Replyable.swift */,
+				665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -556,6 +564,7 @@
 				96AF96161A5EABC9003926E2 /* StoryTableViewCell.swift */,
 				B7E4D3361A719855001DC9B6 /* CommentTableViewCell.swift */,
 				1A2331C31A78DFAF002F8D80 /* LoadingTableViewCell.swift */,
+				662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -776,6 +785,7 @@
 				1A908E471A74A44600F30022 /* Replyable.swift in Sources */,
 				964892151A62A84600214D53 /* ReplyViewController.swift in Sources */,
 				1A2331C41A78DFAF002F8D80 /* LoadingTableViewCell.swift in Sources */,
+				665CEB941B577FC500A5C8BA /* AuditActivitiesViewController.swift in Sources */,
 				1A935E2F1A837A670059BCBC /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				B78F90431A6EFF2100883A5B /* Comment.swift in Sources */,
 				1A935E321A837A670059BCBC /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
@@ -788,6 +798,7 @@
 				66919EFE1B5627020058FF09 /* FlickrPhotosViewController.swift in Sources */,
 				669B2EFA1B57620B00F8D82D /* MainViewController.swift in Sources */,
 				1A9183091A75EE1900606F35 /* CoreTextView.swift in Sources */,
+				665CEBA41B5782ED00A5C8BA /* AuditRequestModel.swift in Sources */,
 				1A935E3C1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift in Sources */,
 				66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */,
 				B7E4D3371A719855001DC9B6 /* CommentTableViewCell.swift in Sources */,
@@ -795,6 +806,7 @@
 				967CFD061A5C10700044B4E3 /* LoginViewController.swift in Sources */,
 				B779F6C61AB7851100DDF3AA /* SafariActivity.swift in Sources */,
 				9694F2051A5FF13900A6376A /* CommentsTableViewController.swift in Sources */,
+				662C80DD1B57950300371598 /* AuditRequestCollectionViewCell.swift in Sources */,
 				B790E5311A82C6BC0007B392 /* MenuControl.swift in Sources */,
 				B779F6B41AB7570700DDF3AA /* ChromeActivity.swift in Sources */,
 				9631F5A81AC1A9A800418E0E /* IntroViewController.swift in Sources */,
