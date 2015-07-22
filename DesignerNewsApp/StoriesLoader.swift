@@ -49,19 +49,6 @@ class StoriesLoader {
         }
 
         isLoading = true
-        DesignerNewsService.storiesForSection(self.section.description, page: page, keyword: self.keyword) { [weak self] stories in
-
-            if let strongSelf = self {
-                switch (strongSelf.section) {
-                case .Search(_):
-                    strongSelf.hasMore = false
-                default:
-                    strongSelf.hasMore = stories.count > 0
-                }
-                strongSelf.isLoading = false
-                completion(stories: stories)
-            }
-        }
     }
 
     func next(completion: (stories:[Story]) ->()) {

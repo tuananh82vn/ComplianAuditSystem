@@ -9,10 +9,90 @@
 import Foundation
 
 struct JSONParser {
-    static func parseStories(data: NSData?) -> [Story] {
-        return self.dictionariesFromData(data)?.map(self.parseStory) ?? []
+
+
+    static func parseAuditRequestStatus(story: NSDictionary) -> AuditRequestStatusModel {
+        
+        
+        let auditrequestObject =  AuditRequestStatusModel()
+        
+        auditrequestObject.Id = story["Id"] as? Int ?? 0
+        
+        auditrequestObject.Color = story["Colour"] as? String ?? ""
+        
+        auditrequestObject.Description = story["Description"] as? String ?? ""
+        
+        auditrequestObject.DisplayOrder = story["DisplayOrder"] as? Int ?? 0
+        
+        auditrequestObject.MainStatus = story["MainStatus"] as? Int ?? 0
+        
+        auditrequestObject.Description = story["Description"] as? String ?? ""
+        
+        auditrequestObject.Name = story["Name"] as? String ?? ""
+        
+        return auditrequestObject
     }
 
+
+    static func parseAuditRequest(story: NSDictionary) -> AuditRequestModel {
+        
+        
+        let auditrequestObject =  AuditRequestModel()
+        
+        auditrequestObject.TotalRows = story["TotalRows"] as? Int ?? 0
+        
+        auditrequestObject.AuditorName = story["AuditorName"] as? String ?? ""
+        
+        auditrequestObject.AcceptedFromDateDisplay = story["AcceptedFromDateDisplay"] as? String ?? ""
+        
+        auditrequestObject.AuditorId = story["AuditorId"] as? Int ?? 0
+        
+        auditrequestObject.QuestionSetName = story["QuestionSetName"] as? String ?? ""
+        
+        auditrequestObject.CanEditAuditActivity = story["CanEditAuditActivity"] as? Bool ?? false
+        
+        auditrequestObject.StateName = story["StateName"] as? String ?? ""
+        
+        auditrequestObject.Suburb = story["Suburb"] as? String ?? ""
+        
+        auditrequestObject.RequestFromDateDisplay = story["RequestFromDateDisplay"] as? String ?? ""
+        
+        auditrequestObject.RequestToDateDisplay = story["RequestToDateDisplay"] as? String ?? ""
+        
+        auditrequestObject.SiteName = story["SiteName"] as? String ?? ""
+        
+        auditrequestObject.Address = story["Address"] as? String ?? ""
+        
+        auditrequestObject.AuditActivityId = story["AuditActivityId"] as? Int ?? 0
+        
+        auditrequestObject.SiteId = story["SiteId"] as? Int ?? 0
+        
+        auditrequestObject.UrlId = story["UrlId"] as? String ?? ""
+        
+        auditrequestObject.AcceptedToDateDisplay = story["AcceptedToDateDisplay"] as? String ?? ""
+        
+        auditrequestObject.AuditCompanyId = story["AuditCompanyId"] as? Int ?? 0
+        
+        auditrequestObject.QuestionSetUrlId = story["QuestionSetUrlId"] as? String ?? "0"
+        
+        auditrequestObject.Id = story["Id"] as? Int ?? 0
+        
+        auditrequestObject.PostCode = story["PostCode"] as? String ?? ""
+        
+        auditrequestObject.AuditActivityUrlId = story["AuditActivityUrlId"] as? String ?? ""
+        
+        auditrequestObject.AuditActivityStatusId = story["AuditActivityStatusId"] as? Int ?? 0
+        
+        auditrequestObject.AuditRequestStatusId = story["AuditRequestStatusId"] as? Int ?? 0
+        
+        auditrequestObject.CanStartAudit = story["CanStartAudit"] as? Bool ?? false
+        
+        auditrequestObject.AuditCompanyName = story["AuditCompanyName"] as? String ?? ""
+        
+        return auditrequestObject
+    }
+
+    
     static func parseStoriesArray(data: NSData?) -> [Story] {
         if let data = data {
             if let array = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil) as? [NSDictionary] {
@@ -21,7 +101,6 @@ struct JSONParser {
         }
         return []
     }
-
 
     private static func parseStory(story: NSDictionary) -> Story {
         let id = story["id"] as? Int ?? 0
@@ -63,16 +142,16 @@ struct JSONParser {
         }
     }
 
-    // MARK: Helper
-
-    private static func dictionariesFromData(data: NSData?) -> [NSDictionary]? {
-        if let data = data {
-            if let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil) as? NSDictionary {
-                if let items = dictionary["stories"] as? [NSDictionary] {
-                    return items
-                }
-            }
-        }
-        return nil
-    }
+//    // MARK: Helper
+//
+//    private static func dictionariesFromData(data: NSData?) -> [NSDictionary]? {
+//        if let data = data {
+//            if let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil) as? NSDictionary {
+//                if let items = dictionary["stories"] as? [NSDictionary] {
+//                    return items
+//                }
+//            }
+//        }
+//        return nil
+//    }
 }

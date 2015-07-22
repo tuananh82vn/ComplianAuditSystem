@@ -9,8 +9,17 @@
 import Foundation
 
 
+struct AuditRequestModelList {
+
+    let Items : [AuditRequestModel]
+    let Total : Int
+    let IsSuccess : Bool
+    let Error : String
+}
+
+
 class AuditRequestModel {
-    
+    var TotalRows : Int
     var Id : Int
     var UrlId : String
     var SiteId :Int?
@@ -41,6 +50,7 @@ class AuditRequestModel {
     var CanEditAuditActivity : Bool
     
     init() {
+        TotalRows = 0
         Id = 0
         UrlId = ""
         SiteId = 0
@@ -69,64 +79,49 @@ class AuditRequestModel {
          AuditActivityUrlId = ""
          AuditActivityStatusId = 0
          CanEditAuditActivity = false
-
     }
+}
+
+struct AuditRequestStatusModelList {
     
-//    init(Id : Int,
-//         UrlId : String,
-//         SiteId :Int?,
-//         AuditCompanyId : Int?,
-//         AuditorId : Int?,
-//         SiteName  :String,
-//         Address: String,
-//         Suburb: String,
-//         StateName: String,
-//         PostCode: String,
-//         AuditorName: String,
-//         AuditCompanyName: String,
-//         QuestionSetName: String,
-//         QuestionSetUrlId: String,
-//         RequestFromDate : NSDate?,
-//         RequestFromDateDisplay : String,
-//         RequestToDate :NSDate?,
-//         RequestToDateDisplay : String,
-//         AcceptedFromDate : NSDate?,
-//         AcceptedFromDateDisplay : String,
-//         AcceptedToDate : NSDate?,
-//         AcceptedToDateDisplay : String,
-//         AuditRequestStatusId: Int?,
-//         CanStartAudit :Bool,
-//         AuditActivityId: Int?,
-//         AuditActivityUrlId: String,
-//         AuditActivityStatusId : Int?,
-//         CanEditAuditActivity : Bool) {
-//            self.Id = Id
-//            self.UrlId = UrlId
-//            self.SiteId = SiteId
-//            self.AuditCompanyId = AuditCompanyId
-//            self.AuditorId = AuditorId
-//            self.SiteName  = SiteName
-//            self.Address =  Address
-//            self.Suburb = Suburb
-//            self.StateName =  StateName
-//            self.PostCode = PostCode
-//            self.AuditorName = AuditorName
-//            self.AuditCompanyName = AuditCompanyName
-//            self.QuestionSetName = QuestionSetName
-//            self.QuestionSetUrlId = QuestionSetUrlId
-//            self.RequestFromDate = RequestFromDate
-//            self.RequestFromDateDisplay = RequestFromDateDisplay
-//            self.RequestToDate = RequestToDate
-//            self.RequestToDateDisplay = RequestToDateDisplay
-//            self.AcceptedFromDate = AcceptedFromDate
-//            self.AcceptedFromDateDisplay = AcceptedFromDateDisplay
-//            self.AcceptedToDate = AcceptedToDate
-//            self.AcceptedToDateDisplay = AcceptedToDateDisplay
-//            self.AuditRequestStatusId = AuditRequestStatusId
-//            self.CanStartAudit = CanStartAudit
-//            self.AuditActivityId = AuditActivityId
-//            self.AuditActivityUrlId = AuditActivityUrlId
-//            self.AuditActivityStatusId = AuditActivityStatusId
-//            self.CanEditAuditActivity = CanEditAuditActivity
-//    }
+    let Item : [AuditRequestStatusModel]
+    let IsSuccess : Bool
+    let Error : String
+}
+
+class AuditRequestStatusModel {
+    var Id : Int?
+    var Name : String
+    var Color : String
+    var Description : String
+    var DisplayOrder: Int
+    var MainStatus : Int
+    init() {
+        Id = 0
+        Name = ""
+        Color = ""
+        Description = ""
+        DisplayOrder = 0
+        MainStatus = 0
+    }
+}
+
+class AuditRequestFilter {
+    var Page : Int
+    var PageSize : Int
+    var Sort : String
+    var SiteName : String
+    var Status : String
+    var FromDate : NSDate
+    var ToDate : NSDate
+    
+    init() {
+      Page = 1
+      PageSize = 20
+      Sort = "SiteName-asc"
+      SiteName = ""
+      Status = ""
+      FromDate = NSDate()
+      ToDate = NSDate()
+    }
 }

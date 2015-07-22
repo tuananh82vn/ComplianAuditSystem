@@ -50,13 +50,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         
         view.showLoading()
         
-        DesignerNewsService.loginWithEmail(emailTextField.text, password: passwordTextField.text) { token in
+        WebApiService.loginWithEmail(emailTextField.text, password: passwordTextField.text) { token in
             
             self.view.hideLoading()
             
             if let token = token {
                 
-                //println(token)
+                println(token)
                 
                 LocalStore.setAccessToken(token)
                 

@@ -10,7 +10,6 @@ import UIKit
 
 class AuditRequestCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var AuditName: UILabel!
-    
     @IBOutlet weak var AuditAddress: UILabel!
     @IBOutlet weak var AuditorUser: UILabel!
     @IBOutlet weak var AuditCompanyName: UILabel!
@@ -18,6 +17,12 @@ class AuditRequestCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var AuditFinishDate: UILabel!
     @IBOutlet weak var QuestionSet: UILabel!
     @IBOutlet weak var Status: UILabel!
+
+    @IBOutlet weak var ButtonStatus: UIButton!
+    
+    @IBAction func ButtonClicked(sender: AnyObject) {
+        println("button Clicked")
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
