@@ -22,7 +22,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     @IBOutlet weak var signupButton: SpringButton!
     @IBOutlet weak var emailTextField: DesignableTextField!
     @IBOutlet weak var passwordTextField: DesignableTextField!
+    
     var originalCenter: CGPoint!
+    
     weak var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad() {

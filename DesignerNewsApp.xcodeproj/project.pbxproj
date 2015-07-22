@@ -21,7 +21,6 @@
 		1A8D9C841A75E30F0032DA0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8D9C831A75E30F0032DA0F /* QuartzCore.framework */; };
 		1A8D9C871A75E31B0032DA0F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8D9C861A75E31B0032DA0F /* MobileCoreServices.framework */; };
 		1A8D9C8A1A75E33E0032DA0F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8D9C891A75E33E0032DA0F /* CoreText.framework */; };
-		1A908E471A74A44600F30022 /* Replyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A908E461A74A44600F30022 /* Replyable.swift */; };
 		1A908E671A753B6C00F30022 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A908E661A753B6C00F30022 /* libxml2.dylib */; };
 		1A9183091A75EE1900606F35 /* CoreTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9183081A75EE1900606F35 /* CoreTextView.swift */; };
 		1A935E2F1A837A670059BCBC /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A935E281A837A670059BCBC /* TPKeyboardAvoidingCollectionView.m */; };
@@ -56,8 +55,6 @@
 		B779F6C61AB7851100DDF3AA /* SafariActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779F6C51AB7851100DDF3AA /* SafariActivity.swift */; };
 		B78F90381A6EF75800883A5B /* WebApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78F90371A6EF75800883A5B /* WebApiService.swift */; };
 		B78F903E1A6EFAAA00883A5B /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78F903D1A6EFAAA00883A5B /* JSONParser.swift */; };
-		B78F90411A6EFBAF00883A5B /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78F90401A6EFBAF00883A5B /* Story.swift */; };
-		B78F90431A6EFF2100883A5B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78F90421A6EFF2100883A5B /* Comment.swift */; };
 		B790E5311A82C6BC0007B392 /* MenuControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B790E5301A82C6BC0007B392 /* MenuControl.swift */; };
 /* End PBXBuildFile section */
 
@@ -215,7 +212,6 @@
 		1A8D9C831A75E30F0032DA0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1A8D9C861A75E31B0032DA0F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1A8D9C891A75E33E0032DA0F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		1A908E461A74A44600F30022 /* Replyable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Replyable.swift; sourceTree = "<group>"; };
 		1A908E611A75382200F30022 /* DesignerNewsApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DesignerNewsApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		1A908E661A753B6C00F30022 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		1A9183081A75EE1900606F35 /* CoreTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextView.swift; sourceTree = "<group>"; };
@@ -256,8 +252,6 @@
 		B779F6C51AB7851100DDF3AA /* SafariActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariActivity.swift; sourceTree = "<group>"; };
 		B78F90371A6EF75800883A5B /* WebApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebApiService.swift; sourceTree = "<group>"; };
 		B78F903D1A6EFAAA00883A5B /* JSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
-		B78F90401A6EFBAF00883A5B /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
-		B78F90421A6EFF2100883A5B /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		B790E5301A82C6BC0007B392 /* MenuControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -515,10 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				66919EF91B5626200058FF09 /* LoginModel.swift */,
-				B78F90401A6EFBAF00883A5B /* Story.swift */,
-				B78F90421A6EFF2100883A5B /* Comment.swift */,
 				1AED4A701A7BBCCA004C689E /* Error.swift */,
-				1A908E461A74A44600F30022 /* Replyable.swift */,
 				665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */,
 			);
 			name = Models;
@@ -741,15 +732,12 @@
 				1AED4A711A7BBCCA004C689E /* Error.swift in Sources */,
 				66C364AD1B5F861400BE3903 /* LocalStore.swift in Sources */,
 				B78F903E1A6EFAAA00883A5B /* JSONParser.swift in Sources */,
-				1A908E471A74A44600F30022 /* Replyable.swift in Sources */,
 				665CEB941B577FC500A5C8BA /* AuditActivitiesViewController.swift in Sources */,
 				1A935E2F1A837A670059BCBC /* TPKeyboardAvoidingCollectionView.m in Sources */,
-				B78F90431A6EFF2100883A5B /* Comment.swift in Sources */,
 				1A935E321A837A670059BCBC /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				66E666B11B5F1FE100D7FF78 /* AuditRequestHeaderView.swift in Sources */,
 				B78F90381A6EF75800883A5B /* WebApiService.swift in Sources */,
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
-				B78F90411A6EFBAF00883A5B /* Story.swift in Sources */,
 				1A935E301A837A670059BCBC /* TPKeyboardAvoidingScrollView.m in Sources */,
 				669B2EFA1B57620B00F8D82D /* MainViewController.swift in Sources */,
 				1A9183091A75EE1900606F35 /* CoreTextView.swift in Sources */,
