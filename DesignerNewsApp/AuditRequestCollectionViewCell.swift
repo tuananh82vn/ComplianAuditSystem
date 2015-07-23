@@ -20,10 +20,6 @@ class AuditRequestCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var ButtonStatus: UIButton!
     
-    @IBAction func ButtonClicked(sender: AnyObject) {
-        println("button Clicked")
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selected = false

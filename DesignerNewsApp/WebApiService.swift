@@ -12,14 +12,18 @@ struct WebApiService {
         case Login
         case AuditRequestList
         case AuditRequestStatusList
+        case AuditActivitySiteDetail
+        case AuditActivityAuditDetail
         
 
         var description: String {
             switch self {
-            case .Login: return "/api/login"
-            case .AuditRequestList: return "/api/auditrequestlist"
+                case .Login: return "/Api/Login"
+                case .AuditRequestList: return "/Api/AuditRequestList"
+                case .AuditRequestStatusList: return "/Api/AuditRequestStatusList"
+                case .AuditActivitySiteDetail : return "/Api/AuditActivitySiteDetail"
+                case .AuditActivityAuditDetail : return "/Api/AuditActivityAuditDetail"
                 
-            case .AuditRequestStatusList: return "/api/AuditRequestStatusList"
             }
         }
     }
@@ -27,6 +31,10 @@ struct WebApiService {
     static func loginWithEmail(email: String, password: String, response: (token: String?) -> ()) {
         
         let urlString = baseURL + ResourcePath.Login.description
+        
+        
+        println(urlString)
+        
         
         let parameters = [
             "Item": [
@@ -61,6 +69,9 @@ struct WebApiService {
         
         let urlString = baseURL + ResourcePath.AuditRequestList.description
         
+        
+        println(urlString)
+        
         var parameters : [String:AnyObject] = [
             "TokenNumber" : token,
             "Item": [
@@ -74,7 +85,7 @@ struct WebApiService {
             ]
         ]
         
-        //println(parameters)
+
 
         Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
             
@@ -82,7 +93,7 @@ struct WebApiService {
             
             let jsonObject = JSON(json!)
             
-            println(jsonObject)
+            //println(jsonObject)
             
             if let Items = jsonObject["Items"].array {
                 
@@ -102,18 +113,16 @@ struct WebApiService {
     
     static func getAuditRequestStatusList(token: String, response : (objectReturn : [AuditRequestStatusModel]) -> ()) {
 
-        
-        println(ResourcePath.AuditRequestStatusList.description)
-        
+
         let urlString = baseURL + ResourcePath.AuditRequestStatusList.description
+        
+        println(urlString)
         
         var parameters = [
             "TokenNumber" : token
         ]
         
-        
-        
-        
+
         Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
 
         var arrayReturn = [AuditRequestStatusModel]()
@@ -124,11 +133,12 @@ struct WebApiService {
             
             let jsonObject = JSON(json!)
             
-            println(jsonObject)
+            //println(jsonObject)
             
             if let Items = jsonObject["Item"].array {
                 
                 for var index = 0; index < Items.count; ++index {
+                    
                     if let Item = Items[index].dictionaryObject {
                         
                         let AuditRequestStatus = JSONParser.parseAuditRequestStatus(Item as NSDictionary)
@@ -142,6 +152,72 @@ struct WebApiService {
             
           response (objectReturn : arrayReturn)
        }
+    }
+    
+    static func getAuditActivitySiteDetail(token: String, AuditActivityUrlId: String, response : (objectReturn : AuditActivitySiteDetailModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivitySiteDetail.description
+        
+        println(urlString)
+        
+        var parameters = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+
+                    let jsonObject = JSON(json!)
+                
+                    //println(jsonObject)
+                
+                    if let Item = jsonObject["Item"].dictionaryObject {
+                
+                        let Return = JSONParser.parseAuditActivitySite(Item as NSDictionary)
+                        response (objectReturn : Return)
+                    }
+
+                }
+            }
+            
+            response (objectReturn : nil)
+        }
+    
+    static func getAuditActivityAuditDetail(token: String, AuditActivityUrlId: String, response : (objectReturn : AuditActivityAuditDetailModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityAuditDetail.description
+        
+        println(urlString)
+        
+        var parameters = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                println(jsonObject)
+                
+                if let Item = jsonObject["Item"].dictionaryObject {
+                    
+                      let Return = JSONParser.parseAuditActivityAuditDetail(Item as NSDictionary)
+                      response (objectReturn : Return)
+                }
+                
+            }
+        }
+        
+        response (objectReturn : nil)
     }
 
 }

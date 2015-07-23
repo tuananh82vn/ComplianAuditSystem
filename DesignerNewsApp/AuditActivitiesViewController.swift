@@ -26,6 +26,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     private var imageRework = UIImage(named: "redo") as UIImage?
     private var imageAbandonded = UIImage(named: "abandond") as UIImage?
     
+    private var selectedAuditRequestURL :String = ""
+    
     
     var originalCenter: CGPoint!
     
@@ -118,42 +120,57 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         //imageReview
         if auditRequest[indexPath.row].AuditActivityStatusId == 1 {
             cell.ButtonStatus.setImage(imageReview, forState: .Normal)
-            cell.userInteractionEnabled = false
+            cell.ButtonStatus.userInteractionEnabled = false
         }
         else // imageOngoing
             if auditRequest[indexPath.row].AuditActivityStatusId == 2 {
                 cell.ButtonStatus.setImage(imageOngoing, forState: .Normal)
+                cell.ButtonStatus.tag = indexPath.row
+                cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
             }
             else // imageComplete
                 if auditRequest[indexPath.row].AuditActivityStatusId == 3 {
                     cell.ButtonStatus.setImage(imageComplete, forState: .Normal)
-                    cell.userInteractionEnabled = false
+                    cell.ButtonStatus.userInteractionEnabled = false
                 }
                 else // imageRework
                     if auditRequest[indexPath.row].AuditActivityStatusId == 4 {
                         cell.ButtonStatus.setImage(imageRework, forState: .Normal)
+                        cell.ButtonStatus.tag = indexPath.row
+                        cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
                     }
                     else // imageApproved
                         if auditRequest[indexPath.row].AuditActivityStatusId == 5 {
                             cell.ButtonStatus.setImage(imageApproved, forState: .Normal)
-                            cell.userInteractionEnabled = false
+                            cell.ButtonStatus.userInteractionEnabled = false
                         }
                         else // imageAbandonded
                             if auditRequest[indexPath.row].AuditActivityStatusId == 6 {
                                 cell.ButtonStatus.setImage(imageAbandonded, forState: .Normal)
-                                cell.userInteractionEnabled = false
+                                cell.ButtonStatus.userInteractionEnabled = false
                             }
                             else //
                                     if auditRequest[indexPath.row].AuditActivityStatusId == nil {
                                             cell.ButtonStatus.enabled = false
-                                            cell.userInteractionEnabled = false
+                                            cell.ButtonStatus.userInteractionEnabled = false
                                 }
         
-        
+
         // Configure the cell
         return cell
     }
     
+    func yourButtonClicked(sender : UIButton)
+    {
+        self.selectedAuditRequestURL = auditRequest[sender.tag].AuditActivityUrlId
+
+        println("Button clicked \(selectedAuditRequestURL)")
+        
+        self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
+
+    }
+    
+    //display Header of Colllection View
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
             //1
             switch kind {
@@ -180,6 +197,14 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         }
         
         return temp
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "GoToAuditDetail" {
+            println("prepare Go to Audit Detail")
+            let auditDetailViewController = segue.destinationViewController as! AuditDetailViewController
+            auditDetailViewController.AuditActivityUrlId = self.selectedAuditRequestURL
+        }
     }
 
 }

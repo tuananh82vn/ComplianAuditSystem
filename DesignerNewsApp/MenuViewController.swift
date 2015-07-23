@@ -10,6 +10,7 @@ import UIKit
 import Spring
 
 protocol MenuViewControllerDelegate : class {
+    
     func menuViewControllerDidSelectCloseMenu(controller:MenuViewController)
     
     func menuViewControllerDidSelectActivitiesMenu(controller:MenuViewController)

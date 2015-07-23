@@ -40,6 +40,9 @@
 		66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF91B5626200058FF09 /* LoginModel.swift */; };
 		669B2EFA1B57620B00F8D82D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669B2EF91B57620B00F8D82D /* MainViewController.swift */; };
 		66C364AD1B5F861400BE3903 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C364AC1B5F861400BE3903 /* LocalStore.swift */; };
+		66C364AF1B60679D00BE3903 /* AuditDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C364AE1B60679D00BE3903 /* AuditDetailViewController.swift */; };
+		66C364B11B608C7100BE3903 /* AuditActivitySiteDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C364B01B608C7100BE3903 /* AuditActivitySiteDetailModel.swift */; };
+		66C364B71B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C364B61B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift */; };
 		66D7B3091B5F670600B7FAE2 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D7B3081B5F670600B7FAE2 /* NavigationController.swift */; };
 		66E666B11B5F1FE100D7FF78 /* AuditRequestHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E666B01B5F1FE100D7FF78 /* AuditRequestHeaderView.swift */; };
 		961889B81A680D3800295A64 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961889B71A680D3800295A64 /* LearnViewController.swift */; };
@@ -236,6 +239,9 @@
 		66919EF91B5626200058FF09 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		669B2EF91B57620B00F8D82D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		66C364AC1B5F861400BE3903 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
+		66C364AE1B60679D00BE3903 /* AuditDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditDetailViewController.swift; sourceTree = "<group>"; };
+		66C364B01B608C7100BE3903 /* AuditActivitySiteDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivitySiteDetailModel.swift; sourceTree = "<group>"; };
+		66C364B61B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityAuditDetailModel.swift; sourceTree = "<group>"; };
 		66D7B3081B5F670600B7FAE2 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		66E666B01B5F1FE100D7FF78 /* AuditRequestHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestHeaderView.swift; sourceTree = "<group>"; };
 		961889B71A680D3800295A64 /* LearnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
@@ -408,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				667F4A5D1B563F4400257DF8 /* Main.storyboard */,
+				966128541A4DA63100A54A23 /* AppDelegate.swift */,
 				B78F903F1A6EFB9800883A5B /* Models */,
 				B70191151A76566700ED4D3D /* Views */,
 				B70190FA1A754DC900ED4D3D /* View Controllers */,
@@ -452,9 +459,9 @@
 				669B2EF91B57620B00F8D82D /* MainViewController.swift */,
 				964892661A63F5D900214D53 /* MenuViewController.swift */,
 				665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */,
+				66C364AE1B60679D00BE3903 /* AuditDetailViewController.swift */,
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
 				961889B71A680D3800295A64 /* LearnViewController.swift */,
-				966128541A4DA63100A54A23 /* AppDelegate.swift */,
 				66D7B3081B5F670600B7FAE2 /* NavigationController.swift */,
 			);
 			name = "View Controllers";
@@ -511,6 +518,8 @@
 				66919EF91B5626200058FF09 /* LoginModel.swift */,
 				1AED4A701A7BBCCA004C689E /* Error.swift */,
 				665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */,
+				66C364B01B608C7100BE3903 /* AuditActivitySiteDetailModel.swift */,
+				66C364B61B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -740,8 +749,11 @@
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
 				1A935E301A837A670059BCBC /* TPKeyboardAvoidingScrollView.m in Sources */,
 				669B2EFA1B57620B00F8D82D /* MainViewController.swift in Sources */,
+				66C364B71B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift in Sources */,
 				1A9183091A75EE1900606F35 /* CoreTextView.swift in Sources */,
 				665CEBA41B5782ED00A5C8BA /* AuditRequestModel.swift in Sources */,
+				66C364B11B608C7100BE3903 /* AuditActivitySiteDetailModel.swift in Sources */,
+				66C364AF1B60679D00BE3903 /* AuditDetailViewController.swift in Sources */,
 				1A935E3C1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift in Sources */,
 				66D7B3091B5F670600B7FAE2 /* NavigationController.swift in Sources */,
 				66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */,
@@ -894,7 +906,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Externals/DTCoreText/Core/** Externals/DTCoreText/Externals/DTFoundation/Core/**";
 			};
 			name = Debug;
@@ -926,7 +938,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Externals/DTCoreText/Core/** Externals/DTCoreText/Externals/DTFoundation/Core/**";
 			};
 			name = Release;

@@ -9,11 +9,6 @@
 import UIKit
 import Spring
 
-protocol LoginViewControllerDelegate : class {
-    func loginViewControllerDidLogin(controller:LoginViewController)
-    
-}
-
 class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehaviorDelegate {
 
     @IBOutlet weak var passwordImageView: SpringImageView!
@@ -24,8 +19,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     @IBOutlet weak var passwordTextField: DesignableTextField!
     
     var originalCenter: CGPoint!
-    
-    weak var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +59,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
                 self.dialogView.animate()
                 self.dismissViewControllerAnimated(true, completion: nil)
                 
-                self.performSegueWithIdentifier("AfterLogin", sender: self)
+                self.performSegueWithIdentifier("GoToDashboard", sender: self)
                 
             }
             else

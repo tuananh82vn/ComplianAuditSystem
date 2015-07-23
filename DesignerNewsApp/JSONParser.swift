@@ -32,6 +32,8 @@ struct JSONParser {
         
         return auditrequestObject
     }
+    
+    
 
 
     static func parseAuditRequest(story: NSDictionary) -> AuditRequestModel {
@@ -90,6 +92,94 @@ struct JSONParser {
         auditrequestObject.AuditCompanyName = story["AuditCompanyName"] as? String ?? ""
         
         return auditrequestObject
+    }
+    
+    static func parseAuditActivitySite(story: NSDictionary) -> AuditActivitySiteDetailModel {
+        
+        
+        let Object =  AuditActivitySiteDetailModel()
+        
+        Object.AuditRequestSiteId =             story["AuditRequestSiteId"] as? Int ?? 0
+        
+        Object.SiteSuburb =                    story["SiteSuburb"] as? String ?? ""
+        
+        Object.SiteContactEmail =      story["SiteContactEmail"] as? String ?? ""
+        
+        Object.SitePostCode =     story["SitePostCode"] as? String ?? ""
+        
+        Object.AuditActivityUrlId =      story["AuditActivityUrlId"] as? String ?? ""
+        
+        Object.SiteContactPhone =   story["SiteContactPhone"] as? String ?? ""
+        
+        Object.SiteUrlId =   story["SiteUrlId"] as? String ?? ""
+        
+        Object.SiteAlternateContactPerson =                    story["SiteAlternateContactPerson"] as? String ?? ""
+        
+        Object.SiteIndustryTypeName =      story["SiteIndustryTypeName"] as? String ?? ""
+        
+        Object.SiteState =     story["SiteState"] as? String ?? ""
+        
+        Object.SiteAlternateContactEmail =      story["SiteAlternateContactEmail"] as? String ?? ""
+        
+        Object.SiteContactPerson =   story["SiteContactPerson"] as? String ?? ""
+        
+        Object.SiteAlternateContactPosition =   story["SiteAlternateContactPosition"] as? String ?? ""
+        
+        Object.SiteCompanyName =   story["SiteCompanyName"] as? String ?? ""
+    
+        Object.SiteName =   story["SiteName"] as? String ?? ""
+        
+        Object.SiteAddress =   story["SiteAddress"] as? String ?? ""
+        
+        Object.SiteAlternateContactPhone =   story["SiteAlternateContactPhone"] as? String ?? ""
+        
+        return Object
+    }
+    
+    static func parseAuditActivityAuditDetail(story: NSDictionary) -> AuditActivityAuditDetailModel {
+        
+        
+        let Object =  AuditActivityAuditDetailModel()
+        
+        Object.AuditType =             story["AuditType"] as? String ?? ""
+        
+        Object.EmailAddress =                    story["EmailAddress"] as? String ?? ""
+        
+        Object.AuditActivityId =      story["AuditActivityId"] as? Int ?? 0
+        
+        Object.CanEdit =     story["CanEdit"] as? Bool ?? false
+        
+        Object.UrlId =      story["UrlId"] as? String ?? ""
+        
+        Object.AuditTypeId =   story["AuditTypeId"] as? Int ?? 0
+        
+        Object.Phone =   story["Phone"] as? String ?? ""
+        
+        Object.AuditEndDateDisplay =                    story["AuditEndDateDisplay"] as? String ?? ""
+        
+        Object.AuditActivityStatusColor =      story["AuditActivityStatusColor"] as? String ?? ""
+        
+        Object.ScopeOfAudit =     story["ScopeOfAudit"] as? String ?? ""
+        
+        Object.AuditActivityStatusName =      story["AuditActivityStatusName"] as? String ?? ""
+        
+        Object.CanApprove =   story["CanApprove"] as? Bool ?? false
+        
+        Object.AuditRequestId =   story["AuditRequestId"] as? Int ?? 0
+        
+        Object.AuditStartDate =   story["AuditStartDate"] as? NSDate ?? nil
+        
+        Object.AuditActivityStatusId =   story["AuditActivityStatusId"] as? Int ?? 0
+        
+        Object.LeadAuditor =   story["LeadAuditor"] as? String ?? ""
+        
+        Object.AuditStartDateDisplay =   story["AuditStartDateDisplay"] as? String ?? ""
+        
+        Object.AuditEndDate =   story["AuditEndDate"] as? NSDate ?? nil
+        
+        Object.ReportId =   story["ReportId"] as? Int ?? 0
+        
+        return Object
     }
 
     
