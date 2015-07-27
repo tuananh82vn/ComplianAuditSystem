@@ -179,6 +179,44 @@ struct JSONParser {
         
         Object.ReportId =   story["ReportId"] as? Int ?? 0
         
+        var AuditActivityDayModelList = [AuditActivityDayModel]()
+        
+        if let Items = (story["ListAuditActivityDay"] as? NSArray) as Array? {
+            
+            
+            println(Items)
+            
+            for var index = 0; index < Items.count; ++index {
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseAuditActivityDay(Item as NSDictionary)
+                    
+                    AuditActivityDayModelList.insert(temp, atIndex: index)
+                }
+            }
+        }
+        
+        
+        Object.ListAuditActivityDay = AuditActivityDayModelList
+        
+        
+        
+        return Object
+    }
+    
+    
+    static func parseAuditActivityDay(story: NSDictionary) -> AuditActivityDayModel {
+        
+        
+        let Object =  AuditActivityDayModel()
+        
+        Object.DayDateDisplay =             story["DayDateDisplay"] as? String ?? ""
+        
+        Object.DayNumber =                    story["DayNumber"] as? Int ?? 0
+        
+        Object.DayType =      story["DayType"] as? Int ?? 0
+
+        
         return Object
     }
 

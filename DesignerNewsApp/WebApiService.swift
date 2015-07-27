@@ -192,7 +192,7 @@ struct WebApiService {
         
         let urlString = baseURL + ResourcePath.AuditActivityAuditDetail.description
         
-        println(urlString)
+        //println(urlString)
         
         var parameters = [
             "TokenNumber" : token,
@@ -206,7 +206,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                println(jsonObject)
+                //println(jsonObject)
                 
                 if let Item = jsonObject["Item"].dictionaryObject {
                     

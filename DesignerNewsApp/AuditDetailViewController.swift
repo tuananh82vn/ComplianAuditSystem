@@ -8,8 +8,14 @@
 
 import UIKit
 
-class AuditDetailViewController: UIViewController {
+class AuditDetailViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
+    
+    @IBOutlet var tableView: UITableView!
+    
+    var items: [String] = ["We", "Heart", "Swift"]
+    
+    
     @IBOutlet weak var lbl_SiteDetailName: UILabel!
     @IBOutlet weak var lbl_SiteIndustryName: UILabel!
     @IBOutlet weak var lbl_SiteCompanyName: UILabel!
@@ -22,22 +28,24 @@ class AuditDetailViewController: UIViewController {
     @IBOutlet weak var lbl_FromDate: UILabel!
     
     private var auditSiteDetail = AuditActivitySiteDetailModel()
+    
     private var auditActivityAuditDetail = AuditActivityAuditDetailModel()
     
     
     var AuditActivityUrlId : String!
     var originalCenter: CGPoint!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         originalCenter = view.center
-        
-        println(self.AuditActivityUrlId)
         
         initSiteData()
         
         initDetailData()
         
+        
+
         // Do any additional setup after loading the view.
     }
 
@@ -92,6 +100,7 @@ class AuditDetailViewController: UIViewController {
                 
                 self.lbl_Email.text = self.auditActivityAuditDetail.EmailAddress
                 
+                self.tableView.reloadData()
                 
             }
             
@@ -104,5 +113,30 @@ class AuditDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Table view data source
+    
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println(self.auditActivityAuditDetail.ListAuditActivityDay.count)
+        return self.auditActivityAuditDetail.ListAuditActivityDay.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell = self.tableView.dequeueReusableCellWithIdentifier("DetailCell") as! AuditRequestDetailViewCell
+        
+        cell.lbl_Number.text =  self.auditActivityAuditDetail.ListAuditActivityDay[indexPath.row].DayNumber.description
+        cell.lbl_Day.text =  self.auditActivityAuditDetail.ListAuditActivityDay[indexPath.row].DayDateDisplay
+        
+        println("numberOfRowsInSection \(indexPath.row)")
+            
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //println("You selected cell #\(indexPath.row)!")
+    }
+
 
 }
