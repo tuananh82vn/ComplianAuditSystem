@@ -11,11 +11,10 @@ import UIKit
 class AuditDetailViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var tableView1: UITableView!
     
-    var items: [String] = ["We", "Heart", "Swift"]
-    
-    
+    @IBOutlet var tableView2: UITableView!
+
     @IBOutlet weak var lbl_SiteDetailName: UILabel!
     @IBOutlet weak var lbl_SiteIndustryName: UILabel!
     @IBOutlet weak var lbl_SiteCompanyName: UILabel!
@@ -100,7 +99,9 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
                 
                 self.lbl_Email.text = self.auditActivityAuditDetail.EmailAddress
                 
-                self.tableView.reloadData()
+                self.tableView1.reloadData()
+                
+                self.tableView2.reloadData()
                 
             }
             
@@ -118,20 +119,36 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println(self.auditActivityAuditDetail.ListAuditActivityDay.count)
-        return self.auditActivityAuditDetail.ListAuditActivityDay.count
+        if(tableView == self.tableView1){
+            return self.auditActivityAuditDetail.TimeOnFactoryFloor.count
+        }
+        else
+            {
+                return self.auditActivityAuditDetail.TimeOnSite.count
+        }
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = self.tableView.dequeueReusableCellWithIdentifier("DetailCell") as! AuditRequestDetailViewCell
+        if(tableView == self.tableView1){
+            var cell1 = self.tableView1.dequeueReusableCellWithIdentifier("DetailCell1") as! AuditRequestDetailViewCell
         
-        cell.lbl_Number.text =  self.auditActivityAuditDetail.ListAuditActivityDay[indexPath.row].DayNumber.description
-        cell.lbl_Day.text =  self.auditActivityAuditDetail.ListAuditActivityDay[indexPath.row].DayDateDisplay
-        
-        println("numberOfRowsInSection \(indexPath.row)")
+            cell1.lbl_Number.text =  self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row].DayNumber.description
+            cell1.lbl_Day.text =  self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row].DayDateDisplay
             
-        return cell
+            return cell1
+        }
+        else
+            {
+                var cell2 = self.tableView2.dequeueReusableCellWithIdentifier("DetailCell2") as! AuditRequestDetailViewCell
+                
+                cell2.lbl_Number.text =  self.auditActivityAuditDetail.TimeOnSite[indexPath.row].DayNumber.description
+                cell2.lbl_Day.text =  self.auditActivityAuditDetail.TimeOnSite[indexPath.row].DayDateDisplay
+                
+                return cell2
+        }
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

@@ -19,7 +19,8 @@ class AuditActivityAuditDetailModel {
     var AuditTypeId : Int
     var Phone: String
     var AuditEndDateDisplay: String
-    var ListAuditActivityDay: [AuditActivityDayModel]
+    var TimeOnFactoryFloor: [AuditActivityDayModel]
+    var TimeOnSite: [AuditActivityDayModel]
     var AuditActivityStatusColor: String
     var ScopeOfAudit: String
     var AuditActivityStatusName: String
@@ -52,7 +53,8 @@ class AuditActivityAuditDetailModel {
         AuditStartDateDisplay = ""
         AuditEndDate = nil
         ReportId = nil
-        ListAuditActivityDay = [AuditActivityDayModel]()
+        TimeOnFactoryFloor = [AuditActivityDayModel]()
+        TimeOnSite = [AuditActivityDayModel]()
     }
 }
 

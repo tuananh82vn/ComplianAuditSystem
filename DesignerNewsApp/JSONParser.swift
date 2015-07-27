@@ -179,7 +179,8 @@ struct JSONParser {
         
         Object.ReportId =   story["ReportId"] as? Int ?? 0
         
-        var AuditActivityDayModelList = [AuditActivityDayModel]()
+        var TimeOnSite = [AuditActivityDayModel]()
+        var TimeOnFactory = [AuditActivityDayModel]()
         
         if let Items = (story["ListAuditActivityDay"] as? NSArray) as Array? {
             
@@ -191,13 +192,30 @@ struct JSONParser {
                     
                     let temp = JSONParser.parseAuditActivityDay(Item as NSDictionary)
                     
-                    AuditActivityDayModelList.insert(temp, atIndex: index)
+                    
+                    if(temp.DayType == 1){
+                        if(TimeOnFactory.isEmpty){
+                            TimeOnFactory.insert(temp, atIndex: 0)
+                        }
+                        else{
+                            TimeOnFactory.insert(temp, atIndex: TimeOnFactory.count)
+                        }
+                    }
+                    
+                    if(temp.DayType == 2){
+                        if(TimeOnSite.isEmpty){
+                            TimeOnSite.insert(temp, atIndex: 0)
+                        }
+                        else{
+                            TimeOnSite.insert(temp, atIndex: TimeOnSite.count)
+                        }
+                    }
                 }
             }
         }
         
-        
-        Object.ListAuditActivityDay = AuditActivityDayModelList
+        Object.TimeOnFactoryFloor = TimeOnFactory
+        Object.TimeOnSite = TimeOnSite
         
         
         
