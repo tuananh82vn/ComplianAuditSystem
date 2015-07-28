@@ -164,8 +164,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     {
         self.selectedAuditRequestURL = auditRequest[sender.tag].AuditActivityUrlId
 
-        println("Button clicked \(selectedAuditRequestURL)")
-        
         self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
 
     }
@@ -201,7 +199,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToAuditDetail" {
-            println("prepare Go to Audit Detail")
+            //println("prepare Go to Audit Detail")
             let auditDetailViewController = segue.destinationViewController as! AuditDetailViewController
             auditDetailViewController.AuditActivityUrlId = self.selectedAuditRequestURL
         }

@@ -179,8 +179,8 @@ struct JSONParser {
         
         Object.ReportId =   story["ReportId"] as? Int ?? 0
         
-        var TimeOnSite = [AuditActivityDayModel]()
-        var TimeOnFactory = [AuditActivityDayModel]()
+        var TimeOnSite = [AuditActivityDayModel?]()
+        var TimeOnFactory = [AuditActivityDayModel?]()
         
         if let Items = (story["ListAuditActivityDay"] as? NSArray) as Array? {
             

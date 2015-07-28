@@ -112,8 +112,8 @@ class AuditRequestFilter {
     var Sort : String
     var SiteName : String
     var Status : String
-    var FromDate : NSDate
-    var ToDate : NSDate
+    var FromDate : NSDate?
+    var ToDate : NSDate?
     
     init() {
       Page = 1
@@ -121,7 +121,7 @@ class AuditRequestFilter {
       Sort = "SiteName-asc"
       SiteName = ""
       Status = ""
-      FromDate = NSDate()
-      ToDate = NSDate()
+      FromDate = nil
+      ToDate = nil
     }
 }

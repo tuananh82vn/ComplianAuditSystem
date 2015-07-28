@@ -9,7 +9,7 @@
 import Foundation
 
 
-class AuditActivityAuditDetailModel {
+class AuditActivityAuditDetailModel : Serializable {
     
     var AuditType : String
     var EmailAddress : String
@@ -19,8 +19,9 @@ class AuditActivityAuditDetailModel {
     var AuditTypeId : Int
     var Phone: String
     var AuditEndDateDisplay: String
-    var TimeOnFactoryFloor: [AuditActivityDayModel]
-    var TimeOnSite: [AuditActivityDayModel]
+    var TimeOnFactoryFloor: [AuditActivityDayModel?]
+    var TimeOnSite: [AuditActivityDayModel?]
+    var AuditActivityDayListJson: String
     var AuditActivityStatusColor: String
     var ScopeOfAudit: String
     var AuditActivityStatusName: String
@@ -33,7 +34,7 @@ class AuditActivityAuditDetailModel {
     var AuditEndDate : NSDate?
     var ReportId : Int?
     
-    init() {
+    override init() {
         AuditType = ""
         EmailAddress = ""
         AuditActivityId = 0
@@ -55,17 +56,20 @@ class AuditActivityAuditDetailModel {
         ReportId = nil
         TimeOnFactoryFloor = [AuditActivityDayModel]()
         TimeOnSite = [AuditActivityDayModel]()
+        AuditActivityDayListJson =  ""
     }
 }
 
-class AuditActivityDayModel {
+class AuditActivityDayModel : Serializable {
     var DayNumber : Int
     var DayType : Int
     var DayDateDisplay : String
+    var DayDate : String
     
-    init() {
+    override init() {
         DayNumber = 0
         DayType = 0
         DayDateDisplay = ""
+        DayDate = ""
     }
 }

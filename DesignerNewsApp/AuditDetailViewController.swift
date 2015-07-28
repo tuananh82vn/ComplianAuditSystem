@@ -50,6 +50,10 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
 
 
     
+    @IBAction func ButtonEditClicked(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("GotoAuditDetailEdit", sender: sender)
+    }
 
     func initSiteData(){
         
@@ -134,8 +138,8 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         if(tableView == self.tableView1){
             var cell1 = self.tableView1.dequeueReusableCellWithIdentifier("DetailCell1") as! AuditRequestDetailViewCell
         
-            cell1.lbl_Number.text =  self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row].DayNumber.description
-            cell1.lbl_Day.text =  self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row].DayDateDisplay
+            cell1.lbl_Number.text =  self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row]!.DayNumber.description
+            cell1.lbl_Day.text =  self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row]!.DayDateDisplay
             
             return cell1
         }
@@ -143,8 +147,8 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
             {
                 var cell2 = self.tableView2.dequeueReusableCellWithIdentifier("DetailCell2") as! AuditRequestDetailViewCell
                 
-                cell2.lbl_Number.text =  self.auditActivityAuditDetail.TimeOnSite[indexPath.row].DayNumber.description
-                cell2.lbl_Day.text =  self.auditActivityAuditDetail.TimeOnSite[indexPath.row].DayDateDisplay
+                cell2.lbl_Number.text =  self.auditActivityAuditDetail.TimeOnSite[indexPath.row]!.DayNumber.description
+                cell2.lbl_Day.text =  self.auditActivityAuditDetail.TimeOnSite[indexPath.row]!.DayDateDisplay
                 
                 return cell2
         }
@@ -153,6 +157,14 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //println("You selected cell #\(indexPath.row)!")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "GotoAuditDetailEdit" {
+            println("prepare Go to Audit Detail Edit")
+            let auditDetailEditViewController = segue.destinationViewController as! AuditDetailEditViewController
+            auditDetailEditViewController.auditActivityDetail = self.auditActivityAuditDetail
+        }
     }
 
 

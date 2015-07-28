@@ -51,7 +51,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
             
             if let token = token {
                 
-                println(token)
+                //println(token)
                 
                 LocalStore.setAccessToken(token)
                 

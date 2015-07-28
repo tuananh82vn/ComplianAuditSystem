@@ -5,8 +5,8 @@ import Alamofire
 struct WebApiService {
 
 
-    private static let baseURL = "http://complianceauditsystem.softwarestaging.com.au"
-    //private static let baseURL = "http://wsandypham:8080"
+    //private static let baseURL = "http://complianceauditsystem.softwarestaging.com.au"
+    private static let baseURL = "http://wsandypham:8080"
 
     private enum ResourcePath: Printable {
         case Login
@@ -14,6 +14,7 @@ struct WebApiService {
         case AuditRequestStatusList
         case AuditActivitySiteDetail
         case AuditActivityAuditDetail
+        case AuditActivityAuditDetailEdit
         
 
         var description: String {
@@ -23,7 +24,7 @@ struct WebApiService {
                 case .AuditRequestStatusList: return "/Api/AuditRequestStatusList"
                 case .AuditActivitySiteDetail : return "/Api/AuditActivitySiteDetail"
                 case .AuditActivityAuditDetail : return "/Api/AuditActivityAuditDetail"
-                
+                case .AuditActivityAuditDetailEdit : return "/Api/AuditActivityAuditDetailEdit"
             }
         }
     }
@@ -69,8 +70,26 @@ struct WebApiService {
         
         let urlString = baseURL + ResourcePath.AuditRequestList.description
         
+        var FromDate : String
+        var ToDate : String
         
-        println(urlString)
+        if let object1 = filter.FromDate
+        {
+            FromDate =  object1.description
+        }
+        else
+        {
+            FromDate = ""
+        }
+        
+        if let object1 = filter.ToDate
+        {
+            ToDate =  object1.description
+        }
+        else
+        {
+            ToDate = ""
+        }
         
         var parameters : [String:AnyObject] = [
             "TokenNumber" : token,
@@ -80,8 +99,8 @@ struct WebApiService {
                 "Sort" : filter.Sort,
                 "SiteName" : filter.SiteName,
                 "Status" : filter.Status,
-                "FromDate" : filter.FromDate.description,
-                "ToDate" : filter.ToDate.description
+                "FromDate" :  FromDate,
+                "ToDate" : ToDate
             ]
         ]
         
@@ -93,7 +112,6 @@ struct WebApiService {
             
             let jsonObject = JSON(json!)
             
-            //println(jsonObject)
             
             if let Items = jsonObject["Items"].array {
                 
@@ -116,7 +134,6 @@ struct WebApiService {
 
         let urlString = baseURL + ResourcePath.AuditRequestStatusList.description
         
-        println(urlString)
         
         var parameters = [
             "TokenNumber" : token
@@ -133,7 +150,6 @@ struct WebApiService {
             
             let jsonObject = JSON(json!)
             
-            //println(jsonObject)
             
             if let Items = jsonObject["Item"].array {
                 
@@ -159,7 +175,6 @@ struct WebApiService {
         
         let urlString = baseURL + ResourcePath.AuditActivitySiteDetail.description
         
-        println(urlString)
         
         var parameters = [
             "TokenNumber" : token,
@@ -172,8 +187,6 @@ struct WebApiService {
             if(json != nil) {
 
                     let jsonObject = JSON(json!)
-                
-                    //println(jsonObject)
                 
                     if let Item = jsonObject["Item"].dictionaryObject {
                 
@@ -192,7 +205,6 @@ struct WebApiService {
         
         let urlString = baseURL + ResourcePath.AuditActivityAuditDetail.description
         
-        //println(urlString)
         
         var parameters = [
             "TokenNumber" : token,
@@ -206,8 +218,6 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                //println(jsonObject)
-                
                 if let Item = jsonObject["Item"].dictionaryObject {
                     
                       let Return = JSONParser.parseAuditActivityAuditDetail(Item as NSDictionary)
@@ -219,5 +229,45 @@ struct WebApiService {
         
         response (objectReturn : nil)
     }
+    
+    static func postAuditActivityAuditDetail(token: String, AuditActivityDetail: AuditActivityAuditDetailModel, response : (objectReturn : Bool?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityAuditDetailEdit.description
+        
+        
+        var parameters : [String : AnyObject] = [
+            "TokenNumber" : token,
+            "Item": [
+                "AuditActivityId": AuditActivityDetail.AuditActivityId,
+                "UrlId": AuditActivityDetail.UrlId,
+                "AuditStartDate" : AuditActivityDetail.AuditStartDateDisplay,
+                "AuditEndDate" : AuditActivityDetail.AuditEndDateDisplay,
+                "AuditTypeId" : AuditActivityDetail.AuditTypeId,
+                "ScopeOfAudit" :  AuditActivityDetail.ScopeOfAudit,
+                "LeadAuditor" : AuditActivityDetail.LeadAuditor,
+                 "Phone" : AuditActivityDetail.Phone,
+                 "EmailAddress" : AuditActivityDetail.EmailAddress,
+                 "AuditActivityDayListJson" : AuditActivityDetail.AuditActivityDayListJson,
+            ]
+
+        ]
+        
+        println(parameters)
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                println(jsonObject)
+                
+            }
+        }
+        
+        response (objectReturn : true)
+    }
+    
 
 }
