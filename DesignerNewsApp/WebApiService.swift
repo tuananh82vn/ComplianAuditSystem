@@ -236,7 +236,7 @@ struct WebApiService {
         let urlString = baseURL + ResourcePath.AuditActivityAuditDetailEdit.description
         
         
-        var parameters : [String : AnyObject] = [
+        var parameters  = [
             "TokenNumber" : token,
             "Item": [
                 "AuditActivityId": AuditActivityDetail.AuditActivityId,
@@ -248,9 +248,7 @@ struct WebApiService {
                 "LeadAuditor" : AuditActivityDetail.LeadAuditor,
                  "Phone" : AuditActivityDetail.Phone,
                  "EmailAddress" : AuditActivityDetail.EmailAddress,
-                 "AuditActivityDayListJson" : AuditActivityDetail.AuditActivityDayListJson,
-            ]
-
+                 "AuditActivityDayListJson" : AuditActivityDetail.AuditActivityDayListJson]
         ]
         
         println(parameters)

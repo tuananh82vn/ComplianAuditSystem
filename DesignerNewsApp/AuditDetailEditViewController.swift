@@ -379,7 +379,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         self.auditActivityDetail.Phone = Phone.text
         self.auditActivityDetail.EmailAddress = Email.text
         
-        
+        self.auditActivityDetail.AuditActivityDayListJson += "["
         AddAuditDay(FactoryDay1,DayType: 1,DayNumber: 1)
         AddAuditDay(FactoryDay2,DayType: 1,DayNumber: 2)
         AddAuditDay(FactoryDay3,DayType: 1,DayNumber: 3)
@@ -392,13 +392,9 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         AddAuditDay(SiteDay4,DayType: 2,DayNumber: 4)
         AddAuditDay(SiteDay5,DayType: 2,DayNumber: 5)
         
-        let paramsJSON = JSON(self.AuditActivityDayListJson)
-        
-        if let paramsString = paramsJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
-        {
-            self.auditActivityDetail.AuditActivityDayListJson = paramsString
-        }
 
+        self.auditActivityDetail.AuditActivityDayListJson += "]"
+        
         
         WebApiService.postAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityDetail: self.auditActivityDetail) { objectReturn in
             
@@ -417,8 +413,8 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
             AuditDay.DayType = DayType
             
             AuditDay.DayDate = textField.text
-            
-            self.AuditActivityDayListJson.append(AuditDay)
+    
+            self.auditActivityDetail.AuditActivityDayListJson += AuditDay.toJsonString() + ","
             
         }
     }
