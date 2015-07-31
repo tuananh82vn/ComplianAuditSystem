@@ -185,8 +185,6 @@ struct JSONParser {
         if let Items = (story["ListAuditActivityDay"] as? NSArray) as Array? {
             
             
-            println(Items)
-            
             for var index = 0; index < Items.count; ++index {
                 if let Item = Items[index] as? NSDictionary {
                     
@@ -238,7 +236,35 @@ struct JSONParser {
         return Object
     }
 
+    static func parseError(story: NSArray) -> [Error] {
+        
+        var ErrorArray = [Error]()
+        
+        if let Items = story as Array? {
+        
+            for var index = 0; index < Items.count; ++index {
     
+                if let Item = Items[index] as? NSDictionary {
+                
+                    let temp = JSONParser.parseObjectError(Item as NSDictionary)
+            
+                    ErrorArray.append(temp)
+                }
+            }
+        }
+        
+        return ErrorArray
+    }
+            
+    static func parseObjectError(story: NSDictionary) -> Error {
+        
+        let Object =  Error()
+        
+        Object.ErrorMessage =             story["ErrorMessage"] as? String ?? ""
+        
+        return Object
+    }
+
 //    static func parseStoriesArray(data: NSData?) -> [Story] {
 //        if let data = data {
 //            if let array = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil) as? [NSDictionary] {

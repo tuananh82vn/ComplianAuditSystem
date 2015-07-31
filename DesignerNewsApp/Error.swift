@@ -8,7 +8,24 @@
 
 import Foundation
 
-struct Error {
-    let message : String
-    let code : Int
+class Error {
+    var ErrorMessage : String
+    
+    init() {
+        ErrorMessage = ""
+    }
+}
+
+
+class JsonReturnModel {
+    
+    var Item : String
+    var Errors : [Error]
+    var IsSuccess : Bool
+    
+    init() {
+        Item = ""
+        Errors = [Error]()
+        IsSuccess = false
+    }
 }

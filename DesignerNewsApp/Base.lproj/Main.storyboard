@@ -1730,12 +1730,6 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puj-0c-6XW">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tap drive" translatesAutoresizingMaskIntoConstraints="NO" id="faP-Cd-BkO">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
@@ -1924,7 +1918,7 @@
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o9l-DA-yxB" id="be8-td-mqv">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/01/1999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dS-7A-GdK">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dS-7A-GdK">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="197" id="ewi-ge-3ou"/>
@@ -1937,7 +1931,8 @@
                                                                     <exclude reference="ewi-ge-3ou"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                <rect key="frame" x="127" y="11" width="197" height="21"/>
                                                                 <mask key="constraints">
                                                                     <include reference="ewi-ge-3ou"/>
                                                                 </mask>
@@ -1956,13 +1951,14 @@
                                                                     <exclude reference="cqt-4q-GAd"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                <rect key="frame" x="8" y="11" width="30" height="21"/>
                                                                 <mask key="constraints">
                                                                     <exclude reference="cqt-4q-GAd"/>
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3l-xk-Spg">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3l-xk-Spg">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="CXH-Ri-ML7"/>
@@ -1977,7 +1973,8 @@
                                                                     <exclude reference="mhC-04-VsW"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                <rect key="frame" x="46" y="11" width="40" height="21"/>
                                                                 <mask key="constraints">
                                                                     <include reference="CXH-Ri-ML7"/>
                                                                     <exclude reference="mhC-04-VsW"/>
@@ -2091,27 +2088,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bid-PZ-bwb">
-                                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="21" id="AZc-LK-i27"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <variation key="default">
-                                                                <mask key="constraints">
-                                                                    <exclude reference="AZc-LK-i27"/>
-                                                                </mask>
-                                                            </variation>
-                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                                <rect key="frame" x="46" y="11" width="89" height="21"/>
-                                                                <mask key="constraints">
-                                                                    <include reference="AZc-LK-i27"/>
-                                                                </mask>
-                                                            </variation>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/01/1999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yng-VY-yUo">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yng-VY-yUo">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="6Qh-CC-9jn"/>
@@ -2128,6 +2105,26 @@
                                                                 <rect key="frame" x="143" y="11" width="88" height="21"/>
                                                                 <mask key="constraints">
                                                                     <include reference="6Qh-CC-9jn"/>
+                                                                </mask>
+                                                            </variation>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bid-PZ-bwb">
+                                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="AZc-LK-i27"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="AZc-LK-i27"/>
+                                                                </mask>
+                                                            </variation>
+                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                <rect key="frame" x="46" y="11" width="89" height="21"/>
+                                                                <mask key="constraints">
+                                                                    <include reference="AZc-LK-i27"/>
                                                                 </mask>
                                                             </variation>
                                                         </label>
@@ -2149,8 +2146,8 @@
                                                     <variation key="default">
                                                         <mask key="subviews">
                                                             <exclude reference="AEd-I2-n9B"/>
-                                                            <exclude reference="Bid-PZ-bwb"/>
                                                             <exclude reference="Yng-VY-yUo"/>
+                                                            <exclude reference="Bid-PZ-bwb"/>
                                                         </mask>
                                                         <mask key="constraints">
                                                             <exclude reference="8oH-Uo-JpR"/>
@@ -2170,8 +2167,8 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <mask key="subviews">
                                                             <include reference="AEd-I2-n9B"/>
-                                                            <include reference="Bid-PZ-bwb"/>
                                                             <include reference="Yng-VY-yUo"/>
+                                                            <include reference="Bid-PZ-bwb"/>
                                                         </mask>
                                                         <mask key="constraints">
                                                             <include reference="8oH-Uo-JpR"/>
@@ -2373,7 +2370,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYD-de-gmh">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYD-de-gmh">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="k5b-Ua-Tc7"/>
@@ -2395,7 +2392,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lead Auditor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TB-Mb-n3Y">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TB-Mb-n3Y">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="0UA-Ss-8by"/>
@@ -2461,7 +2458,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Scope" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l56-cd-sHb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l56-cd-sHb">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="224" id="ZdV-Ut-0Te"/>
@@ -2483,7 +2480,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVC-d0-VKS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVC-d0-VKS">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="224" id="fuW-SO-9mL"/>
@@ -2505,7 +2502,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audit Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bi-4b-acs">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bi-4b-acs">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Mpg-nt-7L3"/>
@@ -2527,7 +2524,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzk-ls-DtJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzk-ls-DtJ">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="e4r-13-sye"/>
@@ -2549,7 +2546,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pl-oK-0gP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pl-oK-0gP">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="8Uh-R5-SPX"/>
@@ -2850,6 +2847,12 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puj-0c-6XW">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -2891,13 +2894,13 @@
                                 <exclude reference="hWX-lZ-TOg"/>
                                 <exclude reference="p3M-WC-IgJ"/>
                                 <exclude reference="tD5-s6-zJu"/>
-                                <exclude reference="puj-0c-6XW"/>
                                 <exclude reference="faP-Cd-BkO"/>
                                 <exclude reference="gbe-19-Rbs"/>
                                 <exclude reference="TkW-AR-L53"/>
                                 <exclude reference="Hfb-zG-gAB"/>
                                 <exclude reference="0pj-Oy-3Et"/>
                                 <exclude reference="nnA-R0-xus"/>
+                                <exclude reference="puj-0c-6XW"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="HLB-3f-xmr"/>
@@ -2939,13 +2942,13 @@
                                 <include reference="hWX-lZ-TOg"/>
                                 <include reference="p3M-WC-IgJ"/>
                                 <include reference="tD5-s6-zJu"/>
-                                <include reference="puj-0c-6XW"/>
                                 <include reference="faP-Cd-BkO"/>
                                 <include reference="gbe-19-Rbs"/>
                                 <include reference="TkW-AR-L53"/>
                                 <include reference="Hfb-zG-gAB"/>
                                 <include reference="0pj-Oy-3Et"/>
                                 <include reference="nnA-R0-xus"/>
+                                <include reference="puj-0c-6XW"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="HLB-3f-xmr"/>
@@ -2994,6 +2997,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="ButtonEdit" destination="18R-7n-yLg" id="2Pa-CD-H6j"/>
                         <outlet property="lbl_AuditType" destination="6bi-4b-acs" id="rB9-KC-Otd"/>
                         <outlet property="lbl_Email" destination="wzk-ls-DtJ" id="VcZ-a5-PQD"/>
                         <outlet property="lbl_FromDate" destination="XYD-de-gmh" id="CIq-E9-aHw"/>

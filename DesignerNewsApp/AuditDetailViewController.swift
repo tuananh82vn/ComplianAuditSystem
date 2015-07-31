@@ -10,6 +10,7 @@ import UIKit
 
 class AuditDetailViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
+    @IBOutlet weak var ButtonEdit: UIBarButtonItem!
     
     @IBOutlet var tableView1: UITableView!
     
@@ -37,50 +38,39 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
         
-        var activityView = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        initSiteData()
         
-        activityView.center = self.view.description
         
-        activityView.startAnimating()
-        
-        self.view.addSubview(activityView)
-        
-        //initSiteData()
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"load", object: nil)
+
 
         // Do any additional setup after loading the view.
-    }
-
-
-    
-    @IBAction func ButtonEditClicked(sender: AnyObject) {
-        
-        self.performSegueWithIdentifier("GotoAuditDetailEdit", sender: sender)
     }
 
     func initSiteData(){
         
         view.showLoading()
         
-        WebApiService.getAuditActivitySiteDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn in
+        self.ButtonEdit.enabled = false
+
+        WebApiService.getAuditActivitySiteDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn1 in
             
-            if let temp = objectReturn {
+            if let temp1 = objectReturn1 {
                 
-                self.auditSiteDetail = temp
+                self.auditSiteDetail = temp1
                 self.lbl_SiteDetailName.text = self.auditSiteDetail.SiteName
                 self.lbl_SiteIndustryName.text = self.auditSiteDetail.SiteIndustryTypeName
                 self.lbl_SiteCompanyName.text = self.auditSiteDetail.SiteCompanyName
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
-                    WebApiService.getAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn in
+                    WebApiService.getAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn2 in
                         
-                        self.view.hideLoading()
-                        
-                        if let temp = objectReturn {
+                        if let temp2 = objectReturn2 {
                             
-                            self.auditActivityAuditDetail = temp
+                            self.auditActivityAuditDetail = temp2
                             
                             self.lbl_FromDate.text = self.auditActivityAuditDetail.AuditStartDateDisplay
                             
@@ -100,8 +90,11 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
                             
                             self.tableView2.reloadData()
                             
+                            self.view.hideLoading()
+                            
+                            self.ButtonEdit.enabled = true
+                            
                         }
-                        
                     }
                 
                 }
@@ -112,6 +105,16 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
 
     }
 
+    
+    func refesh(notification: NSNotification){
+        initSiteData()
+    }
+    
+    
+    @IBAction func ButtonEditClicked(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("GotoAuditDetailEdit", sender: sender)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

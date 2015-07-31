@@ -63,10 +63,14 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         super.viewDidLoad()
         
         originalCenter = view.center
+        
+        view.showLoading()
 
         InitUI()
         
         InitData()
+        
+        view.hideLoading()
 
         // Do any additional setup after loading the view.
     }
@@ -409,6 +413,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
                 "DayDate":model.DayDate
             ]
         }
+        
         let data = NSJSONSerialization.dataWithJSONObject(jsonCompatibleArray, options: nil, error: nil)
         
         if let jsonString = NSString(data: data!, encoding: NSUTF8StringEncoding)
@@ -419,8 +424,36 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         
         WebApiService.postAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityDetail: self.auditActivityDetail) { objectReturn in
             
-            self.view.hideLoading()
-
+            if let temp = objectReturn {
+                
+                self.view.hideLoading()
+                
+                if(temp.IsSuccess){
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
+                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                else
+                {
+                    var errorMessage : String = ""
+                    
+                    for var index = 0; index < temp.Errors.count; ++index {
+                        
+                            errorMessage += temp.Errors[index].ErrorMessage
+                        }
+                    
+                    
+                    let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    alertController.view.tintColor = UIColor.blackColor()
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                
+            }
         }
     }
     

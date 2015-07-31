@@ -233,7 +233,7 @@ struct WebApiService {
         response (objectReturn : nil)
     }
     
-    static func postAuditActivityAuditDetail(token: String, AuditActivityDetail: AuditActivityAuditDetailModel, response : (objectReturn : Bool?) -> ()) {
+    static func postAuditActivityAuditDetail(token: String, AuditActivityDetail: AuditActivityAuditDetailModel, response : (objectReturn : JsonReturnModel?) -> ()) {
         
         
         let urlString = baseURL + ResourcePath.AuditActivityAuditDetailEdit.description
@@ -254,20 +254,42 @@ struct WebApiService {
                  "AuditActivityDayListJson" : AuditActivityDetail.AuditActivityDayListJson]
         ]
         
-        println(parameters)
+        var JsonReturn = JsonReturnModel()
+        
+        //println(parameters)
         
         Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
             
-            if(json != nil) {
+            if let jsonReturn1: AnyObject = json {
                 
-                let jsonObject = JSON(json!)
+                let jsonObject = JSON(jsonReturn1)
                 
-                println(jsonObject)
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+
+                }
                 
+                if let Errors = jsonObject["Errors"].arrayObject {
+
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
             }
         }
         
-        response (objectReturn : true)
+        
+        
+        
+        
     }
     
 
