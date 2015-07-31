@@ -32,17 +32,21 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     
     
     var AuditActivityUrlId : String!
-    var originalCenter: CGPoint!
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        originalCenter = view.center
+        var activityView = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
         
-        initSiteData()
+        activityView.center = self.view.description
         
-        initDetailData()
+        activityView.startAnimating()
         
+        self.view.addSubview(activityView)
+        
+        //initSiteData()
         
 
         // Do any additional setup after loading the view.
@@ -61,56 +65,51 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         
         WebApiService.getAuditActivitySiteDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn in
             
-            self.view.hideLoading()
-            
             if let temp = objectReturn {
-
+                
                 self.auditSiteDetail = temp
-            
                 self.lbl_SiteDetailName.text = self.auditSiteDetail.SiteName
                 self.lbl_SiteIndustryName.text = self.auditSiteDetail.SiteIndustryTypeName
                 self.lbl_SiteCompanyName.text = self.auditSiteDetail.SiteCompanyName
                 
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    WebApiService.getAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn in
+                        
+                        self.view.hideLoading()
+                        
+                        if let temp = objectReturn {
+                            
+                            self.auditActivityAuditDetail = temp
+                            
+                            self.lbl_FromDate.text = self.auditActivityAuditDetail.AuditStartDateDisplay
+                            
+                            self.lbl_ToDate.text = self.auditActivityAuditDetail.AuditEndDateDisplay
+                            
+                            self.lbl_AuditType.text = self.auditActivityAuditDetail.AuditType
+                            
+                            self.lbl_Scope.text = self.auditActivityAuditDetail.ScopeOfAudit
+                            
+                            self.lbl_LeadAuditor.text = self.auditActivityAuditDetail.LeadAuditor
+                            
+                            self.lbl_Phone.text = self.auditActivityAuditDetail.Phone
+                            
+                            self.lbl_Email.text = self.auditActivityAuditDetail.EmailAddress
+                            
+                            self.tableView1.reloadData()
+                            
+                            self.tableView2.reloadData()
+                            
+                        }
+                        
+                    }
+                
+                }
+                
             }
             
         }
 
-    }
-    
-    func initDetailData(){
-        
-        view.showLoading()
-        
-        WebApiService.getAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn in
-            
-            self.view.hideLoading()
-            
-            if let temp = objectReturn {
-                
-                self.auditActivityAuditDetail = temp
-                
-                self.lbl_FromDate.text = self.auditActivityAuditDetail.AuditStartDateDisplay
-                
-                self.lbl_ToDate.text = self.auditActivityAuditDetail.AuditEndDateDisplay
-                
-                self.lbl_AuditType.text = self.auditActivityAuditDetail.AuditType
-                
-                self.lbl_Scope.text = self.auditActivityAuditDetail.ScopeOfAudit
-                
-                self.lbl_LeadAuditor.text = self.auditActivityAuditDetail.LeadAuditor
-                
-                self.lbl_Phone.text = self.auditActivityAuditDetail.Phone
-                
-                self.lbl_Email.text = self.auditActivityAuditDetail.EmailAddress
-                
-                self.tableView1.reloadData()
-                
-                self.tableView2.reloadData()
-                
-            }
-            
-        }
-        
     }
 
     

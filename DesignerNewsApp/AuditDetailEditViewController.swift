@@ -56,8 +56,13 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
     var popSiteDay4Picker : PopDatePicker?
     var popSiteDay5Picker : PopDatePicker?
     
+    var originalCenter: CGPoint!
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        originalCenter = view.center
 
         InitUI()
         
@@ -67,6 +72,8 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
     }
     
     func InitUI(){
+        
+        
     
         radioButtonController = SSRadioButtonsController(buttons: ButtonGap, ButtonCer, ButtonRoutine)
         radioButtonController!.delegate = self
@@ -379,7 +386,8 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         self.auditActivityDetail.Phone = Phone.text
         self.auditActivityDetail.EmailAddress = Email.text
         
-        self.auditActivityDetail.AuditActivityDayListJson += "["
+       // self.auditActivityDetail.AuditActivityDayListJson += "["
+        
         AddAuditDay(FactoryDay1,DayType: 1,DayNumber: 1)
         AddAuditDay(FactoryDay2,DayType: 1,DayNumber: 2)
         AddAuditDay(FactoryDay3,DayType: 1,DayNumber: 3)
@@ -393,7 +401,20 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         AddAuditDay(SiteDay5,DayType: 2,DayNumber: 5)
         
 
-        self.auditActivityDetail.AuditActivityDayListJson += "]"
+        let jsonCompatibleArray = AuditActivityDayListJson.map { model in
+            return [
+                "DayNumber":model.DayNumber,
+                "DayType":model.DayType,
+                "DayDateDisplay":model.DayDateDisplay,
+                "DayDate":model.DayDate
+            ]
+        }
+        let data = NSJSONSerialization.dataWithJSONObject(jsonCompatibleArray, options: nil, error: nil)
+        
+        if let jsonString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+        {
+            self.auditActivityDetail.AuditActivityDayListJson = jsonString as String
+        }
         
         
         WebApiService.postAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityDetail: self.auditActivityDetail) { objectReturn in
@@ -402,6 +423,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
 
         }
     }
+    
     
     func AddAuditDay(textField : UITextField, DayType : Int , DayNumber : Int){
         if( textField.text.length > 0){
@@ -412,9 +434,19 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
             
             AuditDay.DayType = DayType
             
-            AuditDay.DayDate = textField.text
-    
-            self.auditActivityDetail.AuditActivityDayListJson += AuditDay.toJsonString() + ","
+            let formatter = NSDateFormatter()
+            
+            formatter.dateFormat =  NSDateFormatter.dateFormatFromTemplate("MMddyyyy", options: 0, locale: NSLocale(localeIdentifier: "en-AU"))
+            
+            let date1 = formatter.dateFromString(textField.text)
+            
+            var dateFormatter = NSDateFormatter()
+            
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            AuditDay.DayDate = dateFormatter.stringFromDate(date1!)
+            
+            self.AuditActivityDayListJson.append(AuditDay)
             
         }
     }

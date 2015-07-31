@@ -49,19 +49,22 @@ struct WebApiService {
             if(json == nil ){
                 response(token: nil)
             }
-            
-            let jsonObject = JSON(json!)
-
-            let IsSuccess = jsonObject["IsSuccess"].bool
-            
-            if(IsSuccess?.boolValue == true)
-            {
-                let TokenNumber = jsonObject["Item"]["TokenNumber"].string
-                response(token: TokenNumber)
-            }
             else
             {
-                response(token: nil)
+            
+                let jsonObject = JSON(json!)
+
+                let IsSuccess = jsonObject["IsSuccess"].bool
+            
+                if(IsSuccess?.boolValue == true)
+                {
+                    let TokenNumber = jsonObject["Item"]["TokenNumber"].string
+                    response(token: TokenNumber)
+                }
+                else
+                {
+                    response(token: nil)
+                }
             }
         }
     }
