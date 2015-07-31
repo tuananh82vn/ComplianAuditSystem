@@ -10,6 +10,7 @@ import UIKit
 
 class AuditDetailViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
+    @IBOutlet weak var ButtonBooking: UIButton!
     @IBOutlet weak var ButtonEdit: UIBarButtonItem!
     
     @IBOutlet var tableView1: UITableView!
@@ -38,7 +39,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        
         
         initSiteData()
         
@@ -140,17 +141,23 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         if(tableView == self.tableView1){
             var cell1 = self.tableView1.dequeueReusableCellWithIdentifier("DetailCell1") as! AuditRequestDetailViewCell
         
-            cell1.lbl_Number.text =  self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row]!.DayNumber.description
-            cell1.lbl_Day.text =  self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row]!.DayDateDisplay
+            
+            if let TimeOnFactoryFloor = self.auditActivityAuditDetail.TimeOnFactoryFloor[indexPath.row] {
+                
+                cell1.lbl_Number.text =  TimeOnFactoryFloor.DayNumber.description
+                cell1.lbl_Day.text =  TimeOnFactoryFloor.DayDateDisplay
+            }
             
             return cell1
         }
         else
             {
                 var cell2 = self.tableView2.dequeueReusableCellWithIdentifier("DetailCell2") as! AuditRequestDetailViewCell
-                
-                cell2.lbl_Number.text =  self.auditActivityAuditDetail.TimeOnSite[indexPath.row]!.DayNumber.description
-                cell2.lbl_Day.text =  self.auditActivityAuditDetail.TimeOnSite[indexPath.row]!.DayDateDisplay
+            
+                if let TimeOnSite = self.auditActivityAuditDetail.TimeOnSite[indexPath.row] {
+                    cell2.lbl_Number.text =  TimeOnSite.DayNumber.description
+                    cell2.lbl_Day.text =  TimeOnSite.DayDateDisplay
+                }
                 
                 return cell2
         }
@@ -163,11 +170,18 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GotoAuditDetailEdit" {
-            println("prepare Go to Audit Detail Edit")
             let auditDetailEditViewController = segue.destinationViewController as! AuditDetailEditViewController
             auditDetailEditViewController.auditActivityDetail = self.auditActivityAuditDetail
         }
+        else
+            if segue.identifier == "GoToBooking" {
+                let auditBookingViewController = segue.destinationViewController as! AuditBookingViewController
+                auditBookingViewController.AuditActivityUrlId = self.AuditActivityUrlId
+        }
     }
 
+    @IBAction func ButtonBookingClicked(sender: AnyObject) {
+        self.performSegueWithIdentifier("GoToBooking", sender: sender)
+    }
 
 }

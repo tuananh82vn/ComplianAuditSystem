@@ -10,4 +10,5 @@ import UIKit
 
 class AuditRequestHeaderView: UICollectionReusableView {
         
+    @IBOutlet weak var AuditorAvatar: UIImageView!
 }

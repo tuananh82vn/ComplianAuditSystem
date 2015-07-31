@@ -10,6 +10,8 @@ import UIKit
 
 class AuditActivitiesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    //@IBOutlet weak var AuditorAvatar: UIImageView!
+    
     private var auditRequest = [AuditRequestModel]()
     
     private var auditRequestStatus = [AuditRequestStatusModel]()
@@ -37,8 +39,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         originalCenter = view.center
         
         initData()
-        
-        // Do any additional setup after loading the view.
     }
     
     func initData(){
@@ -177,6 +177,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                 //3
                 let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "AuditRequestHeaderView", forIndexPath: indexPath) as! AuditRequestHeaderView
                 //headerView.label.text = searches[indexPath.section].searchTerm
+                headerView.AuditorAvatar.layer.cornerRadius = headerView.AuditorAvatar.frame.size.width / 2;
+                headerView.AuditorAvatar.clipsToBounds = true;
                 return headerView
             default:
                 //4
