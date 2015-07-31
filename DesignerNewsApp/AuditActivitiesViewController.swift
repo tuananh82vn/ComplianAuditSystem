@@ -37,8 +37,9 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         super.viewDidLoad()
         
         originalCenter = view.center
-        
+
         initData()
+
     }
     
     func initData(){
@@ -88,8 +89,16 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         cell.backgroundColor = UIColor.whiteColor()
         
         cell.AuditName.text = auditRequest[indexPath.row].SiteName
-        cell.AuditAddress.text = auditRequest[indexPath.row].Address + "," + auditRequest[indexPath.row].Suburb + "," + auditRequest[indexPath.row].StateName
-        cell.AuditorUser.text = auditRequest[indexPath.row].AuditorName
+        
+        if auditRequest[indexPath.row].Address.length > 0 {
+            cell.AuditAddress.text = auditRequest[indexPath.row].Address + ", " + auditRequest[indexPath.row].Suburb + ", " + auditRequest[indexPath.row].StateName
+        }
+        else
+        {
+            cell.AuditAddress.text = auditRequest[indexPath.row].Suburb + ", " + auditRequest[indexPath.row].StateName
+        }
+        
+        //cell.AuditorUser.text = auditRequest[indexPath.row].AuditorName
         cell.AuditCompanyName.text = auditRequest[indexPath.row].AuditCompanyName
         cell.AuditStartDate.text = auditRequest[indexPath.row].RequestFromDateDisplay
         cell.AuditFinishDate.text = auditRequest[indexPath.row].RequestToDateDisplay
@@ -177,8 +186,9 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                 //3
                 let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "AuditRequestHeaderView", forIndexPath: indexPath) as! AuditRequestHeaderView
                 //headerView.label.text = searches[indexPath.section].searchTerm
-                headerView.AuditorAvatar.layer.cornerRadius = headerView.AuditorAvatar.frame.size.width / 2;
-                headerView.AuditorAvatar.clipsToBounds = true;
+                //headerView.AuditorAvatar.layer.cornerRadius = headerView.AuditorAvatar.frame.size.width / 2;
+                //headerView.AuditorAvatar.clipsToBounds = true;
+
                 return headerView
             default:
                 //4
