@@ -10,6 +10,10 @@ import UIKit
 
 class BookingViewCell: UITableViewCell {
 
+    @IBOutlet weak var lbl_FileName: UILabel!
+    @IBOutlet weak var lbl_Notes: UILabel!
+    @IBOutlet weak var lbl_Number: UILabel!
+    @IBOutlet weak var lbl_Item: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

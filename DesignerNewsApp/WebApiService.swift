@@ -15,6 +15,7 @@ struct WebApiService {
         case AuditActivitySiteDetail
         case AuditActivityAuditDetail
         case AuditActivityAuditDetailEdit
+        case AuditActivityBookingDetailList
         
 
         var description: String {
@@ -25,6 +26,7 @@ struct WebApiService {
                 case .AuditActivitySiteDetail : return "/Api/AuditActivitySiteDetail"
                 case .AuditActivityAuditDetail : return "/Api/AuditActivityAuditDetail"
                 case .AuditActivityAuditDetailEdit : return "/Api/AuditActivityAuditDetailEdit"
+                case .AuditActivityBookingDetailList : return "/Api/AuditActivityBookingDetailList"
             }
         }
     }
@@ -286,11 +288,45 @@ struct WebApiService {
             }
         }
         
-        
-        
-        
-        
     }
     
-
+    static func getAuditActivityBookingDetailList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityBookingDetaiModel]?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityBookingDetailList.description
+        
+        
+        var parameters = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        var arrayReturn = [AuditActivityBookingDetaiModel]()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                //println(jsonObject)
+                
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Items"].arrayObject {
+                            
+                            arrayReturn = JSONParser.parseAuditActivityBookingDetaiModel(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+    
 }

@@ -32,6 +32,10 @@
 		1A935E3C1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A935E3B1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift */; };
 		1AB33B591A7660E800E3AB55 /* libDTCoreText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB33B501A7660B300E3AB55 /* libDTCoreText.a */; };
 		1AED4A711A7BBCCA004C689E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED4A701A7BBCCA004C689E /* Error.swift */; };
+		6617A5781B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */; };
+		6617A58C1B6F31AE00066C73 /* AuditBookingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */; };
+		6617A58E1B6F3B1100066C73 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6617A58D1B6F3B1100066C73 /* Photos.framework */; };
+		6617A5901B6F3B5F00066C73 /* PhotoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58F1B6F3B5F00066C73 /* PhotoThumbnail.swift */; };
 		662C80DD1B57950300371598 /* AuditRequestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */; };
 		6630670F1B6715F1001EE543 /* PopDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6630670E1B6715F1001EE543 /* PopDatePicker.swift */; };
 		6630671F1B6715FB001EE543 /* PopDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6630671E1B6715FB001EE543 /* PopDateViewController.swift */; };
@@ -244,6 +248,10 @@
 		1A935E3B1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoundPlayer+DesignerNewsApp.swift"; sourceTree = "<group>"; };
 		1AB33B3F1A7660B300E3AB55 /* DTCoreText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTCoreText.xcodeproj; path = DTCoreText/DTCoreText.xcodeproj; sourceTree = "<group>"; };
 		1AED4A701A7BBCCA004C689E /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityBookingDetailModel.swift; sourceTree = "<group>"; };
+		6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditBookingAddViewController.swift; sourceTree = "<group>"; };
+		6617A58D1B6F3B1100066C73 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		6617A58F1B6F3B5F00066C73 /* PhotoThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoThumbnail.swift; path = "../../../../Downloads/PhotosGalleryApp-master/Photos Gallery App/PhotoThumbnail.swift"; sourceTree = "<group>"; };
 		662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestCollectionViewCell.swift; sourceTree = "<group>"; };
 		6630670E1B6715F1001EE543 /* PopDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDatePicker.swift; sourceTree = "<group>"; };
 		6630671E1B6715FB001EE543 /* PopDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDateViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +300,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6617A58E1B6F3B1100066C73 /* Photos.framework in Frameworks */,
 				1A6D23D91AB6AD9C000F080A /* UIKit.framework in Frameworks */,
 				1A6D23D71AB6AD93000F080A /* SystemConfiguration.framework in Frameworks */,
 				1A6D23D51AB6AD89000F080A /* Security.framework in Frameworks */,
@@ -355,6 +364,7 @@
 		1A8D9C881A75E31F0032DA0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6617A58D1B6F3B1100066C73 /* Photos.framework */,
 				1A6D23D81AB6AD9C000F080A /* UIKit.framework */,
 				1A6D23D61AB6AD93000F080A /* SystemConfiguration.framework */,
 				1A6D23D41AB6AD89000F080A /* Security.framework */,
@@ -422,6 +432,7 @@
 		66BA22D81B67056D00B755D7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6617A58F1B6F3B5F00066C73 /* PhotoThumbnail.swift */,
 				6630671E1B6715FB001EE543 /* PopDateViewController.swift */,
 				663067201B671604001EE543 /* PopDateViewController.xib */,
 				6630670E1B6715F1001EE543 /* PopDatePicker.swift */,
@@ -504,6 +515,7 @@
 				66C364AE1B60679D00BE3903 /* AuditDetailViewController.swift */,
 				66BA22EB1B67095500B755D7 /* AuditDetailEditViewController.swift */,
 				66B5E4331B6B421B001B7EC7 /* AuditBookingViewController.swift */,
+				6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */,
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
 				961889B71A680D3800295A64 /* LearnViewController.swift */,
 				66D7B3081B5F670600B7FAE2 /* NavigationController.swift */,
@@ -565,6 +577,7 @@
 				665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */,
 				66C364B01B608C7100BE3903 /* AuditActivitySiteDetailModel.swift */,
 				66C364B61B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift */,
+				6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -796,6 +809,7 @@
 				66E666B11B5F1FE100D7FF78 /* AuditRequestHeaderView.swift in Sources */,
 				B78F90381A6EF75800883A5B /* WebApiService.swift in Sources */,
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
+				6617A5901B6F3B5F00066C73 /* PhotoThumbnail.swift in Sources */,
 				669304F01B60CF6E001B855D /* TableViewController.swift in Sources */,
 				66B5E4241B6B3E37001B7EC7 /* RoundButton.swift in Sources */,
 				6630671F1B6715FB001EE543 /* PopDateViewController.swift in Sources */,
@@ -805,6 +819,8 @@
 				664AB6EE1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift in Sources */,
 				663067231B671616001EE543 /* DateUtils.swift in Sources */,
 				66C364B71B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift in Sources */,
+				6617A5781B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift in Sources */,
+				6617A58C1B6F31AE00066C73 /* AuditBookingAddViewController.swift in Sources */,
 				1A9183091A75EE1900606F35 /* CoreTextView.swift in Sources */,
 				665CEBA41B5782ED00A5C8BA /* AuditRequestModel.swift in Sources */,
 				66C364B11B608C7100BE3903 /* AuditActivitySiteDetailModel.swift in Sources */,
