@@ -389,7 +389,7 @@ struct WebApiService {
     
     static func postAuditActivityBookingDetailDelete(token: String, Id: Int,  response : (objectReturn : JsonReturnModel?) -> ()) {
         
-        let urlString = baseURL + ResourcePath.AuditActivityBookingDetailAdd.description
+        let urlString = baseURL + ResourcePath.AuditActivityBookingDetailDelete.description
         
         
         var parameters   : [String:AnyObject] = [

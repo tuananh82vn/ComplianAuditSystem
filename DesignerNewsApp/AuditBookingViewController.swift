@@ -81,7 +81,33 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
     {
         println(sender.tag.description)
         
-        //self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
+        var refreshAlert = UIAlertController(title: "Confirm", message: "Do you want to delete this booking item ?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
+            println("Handle Yes logic here")
+            
+            WebApiService.postAuditActivityBookingDetailDelete(LocalStore.accessToken()!, Id: sender.tag) { objectReturn in
+                
+                if let temp = objectReturn {
+                    
+                    if(temp.IsSuccess){
+                        
+                        self.InitData()
+                        //self.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                    
+                }
+            }
+
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction!) in
+//            println("Handle Cancel Logic here")
+        }))
+        
+        refreshAlert.view.tintColor = UIColor.blackColor()
+
+        self.presentViewController(refreshAlert, animated: true, completion: nil)
         
     }
     
