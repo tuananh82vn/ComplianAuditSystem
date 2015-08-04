@@ -3487,7 +3487,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView1" destination="RKC-gQ-6JF" id="8XU-h9-DgO"/>
-                        <segue destination="k6w-BO-hIM" kind="presentation" identifier="GoToBookingAdd" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="qI9-jh-6wb"/>
+                        <segue destination="k6w-BO-hIM" kind="presentation" identifier="GoToBookingAdd" modalPresentationStyle="overCurrentContext" modalTransitionStyle="flipHorizontal" id="qI9-jh-6wb"/>
+                        <segue destination="k6w-BO-hIM" kind="presentation" identifier="GoToBookingEdit" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="if3-vP-lkp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Seg-Ze-Eik" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3794,6 +3795,7 @@
                         <outlet property="ButtonCancelClicked" destination="2qd-3J-ARH" id="mH4-Gd-GBp"/>
                         <outlet property="ButtonSaveClicked" destination="XdB-kR-IiX" id="Aft-4W-xzq"/>
                         <outlet property="img_Thumbnail" destination="0oi-i4-LLv" id="IwB-fG-7f0"/>
+                        <outlet property="lbl_Title" destination="tCf-Bp-wHX" id="tn3-yT-m5a"/>
                         <outlet property="txt_FileName" destination="TQC-PY-5gk" id="dRF-OT-5Y7"/>
                         <outlet property="txt_Item" destination="kc0-bE-4dM" id="9X0-U9-hEn"/>
                         <outlet property="txt_Notes" destination="mDQ-c1-D4l" id="FKc-b1-pzd"/>
@@ -4787,4 +4789,7 @@
         <image name="university" width="50" height="50"/>
         <image name="user" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="if3-vP-lkp"/>
+    </inferredMetricsTieBreakers>
 </document>

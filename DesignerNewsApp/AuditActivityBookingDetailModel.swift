@@ -18,6 +18,14 @@ class AuditActivityBookingDetaiModel : Serializable {
     var FileName : String
     var SerialNumber : Int
     var Attachment : BookingAttachment
+    var DisplayFileName : String
+    var AuditActivityBookingAttachments : String
+    var UpdatedBy : String
+    var UpdatedDate : String
+    var Size : Float
+    var MIMEType : String
+    var UniqueId : String
+    var FolderPath : String
     
     override init() {
         Id = 0
@@ -29,6 +37,15 @@ class AuditActivityBookingDetaiModel : Serializable {
         FileName = ""
         SerialNumber = 0
         Attachment = BookingAttachment()
+        DisplayFileName = ""
+        AuditActivityBookingAttachments = ""
+        UpdatedBy = ""
+        UpdatedDate = ""
+        Size = 0
+        MIMEType = ""
+        UniqueId = ""
+        FolderPath = ""
+        UniqueId = ""
     }
 }
 

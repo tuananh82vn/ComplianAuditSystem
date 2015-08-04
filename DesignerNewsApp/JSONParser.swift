@@ -305,5 +305,42 @@ struct JSONParser {
         
         return Object
     }
+    
+    static func parseAuditActivityBookingDetail(story: NSDictionary) -> AuditActivityBookingDetaiModel {
+        
+        
+        let Object =  AuditActivityBookingDetaiModel()
+        
+        Object.Id =                                 story["Id"] as? Int ?? 0
+        
+        Object.AuditActivityId =                    story["AuditActivityId"] as? Int ?? 0
+        
+        Object.Item =                               story["Item"] as? String ?? ""
+        
+        Object.Notes =                              story["Notes"] as? String ?? ""
+        
+        Object.DisplayFileName =                    story["DisplayFileName"] as? String ?? ""
+        
+        Object.FileId =                             story["FileId"] as? Int ?? 0
+        
+        Object.AuditActivityBookingAttachments =    story["AuditActivityBookingAttachments"] as? String ?? ""
+        
+        Object.UpdatedBy =    story["UpdatedBy"] as? String ?? ""
+        
+        Object.UpdatedDate =    story["UpdatedDate"] as? String ?? ""
+        
+        Object.FileName =    story["FileName"] as? String ?? ""
+        
+        Object.Size =    story["Size"] as? Float ?? 0
+        
+        Object.MIMEType =    story["MIMEType"] as? String ?? ""
+        
+        Object.FolderPath =    story["FolderPath"] as? String ?? ""
+
+        //Object.Attachment =    story["FolderPath"] as? String ?? ""
+        
+        return Object
+    }
+
 
 }

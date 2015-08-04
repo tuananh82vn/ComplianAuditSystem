@@ -12,7 +12,7 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
 
     @IBOutlet weak var tableView1: UITableView!
     
-    //var AuditActivityUrlId : String!
+    var SelectedId : Int = 0
     
     private var auditBooking = [AuditActivityBookingDetaiModel]()
     
@@ -74,17 +74,29 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
             cell.ButtonDelete.addTarget(self, action: "ButtonDeleteClicked:", forControlEvents: .TouchUpInside)
 
         
+            cell.ButtonEdit.tag = self.auditBooking[indexPath.row].Id
+        
+            cell.ButtonEdit.addTarget(self, action: "ButtonEditClicked:", forControlEvents: .TouchUpInside)
+        
+
+            self.SelectedId = self.auditBooking[indexPath.row].Id
+
             return cell
+    }
+    
+    func ButtonEditClicked(sender : UIButton)
+    {
+        self.performSegueWithIdentifier("GoToBookingEdit", sender: sender)
     }
     
     func ButtonDeleteClicked(sender : UIButton)
     {
-        println(sender.tag.description)
+        //println(sender.tag.description)
         
         var refreshAlert = UIAlertController(title: "Confirm", message: "Do you want to delete this booking item ?", preferredStyle: UIAlertControllerStyle.Alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
-            println("Handle Yes logic here")
+            //println("Handle Yes logic here")
             
             WebApiService.postAuditActivityBookingDetailDelete(LocalStore.accessToken()!, Id: sender.tag) { objectReturn in
                 
@@ -118,5 +130,19 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
     @IBAction func ButtonAddClicked(sender: AnyObject) {
         self.performSegueWithIdentifier("GoToBookingAdd", sender: sender)
 
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "GoToBookingAdd" {
+                        let controller = segue.destinationViewController as! AuditBookingAddViewController
+                        controller.AddMode = true
+        }
+        else
+        if segue.identifier == "GoToBookingEdit" {
+            let controller = segue.destinationViewController as! AuditBookingAddViewController
+            controller.AddMode = false
+            controller.selectedBookingId = self.SelectedId
+        }
+        
     }
 }

@@ -18,6 +18,9 @@ struct WebApiService {
         case AuditActivityBookingDetailList
         case AuditActivityBookingDetailAdd
         case AuditActivityBookingDetailDelete
+        case AuditActivityBookingDetailEdit
+        case AuditActivityBookingDetailSelect
+        
         
         var description: String {
             switch self {
@@ -30,6 +33,8 @@ struct WebApiService {
                 case .AuditActivityBookingDetailList : return "/Api/AuditActivityBookingDetailList"
                 case .AuditActivityBookingDetailAdd : return "/Api/AuditActivityBookingDetailAdd"
                 case .AuditActivityBookingDetailDelete : return "/Api/AuditActivityBookingDetailDelete"
+                case .AuditActivityBookingDetailEdit : return "/Api/AuditActivityBookingDetailEdit"
+                case .AuditActivityBookingDetailSelect : return "/Api/AuditActivityBookingDetailSelect"
             }
         }
     }
@@ -37,10 +42,7 @@ struct WebApiService {
     static func loginWithEmail(email: String, password: String, response: (token: String?) -> ()) {
         
         let urlString = baseURL + ResourcePath.Login.description
-        
-        
-        println(urlString)
-        
+
         
         let parameters = [
             "Item": [
@@ -331,10 +333,19 @@ struct WebApiService {
         response (objectReturn : nil)
     }
     
-    static func postAuditActivityBookingDetail(token: String, bookingItem: AuditActivityBookingDetaiModel, response : (objectReturn : JsonReturnModel?) -> ()) {
+    static func postAuditActivityBookingDetail(token: String, bookingItem: AuditActivityBookingDetaiModel, Type : Bool, response : (objectReturn : JsonReturnModel?) -> ()) {
         
+        var urlString : String = ""
         
-        let urlString = baseURL + ResourcePath.AuditActivityBookingDetailAdd.description
+        if Type {
+             urlString = baseURL + ResourcePath.AuditActivityBookingDetailAdd.description
+        }
+        else
+        {
+             urlString = baseURL + ResourcePath.AuditActivityBookingDetailEdit.description
+
+        }
+        
         
         
         var parameters   : [String:AnyObject] = [
@@ -430,5 +441,38 @@ struct WebApiService {
         }
 
     }
+    
+    static func getAuditActivityBookingDetail(token: String, Id: Int, response : (objectReturn : AuditActivityBookingDetaiModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityBookingDetailSelect.description
+        
+        
+        var parameters  : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Id" : Id
+        ]
+        
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                println(jsonObject)
+                
+                if let Item = jsonObject["Item"].dictionaryObject {
+                    
+                    let Return = JSONParser.parseAuditActivityBookingDetail(Item as NSDictionary)
+                    response (objectReturn : Return)
+                }
+                
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+
 
 }

@@ -14,6 +14,7 @@ let albumName = "App Folder"
 
 class AuditBookingAddViewController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate{
 
+    @IBOutlet weak var lbl_Title: UILabel!
     @IBOutlet weak var txt_FileName: UITextField!
     @IBOutlet weak var txt_Notes: UITextView!
     @IBOutlet weak var txt_Item: UITextField!
@@ -32,17 +33,52 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
     
     var uploadBookingItem = AuditActivityBookingDetaiModel()
     
+    var AddMode : Bool = false
+    
+    var selectedBookingId : Int = 0
+    
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         InitFolder()
-    
+        
+        if(AddMode)
+        {
+            self.lbl_Title.text = "Add Booking Detail"
+            
+        }
+        else
+        {
+            self.lbl_Title.text = "Edit Booking Detail"
+            
+            InitData()
+        }
     }
     
-    func InitFolder(){
-        //Check if the folder exists, if not, create it
+    
+    func InitData(){
         
+        WebApiService.getAuditActivityBookingDetail(LocalStore.accessToken()!, Id: selectedBookingId) { objectReturn in
+            
+            if let temp = objectReturn {
+                
+                self.uploadBookingItem = temp
+                
+                self.txt_FileName.text = self.uploadBookingItem.DisplayFileName
+                self.txt_Item.text = self.uploadBookingItem.Item
+                self.txt_Notes.text = self.uploadBookingItem.Notes
+
+            }
+        }
+   
+    }
+    
+    
+    func InitFolder(){
+        
+        //Check if the folder exists, if not, create it
         let fetchOptions = PHFetchOptions()
         
         fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
@@ -209,6 +245,7 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 if let imageNotNull = imageData {
                         let base64String = imageNotNull.base64EncodedStringWithOptions(.allZeros)
                         self.bookingAttachment.FileContent = base64String
+                        //println(base64String)
                 }
             }
         })
@@ -234,7 +271,7 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
         self.uploadBookingItem.Notes = self.txt_Notes.text
         self.uploadBookingItem.Attachment = self.bookingAttachment
         
-        WebApiService.postAuditActivityBookingDetail(LocalStore.accessToken()!, bookingItem: self.uploadBookingItem) { objectReturn in
+        WebApiService.postAuditActivityBookingDetail(LocalStore.accessToken()!, bookingItem: self.uploadBookingItem, Type : AddMode) { objectReturn in
             
             if let temp = objectReturn {
                 
