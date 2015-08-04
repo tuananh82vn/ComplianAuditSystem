@@ -16,8 +16,9 @@ struct WebApiService {
         case AuditActivityAuditDetail
         case AuditActivityAuditDetailEdit
         case AuditActivityBookingDetailList
+        case AuditActivityBookingDetailAdd
+        case AuditActivityBookingDetailDelete
         
-
         var description: String {
             switch self {
                 case .Login: return "/Api/Login"
@@ -27,6 +28,8 @@ struct WebApiService {
                 case .AuditActivityAuditDetail : return "/Api/AuditActivityAuditDetail"
                 case .AuditActivityAuditDetailEdit : return "/Api/AuditActivityAuditDetailEdit"
                 case .AuditActivityBookingDetailList : return "/Api/AuditActivityBookingDetailList"
+                case .AuditActivityBookingDetailAdd : return "/Api/AuditActivityBookingDetailAdd"
+                case .AuditActivityBookingDetailDelete : return "/Api/AuditActivityBookingDetailDelete"
             }
         }
     }
@@ -311,7 +314,6 @@ struct WebApiService {
                 
                 //println(jsonObject)
                 
-                
                 if let IsSuccess = jsonObject["IsSuccess"].bool {
                     
                     if IsSuccess {
@@ -329,4 +331,104 @@ struct WebApiService {
         response (objectReturn : nil)
     }
     
+    static func postAuditActivityBookingDetail(token: String, bookingItem: AuditActivityBookingDetaiModel, response : (objectReturn : JsonReturnModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityBookingDetailAdd.description
+        
+        
+        var parameters   : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Item": [
+                "Id": bookingItem.Id,
+                "AuditActivityUrlId": bookingItem.AuditActivityUrlId,
+                "Item" : bookingItem.Item,
+                "Notes" : bookingItem.Notes,
+                "Attachment" : [
+                    "FileName" : bookingItem.Attachment.FileName,
+                    "ContentType" : bookingItem.Attachment.ContentType,
+                    "Size" : bookingItem.Attachment.Size,
+                    "FileContent" : bookingItem.Attachment.FileContent
+                ]
+            ]
+        ]
+        
+        var JsonReturn = JsonReturnModel()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }    
+
+        }
+        
+    }
+    
+    static func postAuditActivityBookingDetailDelete(token: String, Id: Int,  response : (objectReturn : JsonReturnModel?) -> ()) {
+        
+        let urlString = baseURL + ResourcePath.AuditActivityBookingDetailAdd.description
+        
+        
+        var parameters   : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Id": Id
+        ]
+        
+        var JsonReturn = JsonReturnModel()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }
+            
+        }
+
+    }
+
 }

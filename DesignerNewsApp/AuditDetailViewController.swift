@@ -33,7 +33,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     private var auditActivityAuditDetail = AuditActivityAuditDetailModel()
     
     
-    var AuditActivityUrlId : String!
+   // var AuditActivityUrlId : String!
     
     
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         initSiteData()
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"load", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refesh", object: nil)
 
 
         // Do any additional setup after loading the view.
@@ -56,7 +56,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         
         self.ButtonEdit.enabled = false
 
-        WebApiService.getAuditActivitySiteDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn1 in
+        WebApiService.getAuditActivitySiteDetail(LocalStore.accessToken()!, AuditActivityUrlId : LocalStore.accessAuditActivityUrlId()!) { objectReturn1 in
             
             if let temp1 = objectReturn1 {
                 
@@ -67,7 +67,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
-                    WebApiService.getAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityUrlId : self.AuditActivityUrlId) { objectReturn2 in
+                    WebApiService.getAuditActivityAuditDetail(LocalStore.accessToken()!, AuditActivityUrlId : LocalStore.accessAuditActivityUrlId()!) { objectReturn2 in
                         
                         if let temp2 = objectReturn2 {
                             
@@ -175,8 +175,8 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         }
         else
             if segue.identifier == "GoToBooking" {
-                let auditBookingViewController = segue.destinationViewController as! AuditBookingViewController
-                auditBookingViewController.AuditActivityUrlId = self.AuditActivityUrlId
+//                let auditBookingViewController = segue.destinationViewController as! AuditBookingViewController
+//                auditBookingViewController.AuditActivityUrlId = self.AuditActivityUrlId
         }
     }
 

@@ -122,7 +122,6 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         
     }
     
-
     func InitData(){
         
         self.ScopeOfAudit.text = auditActivityDetail.ScopeOfAudit
@@ -216,11 +215,6 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func ButtonCancelClicked(sender: AnyObject) {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     func PopUpPickerHandle(textField: UITextField, controlPicker : PopDatePicker?){
@@ -358,7 +352,6 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         //println(aButton)
     }
 
-
     @IBAction func ButtonSaveClicked(sender: AnyObject) {
         
         view.showLoading()
@@ -370,6 +363,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         formatter.dateFormat =  NSDateFormatter.dateFormatFromTemplate("MMddyyyy", options: 0, locale: NSLocale(localeIdentifier: "en-AU"))
 
         self.auditActivityDetail.AuditStartDate = formatter.dateFromString(DateFrom.text)
+        
         self.auditActivityDetail.AuditEndDate = formatter.dateFromString(DateTo.text)
         
         if (self.ButtonGap.selected)
@@ -430,7 +424,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
                 
                 if(temp.IsSuccess){
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("refesh", object: nil)
                     
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
@@ -457,6 +451,10 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         }
     }
     
+    @IBAction func ButtonCancelClicked(sender: AnyObject) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     func AddAuditDay(textField : UITextField, DayType : Int , DayNumber : Int){
         if( textField.text.length > 0){

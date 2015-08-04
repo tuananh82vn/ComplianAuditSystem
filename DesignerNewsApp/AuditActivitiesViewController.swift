@@ -28,7 +28,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     private var imageRework = UIImage(named: "redo") as UIImage?
     private var imageAbandonded = UIImage(named: "abandond") as UIImage?
     
-    private var selectedAuditRequestURL :String = ""
     
     
     var originalCenter: CGPoint!
@@ -171,8 +170,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     func yourButtonClicked(sender : UIButton)
     {
-        self.selectedAuditRequestURL = auditRequest[sender.tag].AuditActivityUrlId
-
+        LocalStore.setAuditActivityUrlId(auditRequest[sender.tag].AuditActivityUrlId)
+        
         self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
 
     }
@@ -212,8 +211,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToAuditDetail" {
             //println("prepare Go to Audit Detail")
-            let auditDetailViewController = segue.destinationViewController as! AuditDetailViewController
-            auditDetailViewController.AuditActivityUrlId = self.selectedAuditRequestURL
+//            let auditDetailViewController = segue.destinationViewController as! AuditDetailViewController
+//            auditDetailViewController.AuditActivityUrlId = self.selectedAuditRequestURL
         }
     }
 

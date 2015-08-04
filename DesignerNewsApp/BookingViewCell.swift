@@ -14,6 +14,10 @@ class BookingViewCell: UITableViewCell {
     @IBOutlet weak var lbl_Notes: UILabel!
     @IBOutlet weak var lbl_Number: UILabel!
     @IBOutlet weak var lbl_Item: UILabel!
+    
+    @IBOutlet weak var ButtonDelete: UIButton!
+    @IBOutlet weak var ButtonEdit: UIButton!
+    @IBOutlet weak var ButtonDownload: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

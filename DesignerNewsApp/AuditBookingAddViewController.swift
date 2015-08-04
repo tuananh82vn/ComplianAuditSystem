@@ -14,6 +14,9 @@ let albumName = "App Folder"
 
 class AuditBookingAddViewController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate{
 
+    @IBOutlet weak var txt_FileName: UITextField!
+    @IBOutlet weak var txt_Notes: UITextView!
+    @IBOutlet weak var txt_Item: UITextField!
     
     var albumFound : Bool = false
     
@@ -22,6 +25,12 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
     var photosAsset: PHFetchResult!
     
     var assetThumbnailSize:CGSize!
+    
+    var FileContentString : String = ""
+    
+    var bookingAttachment = BookingAttachment()
+    
+    var uploadBookingItem = AuditActivityBookingDetaiModel()
     
     
     override func viewDidLoad() {
@@ -163,14 +172,32 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
         
         imageOptions.resizeMode = PHImageRequestOptionsResizeMode.Fast
 
-        self.assetThumbnailSize = CGSizeMake(100,100)
         
         let asset: PHAsset = self.photosAsset.lastObject as! PHAsset
         
-        println(asset.creationDate.ToDateTimeString())
+        self.assetThumbnailSize = CGSizeMake(CGFloat(asset.pixelHeight),CGFloat(asset.pixelWidth))
         
-        //println(asset.mediaType)
-
+        //println(asset.creationDate.ToDateTimeString())
+        
+        if(asset.mediaType.rawValue == 1)
+        {
+            self.txt_FileName.text = asset.creationDate.ToDateTimeString() + ".jpg"
+            bookingAttachment.FileName = self.txt_FileName.text
+            bookingAttachment.ContentType = "Image/jpeg"
+            
+        }
+        
+        
+        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) { (data:NSData!, string:String!, orientation:UIImageOrientation, object:[NSObject : AnyObject]!) -> Void in
+            //transform into image
+            var image = UIImage(data: data)
+            
+            //Get bytes size of image
+            var imageSize = Float(data.length)
+            
+            self.bookingAttachment.Size = imageSize
+            
+        }
         
         PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: imageOptions, resultHandler: {(result, info)in
             
@@ -178,18 +205,67 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
             
             if let temp = result {
             
-                var imageData = UIImageJPEGRepresentation(temp, 0)
+                var imageData = UIImageJPEGRepresentation(temp, 1)
                 if let imageNotNull = imageData {
-                    let base64String = imageNotNull.base64EncodedStringWithOptions(.allZeros)
-                    println(base64String)
+                        let base64String = imageNotNull.base64EncodedStringWithOptions(.allZeros)
+                        self.bookingAttachment.FileContent = base64String
                 }
             }
-            
         })
     
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController){
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func ButtonCancelClicked(sender: AnyObject) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+
+    }
+    
+    @IBAction func ButtonSaveClicked(sender: AnyObject) {
+        
+        self.view.showLoading()
+        
+        self.uploadBookingItem.AuditActivityUrlId = LocalStore.accessAuditActivityUrlId()!
+        self.uploadBookingItem.Item = self.txt_Item.text
+        self.uploadBookingItem.Notes = self.txt_Notes.text
+        self.uploadBookingItem.Attachment = self.bookingAttachment
+        
+        WebApiService.postAuditActivityBookingDetail(LocalStore.accessToken()!, bookingItem: self.uploadBookingItem) { objectReturn in
+            
+            if let temp = objectReturn {
+                
+                self.view.hideLoading()
+                
+                if(temp.IsSuccess){
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName("refesh", object: nil)
+                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                else
+                {
+                    var errorMessage : String = ""
+                    
+                    for var index = 0; index < temp.Errors.count; ++index {
+                        
+                        errorMessage += temp.Errors[index].ErrorMessage
+                    }
+                    
+                    
+                    let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    alertController.view.tintColor = UIColor.blackColor()
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                
+            }
+        }
     }
 }

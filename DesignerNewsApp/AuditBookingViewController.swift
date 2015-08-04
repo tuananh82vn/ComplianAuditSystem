@@ -12,25 +12,23 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
 
     @IBOutlet weak var tableView1: UITableView!
     
-    var AuditActivityUrlId : String!
+    //var AuditActivityUrlId : String!
     
     private var auditBooking = [AuditActivityBookingDetaiModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //println(AuditActivityUrlId)
-        
+
         InitData()
         
-        // Do any additional setup after loading the view.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refesh", object: nil)
     }
 
     func InitData(){
         
         view.showLoading()
         
-        WebApiService.getAuditActivityBookingDetailList(LocalStore.accessToken()!, AuditActivityUrlId: AuditActivityUrlId) { objectReturn in
+        WebApiService.getAuditActivityBookingDetailList(LocalStore.accessToken()!, AuditActivityUrlId: LocalStore.accessAuditActivityUrlId()!) { objectReturn in
             
             if let temp = objectReturn {
             
@@ -46,6 +44,10 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
         
     }
     
+    func refesh(notification: NSNotification){
+        InitData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,19 +59,32 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-            var cell1 = self.tableView1.dequeueReusableCellWithIdentifier("BookingCell") as! BookingViewCell
+            var cell = self.tableView1.dequeueReusableCellWithIdentifier("BookingCell") as! BookingViewCell
         
-            cell1.lbl_Number.text = (indexPath.row+1).description
+            cell.lbl_Number.text = (indexPath.row+1).description
         
-            cell1.lbl_Item.text = self.auditBooking[indexPath.row].Item
+            cell.lbl_Item.text = self.auditBooking[indexPath.row].Item
         
-            cell1.lbl_Notes.text = self.auditBooking[indexPath.row].Notes
+            cell.lbl_Notes.text = self.auditBooking[indexPath.row].Notes
         
-            cell1.lbl_FileName.text = self.auditBooking[indexPath.row].FileName
+            cell.lbl_FileName.text = self.auditBooking[indexPath.row].FileName
         
+            cell.ButtonDelete.tag = self.auditBooking[indexPath.row].Id
         
-            return cell1
+            cell.ButtonDelete.addTarget(self, action: "ButtonDeleteClicked:", forControlEvents: .TouchUpInside)
+
+        
+            return cell
     }
+    
+    func ButtonDeleteClicked(sender : UIButton)
+    {
+        println(sender.tag.description)
+        
+        //self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
+        
+    }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //println("You selected cell #\(indexPath.row)!")

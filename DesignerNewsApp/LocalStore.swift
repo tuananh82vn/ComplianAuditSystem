@@ -9,64 +9,71 @@
 import UIKit
 
 struct LocalStore {
-    private static let visitedStoriesKey = "visitedStoriesKey"
-    private static let upvotedStoriesKey = "upvotedStoriesKey"
-    private static let repliedStoriesKey = "repliedStoriesKey"
-    private static let upvotedCommentsKey = "upvotedCommentsKey"
+//    private static let visitedStoriesKey = "visitedStoriesKey"
+//    private static let upvotedStoriesKey = "upvotedStoriesKey"
+//    private static let repliedStoriesKey = "repliedStoriesKey"
+//    private static let upvotedCommentsKey = "upvotedCommentsKey"
     private static let accessTokenKey = "accessTokenKey"
+    
+    private static let accessAuditActivityUrlIdKey = "accessAuditActivityUrlIdKey"
     
     private static let userDefaults = NSUserDefaults.standardUserDefaults()
 
-    static func setIntroAsVisited() {
-        userDefaults.setObject(true, forKey: "introKey")
-    }
-    
-    static func isIntroVisited() -> Bool {
-        return userDefaults.boolForKey("introKey")
-    }
-    
-    static func setStoryAsReplied(storyId: Int) {
-        appendId(storyId, toKey: repliedStoriesKey)
-    }
-
-    static func setStoryAsVisited(storyId: Int) {
-        appendId(storyId, toKey: visitedStoriesKey)
-    }
-
-    static func setStoryAsUpvoted(storyId: Int) {
-        appendId(storyId, toKey: upvotedStoriesKey)
-    }
-
-    static func removeStoryFromUpvoted(storyId: Int) {
-        removeId(storyId, forKey: upvotedStoriesKey)
-    }
-
-    static func setCommentAsUpvoted(commentId: Int) {
-        appendId(commentId, toKey: upvotedCommentsKey)
-    }
-
-    static func removeCommentFromUpvoted(commentId: Int) {
-        removeId(commentId, forKey: upvotedCommentsKey)
-    }
-
-    static func isStoryReplied(storyId: Int) -> Bool {
-        return arrayForKey(repliedStoriesKey, containsId: storyId)
-    }
-
-    static func isStoryVisited(storyId: Int) -> Bool {
-        return arrayForKey(visitedStoriesKey, containsId: storyId)
-    }
-
-    static func isStoryUpvoted(storyId: Int) -> Bool {
-        return arrayForKey(upvotedStoriesKey, containsId: storyId)
-    }
-
-    static func isCommentUpvoted(commentId: Int) -> Bool {
-        return arrayForKey(upvotedCommentsKey, containsId: commentId)
-    }
+//    static func setIntroAsVisited() {
+//        userDefaults.setObject(true, forKey: "introKey")
+//    }
+//    
+//    static func isIntroVisited() -> Bool {
+//        return userDefaults.boolForKey("introKey")
+//    }
+//    
+//    static func setStoryAsReplied(storyId: Int) {
+//        appendId(storyId, toKey: repliedStoriesKey)
+//    }
+//
+//    static func setStoryAsVisited(storyId: Int) {
+//        appendId(storyId, toKey: visitedStoriesKey)
+//    }
+//
+//    static func setStoryAsUpvoted(storyId: Int) {
+//        appendId(storyId, toKey: upvotedStoriesKey)
+//    }
+//
+//    static func removeStoryFromUpvoted(storyId: Int) {
+//        removeId(storyId, forKey: upvotedStoriesKey)
+//    }
+//
+//    static func setCommentAsUpvoted(commentId: Int) {
+//        appendId(commentId, toKey: upvotedCommentsKey)
+//    }
+//
+//    static func removeCommentFromUpvoted(commentId: Int) {
+//        removeId(commentId, forKey: upvotedCommentsKey)
+//    }
+//
+//    static func isStoryReplied(storyId: Int) -> Bool {
+//        return arrayForKey(repliedStoriesKey, containsId: storyId)
+//    }
+//
+//    static func isStoryVisited(storyId: Int) -> Bool {
+//        return arrayForKey(visitedStoriesKey, containsId: storyId)
+//    }
+//
+//    static func isStoryUpvoted(storyId: Int) -> Bool {
+//        return arrayForKey(upvotedStoriesKey, containsId: storyId)
+//    }
+//
+//    static func isCommentUpvoted(commentId: Int) -> Bool {
+//        return arrayForKey(upvotedCommentsKey, containsId: commentId)
+//    }
 
     static func setAccessToken(token: String) {
         userDefaults.setObject(token, forKey: accessTokenKey)
+        userDefaults.synchronize()
+    }
+    
+    static func setAuditActivityUrlId(AuditActivityUrlId: String) {
+        userDefaults.setObject(AuditActivityUrlId, forKey: accessAuditActivityUrlIdKey)
         userDefaults.synchronize()
     }
 
@@ -74,15 +81,24 @@ struct LocalStore {
         userDefaults.removeObjectForKey(accessTokenKey)
         userDefaults.synchronize()
     }
-
-    static func removeUpvotes() {
-        userDefaults.removeObjectForKey(upvotedStoriesKey)
-        userDefaults.removeObjectForKey(upvotedCommentsKey)
+    
+    private static func deleteAuditActivityUrlId() {
+        userDefaults.removeObjectForKey(accessAuditActivityUrlIdKey)
         userDefaults.synchronize()
     }
 
+//    static func removeUpvotes() {
+//        userDefaults.removeObjectForKey(upvotedStoriesKey)
+//        userDefaults.removeObjectForKey(upvotedCommentsKey)
+//        userDefaults.synchronize()
+//    }
+
     static func accessToken() -> String? {
         return userDefaults.stringForKey(accessTokenKey)
+    }
+    
+    static func accessAuditActivityUrlId() -> String? {
+        return userDefaults.stringForKey(accessAuditActivityUrlIdKey)
     }
 
     static func logout() {
