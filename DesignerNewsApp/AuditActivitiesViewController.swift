@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class AuditActivitiesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
@@ -29,6 +30,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     private var imageAbandonded = UIImage(named: "abandond") as UIImage?
     
     
+    var userProfile = LoginModel()
+    let imageCache = NSCache()
     
     var originalCenter: CGPoint!
     
@@ -184,10 +187,31 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
             case UICollectionElementKindSectionHeader:
                 //3
                 let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "AuditRequestHeaderView", forIndexPath: indexPath) as! AuditRequestHeaderView
-                //headerView.label.text = searches[indexPath.section].searchTerm
-                //headerView.AuditorAvatar.layer.cornerRadius = headerView.AuditorAvatar.frame.size.width / 2;
-                //headerView.AuditorAvatar.clipsToBounds = true;
 
+                headerView.lbl_name.text = self.userProfile.Name
+                headerView.lbl_email.text = self.userProfile.EmailAddress
+                headerView.lbl_phone.text = self.userProfile.Phone
+                headerView.lbl_mobile.text = self.userProfile.Mobile
+                headerView.lbl_companyName.text = self.userProfile.AuditorCompanyName
+                headerView.lbl_companyAddress.text = self.userProfile.AuditorCompanyAddress + ", " + self.userProfile.AuditorCompanySuburb + ", " + self.userProfile.AuditorCompanyPostcode + ", " + self.userProfile.AuditorCompanyStateName
+                
+                
+                if(self.userProfile.PhotoId != 0 ) {
+                    
+                    var stringURL : String = LocalStore.accessDomain()!
+
+                    stringURL += "/Api/GetFileDocument/?fileId=" + self.userProfile.PhotoId.description
+                
+                    Alamofire.request(.GET, stringURL).response() {
+                        (_, _, data, _) in
+                        let image = UIImage(data: data! as! NSData)
+                        headerView.AuditorAvatar.image  = image
+                        headerView.AuditorAvatar.layer.cornerRadius = headerView.AuditorAvatar.frame.size.width / 2;
+                        headerView.AuditorAvatar.clipsToBounds = true;
+                    }
+                }
+                
+                
                 return headerView
             default:
                 //4
@@ -208,12 +232,13 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         return temp
     }
     
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "GoToAuditDetail" {
-            //println("prepare Go to Audit Detail")
-//            let auditDetailViewController = segue.destinationViewController as! AuditDetailViewController
-//            auditDetailViewController.AuditActivityUrlId = self.selectedAuditRequestURL
-        }
+//        if segue.identifier == "GoToAuditDetail" {
+//            //println("prepare Go to Audit Detail")
+////            let auditDetailViewController = segue.destinationViewController as! AuditDetailViewController
+////            auditDetailViewController.AuditActivityUrlId = self.selectedAuditRequestURL
+//        }
     }
 
 }

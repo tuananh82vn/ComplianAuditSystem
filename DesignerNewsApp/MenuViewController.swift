@@ -26,6 +26,8 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var recentLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
     
+    var userProfile = LoginModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

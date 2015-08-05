@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    var userProfile = LoginModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +27,14 @@ class MainViewController: UIViewController {
         if segue.identifier == "GoToMenu" {
             let menuViewController = segue.destinationViewController as! MenuViewController
             menuViewController.delegate = self
+            menuViewController.userProfile = self.userProfile
         }
+        else
+            if segue.identifier == "ActivitiesSegue" {
+                let auditViewController = segue.destinationViewController as! AuditActivitiesViewController
+                auditViewController.userProfile = self.userProfile
+        }
+        
     }
     
     @IBAction func MenuButtonClicked(sender: AnyObject) {

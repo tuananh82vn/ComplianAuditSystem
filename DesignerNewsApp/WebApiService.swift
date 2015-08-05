@@ -5,11 +5,11 @@ import Alamofire
 struct WebApiService {
 
 
-    //private static let baseURL = "http://complianceauditsystem.softwarestaging.com.au"
-    private static let baseURL = "http://wsandypham:8080"
-
+    private static let baseURL = LocalStore.accessDomain()!
+    
     private enum ResourcePath: Printable {
         case Login
+        case Download
         case AuditRequestList
         case AuditRequestStatusList
         case AuditActivitySiteDetail
@@ -25,6 +25,7 @@ struct WebApiService {
         var description: String {
             switch self {
                 case .Login: return "/Api/Login"
+                case .Download: return "/Api/GetFileDocument/?fileId="
                 case .AuditRequestList: return "/Api/AuditRequestList"
                 case .AuditRequestStatusList: return "/Api/AuditRequestStatusList"
                 case .AuditActivitySiteDetail : return "/Api/AuditActivitySiteDetail"
@@ -39,14 +40,14 @@ struct WebApiService {
         }
     }
 
-    static func loginWithEmail(email: String, password: String, response: (token: String?) -> ()) {
+    static func loginWithUsername(Username: String, password: String, response: (object: LoginModel?) -> ()) {
         
         let urlString = baseURL + ResourcePath.Login.description
 
         
         let parameters = [
             "Item": [
-                "Username": email,
+                "Username": Username,
                 "Password": password
             ]
         ]
@@ -54,7 +55,7 @@ struct WebApiService {
         Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
             
             if(json == nil ){
-                response(token: nil)
+                response(object: nil)
             }
             else
             {
@@ -65,12 +66,15 @@ struct WebApiService {
             
                 if(IsSuccess?.boolValue == true)
                 {
-                    let TokenNumber = jsonObject["Item"]["TokenNumber"].string
-                    response(token: TokenNumber)
+                    if let Item = jsonObject["Item"].dictionaryObject {
+                        
+                        let Return = JSONParser.parseLoginModel(Item as NSDictionary)
+                        response (object : Return)
+                    }
                 }
                 else
                 {
-                    response(token: nil)
+                    response(object: nil)
                 }
             }
         }
@@ -314,7 +318,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                //println(jsonObject)
+                println(jsonObject)
                 
                 if let IsSuccess = jsonObject["IsSuccess"].bool {
                     
@@ -363,6 +367,7 @@ struct WebApiService {
                 ]
             ]
         ]
+        
         
         var JsonReturn = JsonReturnModel()
         
@@ -472,6 +477,43 @@ struct WebApiService {
         }
         
         response (objectReturn : nil)
+    }
+    
+    static func getFile(fileId : Int , func_response : (objectReturn : NSURL) -> ()) {
+        
+        let urlString = baseURL + ResourcePath.Download.description + fileId.description
+        
+        var tempURL = NSURL()
+        
+        
+        let destination: (NSURL, NSHTTPURLResponse) -> (NSURL) = {
+            (temporaryURL, response) in
+            
+            if let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as? NSURL {
+                var localImageURL = directoryURL.URLByAppendingPathComponent("\(fileId).\(response.suggestedFilename!)")
+                
+                
+                tempURL = localImageURL
+                
+                return localImageURL
+            }
+
+            return temporaryURL
+        }
+        
+        // deo hieu ra lam sao ???
+        Alamofire.download(.GET, urlString, destination).response(){
+            (_, _, data, _) in
+            
+            if let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as? NSURL {
+                var error: NSError?
+                let urls = NSFileManager.defaultManager().contentsOfDirectoryAtURL(directoryURL, includingPropertiesForKeys: nil, options: nil, error: &error)
+                
+                if error == nil {
+                    func_response(objectReturn : tempURL)
+                }
+            }
+        }
     }
 
 

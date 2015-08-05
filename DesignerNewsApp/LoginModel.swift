@@ -9,18 +9,44 @@
 import Foundation
 
 
-struct LoginModel {
-    let Name: String
-    let EmailAddress: String
-    let TokenNumber: String
-    let UserName: String
-    let PreferName: String
-    let JobTitle: String
-    let Mobile: String
-    let PhotoId: Int
-    let UserId: Int
-    let Initials: String
-    let Phone : String
-    let RoleId : Int
+class LoginModel : Serializable {
+    var Name: String
+    var AuditorCompanyName : String
+    var TokenNumber: String
+    var UserName: String
+    var PreferName: String
+    var EmailAddress: String
+    var Mobile: String
+    var JobTitle: String
+    var PhotoId: Int
+    var AuditorCompanyAddress : String
+    var UserId: Int
+    var AuditorCompanySuburb : String
+    var AuditorCompanyPostcode : String
+    var Initials : String
+    var Phone : String
+    var RoleId : Int
+    var AuditorCompanyStateName : String
+    
+    override init() {
+        Name = ""
+        AuditorCompanyName = ""
+        TokenNumber = ""
+        UserName = ""
+        PreferName = ""
+        EmailAddress = ""
+        Mobile = ""
+        JobTitle = ""
+        PhotoId = 0
+        AuditorCompanyAddress = ""
+        UserId = 0
+        AuditorCompanySuburb = ""
+        AuditorCompanyPostcode = ""
+        Initials = ""
+        Phone = ""
+        RoleId = 0
+        AuditorCompanyStateName = ""
+        
+    }
 }
 

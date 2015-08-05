@@ -9,6 +9,49 @@
 import Foundation
 
 struct JSONParser {
+    
+    static func parseLoginModel(story: NSDictionary) -> LoginModel {
+        
+        let object =  LoginModel()
+        
+        object.Name = story["Name"] as? String ?? ""
+        
+        object.AuditorCompanyName = story["AuditorCompanyName"] as? String ?? ""
+        
+        object.TokenNumber = story["TokenNumber"] as? String ?? ""
+        
+        object.UserName = story["UserName"] as? String ?? ""
+        
+        object.PreferName = story["PreferName"] as? String ?? ""
+        
+        object.EmailAddress = story["EmailAddress"] as? String ?? ""
+        
+        object.Mobile = story["Mobile"] as? String ?? ""
+        
+        object.Mobile = story["Mobile"] as? String ?? ""
+        
+        object.JobTitle = story["JobTitle"] as? String ?? ""
+        
+        object.PhotoId = story["PhotoId"] as? Int ?? 0
+        
+        object.AuditorCompanyAddress = story["AuditorCompanyAddress"] as? String ?? ""
+        
+        object.UserId = story["UserId"] as? Int ?? 0
+        
+        object.AuditorCompanySuburb = story["AuditorCompanySuburb"] as? String ?? ""
+        
+        object.AuditorCompanyPostcode = story["AuditorCompanyPostcode"] as? String ?? ""
+        
+        object.Initials = story["Initials"] as? String ?? ""
+        
+        object.Phone = story["Phone"] as? String ?? ""
+        
+        object.RoleId = story["RoleId"] as? Int ?? 0
+        
+        object.AuditorCompanyStateName = story["AuditorCompanyStateName"] as? String ?? ""
+        
+        return object
+    }
 
 
     static func parseAuditRequestStatus(story: NSDictionary) -> AuditRequestStatusModel {

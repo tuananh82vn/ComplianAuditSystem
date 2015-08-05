@@ -73,19 +73,31 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
         
             cell.ButtonDelete.addTarget(self, action: "ButtonDeleteClicked:", forControlEvents: .TouchUpInside)
 
-        
             cell.ButtonEdit.tag = self.auditBooking[indexPath.row].Id
         
             cell.ButtonEdit.addTarget(self, action: "ButtonEditClicked:", forControlEvents: .TouchUpInside)
         
-
-            self.SelectedId = self.auditBooking[indexPath.row].Id
+            cell.ButtonDownload.tag = self.auditBooking[indexPath.row].FileId
+        
+            cell.ButtonDownload.addTarget(self, action: "ButtonDownloadClicked:", forControlEvents: .TouchUpInside)
+        
 
             return cell
     }
     
+    func ButtonDownloadClicked(sender : UIButton)
+    {
+        
+        WebApiService.getFile(sender.tag) { objectReturn in
+
+            self.performSegueWithIdentifier("GoToWebviewer", sender: objectReturn)
+        }
+    }
+    
     func ButtonEditClicked(sender : UIButton)
     {
+        self.SelectedId = sender.tag
+        
         self.performSegueWithIdentifier("GoToBookingEdit", sender: sender)
     }
     
@@ -105,7 +117,6 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
                     if(temp.IsSuccess){
                         
                         self.InitData()
-                        //self.dismissViewControllerAnimated(true, completion: nil)
                     }
                     
                 }
@@ -114,7 +125,7 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction!) in
-//            println("Handle Cancel Logic here")
+            //println("Handle Cancel Logic here")
         }))
         
         refreshAlert.view.tintColor = UIColor.blackColor()
@@ -142,6 +153,17 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
             let controller = segue.destinationViewController as! AuditBookingAddViewController
             controller.AddMode = false
             controller.selectedBookingId = self.SelectedId
+        }
+        else
+            if segue.identifier == "GoToWebviewer" {
+                
+                UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
+                
+                let webViewController = segue.destinationViewController as! WebViewController
+
+                if let url = sender as? NSURL {
+                    webViewController.url = url
+                }
         }
         
     }

@@ -18,9 +18,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     var url : NSURL!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var closeButton: SpringButton!
-    @IBOutlet weak var backButton: DesignableButton!
-    @IBOutlet weak var forwardButton: DesignableButton!
-    @IBOutlet weak var shareButton: SpringButton!
+
+    //@IBOutlet weak var shareButton: SpringButton!
     var pointNow = CGPoint()
     
     @IBAction func backButtonDidTouch(sender: AnyObject) {
@@ -39,46 +38,27 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         if scrollView.contentOffset.y < pointNow.y {
             
             spring(0.5) {
-                self.backButton.alpha = 1
-                self.forwardButton.alpha = 1
-                self.shareButton.alpha = 1
+
                 self.closeButton.alpha = 1
-                
-                self.backButton.transform = CGAffineTransformMakeTranslation(0, 0)
-                self.forwardButton.transform = CGAffineTransformMakeTranslation(0, 0)
-                self.shareButton.transform = CGAffineTransformMakeTranslation(0, 0)
                 self.closeButton.transform = CGAffineTransformMakeTranslation(0, 0)
             }
         }
         if scrollView.contentOffset.y > pointNow.y {
             spring(0.5) {
-                self.backButton.alpha = 0
-                self.forwardButton.alpha = 0
-                self.shareButton.alpha = 0
                 self.closeButton.alpha = 0
-                
-                self.backButton.transform = CGAffineTransformMakeTranslation(0, 10)
-                self.forwardButton.transform = CGAffineTransformMakeTranslation(0, 10)
-                self.shareButton.transform = CGAffineTransformMakeTranslation(0, 10)
                 self.closeButton.transform = CGAffineTransformMakeTranslation(0, 10)
             }
         }
     }
     
-    @IBAction func shareButtonPressed(sender: AnyObject) {
-        let shareString = self.shareTitle ?? ""
-        let shareURL = self.url
-        let activityViewController = UIActivityViewController(activityItems: [shareString, shareURL], applicationActivities: [SafariActivity(), ChromeActivity()])
-        activityViewController.setValue(shareString, forKey: "subject")
-        activityViewController.excludedActivityTypes = [UIActivityTypeAirDrop]
-        presentViewController(activityViewController, animated: true, completion: nil)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let request = NSURLRequest(URL: url!)
+        
         webView.loadRequest(request)
+        
         webView.delegate = self
         
         webView.scrollView.delegate = self

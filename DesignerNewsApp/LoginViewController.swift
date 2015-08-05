@@ -20,6 +20,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     
     var originalCenter: CGPoint!
     
+    var userProfile = LoginModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +29,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        
+        LocalStore.setDomain("http://wsandypham:8080")
 
     }
     
@@ -45,15 +49,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         
         view.showLoading()
         
-        WebApiService.loginWithEmail(emailTextField.text, password: passwordTextField.text) { token in
+        WebApiService.loginWithUsername(emailTextField.text, password: passwordTextField.text) { object in
             
             self.view.hideLoading()
             
-            if let token = token {
+            if let temp = object {
                 
-                //println(token)
+                self.userProfile = temp
                 
-                LocalStore.setAccessToken(token)
+                LocalStore.setToken(self.userProfile.TokenNumber)
                 
                 self.dialogView.animation = "zoomOut"
                 self.dialogView.animate()
@@ -114,5 +118,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         
         textField.resignFirstResponder()
         return true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "GoToDashboard" {
+            let GoToDashboard = segue.destinationViewController as! MainViewController
+            GoToDashboard.userProfile = self.userProfile
+        }
     }
 }
