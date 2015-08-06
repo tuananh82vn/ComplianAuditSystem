@@ -16,7 +16,7 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
     private var auditPlanList = [AuditActivityAuditPlanModel]()
     
     private var auditPlanMaster = [AuditPlanMasterModel]()
-    
+    private var auditPlanDetail = [AuditPlanDetailModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,10 +92,13 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
         if(tableView == self.tableMaster){
             return self.auditPlanMaster.count
         }
-        else
+        else if(tableView == self.tableDetail)
         {
-            return self.auditPlanMaster.count
+            return self.auditPlanDetail.count
         }
+        
+        return 0
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -110,17 +113,56 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
         }
         else
         {
-        
-                var cell2 = self.tableMaster.dequeueReusableCellWithIdentifier("DetailCell") as! AuditPlanDetailTableViewCell
-                return cell2
+            var cell2 = self.tableDetail.dequeueReusableCellWithIdentifier("DetailCell") as! AuditPlanDetailTableViewCell
+            
+            cell2.lbl_time.text = self.auditPlanDetail[indexPath.row].TimeText
+            cell2.lbl_Activity.text = self.auditPlanDetail[indexPath.row].Activity
+            cell2.lbl_Resources.text = self.auditPlanDetail[indexPath.row].ResoucesRequired
+            
+            return cell2
 
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(tableView == self.tableMaster){
-            println("You selected cell #\(self.auditPlanMaster[indexPath.row].AuditActivityDayId)!")
+            
+            //println("You selected cell #\(self.auditPlanMaster[indexPath.row].AuditActivityDayId)!")
+            
+            self.auditPlanDetail.removeAll(keepCapacity: false)
+            
+            println("before : \(self.auditPlanDetail.count)")
+            
+            self.auditPlanDetail = GetDetailById(self.auditPlanMaster[indexPath.row].AuditActivityDayId)
+            
+            println("after : \(self.auditPlanDetail.count)")
+            
+            
+            self.tableDetail.reloadData()
+            
         }
+    }
+    
+    func GetDetailById(DayId : Int ) -> [AuditPlanDetailModel] {
+        
+        var ReturnArray = [AuditPlanDetailModel]()
+        
+        for item in self.auditPlanList {
+            
+            if(item.AuditActivityDayId == DayId && item.AuditActivityAuditPlanId != 0){
+            
+                var temp = AuditPlanDetailModel()
+                temp.AuditActivityAuditPlanId = item.AuditActivityAuditPlanId
+                temp.TimeText = item.TimeText
+                temp.Activity = item.Activity
+                temp.ResoucesRequired = item.ResoucesRequired
+                
+                ReturnArray.append(temp)
+                
+            }
+        }
+        
+        return ReturnArray
     }
 
 

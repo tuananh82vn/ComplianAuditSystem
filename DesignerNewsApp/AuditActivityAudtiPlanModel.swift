@@ -56,12 +56,12 @@ class AuditPlanDetailModel : Serializable {
     var TimeText : String
     var Activity : String
     var ResoucesRequired : String
-    var AuditActivityDayId : Int
+    var AuditActivityAuditPlanId : Int
     
     override init() {
         TimeText = ""
         Activity = ""
         ResoucesRequired = ""
-        AuditActivityDayId = 0
+        AuditActivityAuditPlanId = 0
     }
 }
