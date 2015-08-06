@@ -65,6 +65,7 @@
 		66C364B11B608C7100BE3903 /* AuditActivitySiteDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C364B01B608C7100BE3903 /* AuditActivitySiteDetailModel.swift */; };
 		66C364B71B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C364B61B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift */; };
 		66D7B3091B5F670600B7FAE2 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D7B3081B5F670600B7FAE2 /* NavigationController.swift */; };
+		66DD85141B731E4D004B9C30 /* AuditPlanAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DD85131B731E4D004B9C30 /* AuditPlanAddViewController.swift */; };
 		66E666B11B5F1FE100D7FF78 /* AuditRequestHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E666B01B5F1FE100D7FF78 /* AuditRequestHeaderView.swift */; };
 		961889B81A680D3800295A64 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961889B71A680D3800295A64 /* LearnViewController.swift */; };
 		964892671A63F5D900214D53 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964892661A63F5D900214D53 /* MenuViewController.swift */; };
@@ -285,6 +286,7 @@
 		66C364B01B608C7100BE3903 /* AuditActivitySiteDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivitySiteDetailModel.swift; sourceTree = "<group>"; };
 		66C364B61B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityAuditDetailModel.swift; sourceTree = "<group>"; };
 		66D7B3081B5F670600B7FAE2 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		66DD85131B731E4D004B9C30 /* AuditPlanAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditPlanAddViewController.swift; sourceTree = "<group>"; };
 		66E666B01B5F1FE100D7FF78 /* AuditRequestHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestHeaderView.swift; sourceTree = "<group>"; };
 		961889B71A680D3800295A64 /* LearnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
 		964892661A63F5D900214D53 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 				66B5E4331B6B421B001B7EC7 /* AuditBookingViewController.swift */,
 				6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */,
 				6622E5B51B72D8DD00C262CF /* AuditPlanViewController.swift */,
+				66DD85131B731E4D004B9C30 /* AuditPlanAddViewController.swift */,
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
 				961889B71A680D3800295A64 /* LearnViewController.swift */,
 				66D7B3081B5F670600B7FAE2 /* NavigationController.swift */,
@@ -825,6 +828,7 @@
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
 				6617A5901B6F3B5F00066C73 /* PhotoThumbnail.swift in Sources */,
 				669304F01B60CF6E001B855D /* TableViewController.swift in Sources */,
+				66DD85141B731E4D004B9C30 /* AuditPlanAddViewController.swift in Sources */,
 				66B5E4241B6B3E37001B7EC7 /* RoundButton.swift in Sources */,
 				6630671F1B6715FB001EE543 /* PopDateViewController.swift in Sources */,
 				1A935E301A837A670059BCBC /* TPKeyboardAvoidingScrollView.m in Sources */,

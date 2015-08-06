@@ -21,6 +21,10 @@ struct WebApiService {
         case AuditActivityBookingDetailEdit
         case AuditActivityBookingDetailSelect
         case AuditActivityAudtiPlanList
+        case AuditActivityAuditPlanAdd
+        case AuditActivityAuditPlanDelete
+        case AuditActivityAuditPlanSelect
+        case AuditActivityAuditPlanEdit
         
         var description: String {
             switch self {
@@ -37,6 +41,10 @@ struct WebApiService {
                 case .AuditActivityBookingDetailEdit : return "/Api/AuditActivityBookingDetailEdit"
                 case .AuditActivityBookingDetailSelect : return "/Api/AuditActivityBookingDetailSelect"
                 case .AuditActivityAudtiPlanList : return "/Api/AuditActivityAudtiPlanList"
+                case .AuditActivityAuditPlanAdd : return "/Api/AuditActivityAuditPlanAdd"
+                case .AuditActivityAuditPlanDelete : return "/Api/AuditActivityAuditPlanDelete"
+                case .AuditActivityAuditPlanSelect : return "/Api/AuditActivityAuditPlanSelect"
+                case .AuditActivityAuditPlanEdit : return "/Api/AuditActivityAuditPlanEdit"
             }
         }
     }
@@ -536,7 +544,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                    println(jsonObject)
+                  //  println(jsonObject)
                 
                 if let IsSuccess = jsonObject["IsSuccess"].bool {
                     
@@ -555,6 +563,141 @@ struct WebApiService {
         response (objectReturn : nil)
     }
 
+    static func postAuditActivityAuditPlanAdd(token: String, object : AuditActivityAuditPlanModel, type : Bool,  response : (objectReturn : JsonReturnModel?) -> ()) {
+        
+        
+        var urlString : String = ""
+        
+        if type {
+            urlString = baseURL + ResourcePath.AuditActivityAuditPlanAdd.description
+        }
+        else
+        {
+            urlString = baseURL + ResourcePath.AuditActivityAuditPlanEdit.description
+            
+        }
 
+        
+        
+        var parameters   : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Item": [
+                "AuditActivityId" : object.AuditActivityId,
+                "AuditActivityAuditPlanId" : object.AuditActivityAuditPlanId,
+                "AuditActivityDayId" : object.AuditActivityDayId,
+                "TimeText" : object.TimeText,
+                "Activity" : object.Activity,
+                "ResoucesRequired" : object.ResoucesRequired
+            ]
+        ]
+        
+        var JsonReturn = JsonReturnModel()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }
+            
+        }
+        
+    }
+    
+    static func postAuditActivityAuditPlanDelete(token: String, Id: Int,  response : (objectReturn : JsonReturnModel?) -> ()) {
+        
+        let urlString = baseURL + ResourcePath.AuditActivityAuditPlanDelete.description
+        
+        
+        var parameters   : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Id": Id
+        ]
+        
+        var JsonReturn = JsonReturnModel()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }
+            
+        }
+        
+    }
+    
+    static func getAuditActivityAuditPlan(token: String, Id: Int, response : (objectReturn : AuditActivityAuditPlanModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityAuditPlanSelect.description
+        
+        
+        var parameters  : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Id" : Id
+        ]
+        
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                
+                if let Item = jsonObject["Item"].dictionaryObject {
+                    
+                    let Return = JSONParser.parseAuditActivityAuditPlan(Item as NSDictionary)
+                    response (objectReturn : Return)
+                }
+                
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
 
 }

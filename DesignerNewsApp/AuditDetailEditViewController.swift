@@ -76,8 +76,6 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
     }
     
     func InitUI(){
-        
-        
     
         radioButtonController = SSRadioButtonsController(buttons: ButtonGap, ButtonCer, ButtonRoutine)
         radioButtonController!.delegate = self

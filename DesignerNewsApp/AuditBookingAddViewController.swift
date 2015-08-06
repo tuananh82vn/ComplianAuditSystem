@@ -156,6 +156,8 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: {(alertAction)in
                 alert.dismissViewControllerAnimated(true, completion: nil)
             }))
+            alert.view.tintColor = UIColor.blackColor()
+            
             self.presentViewController(alert, animated: true, completion: nil)
         }
 

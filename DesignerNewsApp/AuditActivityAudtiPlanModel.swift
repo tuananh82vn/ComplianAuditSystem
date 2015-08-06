@@ -43,12 +43,15 @@ class AuditPlanMasterModel : Serializable {
     var DayTypeName : String
     var DayDateDisplay : String
     var AuditActivityDayId : Int
+    var AuditActivityId : Int
+    
     
     override init() {
         DayNumber = 0
         DayTypeName = ""
         DayDateDisplay = ""
         AuditActivityDayId = 0
+        AuditActivityId = 0 
     }
 }
 
