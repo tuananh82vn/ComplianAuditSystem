@@ -349,6 +349,56 @@ struct JSONParser {
         return Object
     }
     
+    static func parseAuditActivityPlanModel(story: NSArray) -> [AuditActivityAuditPlanModel] {
+        
+        var PlanArray = [AuditActivityAuditPlanModel]()
+        
+        if let Items = story as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseObjectAuditPlan(Item as NSDictionary)
+                    
+                    PlanArray.append(temp)
+                }
+            }
+        }
+        
+        return PlanArray
+    }
+    
+    static func parseObjectAuditPlan(story: NSDictionary) -> AuditActivityAuditPlanModel {
+        
+        let Object =  AuditActivityAuditPlanModel()
+        
+        Object.DayNumber = story["DayNumber"] as? Int ?? 0
+        
+        Object.AuditActivityId = story["AuditActivityId"] as? Int ?? 0
+        
+        Object.DayType = story["DayType"] as? Int ?? 0
+        
+        Object.AuditActivityDayId = story["AuditActivityDayId"] as? Int ?? 0
+        
+        Object.Activity = story["Activity"] as? String ?? ""
+        
+        Object.TimeText = story["TimeText"] as? String ?? ""
+        
+        Object.ResoucesRequired = story["ResoucesRequired"] as? String ?? ""
+
+        Object.DayDateDsiplay = story["DayDateDsiplay"] as? String ?? ""
+        
+        Object.DayDate = story["DayDate"] as? String ?? ""
+        
+        Object.AuditActivityAuditPlanId = story["AuditActivityAuditPlanId"] as? Int ?? 0
+        
+        Object.DayTypeName = story["DayTypeName"] as? String ?? ""
+        
+        return Object
+    }
+
+    
     static func parseAuditActivityBookingDetail(story: NSDictionary) -> AuditActivityBookingDetaiModel {
         
         

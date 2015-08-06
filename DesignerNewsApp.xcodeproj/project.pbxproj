@@ -36,6 +36,10 @@
 		6617A58C1B6F31AE00066C73 /* AuditBookingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */; };
 		6617A58E1B6F3B1100066C73 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6617A58D1B6F3B1100066C73 /* Photos.framework */; };
 		6617A5901B6F3B5F00066C73 /* PhotoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58F1B6F3B5F00066C73 /* PhotoThumbnail.swift */; };
+		6622E5B61B72D8DD00C262CF /* AuditPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622E5B51B72D8DD00C262CF /* AuditPlanViewController.swift */; };
+		6622E5C61B72D97500C262CF /* AuditPlanMasterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622E5C51B72D97500C262CF /* AuditPlanMasterTableViewCell.swift */; };
+		6622E5C81B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622E5C71B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift */; };
+		6622E5CA1B72FB7A00C262CF /* AuditPlanDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622E5C91B72FB7A00C262CF /* AuditPlanDetailTableViewCell.swift */; };
 		662C80DD1B57950300371598 /* AuditRequestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */; };
 		6630670F1B6715F1001EE543 /* PopDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6630670E1B6715F1001EE543 /* PopDatePicker.swift */; };
 		6630671F1B6715FB001EE543 /* PopDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6630671E1B6715FB001EE543 /* PopDateViewController.swift */; };
@@ -252,6 +256,10 @@
 		6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditBookingAddViewController.swift; sourceTree = "<group>"; };
 		6617A58D1B6F3B1100066C73 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		6617A58F1B6F3B5F00066C73 /* PhotoThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoThumbnail.swift; path = "../../../../Downloads/PhotosGalleryApp-master/Photos Gallery App/PhotoThumbnail.swift"; sourceTree = "<group>"; };
+		6622E5B51B72D8DD00C262CF /* AuditPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditPlanViewController.swift; sourceTree = "<group>"; };
+		6622E5C51B72D97500C262CF /* AuditPlanMasterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditPlanMasterTableViewCell.swift; sourceTree = "<group>"; };
+		6622E5C71B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityAudtiPlanModel.swift; sourceTree = "<group>"; };
+		6622E5C91B72FB7A00C262CF /* AuditPlanDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditPlanDetailTableViewCell.swift; sourceTree = "<group>"; };
 		662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestCollectionViewCell.swift; sourceTree = "<group>"; };
 		6630670E1B6715F1001EE543 /* PopDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDatePicker.swift; sourceTree = "<group>"; };
 		6630671E1B6715FB001EE543 /* PopDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDateViewController.swift; sourceTree = "<group>"; };
@@ -516,6 +524,7 @@
 				66BA22EB1B67095500B755D7 /* AuditDetailEditViewController.swift */,
 				66B5E4331B6B421B001B7EC7 /* AuditBookingViewController.swift */,
 				6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */,
+				6622E5B51B72D8DD00C262CF /* AuditPlanViewController.swift */,
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
 				961889B71A680D3800295A64 /* LearnViewController.swift */,
 				66D7B3081B5F670600B7FAE2 /* NavigationController.swift */,
@@ -578,6 +587,7 @@
 				66C364B01B608C7100BE3903 /* AuditActivitySiteDetailModel.swift */,
 				66C364B61B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift */,
 				6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */,
+				6622E5C71B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -589,6 +599,8 @@
 				66E666B01B5F1FE100D7FF78 /* AuditRequestHeaderView.swift */,
 				664AB6ED1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift */,
 				66B5E4351B6B4814001B7EC7 /* BookingViewCell.swift */,
+				6622E5C51B72D97500C262CF /* AuditPlanMasterTableViewCell.swift */,
+				6622E5C91B72FB7A00C262CF /* AuditPlanDetailTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -798,9 +810,11 @@
 				66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */,
 				966128551A4DA63100A54A23 /* AppDelegate.swift in Sources */,
 				1A7D78A01A70F8FE0061D6F6 /* DragDropBehavior.swift in Sources */,
+				6622E5B61B72D8DD00C262CF /* AuditPlanViewController.swift in Sources */,
 				1A935E311A837A670059BCBC /* TPKeyboardAvoidingTableView.m in Sources */,
 				1AED4A711A7BBCCA004C689E /* Error.swift in Sources */,
 				66C364AD1B5F861400BE3903 /* LocalStore.swift in Sources */,
+				6622E5C81B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift in Sources */,
 				B78F903E1A6EFAAA00883A5B /* JSONParser.swift in Sources */,
 				665CEB941B577FC500A5C8BA /* AuditActivitiesViewController.swift in Sources */,
 				66B5E4361B6B4814001B7EC7 /* BookingViewCell.swift in Sources */,
@@ -819,6 +833,7 @@
 				664AB6EE1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift in Sources */,
 				663067231B671616001EE543 /* DateUtils.swift in Sources */,
 				66C364B71B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift in Sources */,
+				6622E5C61B72D97500C262CF /* AuditPlanMasterTableViewCell.swift in Sources */,
 				6617A5781B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift in Sources */,
 				6617A58C1B6F31AE00066C73 /* AuditBookingAddViewController.swift in Sources */,
 				1A9183091A75EE1900606F35 /* CoreTextView.swift in Sources */,
@@ -826,6 +841,7 @@
 				66C364B11B608C7100BE3903 /* AuditActivitySiteDetailModel.swift in Sources */,
 				66B5E4341B6B421B001B7EC7 /* AuditBookingViewController.swift in Sources */,
 				66BA22EC1B67095500B755D7 /* AuditDetailEditViewController.swift in Sources */,
+				6622E5CA1B72FB7A00C262CF /* AuditPlanDetailTableViewCell.swift in Sources */,
 				66C364AF1B60679D00BE3903 /* AuditDetailViewController.swift in Sources */,
 				66BA22EA1B67059A00B755D7 /* SSRadioButton.swift in Sources */,
 				1A935E3C1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift in Sources */,

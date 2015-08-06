@@ -20,7 +20,7 @@ struct WebApiService {
         case AuditActivityBookingDetailDelete
         case AuditActivityBookingDetailEdit
         case AuditActivityBookingDetailSelect
-        
+        case AuditActivityAudtiPlanList
         
         var description: String {
             switch self {
@@ -36,6 +36,7 @@ struct WebApiService {
                 case .AuditActivityBookingDetailDelete : return "/Api/AuditActivityBookingDetailDelete"
                 case .AuditActivityBookingDetailEdit : return "/Api/AuditActivityBookingDetailEdit"
                 case .AuditActivityBookingDetailSelect : return "/Api/AuditActivityBookingDetailSelect"
+                case .AuditActivityAudtiPlanList : return "/Api/AuditActivityAudtiPlanList"
             }
         }
     }
@@ -318,7 +319,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                println(jsonObject)
+                //println(jsonObject)
                 
                 if let IsSuccess = jsonObject["IsSuccess"].bool {
                     
@@ -515,6 +516,45 @@ struct WebApiService {
             }
         }
     }
+    
+    static func getAuditActivityAudtiPlanList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityAuditPlanModel]?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityAudtiPlanList.description
+        
+        
+        var parameters = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        var arrayReturn = [AuditActivityAuditPlanModel]()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                    println(jsonObject)
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Items"].arrayObject {
+                            
+                            arrayReturn = JSONParser.parseAuditActivityPlanModel(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+
 
 
 }

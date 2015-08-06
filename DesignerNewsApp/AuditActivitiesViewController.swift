@@ -231,15 +231,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         
         return temp
     }
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "GoToAuditDetail" {
-//            //println("prepare Go to Audit Detail")
-////            let auditDetailViewController = segue.destinationViewController as! AuditDetailViewController
-////            auditDetailViewController.AuditActivityUrlId = self.selectedAuditRequestURL
-//        }
-    }
 
 }
 

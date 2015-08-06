@@ -143,6 +143,10 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
 
     }
     
+    @IBAction func ButtonAuditPlanClicked(sender: AnyObject) {
+        self.performSegueWithIdentifier("GoToAuditPlan", sender: sender)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToBookingAdd" {
                         let controller = segue.destinationViewController as! AuditBookingAddViewController
