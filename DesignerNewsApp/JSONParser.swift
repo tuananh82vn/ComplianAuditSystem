@@ -451,5 +451,30 @@ struct JSONParser {
         return Object
     }
 
+    
+    static func parseAuditActivityMeetingModel(story: NSDictionary) -> AuditActivityMeetingModel {
+        
+        let Object =  AuditActivityMeetingModel()
+        
+        Object.AuditActivityId =                 story["AuditActivityId"] as? Int ?? 0
+        
+        Object.UrlId =                    story["UrlId"] as? String ?? ""
+        
+        Object.LeadAuditor =           story["LeadAuditor"]  as? String ?? ""
+        
+        Object.SiteName =                           story["SiteName"] as? String ?? ""
+        
+        Object.OpenMeetingDate =                           story["OpenMeetingDate"] as? String ?? ""
+        
+        Object.OpenMeetingDateDisplay =                   story["OpenMeetingDateDisplay"] as? String ?? ""
+        
+        Object.CloseMeetingDate =                           story["CloseMeetingDate"] as? String ?? ""
+        
+        Object.CloseMeetingDateDisplay =                   story["CloseMeetingDateDisplay"] as? String ?? ""
+
+        
+        return Object
+    }
+
 
 }

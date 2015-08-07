@@ -13,18 +13,25 @@ struct WebApiService {
         case AuditRequestList
         case AuditRequestStatusList
         case AuditActivitySiteDetail
+        
         case AuditActivityAuditDetail
         case AuditActivityAuditDetailEdit
+        
         case AuditActivityBookingDetailList
         case AuditActivityBookingDetailAdd
         case AuditActivityBookingDetailDelete
         case AuditActivityBookingDetailEdit
         case AuditActivityBookingDetailSelect
+        
         case AuditActivityAudtiPlanList
         case AuditActivityAuditPlanAdd
         case AuditActivityAuditPlanDelete
         case AuditActivityAuditPlanSelect
         case AuditActivityAuditPlanEdit
+        
+        case AuditActivityMeetingDateSelect
+        case AuditActivityMeetingDateEdit
+        
         
         var description: String {
             switch self {
@@ -45,6 +52,8 @@ struct WebApiService {
                 case .AuditActivityAuditPlanDelete : return "/Api/AuditActivityAuditPlanDelete"
                 case .AuditActivityAuditPlanSelect : return "/Api/AuditActivityAuditPlanSelect"
                 case .AuditActivityAuditPlanEdit : return "/Api/AuditActivityAuditPlanEdit"
+                case .AuditActivityMeetingDateSelect : return "/Api/AuditActivityMeetingDateSelect"
+                case .AuditActivityMeetingDateEdit : return "/Api/AuditActivityMeetingDateEdit"
             }
         }
     }
@@ -699,5 +708,89 @@ struct WebApiService {
         
         response (objectReturn : nil)
     }
+    
+    static func getAuditActivityMeeting(token: String, AuditActivityUrlId: String, response : (objectReturn : AuditActivityMeetingModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityMeetingDateSelect.description
+        
+        
+        var parameters  : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+              
+                
+                if let Item = jsonObject["Item"].dictionaryObject {
+                    
+                    let Return = JSONParser.parseAuditActivityMeetingModel(Item as NSDictionary)
+                    response (objectReturn : Return)
+                }
+                
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+    
+    static func postAuditActivityMeeting(token: String, AuditActivityMeeting: AuditActivityMeetingModel, response : (objectReturn : JsonReturnModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityMeetingDateEdit.description
+        
+        
+        var parameters   : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Item": [
+                "UrlId": AuditActivityMeeting.UrlId,
+                "OpenMeetingDate": AuditActivityMeeting.OpenMeetingDate,
+                "CloseMeetingDate" : AuditActivityMeeting.CloseMeetingDate
+            ]
+        ]
+        
+        var JsonReturn = JsonReturnModel()
+        
+        //println(parameters)
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                  print(jsonObject)
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }
+        }
+        
+    }
+
 
 }

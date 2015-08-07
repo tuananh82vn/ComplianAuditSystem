@@ -120,7 +120,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </textField>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="mirani" placeholder="Username" minimumFontSize="17" background="input-outline" translatesAutoresizingMaskIntoConstraints="NO" id="n8H-YT-4W1" customClass="DesignableTextField" customModule="Spring">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="auditor.tcm" placeholder="Username" minimumFontSize="17" background="input-outline" translatesAutoresizingMaskIntoConstraints="NO" id="n8H-YT-4W1" customClass="DesignableTextField" customModule="Spring">
                                                             <rect key="frame" x="8" y="108" width="320" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="250" id="SvI-Aj-wMf"/>
@@ -4469,6 +4469,9 @@
                                                 <include reference="0Wj-An-G6a"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="ButtonSaveClicked:" destination="ymC-Jo-gOs" eventType="touchUpInside" id="IZN-gh-tQT"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4827,7 +4830,7 @@
                                                     <constraint firstAttribute="height" constant="317" id="qfT-6e-w7c"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YCX-vG-DG9" customClass="MeetingDetailsViewCell" customModule="DesignerNewsApp" customModuleProvider="target">
+                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MeetingCell" id="YCX-vG-DG9" customClass="MeetingDetailsViewCell" customModule="DesignerNewsApp" customModuleProvider="target">
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YCX-vG-DG9" id="Grk-gr-9be">
                                                             <autoresizingMask key="autoresizingMask"/>
@@ -4844,6 +4847,10 @@
                                                         <include reference="qfT-6e-w7c"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="ymC-Jo-gOs" id="o96-xT-YIq"/>
+                                                    <outlet property="delegate" destination="ymC-Jo-gOs" id="fGZ-Go-c4k"/>
+                                                </connections>
                                             </tableView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5034,10 +5041,15 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Meeting Attendance Record" id="cvz-Oq-aiN"/>
+                    <navigationItem key="navigationItem" title="Meeting Attendance Record" id="cvz-Oq-aiN">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="48C-7K-xXk">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="lbl_LeadAuditor" destination="Ybu-eW-v1q" id="mrL-Ah-xPY"/>
                         <outlet property="lbl_SiteName" destination="jxg-L7-i4k" id="iPb-Dc-cOh"/>
+                        <outlet property="tableView1" destination="VSV-ag-Ttg" id="LMv-1e-Gdo"/>
                         <outlet property="txt_CloseDate" destination="umL-hK-9Lu" id="XY2-iu-nBk"/>
                         <outlet property="txt_OpenDate" destination="44N-2p-YbX" id="tnQ-86-dbO"/>
                     </connections>

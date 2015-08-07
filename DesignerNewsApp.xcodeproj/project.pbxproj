@@ -49,6 +49,7 @@
 		664AB6EE1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664AB6ED1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift */; };
 		66570D321B74446F002248A2 /* MeetingAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66570D311B74446F002248A2 /* MeetingAttendanceViewController.swift */; };
 		66570D421B744499002248A2 /* MeetingDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66570D411B744499002248A2 /* MeetingDetailsViewCell.swift */; };
+		66570D441B744B93002248A2 /* AuditActivityMeetingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66570D431B744B93002248A2 /* AuditActivityMeetingModel.swift */; };
 		665CEB941B577FC500A5C8BA /* AuditActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */; };
 		665CEBA41B5782ED00A5C8BA /* AuditRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */; };
 		667F4A5F1B563F4400257DF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F4A5D1B563F4400257DF8 /* Main.storyboard */; };
@@ -272,6 +273,7 @@
 		664AB6ED1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestDetailViewCell.swift; sourceTree = "<group>"; };
 		66570D311B74446F002248A2 /* MeetingAttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAttendanceViewController.swift; sourceTree = "<group>"; };
 		66570D411B744499002248A2 /* MeetingDetailsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewCell.swift; sourceTree = "<group>"; };
+		66570D431B744B93002248A2 /* AuditActivityMeetingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityMeetingModel.swift; sourceTree = "<group>"; };
 		665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivitiesViewController.swift; sourceTree = "<group>"; };
 		665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestModel.swift; sourceTree = "<group>"; };
 		667F4A5E1B563F4400257DF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 				66C364B61B60A5C700BE3903 /* AuditActivityAuditDetailModel.swift */,
 				6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */,
 				6622E5C71B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift */,
+				66570D431B744B93002248A2 /* AuditActivityMeetingModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				967CFD061A5C10700044B4E3 /* LoginViewController.swift in Sources */,
 				663067271B6764BE001EE543 /* Serializable.swift in Sources */,
 				B779F6C61AB7851100DDF3AA /* SafariActivity.swift in Sources */,
+				66570D441B744B93002248A2 /* AuditActivityMeetingModel.swift in Sources */,
 				662C80DD1B57950300371598 /* AuditRequestCollectionViewCell.swift in Sources */,
 				6630670F1B6715F1001EE543 /* PopDatePicker.swift in Sources */,
 				B790E5311A82C6BC0007B392 /* MenuControl.swift in Sources */,
