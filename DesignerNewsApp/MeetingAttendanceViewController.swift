@@ -287,4 +287,7 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
         
     }
 
+    @IBAction func ButtonQuestionSetClicked(sender: AnyObject) {
+        self.performSegueWithIdentifier("GoToQuestionSet", sender: sender)
+    }
 }
