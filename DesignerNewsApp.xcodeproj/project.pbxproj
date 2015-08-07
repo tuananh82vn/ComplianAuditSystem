@@ -52,6 +52,7 @@
 		66570D441B744B93002248A2 /* AuditActivityMeetingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66570D431B744B93002248A2 /* AuditActivityMeetingModel.swift */; };
 		665CEB941B577FC500A5C8BA /* AuditActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */; };
 		665CEBA41B5782ED00A5C8BA /* AuditRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */; };
+		666780231B7471CF00204038 /* MeetingAttendanceAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666780221B7471CF00204038 /* MeetingAttendanceAddViewController.swift */; };
 		667F4A5F1B563F4400257DF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F4A5D1B563F4400257DF8 /* Main.storyboard */; };
 		66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF71B56260C0058FF09 /* SwiftyJSON.swift */; };
 		66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF91B5626200058FF09 /* LoginModel.swift */; };
@@ -276,6 +277,7 @@
 		66570D431B744B93002248A2 /* AuditActivityMeetingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityMeetingModel.swift; sourceTree = "<group>"; };
 		665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivitiesViewController.swift; sourceTree = "<group>"; };
 		665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestModel.swift; sourceTree = "<group>"; };
+		666780221B7471CF00204038 /* MeetingAttendanceAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAttendanceAddViewController.swift; sourceTree = "<group>"; };
 		667F4A5E1B563F4400257DF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66919EF71B56260C0058FF09 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		66919EF91B5626200058FF09 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				6622E5B51B72D8DD00C262CF /* AuditPlanViewController.swift */,
 				66DD85131B731E4D004B9C30 /* AuditPlanAddViewController.swift */,
 				66570D311B74446F002248A2 /* MeetingAttendanceViewController.swift */,
+				666780221B7471CF00204038 /* MeetingAttendanceAddViewController.swift */,
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
 				961889B71A680D3800295A64 /* LearnViewController.swift */,
 				66D7B3081B5F670600B7FAE2 /* NavigationController.swift */,
@@ -868,6 +871,7 @@
 				66570D441B744B93002248A2 /* AuditActivityMeetingModel.swift in Sources */,
 				662C80DD1B57950300371598 /* AuditRequestCollectionViewCell.swift in Sources */,
 				6630670F1B6715F1001EE543 /* PopDatePicker.swift in Sources */,
+				666780231B7471CF00204038 /* MeetingAttendanceAddViewController.swift in Sources */,
 				B790E5311A82C6BC0007B392 /* MenuControl.swift in Sources */,
 				B779F6B41AB7570700DDF3AA /* ChromeActivity.swift in Sources */,
 			);

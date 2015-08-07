@@ -15,6 +15,15 @@ class MeetingDetailsViewCell: UITableViewCell {
         // Initialization code
     }
 
+    @IBOutlet weak var bt_Delete: UIButton!
+    @IBOutlet weak var bt_Edit: UIButton!
+    
+    @IBOutlet weak var lbl_Close: UILabel!
+    @IBOutlet weak var lbl_Open: UILabel!
+    @IBOutlet weak var lbl_Position: UILabel!
+    @IBOutlet weak var lbl_Name: UILabel!
+    @IBOutlet weak var lbl_number: UILabel!
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

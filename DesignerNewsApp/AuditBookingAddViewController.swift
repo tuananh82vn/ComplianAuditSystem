@@ -281,7 +281,7 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 
                 if(temp.IsSuccess){
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName("refesh", object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("refeshBooking", object: nil)
                     
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }

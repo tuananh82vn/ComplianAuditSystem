@@ -44,7 +44,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         initSiteData()
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refesh", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refeshAuditDetail", object: nil)
 
 
         // Do any additional setup after loading the view.

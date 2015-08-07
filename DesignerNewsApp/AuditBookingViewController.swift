@@ -21,7 +21,7 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
 
         InitData()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refesh", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refeshBooking", object: nil)
     }
 
     func InitData(){

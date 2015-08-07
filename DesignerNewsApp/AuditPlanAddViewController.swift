@@ -91,7 +91,7 @@ class AuditPlanAddViewController: UIViewController {
                     
                     var temp = ["selectedDayId" : self.selectedDayId,  "LastSelected" : self.LastSelected]
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName("refesh", object: nil, userInfo: temp)
+                    NSNotificationCenter.defaultCenter().postNotificationName("refeshAuditPlan", object: nil, userInfo: temp)
                     
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }

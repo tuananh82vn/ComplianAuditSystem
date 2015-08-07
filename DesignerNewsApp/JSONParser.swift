@@ -456,6 +456,7 @@ struct JSONParser {
         
         let Object =  AuditActivityMeetingModel()
         
+        
         Object.AuditActivityId =                 story["AuditActivityId"] as? Int ?? 0
         
         Object.UrlId =                    story["UrlId"] as? String ?? ""
@@ -475,6 +476,49 @@ struct JSONParser {
         
         return Object
     }
+    
+    static func parseAuditActivityMeetingAttendanceRecordModel(story: NSArray) -> [AuditActivityMeetingAttendanceRecordModel] {
+        
+        var PlanArray = [AuditActivityMeetingAttendanceRecordModel]()
+        
+        if let Items = story as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseObjectAuditActivityMeetingAttendanceRecord(Item as NSDictionary)
+                    
+                    PlanArray.append(temp)
+                }
+            }
+        }
+        
+        return PlanArray
+    }
+    
+    static func parseObjectAuditActivityMeetingAttendanceRecord(story: NSDictionary) -> AuditActivityMeetingAttendanceRecordModel {
+        
+        let Object =  AuditActivityMeetingAttendanceRecordModel()
+        
+        Object.Id =                 story["Id"] as? Int ?? 0
+        
+        Object.AuditActivityId =    story["AuditActivityId"] as? Int ?? 0
+        
+        Object.Name =               story["Name"]  as? String ?? ""
+        
+        Object.Position =           story["Position"] as? String ?? ""
+        
+        Object.SignOpenMeeting =    story["SignOpenMeeting"] as? String ?? ""
+        
+        Object.SignCloseMeeting =   story["SignCloseMeeting"] as? String ?? ""
+        
+        Object.SerialNumber =       story["SerialNumber"]  as? Int ?? 0
+
+        return Object
+    }
+
+
 
 
 }

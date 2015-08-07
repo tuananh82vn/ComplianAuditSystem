@@ -422,7 +422,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
                 
                 if(temp.IsSuccess){
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName("refesh", object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("refeshAuditDetail", object: nil)
                     
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }

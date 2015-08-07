@@ -28,7 +28,7 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
 
         InitData()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refesh", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refeshAuditPlan", object: nil)
         
         
     }

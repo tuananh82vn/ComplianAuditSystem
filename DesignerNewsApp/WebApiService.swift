@@ -31,6 +31,11 @@ struct WebApiService {
         
         case AuditActivityMeetingDateSelect
         case AuditActivityMeetingDateEdit
+        case AuditActivityMeetingAttendanceRecordList
+        case AuditActivityMeetingAttendanceRecordAdd
+        case AuditActivityMeetingAttendanceRecordDelete
+        case AuditActivityMeetingAttendanceRecordEdit
+        case AuditActivityMeetingAttendanceRecordSelect
         
         
         var description: String {
@@ -54,6 +59,11 @@ struct WebApiService {
                 case .AuditActivityAuditPlanEdit : return "/Api/AuditActivityAuditPlanEdit"
                 case .AuditActivityMeetingDateSelect : return "/Api/AuditActivityMeetingDateSelect"
                 case .AuditActivityMeetingDateEdit : return "/Api/AuditActivityMeetingDateEdit"
+                case .AuditActivityMeetingAttendanceRecordList : return "/Api/AuditActivityMeetingAttendanceRecordList"
+                case .AuditActivityMeetingAttendanceRecordAdd : return "/Api/AuditActivityMeetingAttendanceRecordAdd"
+                case .AuditActivityMeetingAttendanceRecordDelete : return "/Api/AuditActivityMeetingAttendanceRecordDelete"
+                case .AuditActivityMeetingAttendanceRecordEdit : return "/Api/AuditActivityMeetingAttendanceRecordEdit"
+                case .AuditActivityMeetingAttendanceRecordSelect : return "/Api/AuditActivityMeetingAttendanceRecordSelect"
             }
         }
     }
@@ -790,6 +800,181 @@ struct WebApiService {
             }
         }
         
+    }
+    
+    static func getAuditActivityMeetingAttendanceRecordList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityMeetingAttendanceRecordModel]?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityMeetingAttendanceRecordList.description
+        
+        
+        var parameters = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        var arrayReturn = [AuditActivityMeetingAttendanceRecordModel]()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                //  println(jsonObject)
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Items"].arrayObject {
+                            
+                            arrayReturn = JSONParser.parseAuditActivityMeetingAttendanceRecordModel(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+
+    static func postAuditActivityMeetingAttendanceRecord(token: String, MeetingRecord: AuditActivityMeetingAttendanceRecordModel, AddMode : Bool, response : (objectReturn : JsonReturnModel?) -> ()){
+        
+        
+        var urlString : String = ""
+        
+        if AddMode {
+            urlString = baseURL + ResourcePath.AuditActivityMeetingAttendanceRecordAdd.description
+        }
+        else
+        {
+            urlString = baseURL + ResourcePath.AuditActivityMeetingAttendanceRecordEdit.description
+            
+        }
+        
+        
+        var parameters   : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Item": [
+                "Id" : MeetingRecord.Id,
+                "AuditActivityUrlId": MeetingRecord.AuditActivityUrlId,
+                "Name": MeetingRecord.Name,
+                "Position" : MeetingRecord.Position,
+                "SignOpenMeeting" : MeetingRecord.SignOpenMeeting,
+                "SignCloseMeeting" : MeetingRecord.SignCloseMeeting
+            ]
+        ]
+        
+        var JsonReturn = JsonReturnModel()
+        
+        //println(parameters)
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }
+        }
+        
+    }
+    
+    static func postMeetingAttendanceRecordDelete(token: String, Id: Int,  response : (objectReturn : JsonReturnModel?) -> ()) {
+        
+        let urlString = baseURL + ResourcePath.AuditActivityMeetingAttendanceRecordDelete.description
+        
+        
+        var parameters   : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Id": Id
+        ]
+        
+        var JsonReturn = JsonReturnModel()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }
+            
+        }
+        
+    }
+    
+    static func getAuditActivityMeetingAttendanceRecordModel(token: String, Id: Int, response : (objectReturn : AuditActivityMeetingAttendanceRecordModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityMeetingAttendanceRecordSelect.description
+        
+        
+        var parameters  : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Id" : Id
+        ]
+        
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                
+                
+                if let Item = jsonObject["Item"].dictionaryObject {
+                    
+                    let Return = JSONParser.parseObjectAuditActivityMeetingAttendanceRecord(Item as NSDictionary)
+                    response (objectReturn : Return)
+                }
+                
+            }
+        }
+        
+        response (objectReturn : nil)
     }
 
 
