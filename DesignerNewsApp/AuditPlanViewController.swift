@@ -327,4 +327,9 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
         
     }
 
+    @IBAction func ButtonMeetingClicked(sender: AnyObject) {
+        self.performSegueWithIdentifier("GoToMeeting", sender: sender)
+    }
+
+
 }

@@ -30,8 +30,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         emailTextField.delegate = self
         passwordTextField.delegate = self
         
-        LocalStore.setDomain("http://wsandypham:8080")
-
+        
+        //LocalStore.setDomain("http://wsandypham:8080")
+        LocalStore.setDomain("http://complianceauditsystem.softwarestaging.com.au")
     }
     
     override func viewDidAppear(animated: Bool) {
