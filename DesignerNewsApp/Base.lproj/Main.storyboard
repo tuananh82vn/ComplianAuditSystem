@@ -5044,7 +5044,8 @@
                                                                             <exclude reference="N5c-Mt-aAz"/>
                                                                         </mask>
                                                                     </variation>
-                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                        <rect key="frame" x="234" y="4" width="35" height="35"/>
                                                                         <mask key="constraints">
                                                                             <include reference="N5c-Mt-aAz"/>
                                                                         </mask>
@@ -5075,7 +5076,8 @@
                                                                             <exclude reference="Yp9-08-3Iq"/>
                                                                         </mask>
                                                                     </variation>
-                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                        <rect key="frame" x="277" y="4" width="35" height="35"/>
                                                                         <mask key="constraints">
                                                                             <include reference="Yp9-08-3Iq"/>
                                                                         </mask>
@@ -5488,7 +5490,7 @@
                                     <constraint firstAttribute="width" constant="155" id="SCG-tm-fgh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -5504,19 +5506,19 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFc-kb-F7L">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Open Meeting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cs-Wu-Gvm">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Close Meeting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pn6-NA-w6p">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YyN-p1-4SU" customClass="DesignableTextField" customModule="Spring">
@@ -5863,11 +5865,11 @@
                                                 <exclude reference="2Jg-6T-bK9"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <exclude reference="cX8-CN-bcA"/>
                                                 <exclude reference="2aN-TX-mWX"/>
                                                 <exclude reference="JDM-54-bS5"/>
                                                 <exclude reference="jJc-de-uGR"/>
                                                 <exclude reference="wfs-ue-wLE"/>
-                                                <exclude reference="cX8-CN-bcA"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=regular">
@@ -5876,11 +5878,11 @@
                                                 <include reference="2Jg-6T-bK9"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <include reference="cX8-CN-bcA"/>
                                                 <include reference="2aN-TX-mWX"/>
                                                 <include reference="JDM-54-bS5"/>
                                                 <include reference="jJc-de-uGR"/>
                                                 <include reference="wfs-ue-wLE"/>
-                                                <include reference="cX8-CN-bcA"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -5943,6 +5945,11 @@
                                 <exclude reference="iIM-hh-IPQ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="FqJ-Zr-D36"/>
+                                <exclude reference="hfC-Dv-1Kw"/>
+                                <exclude reference="b6Y-q3-hrQ"/>
+                                <exclude reference="dlN-yH-CYH"/>
+                                <exclude reference="vMo-nA-vNA"/>
                                 <exclude reference="Ewq-ZI-dpd"/>
                                 <exclude reference="hOq-e1-5Rk"/>
                                 <exclude reference="iE9-iF-az7"/>
@@ -5951,11 +5958,6 @@
                                 <exclude reference="nda-9d-OkF"/>
                                 <exclude reference="yxp-m4-8xb"/>
                                 <exclude reference="zbU-af-DIl"/>
-                                <exclude reference="FqJ-Zr-D36"/>
-                                <exclude reference="b6Y-q3-hrQ"/>
-                                <exclude reference="dlN-yH-CYH"/>
-                                <exclude reference="vMo-nA-vNA"/>
-                                <exclude reference="hfC-Dv-1Kw"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -5966,6 +5968,11 @@
                                 <include reference="iIM-hh-IPQ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="FqJ-Zr-D36"/>
+                                <include reference="hfC-Dv-1Kw"/>
+                                <include reference="b6Y-q3-hrQ"/>
+                                <include reference="dlN-yH-CYH"/>
+                                <include reference="vMo-nA-vNA"/>
                                 <include reference="Ewq-ZI-dpd"/>
                                 <include reference="hOq-e1-5Rk"/>
                                 <include reference="iE9-iF-az7"/>
@@ -5974,11 +5981,6 @@
                                 <include reference="nda-9d-OkF"/>
                                 <include reference="yxp-m4-8xb"/>
                                 <include reference="zbU-af-DIl"/>
-                                <include reference="FqJ-Zr-D36"/>
-                                <include reference="b6Y-q3-hrQ"/>
-                                <include reference="dlN-yH-CYH"/>
-                                <include reference="vMo-nA-vNA"/>
-                                <include reference="hfC-Dv-1Kw"/>
                             </mask>
                         </variation>
                     </view>
