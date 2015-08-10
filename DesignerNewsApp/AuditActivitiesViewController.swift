@@ -21,14 +21,19 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
+    private var imagePending = UIImage(named: "pending") as UIImage?
+    private var imageWaiting = UIImage(named: "waiting") as UIImage?
+    private var imageDecline = UIImage(named: "decline") as UIImage?
+    
     private var imageReview = UIImage(named: "review") as UIImage?
-    private var imageOngoing = UIImage(named: "pause") as UIImage?
+    private var imageOngoing = UIImage(named: "ongoing") as UIImage?
     private var imageApproved = UIImage(named: "approved") as UIImage?
-    private var imagePlay = UIImage(named: "play") as UIImage?
+    private var imageStartAudit = UIImage(named: "play") as UIImage?
     private var imageComplete = UIImage(named: "complete") as UIImage?
     private var imageRework = UIImage(named: "redo") as UIImage?
-    private var imageAbandonded = UIImage(named: "abandond") as UIImage?
-    
+    private var imageAbandonded = UIImage(named: "abandond2") as UIImage?
+
     
     var userProfile = LoginModel()
     let imageCache = NSCache()
@@ -105,67 +110,101 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         cell.AuditStartDate.text = auditRequest[indexPath.row].RequestFromDateDisplay
         cell.AuditFinishDate.text = auditRequest[indexPath.row].RequestToDateDisplay
         cell.QuestionSet.text = auditRequest[indexPath.row].QuestionSetName
-        let AuditRequestStatus = self.GetStatusNameById(auditRequest[indexPath.row].AuditRequestStatusId, arrayObject : self.auditRequestStatus)
-        cell.Status.text =  AuditRequestStatus.Name
         
-        var Color = UIColor.clearColor()
-        if AuditRequestStatus.Color == "blue"{
-            Color = UIColor.blueColor()
-        }
-        else
-            if AuditRequestStatus.Color == "yellow"{
-                Color = UIColor.yellowColor()
-        }
-            else
-                if AuditRequestStatus.Color == "green"{
-                    Color = UIColor.greenColor()
-        }
-                else
-                    if AuditRequestStatus.Color == "red"{
-                        Color = UIColor.redColor()
-        }
         
-        cell.Status.textColor = Color
+        
+//        var Color = UIColor.clearColor()
+//        if AuditRequestStatus.Color == "blue"{
+//            Color = UIColor.blueColor()
+//        }
+//        else
+//            if AuditRequestStatus.Color == "yellow"{
+//                Color = UIColor.yellowColor()
+//        }
+//            else
+//                if AuditRequestStatus.Color == "green"{
+//                    Color = UIColor.greenColor()
+//        }
+//                else
+//                    if AuditRequestStatus.Color == "red"{
+//                        Color = UIColor.redColor()
+//        }
+//        
+//        cell.Status.textColor = Color
 
         
-        //imageReview
-        if auditRequest[indexPath.row].AuditActivityStatusId == 1 {
-            cell.ButtonStatus.setImage(imageReview, forState: .Normal)
+        //Pending
+        if auditRequest[indexPath.row].AuditRequestStatusId == 1 {
+            cell.ButtonStatus.setImage(imagePending, forState: .Normal)
             cell.ButtonStatus.userInteractionEnabled = false
+            cell.Status.text =  "Pending"
         }
-        else // imageOngoing
-            if auditRequest[indexPath.row].AuditActivityStatusId == 2 {
-                cell.ButtonStatus.setImage(imageOngoing, forState: .Normal)
-                cell.ButtonStatus.tag = indexPath.row
-                cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
+        else
+            //Waiting
+            if auditRequest[indexPath.row].AuditRequestStatusId == 2 {
+                cell.ButtonStatus.userInteractionEnabled = false
+                cell.Status.text =  "Waiting"
             }
-            else // imageComplete
-                if auditRequest[indexPath.row].AuditActivityStatusId == 3 {
-                    cell.ButtonStatus.setImage(imageComplete, forState: .Normal)
+            else
+                //Decline
+                if auditRequest[indexPath.row].AuditRequestStatusId == 4 {
+                    cell.ButtonStatus.setImage(imageDecline, forState: .Normal)
                     cell.ButtonStatus.userInteractionEnabled = false
+                    cell.Status.text =  "Decline"
                 }
-                else // imageRework
-                    if auditRequest[indexPath.row].AuditActivityStatusId == 4 {
-                        cell.ButtonStatus.setImage(imageRework, forState: .Normal)
-                        cell.ButtonStatus.tag = indexPath.row
-                        cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
-                    }
-                    else // imageApproved
-                        if auditRequest[indexPath.row].AuditActivityStatusId == 5 {
-                            cell.ButtonStatus.setImage(imageApproved, forState: .Normal)
+                else
+                    //Approved
+                    if auditRequest[indexPath.row].AuditRequestStatusId == 3 {
+                        //Start Audit
+                        if auditRequest[indexPath.row].AuditActivityStatusId == 0 {
+                            cell.ButtonStatus.setImage(imageStartAudit, forState: .Normal)
+                            cell.Status.text =  "Start Audit"
+                            cell.ButtonStatus.tag = indexPath.row
+                            cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
+    
+                        }
+                        else
+                        //Reviewing
+                        if auditRequest[indexPath.row].AuditActivityStatusId == 1 {
+                            cell.ButtonStatus.setImage(imageReview, forState: .Normal)
+                            cell.Status.text =  "Reviewing"
                             cell.ButtonStatus.userInteractionEnabled = false
                         }
-                        else // imageAbandonded
-                            if auditRequest[indexPath.row].AuditActivityStatusId == 6 {
-                                cell.ButtonStatus.setImage(imageAbandonded, forState: .Normal)
-                                cell.ButtonStatus.userInteractionEnabled = false
+                        else // Ongoing
+                            if auditRequest[indexPath.row].AuditActivityStatusId == 2 {
+                                cell.ButtonStatus.setImage(imageOngoing, forState: .Normal)
+                                cell.ButtonStatus.tag = indexPath.row
+                                cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
+                                cell.Status.text =  "Ongoing"
                             }
-                            else //
-                                    if auditRequest[indexPath.row].AuditActivityStatusId == nil {
-                                            cell.ButtonStatus.enabled = false
-                                            cell.ButtonStatus.userInteractionEnabled = false
+                            else // Completed
+                                if auditRequest[indexPath.row].AuditActivityStatusId == 3 {
+                                    cell.ButtonStatus.setImage(imageComplete, forState: .Normal)
+                                    cell.ButtonStatus.tag = indexPath.row
+                                    cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
+                                    cell.Status.text =  "Completed"
                                 }
-        
+                                else // Rework
+                                    if auditRequest[indexPath.row].AuditActivityStatusId == 4 {
+                                        cell.ButtonStatus.setImage(imageRework, forState: .Normal)
+                                        cell.ButtonStatus.tag = indexPath.row
+                                        cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
+                                        cell.Status.text =  "Rework"
+                                    }
+                                    else // Approved
+                                        if auditRequest[indexPath.row].AuditActivityStatusId == 5 {
+                                            cell.ButtonStatus.setImage(imageApproved, forState: .Normal)
+                                            cell.ButtonStatus.userInteractionEnabled = false
+                                            cell.Status.text =  "Approved"
+                                        }
+                                        else //
+                                            if auditRequest[indexPath.row].AuditActivityStatusId == 6 {
+                                                cell.ButtonStatus.setImage(imageAbandonded, forState: .Normal)
+                                                cell.ButtonStatus.userInteractionEnabled = false
+                                                cell.Status.text =  "Abandoned"
+                                            }
+
+                        }
 
         // Configure the cell
         return cell
@@ -173,6 +212,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     func yourButtonClicked(sender : UIButton)
     {
+        
+
         LocalStore.setAuditActivityUrlId(auditRequest[sender.tag].AuditActivityUrlId)
         
         self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)

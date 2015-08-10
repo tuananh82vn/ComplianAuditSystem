@@ -517,8 +517,131 @@ struct JSONParser {
 
         return Object
     }
+    
+    static func parseAuditActivityQuestionSetModel(story: NSArray) -> [AuditActivityQuestionSetModel] {
+        
+        var PlanArray = [AuditActivityQuestionSetModel]()
+        
+        if let Items = story as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseObjectAuditActivityQuestionSetModel(Item as NSDictionary)
+                    
+                    PlanArray.append(temp)
+                }
+            }
+        }
+        
+        return PlanArray
+    }
+    
+    static func parseObjectAuditActivityQuestionSetModel(story: NSDictionary) -> AuditActivityQuestionSetModel {
+        
+        let Object =  AuditActivityQuestionSetModel()
+        
+        Object.AuditActivityQuestionSetId =      story["AuditActivityQuestionSetId"] as? Int ?? 0
+        
+        Object.AuditActivityQuestionSetName =    story["AuditActivityQuestionSetName"] as? String ?? ""
+        
+        return Object
+    }
+    
+
+    static func parseAuditActivityQuestionSetQuestionResponseList(story: NSDictionary) -> AuditActivityQuestionSetModel {
+        
+        let Object =  AuditActivityQuestionSetModel()
+        
+        Object.AuditActivityQuestionSetId =      story["AuditActivityQuestionSetId"] as? Int ?? 0
+        Object.AuditActivityQuestionSetName =      story["AuditActivityQuestionSetName"] as? String ?? ""
+        
+        // Tap hop cac section
+        var arrayObject1 = [QuestionResponseSectionModel]()
+        
+        if let Items = (story["QuestionResponseSectionList"] as? NSArray) as Array? {
+
+            for var index = 0; index < Items.count; ++index {
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseObjectQuestionResponseSectionModel(Item as NSDictionary)
+                     arrayObject1.insert(temp, atIndex: arrayObject1.count)
+
+                }
+            }
+        }
 
 
+        //Tap hop cac question
+        var arrayObject2 = [QuestionResponseModel]()
+        
+        if let Items = (story["QuestionResponseQuestionList"] as? NSArray) as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseObjectQuestionResponseModel(Item as NSDictionary)
+                    arrayObject2.insert(temp, atIndex: arrayObject2.count)
+                    
+                }
+            }
+        }
 
+        //Tap hop cac question group by section
+        for sectionDetail in arrayObject1 {
+            
+            var QuestionBySectionObject = QuestionBySection()
+            QuestionBySectionObject.SectionNumber = sectionDetail.SerialNumber
+            QuestionBySectionObject.SectionName = sectionDetail.Name
+            
+            for questionDetail in arrayObject2 {
+                if( questionDetail.SectionSerialNumber == QuestionBySectionObject.SectionNumber){
+                    QuestionBySectionObject.QuestionResponseModelList.append(questionDetail)
+                }
+            }
+        
+            Object.QuestionBySectionList.append(QuestionBySectionObject)
+        }
+        
+        return Object
+    }
+
+
+    static func parseObjectQuestionResponseSectionModel(story: NSDictionary) -> QuestionResponseSectionModel {
+        
+        let Object =  QuestionResponseSectionModel()
+        
+        Object.SerialNumber =      story["SerialNumber"] as? Int ?? 0
+        
+        Object.Name =    story["Name"] as? String ?? ""
+        
+        return Object
+    }
+
+    static func parseObjectQuestionResponseModel(story: NSDictionary) -> QuestionResponseModel {
+        
+        let Object =  QuestionResponseModel()
+        
+        Object.FileName =      story["FileName"] as? String ?? ""
+        
+        Object.ResponseCategoryName =    story["ResponseCategoryName"] as? String ?? ""
+        
+        Object.AuditResponse =    story["AuditResponse"] as? String ?? ""
+        
+        Object.SerialNumber =    story["SerialNumber"] as? Int ?? 0
+        
+        Object.SectionSerialNumber =    story["SectionSerialNumber"] as? Int ?? 0
+        
+        Object.Name =    story["Name"] as? String ?? ""
+        
+        Object.AuditActivityQuestionSetQuestionResponseId =    story["AuditActivityQuestionSetQuestionResponseId"] as? Int ?? 0
+        
+        Object.Priority =    story["Priority"] as? String ?? ""
+        
+        Object.FileId =    story["FileId"] as? Int ?? 0
+        
+        return Object
+    }
 
 }

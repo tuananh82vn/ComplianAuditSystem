@@ -37,6 +37,10 @@ struct WebApiService {
         case AuditActivityMeetingAttendanceRecordEdit
         case AuditActivityMeetingAttendanceRecordSelect
         
+        case AuditActivityQuestionSetList
+        case AuditActivityQuestionSetQuestionResponseList
+        
+        
         
         var description: String {
             switch self {
@@ -64,6 +68,8 @@ struct WebApiService {
                 case .AuditActivityMeetingAttendanceRecordDelete : return "/Api/AuditActivityMeetingAttendanceRecordDelete"
                 case .AuditActivityMeetingAttendanceRecordEdit : return "/Api/AuditActivityMeetingAttendanceRecordEdit"
                 case .AuditActivityMeetingAttendanceRecordSelect : return "/Api/AuditActivityMeetingAttendanceRecordSelect"
+                case .AuditActivityQuestionSetList : return "/Api/AuditActivityQuestionSetList"
+                case .AuditActivityQuestionSetQuestionResponseList : return "/Api/AuditActivityQuestionSetQuestionResponseList"
             }
         }
     }
@@ -154,6 +160,7 @@ struct WebApiService {
             
             let jsonObject = JSON(json!)
             
+            //println(jsonObject)
             
             if let Items = jsonObject["Items"].array {
                 
@@ -191,6 +198,8 @@ struct WebApiService {
             
             
             let jsonObject = JSON(json!)
+            
+            //println(jsonObject)
             
             
             if let Items = jsonObject["Item"].array {
@@ -963,8 +972,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                
-                
+
                 if let Item = jsonObject["Item"].dictionaryObject {
                     
                     let Return = JSONParser.parseObjectAuditActivityMeetingAttendanceRecord(Item as NSDictionary)
@@ -976,6 +984,87 @@ struct WebApiService {
         
         response (objectReturn : nil)
     }
+    
+    static func getAuditActivityQuestionSetList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityQuestionSetModel]?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityQuestionSetList.description
+        
+        
+        var parameters = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        var arrayReturn = [AuditActivityQuestionSetModel]()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                //println(jsonObject)
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Item"].arrayObject {
+                            
+                            arrayReturn = JSONParser.parseAuditActivityQuestionSetModel(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+
+    static func getAuditActivityQuestionSetQuestionResponseList(token: String, QuestionRespond: AuditActivityQuestionSetQuestionResponseModel, response : (objectReturn : AuditActivityQuestionSetModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityQuestionSetQuestionResponseList.description
+        
+        
+        var parameters : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Item" : [
+                "AuditActivityQuestionSetId" : QuestionRespond.AuditActivityQuestionSetId,
+                "Priority" : QuestionRespond.Priority,
+                "ResponseCategory" : QuestionRespond.ResponseCategory
+            ]
+        ]
+        
+        var arrayReturn = AuditActivityQuestionSetModel()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                println(jsonObject)
+
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Item"].dictionaryObject {
+                            
+                            arrayReturn = JSONParser.parseAuditActivityQuestionSetQuestionResponseList(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+    
 
 
 }

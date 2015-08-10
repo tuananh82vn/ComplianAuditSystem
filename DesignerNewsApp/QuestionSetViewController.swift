@@ -8,15 +8,20 @@
 
 import UIKit
 
-class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPickerViewDelegate {
+class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPickerViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var tableView1: UITableView!
 
     @IBOutlet weak var QuestionView: AKPickerView!
     
-    let titles = ["Tokyo", "Kanagawa", "Osaka", "Aichi", "Saitama", "Chiba", "Hyogo", "Hokkaido", "Fukuoka", "Shizuoka"]
+    var questionSet = [AuditActivityQuestionSetModel]()
+    var selectedIndex : Int = 0
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        InitData()
         
         self.QuestionView.delegate = self
         self.QuestionView.dataSource = self
@@ -32,30 +37,154 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        
-        // Dispose of any resources that can be recreated.
     }
     
+    
+    func InitData(){
+        
+            view.showLoading()
+            
+            WebApiService.getAuditActivityQuestionSetList(LocalStore.accessToken()!, AuditActivityUrlId: LocalStore.accessAuditActivityUrlId()!) { objectReturn in
+                
+                if let temp = objectReturn {
+
+                    self.questionSet = temp
+                      dispatch_async(dispatch_get_main_queue()) {
+                        for item in self.questionSet {
+                    
+                            var QuestionRespond = AuditActivityQuestionSetQuestionResponseModel()
+                        
+                            QuestionRespond.AuditActivityQuestionSetId = item.AuditActivityQuestionSetId
+
+                            dispatch_async(dispatch_get_main_queue()) {
+                                
+                                WebApiService.getAuditActivityQuestionSetQuestionResponseList(LocalStore.accessToken()!, QuestionRespond: QuestionRespond ) { objectReturn in
+                        
+                                    if let temp = objectReturn {
+                                        item.QuestionBySectionList = temp.QuestionBySectionList
+                                    }
+                                }
+                            }
+                        }
+                    
+                    self.view.hideLoading()
+                    
+                    self.QuestionView.reloadData()
+                    
+                    self.tableView1.reloadData()
+                    }
+                    
+                }
+            }
+    }
+    
+    
    	func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        return self.titles.count
+        return self.questionSet.count
     }
     
     func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
-        return self.titles[item]
+        return self.questionSet[item].AuditActivityQuestionSetName
     }
     
     func pickerView(pickerView: AKPickerView, imageForItem item: Int) -> UIImage {
-        return UIImage(named: self.titles[item])!
+        return UIImage(named: self.questionSet[item].AuditActivityQuestionSetName)!
     }
     
     // MARK: - AKPickerViewDelegate
     
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-        println("Your favorite city is \(self.titles[item])")
+        self.selectedIndex = item
+        self.tableView1.reloadData()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         // println("\(scrollView.contentOffset.x)")
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if(questionSet.count > 0 )
+        {
+            if (questionSet[selectedIndex].QuestionBySectionList.count > 0){
+                if (questionSet[selectedIndex].QuestionBySectionList[section].QuestionResponseModelList.count > 0) {
+                    return questionSet[selectedIndex].QuestionBySectionList[section].QuestionResponseModelList.count
+                }
+                else
+                {
+                    return 0
+                }
+            }
+            else
+            {
+                return 0
+            }
+        }
+        else
+        {
+            return 0
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell1 = self.tableView1.dequeueReusableCellWithIdentifier("DetailCell") as! QuestionSetViewCell
+        
+        cell1.lbl_Question.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].Name
+        
+        return cell1
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        if (questionSet.count > 0)  {
+            if(questionSet[selectedIndex].QuestionBySectionList.count > 0){
+                return questionSet[selectedIndex].QuestionBySectionList.count
+            }
+            else{
+                return 0
+            }
+        }
+        else
+        {
+            return 0
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
 
+        
+        var view = UIView()
+        
+        var label = UILabel()
+        
+        label.text = questionSet[selectedIndex].QuestionBySectionList[section].SectionName
+        label.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+//        let button   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+//        button.addTarget(self, action: "visibleRow:", forControlEvents:.TouchUpInside)
+//        button.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        button.setTitle("Test Title", forState: .Normal)
+        
+        let views = ["label": label,"view": view]
+        view.addSubview(label)
+//        view.addSubview(button)
+        var horizontallayoutContraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[label]-10-|", options: .AlignAllCenterY, metrics: nil, views: views)
+        view.addConstraints(horizontallayoutContraints)
+        
+        var verticalLayoutContraint = NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0)
+        view.addConstraint(verticalLayoutContraint)
+        return view
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
 }
