@@ -10,9 +10,12 @@ import UIKit
 
 class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPickerViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView1: UITableView!
 
     @IBOutlet weak var QuestionView: AKPickerView!
+    
+    @IBOutlet weak var viewWidthConstraint : NSLayoutConstraint!
     
     var questionSet = [AuditActivityQuestionSetModel]()
     var selectedIndex : Int = 0
@@ -31,6 +34,10 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.QuestionView.pickerViewStyle = .Wheel
         self.QuestionView.maskDisabled = false
         self.QuestionView.reloadData()
+        
+        
+        
+        self.scrollView.contentSize = CGSizeMake(tableView1.frame.width, 2400)
 
     }
 
@@ -133,6 +140,12 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         cell1.lbl_Question.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].Name
         
+        if indexPath.row % 2 != 0 {
+            cell1.backgroundColor = UIColor(white: 242/255.0, alpha: 1.0)
+        } else {
+            cell1.backgroundColor = UIColor.whiteColor()
+        }
+        
         return cell1
         
     }
@@ -167,15 +180,9 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         label.text = questionSet[selectedIndex].QuestionBySectionList[section].SectionName
         label.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-//        let button   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-//        button.addTarget(self, action: "visibleRow:", forControlEvents:.TouchUpInside)
-//        button.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        button.setTitle("Test Title", forState: .Normal)
-        
+
         let views = ["label": label,"view": view]
         view.addSubview(label)
-//        view.addSubview(button)
         var horizontallayoutContraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[label]-10-|", options: .AlignAllCenterY, metrics: nil, views: views)
         view.addConstraints(horizontallayoutContraints)
         
