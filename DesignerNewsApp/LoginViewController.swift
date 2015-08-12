@@ -35,6 +35,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         //LocalStore.setDomain("http://complianceauditsystem.softwarestaging.com.au")
     }
     
+
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         

@@ -10,6 +10,7 @@ import UIKit
 
 class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPickerViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var chartView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView1: UITableView!
 
@@ -23,8 +24,13 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     var height: Int = 0
 
     override func viewDidLoad() {
+        
+        println("viewDidLoad")
+        
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
+
         InitData()
         
         self.QuestionView.delegate = self
@@ -36,18 +42,46 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.QuestionView.maskDisabled = false
         self.QuestionView.reloadData()
         
-        self.viewWidthConstraint.constant = CGFloat(728)
+        
         self.viewHeightConstraint.constant = CGFloat(0)
         self.view.layoutIfNeeded()
 
-
+        
+        self.scrollView.contentSize = CGSizeMake(tableView1.frame.width-1, CGFloat(0))
     }
 
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        self.viewWidthConstraint.constant = self.QuestionView.frame.width
+        self.view.layoutIfNeeded()
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
     
+    
+    func rotated()
+    {
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation))
+        {
+
+        }
+        
+        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation))
+        {
+
+        }
+
+        self.viewWidthConstraint.constant = self.QuestionView.frame.width
+        self.view.layoutIfNeeded()
+        
+    }
     
     func InitData(){
         
@@ -114,6 +148,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.height = ((numberOfSection * 51) + (numberOfRow * 44))
         
         self.viewHeightConstraint.constant = CGFloat(self.height)
+        
         self.view.layoutIfNeeded()
         
         self.scrollView.contentSize = CGSizeMake(tableView1.frame.width, CGFloat(self.height + 100))
@@ -156,7 +191,13 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         var cell1 = self.tableView1.dequeueReusableCellWithIdentifier("DetailCell") as! QuestionSetViewCell
         
+        cell1.lbl_Number.text =   self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].SerialNumber.description
         cell1.lbl_Question.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].Name
+        cell1.lbl_Response.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].AuditResponse
+        cell1.lbl_Priority.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].Priority
+        cell1.lbl_Category.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].ResponseCategoryName
+        
+        
         
 //        if indexPath.row % 2 != 0 {
 //            cell1.backgroundColor = UIColor(white: 242/255.0, alpha: 1.0)
