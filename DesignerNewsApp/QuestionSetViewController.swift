@@ -15,11 +15,12 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
 
     @IBOutlet weak var QuestionView: AKPickerView!
     
+    @IBOutlet weak var viewHeightConstraint : NSLayoutConstraint!
     @IBOutlet weak var viewWidthConstraint : NSLayoutConstraint!
     
     var questionSet = [AuditActivityQuestionSetModel]()
     var selectedIndex : Int = 0
-    
+    var height: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +36,10 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.QuestionView.maskDisabled = false
         self.QuestionView.reloadData()
         
-        
-        
-        self.scrollView.contentSize = CGSizeMake(tableView1.frame.width, 2400)
+        self.viewWidthConstraint.constant = CGFloat(728)
+        self.viewHeightConstraint.constant = CGFloat(0)
+        self.view.layoutIfNeeded()
+
 
     }
 
@@ -102,6 +104,20 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
         self.selectedIndex = item
+        
+        var numberOfSection = self.questionSet[selectedIndex].QuestionBySectionList.count
+        var numberOfRow = 0
+        for section in self.questionSet[selectedIndex].QuestionBySectionList {
+            numberOfRow += section.QuestionResponseModelList.count
+        }
+        
+        self.height = ((numberOfSection * 51) + (numberOfRow * 44))
+        
+        self.viewHeightConstraint.constant = CGFloat(self.height)
+        self.view.layoutIfNeeded()
+        
+        self.scrollView.contentSize = CGSizeMake(tableView1.frame.width, CGFloat(self.height + 100))
+        
         self.tableView1.reloadData()
     }
     
@@ -115,7 +131,9 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         {
             if (questionSet[selectedIndex].QuestionBySectionList.count > 0){
                 if (questionSet[selectedIndex].QuestionBySectionList[section].QuestionResponseModelList.count > 0) {
+                    
                     return questionSet[selectedIndex].QuestionBySectionList[section].QuestionResponseModelList.count
+                    
                 }
                 else
                 {
@@ -140,11 +158,11 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         cell1.lbl_Question.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].Name
         
-        if indexPath.row % 2 != 0 {
-            cell1.backgroundColor = UIColor(white: 242/255.0, alpha: 1.0)
-        } else {
-            cell1.backgroundColor = UIColor.whiteColor()
-        }
+//        if indexPath.row % 2 != 0 {
+//            cell1.backgroundColor = UIColor(white: 242/255.0, alpha: 1.0)
+//        } else {
+//            cell1.backgroundColor = UIColor.whiteColor()
+//        }
         
         return cell1
         
@@ -173,12 +191,12 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
 
-        
         var view = UIView()
         
         var label = UILabel()
         
         label.text = questionSet[selectedIndex].QuestionBySectionList[section].SectionName
+        label.textColor = UIColor.whiteColor()
         label.setTranslatesAutoresizingMaskIntoConstraints(false)
 
         let views = ["label": label,"view": view]
