@@ -20,12 +20,10 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     @IBOutlet weak var viewWidthConstraint : NSLayoutConstraint!
     
     var questionSet = [AuditActivityQuestionSetModel]()
-    var selectedIndex : Int = 0
+    var selectedIndex : Int = -1
     var height: Int = 0
 
     override func viewDidLoad() {
-        
-        println("viewDidLoad")
         
         super.viewDidLoad()
         
@@ -114,11 +112,9 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                     
                     self.QuestionView.reloadData()
                     
-                    self.tableView1.reloadData()
                     }
-                    
-                }
-            }
+             }
+        }
     }
     
     
@@ -137,6 +133,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     // MARK: - AKPickerViewDelegate
     
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
+        
         self.selectedIndex = item
         
         var numberOfSection = self.questionSet[selectedIndex].QuestionBySectionList.count
@@ -189,21 +186,17 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        
+        println("cellForRowAtIndexPath")
+        
         var cell1 = self.tableView1.dequeueReusableCellWithIdentifier("DetailCell") as! QuestionSetViewCell
         
-        cell1.lbl_Number.text =   self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].SerialNumber.description
+        cell1.lbl_Number.text   =   "Q-" + self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].SerialNumber.description
         cell1.lbl_Question.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].Name
         cell1.lbl_Response.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].AuditResponse
         cell1.lbl_Priority.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].Priority
         cell1.lbl_Category.text = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].ResponseCategoryName
         
-        
-        
-//        if indexPath.row % 2 != 0 {
-//            cell1.backgroundColor = UIColor(white: 242/255.0, alpha: 1.0)
-//        } else {
-//            cell1.backgroundColor = UIColor.whiteColor()
-//        }
         
         return cell1
         
@@ -214,12 +207,20 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        if (questionSet.count > 0)  {
-            if(questionSet[selectedIndex].QuestionBySectionList.count > 0){
-                return questionSet[selectedIndex].QuestionBySectionList.count
+        if(selectedIndex >= 0){
+            if (questionSet.count > 0)  {
+                if(questionSet[selectedIndex].QuestionBySectionList.count > 0){
+                    println("numberOfSectionsInTableView")
+                    println(questionSet[selectedIndex].QuestionBySectionList.count)
+                    return questionSet[selectedIndex].QuestionBySectionList.count
+                }
+                else
+                {
+                    return 0
+                }
             }
-            else{
+            else
+            {
                 return 0
             }
         }
@@ -236,7 +237,8 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         var label = UILabel()
         
-        label.text = questionSet[selectedIndex].QuestionBySectionList[section].SectionName
+        label.text = "Section - " + questionSet[selectedIndex].QuestionBySectionList[section].SectionNumber.description + " " + questionSet[selectedIndex].QuestionBySectionList[section].SectionName
+        
         label.textColor = UIColor.whiteColor()
         label.setTranslatesAutoresizingMaskIntoConstraints(false)
 

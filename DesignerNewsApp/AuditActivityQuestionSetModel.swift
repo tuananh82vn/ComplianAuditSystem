@@ -14,6 +14,7 @@ class AuditActivityQuestionSetModel : Serializable {
     var AuditActivityQuestionSetId : Int
     var AuditActivityQuestionSetName : String
     var QuestionBySectionList : [QuestionBySection]
+
     
     override init() {
         AuditActivityQuestionSetId = 0
@@ -84,5 +85,34 @@ class QuestionBySection : Serializable {
         SectionName = ""
         SectionNumber = 0
         QuestionResponseModelList = [QuestionResponseModel]()
+    }
+}
+
+class QuestionChartList : Serializable {
+
+    var MadatoryQuestionChartList : [QuestionChartModel]
+    var AllQuestionChartList : [QuestionChartModel]
+    
+    override init() {
+        MadatoryQuestionChartList = [QuestionChartModel]()
+        AllQuestionChartList = [QuestionChartModel]()
+    }
+
+}
+
+class QuestionChartModel : Serializable {
+    
+    var QuestionStatus : Int
+    var QuestionStatusName : String
+    var QuestionCount : Int
+    var QuestionPercentage : Int
+    var ColorCode : String
+    
+    override init() {
+        QuestionStatus = 0
+        QuestionStatusName = ""
+        QuestionCount = 0
+        QuestionPercentage = 0
+        ColorCode = ""
     }
 }

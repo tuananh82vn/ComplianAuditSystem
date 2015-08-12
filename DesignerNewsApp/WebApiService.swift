@@ -40,6 +40,8 @@ struct WebApiService {
         case AuditActivityQuestionSetList
         case AuditActivityQuestionSetQuestionResponseList
         
+        case AuditActivityQuestionSetQuestionResponsePieChart
+        
         
         
         var description: String {
@@ -70,6 +72,8 @@ struct WebApiService {
                 case .AuditActivityMeetingAttendanceRecordSelect : return "/Api/AuditActivityMeetingAttendanceRecordSelect"
                 case .AuditActivityQuestionSetList : return "/Api/AuditActivityQuestionSetList"
                 case .AuditActivityQuestionSetQuestionResponseList : return "/Api/AuditActivityQuestionSetQuestionResponseList"
+                case .AuditActivityQuestionSetQuestionResponsePieChart : return "/Api/AuditActivityQuestionSetQuestionResponsePieChart"
+                
             }
         }
     }
@@ -1022,6 +1026,7 @@ struct WebApiService {
         
         response (objectReturn : nil)
     }
+    
 
     static func getAuditActivityQuestionSetQuestionResponseList(token: String, QuestionRespond: AuditActivityQuestionSetQuestionResponseModel, response : (objectReturn : AuditActivityQuestionSetModel?) -> ()) {
         
