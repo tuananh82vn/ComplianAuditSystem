@@ -643,5 +643,93 @@ struct JSONParser {
         
         return Object
     }
+    
+    static func parseObjectQuestionChartModel(story: NSDictionary) -> QuestionChartModel {
+        
+        let Object =  QuestionChartModel()
+        
+        Object.QuestionCount =      story["QuestionCount"] as? Int ?? 0
+        
+        Object.QuestionPercentage =    story["QuestionPercentage"] as? Double ?? 0
+        
+        Object.QuestionStatus =    story["QuestionStatus"] as? Int ?? 0
+        
+        Object.QuestionStatusName =    story["QuestionStatusName"] as? String ?? ""
+        
+        Object.ColorCode =    story["ColorCode"] as? String ?? ""
+        
+        return Object
+    }
+    
+    static func parseQuestionChartList(story: NSDictionary) -> QuestionChartList {
+        
+        let Object =  QuestionChartList()
+        
+
+        // Tap hop question Madatory
+        
+        var MadatoryQuestionChartList = [QuestionChartModel]()
+        
+
+        if let Items = (story["MadatoryQuestionChartList"] as? NSArray) as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseObjectQuestionChartModel(Item as NSDictionary)
+                    MadatoryQuestionChartList.insert(temp, atIndex: MadatoryQuestionChartList.count)
+                    
+                }
+            }
+        }
+        
+        Object.MadatoryQuestionChartList = MadatoryQuestionChartList
+        
+        //Tap hop All question
+        var AllQuestionChartList = [QuestionChartModel]()
+        
+        if let Items = (story["AllQuestionChartList"] as? NSArray) as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseObjectQuestionChartModel(Item as NSDictionary)
+                    AllQuestionChartList.insert(temp, atIndex: AllQuestionChartList.count)
+                    
+                }
+            }
+        }
+        
+        Object.AllQuestionChartList = AllQuestionChartList
+        
+        return Object
+    }
+    
+    static func parseObjectQuestionResponseModel2(story: NSDictionary) -> QuestionResponseModel {
+        
+        let Object =  QuestionResponseModel()
+        
+        Object.FileName =      story["DisplayFileName"] as? String ?? ""
+        
+        Object.ResponseCategoryId =    story["ResponseCategoryId"] as? Int ?? 0
+        
+        Object.AuditResponse =    story["AuditResponse"] as? String ?? ""
+        
+        Object.SerialNumber =    story["QuestionNumber"] as? Int ?? 0
+        
+        Object.SectionSerialNumber =    story["SectionSerialNumber"] as? Int ?? 0
+        
+        Object.Name =    story["QuestionName"] as? String ?? ""
+        
+        Object.AuditActivityQuestionSetQuestionResponseId =    story["Id"] as? Int ?? 0
+        
+        Object.Priority =    story["Priority"] as? String ?? ""
+        
+        Object.FileId =    story["FileId"] as? Int ?? 0
+        
+        return Object
+    }
+
+
 
 }

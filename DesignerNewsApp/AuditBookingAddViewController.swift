@@ -10,9 +10,10 @@ import UIKit
 import Photos
 
 let reuseIdentifier = "PhotoCell"
-let albumName = "App Folder"
 
-class AuditBookingAddViewController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate{
+let albumName = "Compliance Audit System Folder"
+
+class AuditBookingAddViewController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate {
 
     @IBOutlet weak var lbl_Title: UILabel!
     @IBOutlet weak var txt_FileName: UITextField!
@@ -281,6 +282,7 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 
                 if(temp.IsSuccess){
                     
+
                     NSNotificationCenter.defaultCenter().postNotificationName("refeshBooking", object: nil)
                     
                     self.dismissViewControllerAnimated(true, completion: nil)

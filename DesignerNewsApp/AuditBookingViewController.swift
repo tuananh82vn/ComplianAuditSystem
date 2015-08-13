@@ -77,9 +77,16 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
         
             cell.ButtonEdit.addTarget(self, action: "ButtonEditClicked:", forControlEvents: .TouchUpInside)
         
-            cell.ButtonDownload.tag = self.auditBooking[indexPath.row].FileId
+            if self.auditBooking[indexPath.row].FileId == 0 {
+                cell.ButtonDownload.hidden = true
+            }
+            else
+            {
         
-            cell.ButtonDownload.addTarget(self, action: "ButtonDownloadClicked:", forControlEvents: .TouchUpInside)
+                cell.ButtonDownload.tag = self.auditBooking[indexPath.row].FileId
+        
+                cell.ButtonDownload.addTarget(self, action: "ButtonDownloadClicked:", forControlEvents: .TouchUpInside)
+            }
         
 
             return cell

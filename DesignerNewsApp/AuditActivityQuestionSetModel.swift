@@ -14,12 +14,13 @@ class AuditActivityQuestionSetModel : Serializable {
     var AuditActivityQuestionSetId : Int
     var AuditActivityQuestionSetName : String
     var QuestionBySectionList : [QuestionBySection]
-
+    var QuestionChart : QuestionChartList
     
     override init() {
         AuditActivityQuestionSetId = 0
         AuditActivityQuestionSetName = ""
         QuestionBySectionList = [QuestionBySection]()
+        QuestionChart = QuestionChartList()
     }
 }
 
@@ -58,8 +59,10 @@ class QuestionResponseModel : Serializable {
     var AuditResponse : String
     var Priority : String
     var ResponseCategoryName : String
+    var ResponseCategoryId : Int
     var FileId : Int
     var FileName : String
+    var Attachment : BookingAttachment
     
     
     override init() {
@@ -70,8 +73,10 @@ class QuestionResponseModel : Serializable {
         AuditResponse = ""
         Priority = ""
         ResponseCategoryName = ""
+        ResponseCategoryId = 0
         FileId = 0
         FileName = ""
+        Attachment = BookingAttachment()
     }
 }
 
@@ -105,7 +110,7 @@ class QuestionChartModel : Serializable {
     var QuestionStatus : Int
     var QuestionStatusName : String
     var QuestionCount : Int
-    var QuestionPercentage : Int
+    var QuestionPercentage : Double
     var ColorCode : String
     
     override init() {

@@ -55,6 +55,9 @@
 		665CEB941B577FC500A5C8BA /* AuditActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */; };
 		665CEBA41B5782ED00A5C8BA /* AuditRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */; };
 		666780231B7471CF00204038 /* MeetingAttendanceAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666780221B7471CF00204038 /* MeetingAttendanceAddViewController.swift */; };
+		666A1E571B7C285E00432670 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666A1E521B7C251700432670 /* Charts.framework */; };
+		666A1E581B7C285E00432670 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 666A1E521B7C251700432670 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		666A1E5D1B7C65D600432670 /* QuestionSetEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666A1E5C1B7C65D600432670 /* QuestionSetEditViewController.swift */; };
 		667F4A5F1B563F4400257DF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F4A5D1B563F4400257DF8 /* Main.storyboard */; };
 		66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF71B56260C0058FF09 /* SwiftyJSON.swift */; };
 		66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF91B5626200058FF09 /* LoginModel.swift */; };
@@ -177,6 +180,27 @@
 			remoteGlobalIDString = E2262DC61638331500BFDAD7;
 			remoteInfo = "Mac Framework";
 		};
+		666A1E511B7C251700432670 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 666A1E4D1B7C251700432670 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
+			remoteInfo = Charts;
+		};
+		666A1E531B7C253C00432670 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 666A1E4D1B7C251700432670 /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = Charts;
+		};
+		666A1E591B7C285E00432670 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 666A1E4D1B7C251700432670 /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = Charts;
+		};
 		964892121A62818A00214D53 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96A580051A5E4DF400FDE099 /* Alamofire.xcodeproj */;
@@ -221,6 +245,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				666A1E581B7C285E00432670 /* Charts.framework in Embed Frameworks */,
 				96879AA01A6E786D00717E59 /* Spring.framework in Embed Frameworks */,
 				96AEB7431A5E5C3F005989F4 /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -285,6 +310,9 @@
 		665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivitiesViewController.swift; sourceTree = "<group>"; };
 		665CEBA31B5782ED00A5C8BA /* AuditRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestModel.swift; sourceTree = "<group>"; };
 		666780221B7471CF00204038 /* MeetingAttendanceAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAttendanceAddViewController.swift; sourceTree = "<group>"; };
+		666A1E371B7C238200432670 /* libQLCharts.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libQLCharts.dylib; path = usr/lib/libQLCharts.dylib; sourceTree = SDKROOT; };
+		666A1E4D1B7C251700432670 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
+		666A1E5C1B7C65D600432670 /* QuestionSetEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetEditViewController.swift; sourceTree = "<group>"; };
 		667F4A5E1B563F4400257DF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66919EF71B56260C0058FF09 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		66919EF91B5626200058FF09 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -334,6 +362,7 @@
 				1A6D23D51AB6AD89000F080A /* Security.framework in Frameworks */,
 				1A6D23D31AB6AD83000F080A /* QuickLook.framework in Frameworks */,
 				1A6D23D11AB6AD78000F080A /* Foundation.framework in Frameworks */,
+				666A1E571B7C285E00432670 /* Charts.framework in Frameworks */,
 				1A6D23CF1AB6AD73000F080A /* CoreGraphics.framework in Frameworks */,
 				1A6D23CD1AB6AD69000F080A /* AssetsLibrary.framework in Frameworks */,
 				1AB33B591A7660E800E3AB55 /* libDTCoreText.a in Frameworks */,
@@ -382,6 +411,7 @@
 		1A8D9C7F1A75E2A70032DA0F /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				666A1E4D1B7C251700432670 /* Charts.xcodeproj */,
 				96A580051A5E4DF400FDE099 /* Alamofire.xcodeproj */,
 				1A4FDA211A6E43FE0099D309 /* SpringApp.xcodeproj */,
 				1AB33B3F1A7660B300E3AB55 /* DTCoreText.xcodeproj */,
@@ -392,6 +422,7 @@
 		1A8D9C881A75E31F0032DA0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				666A1E371B7C238200432670 /* libQLCharts.dylib */,
 				6617A58D1B6F3B1100066C73 /* Photos.framework */,
 				1A6D23D81AB6AD9C000F080A /* UIKit.framework */,
 				1A6D23D61AB6AD93000F080A /* SystemConfiguration.framework */,
@@ -443,6 +474,14 @@
 				1AB33B541A7660B300E3AB55 /* MacUnitTest.xctest */,
 				1AB33B561A7660B300E3AB55 /* libDTCoreText_no_DTFoundation.a */,
 				1AB33B581A7660B300E3AB55 /* DTCoreText.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		666A1E4E1B7C251700432670 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				666A1E521B7C251700432670 /* Charts.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -550,6 +589,7 @@
 				66570D311B74446F002248A2 /* MeetingAttendanceViewController.swift */,
 				666780221B7471CF00204038 /* MeetingAttendanceAddViewController.swift */,
 				6647ABCF1B748E6100E6DAF5 /* QuestionSetViewController.swift */,
+				666A1E5C1B7C65D600432670 /* QuestionSetEditViewController.swift */,
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
 				961889B71A680D3800295A64 /* LearnViewController.swift */,
 				66D7B3081B5F670600B7FAE2 /* NavigationController.swift */,
@@ -650,8 +690,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				666A1E541B7C253C00432670 /* PBXTargetDependency */,
 				1A6D71931A6E5F43003968BA /* PBXTargetDependency */,
 				964892131A62818A00214D53 /* PBXTargetDependency */,
+				666A1E5A1B7C285E00432670 /* PBXTargetDependency */,
 			);
 			name = DesignerNewsApp;
 			productName = DesignerNewsApp;
@@ -688,6 +730,10 @@
 				{
 					ProductGroup = 96A580061A5E4DF400FDE099 /* Products */;
 					ProjectRef = 96A580051A5E4DF400FDE099 /* Alamofire.xcodeproj */;
+				},
+				{
+					ProductGroup = 666A1E4E1B7C251700432670 /* Products */;
+					ProjectRef = 666A1E4D1B7C251700432670 /* Charts.xcodeproj */;
 				},
 				{
 					ProductGroup = 1AB33B401A7660B300E3AB55 /* Products */;
@@ -781,6 +827,13 @@
 			fileType = wrapper.framework;
 			path = DTCoreText.framework;
 			remoteRef = 1AB33B571A7660B300E3AB55 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		666A1E521B7C251700432670 /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 666A1E511B7C251700432670 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		96A5800B1A5E4DF500FDE099 /* Alamofire.framework */ = {
@@ -894,6 +947,7 @@
 				666780231B7471CF00204038 /* MeetingAttendanceAddViewController.swift in Sources */,
 				B790E5311A82C6BC0007B392 /* MenuControl.swift in Sources */,
 				B779F6B41AB7570700DDF3AA /* ChromeActivity.swift in Sources */,
+				666A1E5D1B7C65D600432670 /* QuestionSetEditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,6 +958,16 @@
 			isa = PBXTargetDependency;
 			name = Spring;
 			targetProxy = 1A6D71921A6E5F43003968BA /* PBXContainerItemProxy */;
+		};
+		666A1E541B7C253C00432670 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = 666A1E531B7C253C00432670 /* PBXContainerItemProxy */;
+		};
+		666A1E5A1B7C285E00432670 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = 666A1E591B7C285E00432670 /* PBXContainerItemProxy */;
 		};
 		964892131A62818A00214D53 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
