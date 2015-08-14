@@ -1131,7 +1131,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                println(jsonObject)
+                //println(jsonObject)
                 
                 if let IsSuccess = jsonObject["IsSuccess"].bool {
                     

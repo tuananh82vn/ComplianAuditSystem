@@ -130,6 +130,8 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         chart.data = pieChartData
         chart.drawHoleEnabled = false
+        //chart.usePercentValuesEnabled = true
+        chart.drawSliceTextEnabled = false
         chart.descriptionText = ""
         chart.setNeedsDisplay()
 
