@@ -788,6 +788,45 @@ struct JSONParser {
         return Object
     }
 
+    
+    static func parseAuditOutcomeList(story: NSArray) -> [AuditOutcomeModel] {
+        
+        var PlanArray = [AuditOutcomeModel]()
+        
+        if let Items = story as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseAuditOutcome(Item as NSDictionary)
+                    
+                    PlanArray.append(temp)
+                }
+            }
+        }
+        
+        return PlanArray
+    }
+
+    static func parseAuditOutcome(story: NSDictionary) -> AuditOutcomeModel {
+        
+        
+        let Object =  AuditOutcomeModel()
+        
+        Object.Name = story["Name"] as? String ?? ""
+        
+        Object.Description = story["Description"] as? String ?? ""
+        
+        Object.DisplayOrder = story["DisplayOrder"] as? Int ?? 0
+        
+        Object.Id = story["Id"] as? Int ?? 0
+        
+        Object.Colour = story["Colour"] as? String ?? ""
+        
+        
+        return Object
+    }
 
 
 }

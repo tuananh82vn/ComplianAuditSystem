@@ -42,6 +42,7 @@
 		6622E5CA1B72FB7A00C262CF /* AuditPlanDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622E5C91B72FB7A00C262CF /* AuditPlanDetailTableViewCell.swift */; };
 		662C80DD1B57950300371598 /* AuditRequestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */; };
 		662DC8DE1B815D3B00867625 /* ConfirmSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662DC8DD1B815D3B00867625 /* ConfirmSubmitViewController.swift */; };
+		662DC8EE1B81C92000867625 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662DC8ED1B81C92000867625 /* UIColor.swift */; };
 		6630670F1B6715F1001EE543 /* PopDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6630670E1B6715F1001EE543 /* PopDatePicker.swift */; };
 		6630671F1B6715FB001EE543 /* PopDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6630671E1B6715FB001EE543 /* PopDateViewController.swift */; };
 		663067211B671604001EE543 /* PopDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 663067201B671604001EE543 /* PopDateViewController.xib */; };
@@ -299,6 +300,7 @@
 		6622E5C91B72FB7A00C262CF /* AuditPlanDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditPlanDetailTableViewCell.swift; sourceTree = "<group>"; };
 		662C80DC1B57950300371598 /* AuditRequestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestCollectionViewCell.swift; sourceTree = "<group>"; };
 		662DC8DD1B815D3B00867625 /* ConfirmSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSubmitViewController.swift; sourceTree = "<group>"; };
+		662DC8ED1B81C92000867625 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		6630670E1B6715F1001EE543 /* PopDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDatePicker.swift; sourceTree = "<group>"; };
 		6630671E1B6715FB001EE543 /* PopDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDateViewController.swift; sourceTree = "<group>"; };
 		663067201B671604001EE543 /* PopDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopDateViewController.xib; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 		66919EF61B5625FD0058FF09 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				662DC8ED1B81C92000867625 /* UIColor.swift */,
 				663067261B6764BE001EE543 /* Serializable.swift */,
 				663067221B671616001EE543 /* DateUtils.swift */,
 				66919EF71B56260C0058FF09 /* SwiftyJSON.swift */,
@@ -916,6 +919,7 @@
 				B78F90381A6EF75800883A5B /* WebApiService.swift in Sources */,
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
 				6617A5901B6F3B5F00066C73 /* PhotoThumbnail.swift in Sources */,
+				662DC8EE1B81C92000867625 /* UIColor.swift in Sources */,
 				66570D321B74446F002248A2 /* MeetingAttendanceViewController.swift in Sources */,
 				669304F01B60CF6E001B855D /* TableViewController.swift in Sources */,
 				66570D421B744499002248A2 /* MeetingDetailsViewCell.swift in Sources */,

@@ -47,6 +47,7 @@ struct WebApiService {
         case AuditActivityConfirmSubmitSelect
         case AuditActivityConfirmSubmitEdit
         case AuditActivityHistoryList
+        case AuditOutcomeList
         
         
         var description: String {
@@ -86,7 +87,7 @@ struct WebApiService {
                 case .AuditActivityConfirmSubmitSelect : return "/Api/AuditActivityConfirmSubmitSelect"
                 case .AuditActivityConfirmSubmitEdit : return "/Api/AuditActivityConfirmSubmitEdit"
                 case .AuditActivityHistoryList : return "/Api/AuditActivityHistoryList"
-                
+                case .AuditOutcomeList : return "/Api/AuditOutcomeList"
             }
         }
     }
@@ -1337,6 +1338,41 @@ struct WebApiService {
         
     }
 
-
+    static func getAuditOutcomeList(token: String, response : (objectReturn : [AuditOutcomeModel]?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditOutcomeList.description
+        
+        
+        var parameters = [
+            "TokenNumber" : token
+        ]
+        
+        var arrayReturn = [AuditOutcomeModel]()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                println(jsonObject)
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Item"].arrayObject {
+                            
+                            arrayReturn = JSONParser.parseAuditOutcomeList(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
 
 }

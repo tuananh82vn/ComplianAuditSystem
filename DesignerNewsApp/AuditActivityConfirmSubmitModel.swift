@@ -79,3 +79,20 @@ class AuditActivityHistoryModel : Serializable {
         CreatedDateDisplay = ""
     }
 }
+
+class AuditOutcomeModel : Serializable {
+    
+    var Name : String
+    var Description : String
+    var DisplayOrder : Int
+    var Colour : String
+    var Id : Int
+    
+    override init() {
+        Name = ""
+        Description = ""
+        DisplayOrder = 0
+        Colour = ""
+        Id = 0
+    }
+}
