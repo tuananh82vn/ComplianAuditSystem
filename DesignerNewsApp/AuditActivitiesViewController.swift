@@ -40,6 +40,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     var originalCenter: CGPoint!
     
+    var objectStartAudit = AuditRequestStartAuditModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -160,8 +162,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                             cell.ButtonStatus.setImage(imageStartAudit, forState: .Normal)
                             cell.Status.text =  "Start Audit"
                             cell.ButtonStatus.tag = indexPath.row
-                            cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
-    
+                            cell.ButtonStatus.addTarget(self, action: "StartAuditButtonClicked:", forControlEvents: .TouchUpInside)
                         }
                         else
                         //Reviewing
@@ -208,6 +209,46 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
 
         // Configure the cell
         return cell
+    }
+    
+    func StartAuditButtonClicked(sender : UIButton)
+    {
+        
+        
+        var refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure want to start audit?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
+            //println("Handle Yes logic here")
+            
+            self.view.showLoading()
+            
+            WebApiService.postAuditRequestStartAudit(LocalStore.accessToken()!, AuditRequestUrlId : self.auditRequest[sender.tag].UrlId) { objectReturn in
+                
+                if let temp = objectReturn {
+                    
+                    self.objectStartAudit = temp
+                    
+                    LocalStore.setAuditActivityUrlId(self.objectStartAudit.AuditActivityUrlId)
+                    
+                    self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
+                    
+                    self.view.hideLoading()
+                }
+                
+                
+            }
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction!) in
+            //println("Handle Cancel Logic here")
+        }))
+        
+        refreshAlert.view.tintColor = UIColor.blackColor()
+        
+        self.presentViewController(refreshAlert, animated: true, completion: nil)
+        
+       
+
     }
     
     func yourButtonClicked(sender : UIButton)

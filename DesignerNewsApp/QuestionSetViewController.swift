@@ -453,4 +453,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         }
 
     }
+    @IBAction func ButtonConfirmClicked(sender: AnyObject) {
+        self.performSegueWithIdentifier("GoToSubmit", sender: sender)
+    }
 }

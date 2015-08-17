@@ -65,11 +65,13 @@ class SSRadioButton: UIButton {
         circleLayer.fillColor = UIColor.clearColor().CGColor
         circleLayer.strokeColor = circleColor.CGColor
         layer.addSublayer(circleLayer)
+        
         fillCircleLayer.frame = bounds
         fillCircleLayer.lineWidth = 2
         fillCircleLayer.fillColor = UIColor.clearColor().CGColor
         fillCircleLayer.strokeColor = UIColor.clearColor().CGColor
         layer.addSublayer(fillCircleLayer)
+        
         self.titleEdgeInsets = UIEdgeInsetsMake(0, (4*circleRadius + 4*circleLayer.lineWidth), 0, 0)
         self.toggleButon()
         self.setTitleColor(UIColor.blackColor(), forState: UIControlState.Selected)

@@ -11,6 +11,7 @@ struct WebApiService {
         case Login
         case Download
         case AuditRequestList
+        case AuditRequestStartAudit
         case AuditRequestStatusList
         case AuditActivitySiteDetail
         
@@ -43,6 +44,9 @@ struct WebApiService {
         case AuditActivityQuestionSetQuestionResponsePieChart
         case AuditActivityQuestionSetQuestionResponseEdit
         
+        case AuditActivityConfirmSubmitSelect
+        case AuditActivityConfirmSubmitEdit
+        case AuditActivityHistoryList
         
         
         var description: String {
@@ -50,6 +54,8 @@ struct WebApiService {
                 case .Login: return "/Api/Login"
                 case .Download: return "/Api/GetFileDocument/?fileId="
                 case .AuditRequestList: return "/Api/AuditRequestList"
+                case .AuditRequestStartAudit: return "/Api/AuditRequestStartAudit"
+                
                 case .AuditRequestStatusList: return "/Api/AuditRequestStatusList"
                 case .AuditActivitySiteDetail : return "/Api/AuditActivitySiteDetail"
                 case .AuditActivityAuditDetail : return "/Api/AuditActivityAuditDetail"
@@ -76,6 +82,10 @@ struct WebApiService {
                 case .AuditActivityQuestionSetQuestionResponsePieChart : return "/Api/AuditActivityQuestionSetQuestionResponsePieChart"
                 case .AuditActivityQuestionSetQuestionResponseSelect : return "/Api/AuditActivityQuestionSetQuestionResponseSelect"
                 case .AuditActivityQuestionSetQuestionResponseEdit : return "/Api/AuditActivityQuestionSetQuestionResponseEdit"
+                
+                case .AuditActivityConfirmSubmitSelect : return "/Api/AuditActivityConfirmSubmitSelect"
+                case .AuditActivityConfirmSubmitEdit : return "/Api/AuditActivityConfirmSubmitEdit"
+                case .AuditActivityHistoryList : return "/Api/AuditActivityHistoryList"
                 
             }
         }
@@ -184,6 +194,38 @@ struct WebApiService {
             response (objectReturn : AuditRequestList)
         }
     }
+    
+    static func postAuditRequestStartAudit(token: String, AuditRequestUrlId: String, response : (objectReturn : AuditRequestStartAuditModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditRequestStartAudit.description
+        
+        
+        var parameters  = [
+            "TokenNumber" : token,
+            "AuditRequestUrlId" : AuditRequestUrlId
+        ]
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                println(jsonObject)
+                
+                if let Item = jsonObject["Item"].dictionaryObject {
+                    
+                    let Return = JSONParser.parseAuditRequestStartAudit(Item as NSDictionary)
+                    response (objectReturn : Return)
+                }
+                
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+    
     
     static func getAuditRequestStatusList(token: String, response : (objectReturn : [AuditRequestStatusModel]) -> ()) {
 
@@ -1203,6 +1245,98 @@ struct WebApiService {
         }
         
     }
+    
+    static func getAuditActivityConfirmSubmitSelect(token: String, AuditActivityUrlId: String, response : (objectReturn : AuditActivityConfirmSubmitModel?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.AuditActivityConfirmSubmitSelect.description
+        
+        
+        var parameters : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        var arrayReturn = AuditActivityConfirmSubmitModel()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                //println(jsonObject)
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Item"].dictionaryObject {
+                            
+                            arrayReturn = JSONParser.parseObjectAuditActivityConfirmSubmitModel(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+    
+    static func postAuditActivityConfirmSubmitEdit(token: String, object: AuditActivityConfirmSubmitModel,  response : (objectReturn : JsonReturnModel?) -> ()) {
+        
+        let urlString = baseURL + ResourcePath.AuditActivityConfirmSubmitEdit.description
+        
+        
+        var parameters   : [String:AnyObject] = [
+            "TokenNumber" : token,
+            "Item": [
+                "UrlId" : object.UrlId,
+                "IsAuditDetailsCompleted" : object.IsAuditDetailsCompleted,
+                "IsBookingDetailsCompleted" : object.IsBookingDetailsCompleted,
+                "IsAuditPlanCompleted" : object.IsAuditPlanCompleted,
+                "IsMeetingAttendanceRecordCompleted" : object.IsMeetingAttendanceRecordCompleted,
+                "IsQuestionSetCompleted" : object.IsQuestionSetCompleted,
+                "Notes" : object.Notes,
+                "AuditOutcomeId" : object.AuditOutcomeId
+            ]
+        ]
+        
+        var JsonReturn = JsonReturnModel()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }
+            
+        }
+        
+    }
+
 
 
 }

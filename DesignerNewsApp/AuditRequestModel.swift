@@ -125,3 +125,13 @@ class AuditRequestFilter {
       ToDate = nil
     }
 }
+
+class AuditRequestStartAuditModel {
+    var AuditActivityId : Int?
+    var AuditActivityUrlId : String
+    init() {
+        AuditActivityId = 0
+        AuditActivityUrlId = ""
+    }
+}
+

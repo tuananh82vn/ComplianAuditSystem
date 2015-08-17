@@ -76,7 +76,18 @@ struct JSONParser {
         return auditrequestObject
     }
     
-    
+    static func parseAuditRequestStartAudit(story: NSDictionary) -> AuditRequestStartAuditModel {
+        
+        
+        let auditrequestObject =  AuditRequestStartAuditModel()
+        
+        auditrequestObject.AuditActivityId = story["AuditActivityId"] as? Int ?? 0
+        
+        auditrequestObject.AuditActivityUrlId = story["AuditActivityUrlId"] as? String ?? ""
+
+        
+        return auditrequestObject
+    }
 
 
     static func parseAuditRequest(story: NSDictionary) -> AuditRequestModel {
@@ -726,6 +737,53 @@ struct JSONParser {
         Object.Priority =    story["Priority"] as? String ?? ""
         
         Object.FileId =    story["FileId"] as? Int ?? 0
+        
+        return Object
+    }
+    
+    static func parseObjectAuditActivityConfirmSubmitModel(story: NSDictionary) -> AuditActivityConfirmSubmitModel {
+        
+        let Object =  AuditActivityConfirmSubmitModel()
+        
+        Object.Id =      story["Id"] as? Int ?? 0
+        
+        Object.AuditActivityStatusId =    story["AuditActivityStatusId"] as? Int ?? 0
+        
+        Object.AuditType =    story["AuditType"] as? Int ?? 0
+        
+        Object.UrlId =    story["UrlId"] as? String ?? ""
+        
+        Object.CanEdit =    story["CanEdit"] as? Bool ?? false
+        
+        Object.CanApprove =    story["CanApprove"] as? Bool ?? false
+        
+        Object.IsAuditDetailsCompleted =    story["IsAuditDetailsCompleted"] as? Bool ?? false
+        
+        Object.IsBookingDetailsCompleted =    story["IsBookingDetailsCompleted"] as? Bool ?? false
+        
+        Object.IsAuditPlanCompleted =    story["IsAuditPlanCompleted"] as? Bool ?? false
+        
+        Object.IsMeetingAttendanceRecordCompleted =    story["IsMeetingAttendanceRecordCompleted"] as? Bool ?? false
+        
+        Object.IsQuestionSetCompleted =    story["IsQuestionSetCompleted"] as? Bool ?? false
+        
+        Object.IsAuditDetailsCompletedstring =    story["IsAuditDetailsCompletedstring"] as? String ?? ""
+        
+        Object.IsBookingDetailsCompletedstring =    story["IsBookingDetailsCompletedstring"] as? String ?? ""
+        
+        Object.IsAuditPlanCompletedstring =    story["IsAuditPlanCompletedstring"] as? String ?? ""
+        
+        Object.IsMeetingAttendanceRecordCompletedstring =    story["IsMeetingAttendanceRecordCompletedstring"] as? String ?? ""
+        
+        Object.IsQuestionSetCompletedstring =    story["IsQuestionSetCompletedstring"] as? String ?? ""
+        
+        Object.Notes =    story["Notes"] as? String ?? ""
+        
+        Object.AuditOutcomeId =    story["AuditOutcomeId"] as? Int ?? 0
+        
+        Object.AuditOutcomeName =    story["AuditOutcomeName"] as? String ?? ""
+        
+        Object.AuditOutcomeColorName =    story["AuditOutcomeColorName"] as? String ?? ""
         
         return Object
     }
