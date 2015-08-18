@@ -35,9 +35,6 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        //
-        
 
         InitData()
 
@@ -52,10 +49,11 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         
         self.viewHeightConstraint.constant = CGFloat(0)
+
+        self.scrollView.contentSize = CGSizeMake(tableView1.frame.width-1, CGFloat(0))
+        
         self.view.layoutIfNeeded()
 
-        
-        self.scrollView.contentSize = CGSizeMake(tableView1.frame.width-1, CGFloat(0))
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
 

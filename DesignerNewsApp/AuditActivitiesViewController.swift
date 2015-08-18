@@ -63,6 +63,11 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                 
                 let filter = AuditRequestFilter()
                 
+                //accepted
+                filter.Status = "3"
+                
+                filter.Sort = "SiteName-asc"
+                
                 WebApiService.getAuditRequestList(LocalStore.accessToken()!, filter : filter) { objectReturn in
                     
                     self.view.hideLoading()
@@ -113,26 +118,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         cell.AuditFinishDate.text = auditRequest[indexPath.row].RequestToDateDisplay
         cell.QuestionSet.text = auditRequest[indexPath.row].QuestionSetName
         
-        
-        
-//        var Color = UIColor.clearColor()
-//        if AuditRequestStatus.Color == "blue"{
-//            Color = UIColor.blueColor()
-//        }
-//        else
-//            if AuditRequestStatus.Color == "yellow"{
-//                Color = UIColor.yellowColor()
-//        }
-//            else
-//                if AuditRequestStatus.Color == "green"{
-//                    Color = UIColor.greenColor()
-//        }
-//                else
-//                    if AuditRequestStatus.Color == "red"{
-//                        Color = UIColor.redColor()
-//        }
-//        
-//        cell.Status.textColor = Color
 
         
         //Pending
