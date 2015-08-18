@@ -15,6 +15,8 @@ protocol MenuViewControllerDelegate : class {
     
     func menuViewControllerDidSelectActivitiesMenu(controller:MenuViewController)
     
+    func menuViewControllerDidSelectLogoutMenu(controller:MenuViewController)
+    
 }
 
 class MenuViewController: UIViewController {
@@ -55,7 +57,10 @@ class MenuViewController: UIViewController {
         animateView()
     }
     
-    @IBAction func loginButtonPressed(sender: AnyObject) {
+    @IBAction func logoutButtonPressed(sender: AnyObject) {
+        animateView()
+        delegate?.menuViewControllerDidSelectLogoutMenu(self)
+        closeButtonPressed(self)
     }
 
     @IBAction func closeButtonPressed(sender: AnyObject) {

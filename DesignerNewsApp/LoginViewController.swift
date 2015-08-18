@@ -11,6 +11,7 @@ import Spring
 
 class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehaviorDelegate {
 
+    @IBOutlet weak var switchRememberMe: UISwitch!
     @IBOutlet weak var passwordImageView: SpringImageView!
     @IBOutlet weak var emailImageView: SpringImageView!
     @IBOutlet weak var dialogView: SpringView!
@@ -20,6 +21,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     
     var originalCenter: CGPoint!
     
+    var keychain = Keychain()
+    
     var userProfile = LoginModel()
     
     override func viewDidLoad() {
@@ -27,12 +30,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         
         originalCenter = view.center
         
+        emailTextField.text = keychain["username"]
+        passwordTextField.text = keychain["password"]
+        
+        if (emailTextField.text != "" &&  passwordTextField.text != ""){
+            switchRememberMe.on = true
+        }
+        else
+        {
+            switchRememberMe.on = false
+        }
+        
+        
         emailTextField.delegate = self
         passwordTextField.delegate = self
         
         
         LocalStore.setDomain("http://wsandypham:8080")
         //LocalStore.setDomain("http://complianceauditsystem.softwarestaging.com.au")
+        
+        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
+        navigationItem.leftBarButtonItem = backButton
     }
     
 
@@ -45,6 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     
     // MARK: Button
     @IBAction func signupButtonPressed(sender: AnyObject) {
+
         DoLogin()
     }
     
@@ -57,6 +76,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
             self.view.hideLoading()
             
             if let temp = object {
+
+                if (self.switchRememberMe.on)
+                {
+                    self.keychain["username"] = self.emailTextField.text
+                    self.keychain["password"] = self.passwordTextField.text
+                }
+                else
+                {
+                    self.keychain["username"] = ""
+                    self.keychain["password"] = ""
+                }
                 
                 self.userProfile = temp
                 
@@ -123,6 +153,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         return true
     }
     
+    @IBAction func ButtonForgotClicked(sender: AnyObject) {UIApplication.sharedApplication().openURL(NSURL(string:"http://complianceauditsystem.softwarestaging.com.au/login/forgotpassword")!)
+        
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToDashboard" {
             let GoToDashboard = segue.destinationViewController as! MainViewController

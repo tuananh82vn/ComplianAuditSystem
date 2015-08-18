@@ -59,4 +59,12 @@ extension  MainViewController : MenuViewControllerDelegate {
     func menuViewControllerDidSelectActivitiesMenu(controller: MenuViewController) {
         performSegueWithIdentifier("ActivitiesSegue", sender: nil)
     }
+    func menuViewControllerDidSelectLogoutMenu(controller: MenuViewController) {
+        
+        LocalStore.setAuditActivityUrlId("")
+        
+        LocalStore.setToken("")
+        
+        performSegueWithIdentifier("GoToLogin", sender: nil)
+    }
 }

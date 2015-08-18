@@ -32,6 +32,7 @@
 		1A935E3C1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A935E3B1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift */; };
 		1AB33B591A7660E800E3AB55 /* libDTCoreText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB33B501A7660B300E3AB55 /* libDTCoreText.a */; };
 		1AED4A711A7BBCCA004C689E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED4A701A7BBCCA004C689E /* Error.swift */; };
+		661133131B83098D00C3CAE4 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661133121B83098D00C3CAE4 /* Keychain.swift */; };
 		6617A5781B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */; };
 		6617A58C1B6F31AE00066C73 /* AuditBookingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */; };
 		6617A58E1B6F3B1100066C73 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6617A58D1B6F3B1100066C73 /* Photos.framework */; };
@@ -290,6 +291,7 @@
 		1A935E3B1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoundPlayer+DesignerNewsApp.swift"; sourceTree = "<group>"; };
 		1AB33B3F1A7660B300E3AB55 /* DTCoreText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTCoreText.xcodeproj; path = DTCoreText/DTCoreText.xcodeproj; sourceTree = "<group>"; };
 		1AED4A701A7BBCCA004C689E /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		661133121B83098D00C3CAE4 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityBookingDetailModel.swift; sourceTree = "<group>"; };
 		6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditBookingAddViewController.swift; sourceTree = "<group>"; };
 		6617A58D1B6F3B1100066C73 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -495,6 +497,7 @@
 		66919EF61B5625FD0058FF09 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				661133121B83098D00C3CAE4 /* Keychain.swift */,
 				662DC8ED1B81C92000867625 /* UIColor.swift */,
 				663067261B6764BE001EE543 /* Serializable.swift */,
 				663067221B671616001EE543 /* DateUtils.swift */,
@@ -918,6 +921,7 @@
 				66E666B11B5F1FE100D7FF78 /* AuditRequestHeaderView.swift in Sources */,
 				B78F90381A6EF75800883A5B /* WebApiService.swift in Sources */,
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
+				661133131B83098D00C3CAE4 /* Keychain.swift in Sources */,
 				6617A5901B6F3B5F00066C73 /* PhotoThumbnail.swift in Sources */,
 				662DC8EE1B81C92000867625 /* UIColor.swift in Sources */,
 				66570D321B74446F002248A2 /* MeetingAttendanceViewController.swift in Sources */,
