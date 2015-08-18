@@ -297,7 +297,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                 return headerView
             default:
                 //4
-                assert(false, "Unexpected element kind")
+                fatalError("Unexpected element kind")
             }
     }
     

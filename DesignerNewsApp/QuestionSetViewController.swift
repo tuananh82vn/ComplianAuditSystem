@@ -409,7 +409,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         var view = UIView()
         

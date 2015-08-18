@@ -76,7 +76,7 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
                 
                 self.selectedDayId = notification.userInfo!["selectedDayId"] as! Int
                 
-                self.LastSelected = notification.userInfo!["LastSelected"] as! NSIndexPath
+                self.LastSelected = notification.userInfo!["LastSelected"] as? NSIndexPath
                 
                 
                 //reload data

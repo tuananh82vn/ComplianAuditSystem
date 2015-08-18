@@ -10,32 +10,23 @@ import UIKit
 
 class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationControllerDelegate {
 
+    @IBOutlet weak var txt_Notes: UITextView!
+    @IBOutlet weak var QuestionSetCompleted: UISwitch!
+    @IBOutlet weak var MeetingRecordCompleted: UISwitch!
+    @IBOutlet weak var AuditPlanCompleted: UISwitch!
+    @IBOutlet weak var AuditDetailCompleted: UISwitch!
+    @IBOutlet weak var BookingDetailCompleted: UISwitch!
     @IBOutlet weak var view1: UIView!
     
     var AuditOutcomeList = [AuditOutcomeModel]()
+    var AuditConfirm = AuditActivityConfirmSubmitModel()
+    var selectedOutcomeId : Int = 0
+    
     
     @IBOutlet weak var bt_Select: UIButton!
     
     let picker = UIImageView(image: UIImage(named: "picker"))
     
-    struct properties {
-        static let moods = [
-            ["title" : "the best", "color" : "#8647b7"],
-            ["title" : "okay", "color" : "#45a85a"],
-            ["title" : "meh", "color" : "#a8a23f"],
-            ["title" : "really good", "color": "#4870b7"],
-            ["title" : "okay", "color" : "#45a85a"],
-            ["title" : "okay", "color" : "#45a85a"],
-            ["title" : "meh", "color" : "#a8a23f"],
-            ["title" : "meh", "color" : "#a8a23f"],
-            ["title" : "okay", "color" : "#45a85a"],
-            ["title" : "meh", "color" : "#a8a23f"],
-            ["title" : "not so great", "color" : "#c6802e"],
-            ["title" : "okay", "color" : "#45a85a"],
-            ["title" : "meh", "color" : "#a8a23f"],
-            ["title" : "the worst", "color" : "#b05050"]
-        ]
-    }
 
     
     override func viewDidLoad() {
@@ -43,7 +34,7 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         
         InitData()
         
-        createPicker()
+        
 
         // Do any additional setup after loading the view.
     }
@@ -51,15 +42,50 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     func InitData(){
         view.showLoading()
         
-        WebApiService.getAuditOutcomeList(LocalStore.accessToken()!) { objectReturn in
+        WebApiService.getAuditActivityConfirmSubmitSelect(LocalStore.accessToken()! , AuditActivityUrlId : LocalStore.accessAuditActivityUrlId()! ) { objectReturn in
             
             if let temp = objectReturn {
                 
-                self.AuditOutcomeList = temp
+                self.AuditConfirm = temp
+
+                self.AuditDetailCompleted.on =  self.AuditConfirm.IsAuditDetailsCompleted
+               
+                self.BookingDetailCompleted.on = self.AuditConfirm.IsBookingDetailsCompleted
+               
+                self.AuditPlanCompleted.on = self.AuditConfirm.IsAuditPlanCompleted
                 
-                self.view.hideLoading()
+                self.MeetingRecordCompleted.on = self.AuditConfirm.IsMeetingAttendanceRecordCompleted
+                
+                self.QuestionSetCompleted.on = self.AuditConfirm.IsQuestionSetCompleted
+                
+                self.txt_Notes.text = self.AuditConfirm.Notes
+                
+                if(self.AuditConfirm.AuditOutcomeName == "") {
+                    
+                    self.bt_Select.setTitle("Select", forState: .Normal)
+
+                }
+                else
+                {
+                    self.bt_Select.setTitle(self.AuditConfirm.AuditOutcomeName, forState: .Normal)
+                }
+                dispatch_async(dispatch_get_main_queue()) {
+                    WebApiService.getAuditOutcomeList(LocalStore.accessToken()!) { objectReturn in
+                        
+                        if let temp = objectReturn {
+                            
+                            self.AuditOutcomeList = temp
+
+                            self.createPicker()
+                            
+                            self.view.hideLoading()
+                        }
+                    }
+                }
             }
         }
+
+        
 
     }
     
@@ -71,31 +97,120 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     @IBAction func ButtonSelectClicked(sender: AnyObject) {
         picker.hidden ? openPicker() : closePicker()
     }
-    
-    @IBAction func ButtonCancelClicked(sender: AnyObject) {
-    }
 
     @IBAction func ButtonSubmitClicked(sender: AnyObject) {
+        
+        var refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure to submit the audit ?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
+            
+                        
+                        self.view.showLoading()
+                        
+                        self.AuditConfirm.IsAuditDetailsCompleted = self.AuditDetailCompleted.on
+                        
+                        self.AuditConfirm.IsBookingDetailsCompleted = self.BookingDetailCompleted.on
+                        
+                        self.AuditConfirm.IsAuditPlanCompleted = self.AuditPlanCompleted.on
+                        
+                        self.AuditConfirm.IsMeetingAttendanceRecordCompleted = self.MeetingRecordCompleted.on
+                        
+                        self.AuditConfirm.IsQuestionSetCompleted = self.QuestionSetCompleted.on
+                        
+                        self.AuditConfirm.Notes = self.txt_Notes.text
+                        
+                        self.AuditConfirm.AuditOutcomeId = self.selectedOutcomeId
+                        
+                        WebApiService.postAuditActivityConfirmSubmitEdit(LocalStore.accessToken()!, object : self.AuditConfirm) { objectReturn in
+                            
+                            if let temp = objectReturn {
+                                
+                                self.view.hideLoading()
+                                
+                                if(temp.IsSuccess){
+                                    
+                                    self.performSegueWithIdentifier("GoToDashboard", sender: sender)
+                                }
+                                else
+                                {
+                                    var errorMessage : String = ""
+                                    
+                                    for var index = 0; index < temp.Errors.count; ++index {
+                                        
+                                        errorMessage += temp.Errors[index].ErrorMessage
+                                    }
+                                    
+                                    
+                                    let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                                    
+                                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                                    
+                                    alertController.view.tintColor = UIColor.blackColor()
+                                    
+                                    self.presentViewController(alertController, animated: true, completion: nil)
+                                }
+                            }
+                            
+                        }
+            
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction!) in
+        }))
+        
+        refreshAlert.view.tintColor = UIColor.blackColor()
+        
+        self.presentViewController(refreshAlert, animated: true, completion: nil)
+        
+
+       
+
     }
     
     func createPicker()
     {
         
-        let picker_height = 21 + self.properties.moods.count * 43
-        picker.frame = CGRect(x: self.bt_Select.frame.origin.x, y: self.bt_Select.frame.origin.y + self.bt_Select.frame.height , width: self.bt_Select.frame.width, height: picker_height)
+        var picker_height = self.AuditOutcomeList.count * 44 //+ self.properties.moods.count * 43
+        picker.frame = CGRect(x: self.bt_Select.frame.origin.x, y: self.bt_Select.frame.origin.y + self.bt_Select.frame.height , width: self.bt_Select.frame.width, height: CGFloat(picker_height))
         picker.alpha = 0
         picker.hidden = true
         picker.userInteractionEnabled = true
         picker.layer.zPosition = 9000
         
         var offset = 21
+        var index: Int
         
-        for (index, feeling) in enumerate(properties.moods)
-        {
+        for index = 0; index < self.AuditOutcomeList.count; ++index {
+
             let button = UIButton()
-            button.frame = CGRect(x: 0, y: offset, width: 178  , height: 43)
-            button.setTitleColor(UIColor(rgba: feeling["color"]!), forState: .Normal)
-            button.setTitle(feeling["title"], forState: .Normal)
+            button.frame = CGRect(x: 0, y: offset, width: Int(self.bt_Select.frame.width)  , height: 43)
+            
+            var color = UIColor.blackColor()
+            
+            if(self.AuditOutcomeList[index].Colour == "amber")
+            {
+                color = UIColor(rgba: "#FFC200")
+            }
+            else
+                if(self.AuditOutcomeList[index].Colour == "blue")
+                {
+                    color = UIColor(rgba: "#235396")
+                }
+                else
+                    if(self.AuditOutcomeList[index].Colour == "green")
+                    {
+                        color = UIColor(rgba: "#3EB55B")
+                    }
+                    else
+                        if(self.AuditOutcomeList[index].Colour == "red")
+                        {
+                            color = UIColor(rgba: "#E32444")
+                        }
+
+            
+            
+            button.setTitleColor(color, forState: .Normal)
+            button.setTitle(self.AuditOutcomeList[index].Name, forState: .Normal)
             button.tag = index
             button.addTarget(self, action: "ButtonEditClicked:", forControlEvents: .TouchUpInside)
             picker.addSubview(button)
@@ -108,10 +223,36 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     
     func ButtonEditClicked(sender : UIButton)
     {
-        println("button \(sender.tag) clicked")
-        let temp = properties.moods[sender.tag]["title"]
+        let temp = self.AuditOutcomeList[sender.tag].Name
+        
+        var color = UIColor.whiteColor()
+        
+        if(self.AuditOutcomeList[sender.tag].Colour == "amber")
+        {
+            color = UIColor(rgba: "#FFC200")
+        }
+        else
+            if(self.AuditOutcomeList[sender.tag].Colour == "blue")
+            {
+                color = UIColor(rgba: "#235396")
+            }
+            else
+                if(self.AuditOutcomeList[sender.tag].Colour == "green")
+                {
+                    color = UIColor(rgba: "#3EB55B")
+                }
+                else
+                    if(self.AuditOutcomeList[sender.tag].Colour == "red")
+                    {
+                        color = UIColor(rgba: "#E32444")
+        }
+        
+        self.selectedOutcomeId = self.AuditOutcomeList[sender.tag].Id
+        
+        self.bt_Select.setTitleColor(color, forState: .Normal)
         
         self.bt_Select.setTitle(temp, forState: .Normal)
+        
         closePicker()
     }
     
