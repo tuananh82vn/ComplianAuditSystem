@@ -65,7 +65,6 @@
 		66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF71B56260C0058FF09 /* SwiftyJSON.swift */; };
 		66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF91B5626200058FF09 /* LoginModel.swift */; };
 		669304F01B60CF6E001B855D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669304EF1B60CF6E001B855D /* TableViewController.swift */; };
-		669B2EFA1B57620B00F8D82D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669B2EF91B57620B00F8D82D /* MainViewController.swift */; };
 		66B2ED8E1B7829AD00FE55A6 /* AuditActivityQuestionSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B2ED8D1B7829AD00FE55A6 /* AuditActivityQuestionSetModel.swift */; };
 		66B2ED9E1B7879D800FE55A6 /* QuestionSetViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B2ED9D1B7879D800FE55A6 /* QuestionSetViewCell.swift */; };
 		66B2EDA01B787B8900FE55A6 /* QuestionSetHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B2ED9F1B787B8900FE55A6 /* QuestionSetHeaderViewCell.swift */; };
@@ -324,7 +323,6 @@
 		66919EF71B56260C0058FF09 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		66919EF91B5626200058FF09 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		669304EF1B60CF6E001B855D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		669B2EF91B57620B00F8D82D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		66B2ED8D1B7829AD00FE55A6 /* AuditActivityQuestionSetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityQuestionSetModel.swift; sourceTree = "<group>"; };
 		66B2ED9D1B7879D800FE55A6 /* QuestionSetViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetViewCell.swift; sourceTree = "<group>"; };
 		66B2ED9F1B787B8900FE55A6 /* QuestionSetHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetHeaderViewCell.swift; sourceTree = "<group>"; };
@@ -587,9 +585,8 @@
 			isa = PBXGroup;
 			children = (
 				967CFD051A5C10700044B4E3 /* LoginViewController.swift */,
-				669B2EF91B57620B00F8D82D /* MainViewController.swift */,
-				964892661A63F5D900214D53 /* MenuViewController.swift */,
 				665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */,
+				964892661A63F5D900214D53 /* MenuViewController.swift */,
 				66C364AE1B60679D00BE3903 /* AuditDetailViewController.swift */,
 				66BA22EB1B67095500B755D7 /* AuditDetailEditViewController.swift */,
 				66B5E4331B6B421B001B7EC7 /* AuditBookingViewController.swift */,
@@ -932,7 +929,6 @@
 				6630671F1B6715FB001EE543 /* PopDateViewController.swift in Sources */,
 				1A935E301A837A670059BCBC /* TPKeyboardAvoidingScrollView.m in Sources */,
 				66BA22E81B67059000B755D7 /* SSRadioButtonsController.swift in Sources */,
-				669B2EFA1B57620B00F8D82D /* MainViewController.swift in Sources */,
 				66B2EDA01B787B8900FE55A6 /* QuestionSetHeaderViewCell.swift in Sources */,
 				664AB6EE1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift in Sources */,
 				663067231B671616001EE543 /* DateUtils.swift in Sources */,

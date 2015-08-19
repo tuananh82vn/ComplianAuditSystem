@@ -96,7 +96,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
                 self.dialogView.animate()
                 self.dismissViewControllerAnimated(true, completion: nil)
                 
-                self.performSegueWithIdentifier("GoToDashboard", sender: self)
+                self.performSegueWithIdentifier("GoToActivity", sender: self)
                 
             }
             else
@@ -153,13 +153,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         return true
     }
     
-    @IBAction func ButtonForgotClicked(sender: AnyObject) {UIApplication.sharedApplication().openURL(NSURL(string:"http://complianceauditsystem.softwarestaging.com.au/login/forgotpassword")!)
-        
+    @IBAction func ButtonForgotClicked(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string:"http://complianceauditsystem.softwarestaging.com.au/login/forgotpassword")!)
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "GoToDashboard" {
-            let GoToDashboard = segue.destinationViewController as! MainViewController
-            GoToDashboard.userProfile = self.userProfile
+        if segue.identifier == "GoToActivity" {
+            let GoToActivity = segue.destinationViewController as! AuditActivitiesViewController
+            GoToActivity.userProfile = self.userProfile
         }
     }
 }

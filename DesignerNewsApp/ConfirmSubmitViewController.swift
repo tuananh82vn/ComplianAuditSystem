@@ -22,12 +22,13 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     var AuditConfirm = AuditActivityConfirmSubmitModel()
     var selectedOutcomeId : Int = 0
     
+    var userProfile = LoginModel()
     
     @IBOutlet weak var bt_Select: UIButton!
     
     let picker = UIImageView(image: UIImage(named: "picker"))
     
-
+    var keychain = Keychain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,7 +130,21 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
                                 
                                 if(temp.IsSuccess){
                                     
-                                    self.performSegueWithIdentifier("GoToDashboard", sender: sender)
+                                    dispatch_async(dispatch_get_main_queue()) {
+                                        
+                                        WebApiService.loginWithUsername(self.keychain["username"]!, password: self.keychain["password"]!) { object in
+                                        
+                                            if let temp = object {
+                                            
+                                                self.userProfile = temp
+                                            
+                                                LocalStore.setToken(self.userProfile.TokenNumber)
+                                            
+                                                self.performSegueWithIdentifier("GoToActivity", sender: sender)
+                                            
+                                            }
+                                        }
+                                    }
                                 }
                                 else
                                 {
@@ -161,11 +176,10 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         refreshAlert.view.tintColor = UIColor.blackColor()
         
         self.presentViewController(refreshAlert, animated: true, completion: nil)
-        
-
-       
 
     }
+    
+
     
     func createPicker()
     {
@@ -283,5 +297,12 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
     {
         return UIModalPresentationStyle.None
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "GoToActivity" {
+            let GoToActivity = segue.destinationViewController as! AuditActivitiesViewController
+            GoToActivity.userProfile = self.userProfile
+        }
     }
 }

@@ -36,18 +36,26 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
 
     
     var userProfile = LoginModel()
+    
     let imageCache = NSCache()
     
     var originalCenter: CGPoint!
     
     var objectStartAudit = AuditRequestStartAuditModel()
     
-    override func viewDidLoad() {
+    
+    
+    override func viewDidLoad(){
+        
         super.viewDidLoad()
         
         originalCenter = view.center
 
         initData()
+        
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refeshActivity", object: nil)
+//        
+//        println("viewDidLoad")
 
     }
     
@@ -69,16 +77,18 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                 filter.Sort = "SiteName-asc"
                 
                 WebApiService.getAuditRequestList(LocalStore.accessToken()!, filter : filter) { objectReturn in
-                    
-                    self.view.hideLoading()
-                    
+
                     self.auditRequest = objectReturn
                     
                     self.collectionView?.reloadData()
+                    
+                    self.view.hideLoading()
+
                 }
             }
         }
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -98,6 +108,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     //3
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! AuditRequestCollectionViewCell
         
         cell.ButtonStatus.removeTarget(self, action: nil, forControlEvents: .TouchUpInside)
@@ -226,8 +237,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                     
                     self.view.hideLoading()
                 }
-                
-                
             }
         }))
         
@@ -258,7 +267,10 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     //display Header of Colllection View
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-            //1
+        
+        
+            var reusableView: UICollectionReusableView = UICollectionReusableView()
+        
             switch kind {
                 //2
             case UICollectionElementKindSectionHeader:
@@ -288,12 +300,15 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                     }
                 }
                 
+                //println("Init Header View \(self.userProfile.AuditorCompanyName)")
                 
-                return headerView
+                reusableView =  headerView
             default:
                 //4
                 fatalError("Unexpected element kind")
             }
+        
+        return reusableView
     }
     
     func GetStatusNameById(id : Int?, arrayObject : [AuditRequestStatusModel]) -> AuditRequestStatusModel {
@@ -308,16 +323,47 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         
         return temp
     }
+    
+    @IBAction func MenuButtonClicked(sender: AnyObject) {
+        performSegueWithIdentifier("GoToMenu", sender: sender)
+    }
+    
+    
+    func animateMenuButton() {
+        if let button = navigationItem.leftBarButtonItem?.customView as? MenuControl {
+            button.menuAnimation()
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "GoToMenu" {
+            let menuViewController = segue.destinationViewController as! MenuViewController
+            menuViewController.delegate = self
+            menuViewController.userProfile = self.userProfile
+        }
+    }
 
 }
 
-//extension NSLayoutConstraint {
-//    
-//    override public var description: String {
-//        let id = identifier ?? ""
-//        return "id: \(id), constant: \(constant)" //you may print whatever you want here
-//    }
-//}
+extension  AuditActivitiesViewController : MenuViewControllerDelegate {
+    
+    func menuViewControllerDidSelectCloseMenu(controller: MenuViewController) {
+        animateMenuButton()
+    }
+    
+    func menuViewControllerDidSelectActivitiesMenu(controller: MenuViewController) {
+        //performSegueWithIdentifier("ActivitiesSegue", sender: nil)
+    }
+    
+    func menuViewControllerDidSelectLogoutMenu(controller: MenuViewController) {
+        
+        LocalStore.setAuditActivityUrlId("")
+        
+        LocalStore.setToken("")
+        
+        performSegueWithIdentifier("GoToLogin", sender: nil)
+    }
+}
 
 
 

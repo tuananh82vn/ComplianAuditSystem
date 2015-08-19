@@ -289,6 +289,8 @@ struct WebApiService {
 
                     let jsonObject = JSON(json!)
                 
+                    //println(jsonObject)
+                
                     if let Item = jsonObject["Item"].dictionaryObject {
                 
                         let Return = JSONParser.parseAuditActivitySite(Item as NSDictionary)

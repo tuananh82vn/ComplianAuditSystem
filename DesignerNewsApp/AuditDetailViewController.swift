@@ -31,10 +31,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     private var auditSiteDetail = AuditActivitySiteDetailModel()
     
     private var auditActivityAuditDetail = AuditActivityAuditDetailModel()
-    
-    
-   // var AuditActivityUrlId : String!
-    
+
     
     override func viewDidLoad() {
         
@@ -47,7 +44,6 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refeshAuditDetail", object: nil)
 
 
-        // Do any additional setup after loading the view.
     }
 
     func initSiteData(){
