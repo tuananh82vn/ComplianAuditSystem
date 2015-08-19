@@ -32,7 +32,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     private var imageStartAudit = UIImage(named: "play") as UIImage?
     private var imageComplete = UIImage(named: "complete") as UIImage?
     private var imageRework = UIImage(named: "redo") as UIImage?
-    private var imageAbandonded = UIImage(named: "abandond2") as UIImage?
+    private var imageAbandonded = UIImage(named: "abandond") as UIImage?
 
     
     var userProfile = LoginModel()
@@ -100,6 +100,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! AuditRequestCollectionViewCell
         
+        cell.ButtonStatus.removeTarget(self, action: nil, forControlEvents: .TouchUpInside)
+        
         cell.backgroundColor = UIColor.whiteColor()
         
         cell.AuditName.text = auditRequest[indexPath.row].SiteName
@@ -111,16 +113,16 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         {
             cell.AuditAddress.text = auditRequest[indexPath.row].Suburb + ", " + auditRequest[indexPath.row].StateName
         }
-        
-        //cell.AuditorUser.text = auditRequest[indexPath.row].AuditorName
-        cell.AuditCompanyName.text = auditRequest[indexPath.row].AuditCompanyName
+
+//        cell.AuditorUser.text = auditRequest[indexPath.row].AuditorName
+//        cell.AuditCompanyName.text = auditRequest[indexPath.row].AuditCompanyName
         cell.AuditStartDate.text = auditRequest[indexPath.row].RequestFromDateDisplay
         cell.AuditFinishDate.text = auditRequest[indexPath.row].RequestToDateDisplay
         cell.QuestionSet.text = auditRequest[indexPath.row].QuestionSetName
         
 
         
-        //Pending
+//        //Pending
         if auditRequest[indexPath.row].AuditRequestStatusId == 1 {
             cell.ButtonStatus.setImage(imagePending, forState: .Normal)
             cell.ButtonStatus.userInteractionEnabled = false
@@ -154,7 +156,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                         if auditRequest[indexPath.row].AuditActivityStatusId == 1 {
                             cell.ButtonStatus.setImage(imageReview, forState: .Normal)
                             cell.Status.text =  "Reviewing"
-                            cell.ButtonStatus.userInteractionEnabled = false
+                            //cell.ButtonStatus.userInteractionEnabled = false
                         }
                         else // Ongoing
                             if auditRequest[indexPath.row].AuditActivityStatusId == 2 {
@@ -180,17 +182,19 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                                     else // Approved
                                         if auditRequest[indexPath.row].AuditActivityStatusId == 5 {
                                             cell.ButtonStatus.setImage(imageApproved, forState: .Normal)
-                                            cell.ButtonStatus.userInteractionEnabled = false
+                                            //cell.ButtonStatus.userInteractionEnabled = false
                                             cell.Status.text =  "Approved"
                                         }
                                         else //
                                             if auditRequest[indexPath.row].AuditActivityStatusId == 6 {
                                                 cell.ButtonStatus.setImage(imageAbandonded, forState: .Normal)
-                                                cell.ButtonStatus.userInteractionEnabled = false
+                                                //cell.ButtonStatus.userInteractionEnabled = false
                                                 cell.Status.text =  "Abandoned"
                                             }
 
                         }
+        
+        //println("render cell \(indexPath.row) : \(cell.Status.text)")
 
         // Configure the cell
         return cell
@@ -198,7 +202,10 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     func StartAuditButtonClicked(sender : UIButton)
     {
-        
+        self.CallStartAudit(sender.tag)
+    }
+    
+    func CallStartAudit(index : Int){
         
         var refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure want to start audit?", preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -207,7 +214,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
             
             self.view.showLoading()
             
-            WebApiService.postAuditRequestStartAudit(LocalStore.accessToken()!, AuditRequestUrlId : self.auditRequest[sender.tag].UrlId) { objectReturn in
+            WebApiService.postAuditRequestStartAudit(LocalStore.accessToken()!, AuditRequestUrlId : self.auditRequest[index].UrlId) { objectReturn in
                 
                 if let temp = objectReturn {
                     
@@ -215,7 +222,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                     
                     LocalStore.setAuditActivityUrlId(self.objectStartAudit.AuditActivityUrlId)
                     
-                    self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
+                    self.performSegueWithIdentifier("GoToAuditDetail", sender: nil)
                     
                     self.view.hideLoading()
                 }
@@ -231,18 +238,21 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         refreshAlert.view.tintColor = UIColor.blackColor()
         
         self.presentViewController(refreshAlert, animated: true, completion: nil)
-        
-       
 
     }
     
     func yourButtonClicked(sender : UIButton)
     {
+        if (auditRequest[sender.tag].AuditActivityStatusId == 0 )
+        {
+            self.CallStartAudit(sender.tag)
+        }
+        else
+        {
+            LocalStore.setAuditActivityUrlId(auditRequest[sender.tag].AuditActivityUrlId)
         
-
-        LocalStore.setAuditActivityUrlId(auditRequest[sender.tag].AuditActivityUrlId)
-        
-        self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
+            self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
+        }
 
     }
     
@@ -300,6 +310,14 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     }
 
 }
+
+//extension NSLayoutConstraint {
+//    
+//    override public var description: String {
+//        let id = identifier ?? ""
+//        return "id: \(id), constant: \(constant)" //you may print whatever you want here
+//    }
+//}
 
 
 
