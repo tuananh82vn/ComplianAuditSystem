@@ -26,7 +26,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     @IBOutlet weak var viewWidthConstraint : NSLayoutConstraint!
     
     var questionSet = [AuditActivityQuestionSetModel]()
-    var selectedIndex : Int = -1
+    var selectedIndex : Int = 0
     var height: Int = 0
     var selectQuestionReponseId : Int = 0
     
@@ -62,9 +62,11 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func refesh(notification: NSNotification){
         
-        InitData()
-        
         self.selectedIndex = notification.userInfo!["selectedIndex"] as! Int
+        
+        self.view.showLoading()
+        
+        LoadQuestionData()
         
         //Reload chart view
         var questionText1 = [String]()
@@ -142,13 +144,10 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.view.layoutIfNeeded()
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
     
     func rotated()
     {
@@ -170,51 +169,62 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     func InitData(){
         
             view.showLoading()
-            
+        
             WebApiService.getAuditActivityQuestionSetList(LocalStore.accessToken()!, AuditActivityUrlId: LocalStore.accessAuditActivityUrlId()!) { objectReturn in
                 
                 if let temp = objectReturn {
 
                     self.questionSet = temp
                     
-                      dispatch_async(dispatch_get_main_queue()) {
-                        
-                        for item in self.questionSet {
+                    self.LoadQuestionData()
                     
-                            var QuestionRespond = AuditActivityQuestionSetQuestionResponseModel()
+                    self.QuestionView.reloadData()
+                }
+            }
+    }
+    
+    func LoadQuestionData(){
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            var index = 0
+            
+            for item in self.questionSet {
+                
+                var QuestionRespond = AuditActivityQuestionSetQuestionResponseModel()
+                
+                QuestionRespond.AuditActivityQuestionSetId = item.AuditActivityQuestionSetId
+                
+                
+                //load question set by Id
+                WebApiService.getAuditActivityQuestionSetQuestionResponseList(LocalStore.accessToken()!, QuestionRespond: QuestionRespond ) { objectReturn in
+                    
+                    if let temp1 = objectReturn {
+                        item.QuestionBySectionList = temp1.QuestionBySectionList
                         
-                            QuestionRespond.AuditActivityQuestionSetId = item.AuditActivityQuestionSetId
-
-                            dispatch_async(dispatch_get_main_queue()) {
-                                
-                                WebApiService.getAuditActivityQuestionSetQuestionResponseList(LocalStore.accessToken()!, QuestionRespond: QuestionRespond ) { objectReturn in
                         
-                                    if let temp = objectReturn {
-                                        item.QuestionBySectionList = temp.QuestionBySectionList
-                                    }
-                                }
-                            }
+                        //load chart data By Id
+                        WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: QuestionRespond.AuditActivityQuestionSetId ) { objectReturn in
                             
-                            dispatch_async(dispatch_get_main_queue()) {
+                            if let temp2 = objectReturn {
+                                item.QuestionChart = temp2
                                 
-                                WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: QuestionRespond.AuditActivityQuestionSetId ) { objectReturn in
-                                    
-                                    if let temp = objectReturn {
-                                        item.QuestionChart = temp
-                                    }
+                                if(index == self.questionSet.count-1)
+                                {
+                                    self.view.hideLoading()
+                                    self.displayById(self.selectedIndex)
+                                }
+                                else
+                                {
+                                    index++
                                 }
                             }
                         }
-                    
-                    self.view.hideLoading()
-                    
-                    self.QuestionView.reloadData()
-                    
                     }
-             }
+                }
+            }
         }
     }
-    
     
    	func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
         return self.questionSet.count
@@ -228,31 +238,34 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         return UIImage(named: self.questionSet[item].AuditActivityQuestionSetName)!
     }
     
-    // MARK: - AKPickerViewDelegate
-    
+    //AKPickerViewDelegate
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
         
         self.selectedIndex = item
+        self.displayById(selectedIndex)
         
-        
+    }
+    
+    func displayById(Index : Int)
+    {
         //Reload chart view
         var questionText1 = [String]()
         var questionNumber1 = [Double]()
         var questionColors1 = [UIColor]()
         
-        for chart in self.questionSet[selectedIndex].QuestionChart.MadatoryQuestionChartList {
+        for chart in self.questionSet[Index].QuestionChart.MadatoryQuestionChartList {
             questionText1.append(chart.QuestionStatusName)
             questionNumber1.append(Double(chart.QuestionCount))
             questionColors1.append(UIColor(hex: chart.ColorCode))
         }
-
+        
         setChart(self.pieChartMadatory,chartName : "Mandatory Questions",dataPoints : questionText1, values: questionNumber1 , colors : questionColors1)
         
         var questionText2 = [String]()
         var questionNumber2 = [Double]()
         var questionColors2 = [UIColor]()
         
-        for chart in self.questionSet[selectedIndex].QuestionChart.AllQuestionChartList {
+        for chart in self.questionSet[Index].QuestionChart.AllQuestionChartList {
             questionText2.append(chart.QuestionStatusName)
             questionNumber2.append(Double(chart.QuestionCount))
             questionColors2.append(UIColor(hex: chart.ColorCode))
@@ -261,11 +274,11 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         setChart(self.pieChartAll,chartName : "All Questions",dataPoints : questionText2, values: questionNumber2 , colors : questionColors2)
         
         //Reload table view
-        var numberOfSection = self.questionSet[selectedIndex].QuestionBySectionList.count
+        var numberOfSection = self.questionSet[Index].QuestionBySectionList.count
         
         var numberOfRow = 0
         
-        for section in self.questionSet[selectedIndex].QuestionBySectionList {
+        for section in self.questionSet[Index].QuestionBySectionList {
             numberOfRow += section.QuestionResponseModelList.count
         }
         
@@ -378,8 +391,6 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.performSegueWithIdentifier("GoToQuestionEdit", sender: sender)
     }
     
-    
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
@@ -451,6 +462,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         }
 
     }
+    
     @IBAction func ButtonConfirmClicked(sender: AnyObject) {
         self.performSegueWithIdentifier("GoToSubmit", sender: sender)
     }
