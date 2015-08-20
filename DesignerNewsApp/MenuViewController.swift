@@ -59,7 +59,7 @@ class MenuViewController: UIViewController {
 
     @IBAction func closeButtonPressed(sender: AnyObject) {
         delegate?.menuViewControllerDidSelectCloseMenu(self)
-        dialogView.animation = "fall"
+        dialogView.animation = "morph"
         dialogView.animateNext {
             self.dismissViewControllerAnimated(false, completion: nil)
         }

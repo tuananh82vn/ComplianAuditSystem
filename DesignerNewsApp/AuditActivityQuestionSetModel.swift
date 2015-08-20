@@ -28,13 +28,13 @@ class AuditActivityQuestionSetQuestionResponseModel : Serializable {
     
     var AuditActivityQuestionSetId : Int
     var Priority : String
-    var QuestionStatus : Int
+    var QuestionStatus : String
     var ResponseCategory : String
     
     override init() {
         AuditActivityQuestionSetId = 0
         Priority = ""
-        QuestionStatus = 0
+        QuestionStatus = ""
         ResponseCategory = ""
     }
 }
@@ -119,5 +119,16 @@ class QuestionChartModel : Serializable {
         QuestionCount = 0
         QuestionPercentage = 0
         ColorCode = ""
+    }
+}
+
+class ResponseCategoryModel : Serializable {
+    
+    var Id : Int
+    var Name : String
+    
+    override init() {
+        Id = 0
+        Name = ""
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreActionSheetPicker
 
 class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationControllerDelegate {
 
@@ -30,14 +31,17 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     
     var keychain = Keychain()
     
+    var OutcomeList = [String]()
+    
+    var selectOutcome : Int = 0
+    
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         InitData()
-        
-        
 
-        // Do any additional setup after loading the view.
     }
 
     func InitData(){
@@ -70,23 +74,28 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
                 {
                     self.bt_Select.setTitle(self.AuditConfirm.AuditOutcomeName, forState: .Normal)
                 }
+                
                 dispatch_async(dispatch_get_main_queue()) {
                     WebApiService.getAuditOutcomeList(LocalStore.accessToken()!) { objectReturn in
                         
                         if let temp = objectReturn {
                             
                             self.AuditOutcomeList = temp
-
-                            self.createPicker()
                             
+                            var index = 0
+                            
+                            for temp in self.AuditOutcomeList {
+                                self.OutcomeList.insert(temp.Name, atIndex: index)
+                                index++
+                            }
+
+
                             self.view.hideLoading()
                         }
                     }
                 }
             }
         }
-
-        
 
     }
     
@@ -96,7 +105,15 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     }
     
     @IBAction func ButtonSelectClicked(sender: AnyObject) {
-        picker.hidden ? openPicker() : closePicker()
+        ActionSheetStringPicker.showPickerWithTitle("Select", rows: OutcomeList as [AnyObject] , initialSelection: self.selectOutcome, doneBlock: {
+            picker, value, index in
+            
+            self.bt_Select.setTitle(index as! String, forState: .Normal)
+            self.selectOutcome =  value
+            self.selectedOutcomeId = self.AuditOutcomeList[self.selectOutcome].Id
+            
+            return
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
 
     @IBAction func ButtonSubmitClicked(sender: AnyObject) {
@@ -178,126 +195,43 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         self.presentViewController(refreshAlert, animated: true, completion: nil)
 
     }
-    
 
     
-    func createPicker()
-    {
-        
-        var picker_height = self.AuditOutcomeList.count * 44 //+ self.properties.moods.count * 43
-        picker.frame = CGRect(x: self.bt_Select.frame.origin.x, y: self.bt_Select.frame.origin.y + self.bt_Select.frame.height , width: self.bt_Select.frame.width, height: CGFloat(picker_height))
-        picker.alpha = 0
-        picker.hidden = true
-        picker.userInteractionEnabled = true
-        picker.layer.zPosition = 9000
-        
-        var offset = 21
-        var index: Int
-        
-        for index = 0; index < self.AuditOutcomeList.count; ++index {
-
-            let button = UIButton()
-            button.frame = CGRect(x: 0, y: offset, width: Int(self.bt_Select.frame.width)  , height: 43)
-            
-            var color = UIColor.blackColor()
-            
-            if(self.AuditOutcomeList[index].Colour == "amber")
-            {
-                color = UIColor(rgba: "#FFC200")
-            }
-            else
-                if(self.AuditOutcomeList[index].Colour == "blue")
-                {
-                    color = UIColor(rgba: "#235396")
-                }
-                else
-                    if(self.AuditOutcomeList[index].Colour == "green")
-                    {
-                        color = UIColor(rgba: "#3EB55B")
-                    }
-                    else
-                        if(self.AuditOutcomeList[index].Colour == "red")
-                        {
-                            color = UIColor(rgba: "#E32444")
-                        }
-
-            
-            
-            button.setTitleColor(color, forState: .Normal)
-            button.setTitle(self.AuditOutcomeList[index].Name, forState: .Normal)
-            button.tag = index
-            button.addTarget(self, action: "ButtonEditClicked:", forControlEvents: .TouchUpInside)
-            picker.addSubview(button)
-            
-            offset += 44
-        }
-        
-        view1.addSubview(picker)
-    }
+//    func ButtonEditClicked(sender : UIButton)
+//    {
+//        let temp = self.AuditOutcomeList[sender.tag].Name
+//        
+//        var color = UIColor.whiteColor()
+//        
+//        if(self.AuditOutcomeList[sender.tag].Colour == "amber")
+//        {
+//            color = UIColor(rgba: "#FFC200")
+//        }
+//        else
+//            if(self.AuditOutcomeList[sender.tag].Colour == "blue")
+//            {
+//                color = UIColor(rgba: "#235396")
+//            }
+//            else
+//                if(self.AuditOutcomeList[sender.tag].Colour == "green")
+//                {
+//                    color = UIColor(rgba: "#3EB55B")
+//                }
+//                else
+//                    if(self.AuditOutcomeList[sender.tag].Colour == "red")
+//                    {
+//                        color = UIColor(rgba: "#E32444")
+//        }
+//        
+//        self.selectedOutcomeId = self.AuditOutcomeList[sender.tag].Id
+//        
+//        self.bt_Select.setTitleColor(color, forState: .Normal)
+//        
+//        self.bt_Select.setTitle(temp, forState: .Normal)
+//        
+//        closePicker()
+//    }
     
-    func ButtonEditClicked(sender : UIButton)
-    {
-        let temp = self.AuditOutcomeList[sender.tag].Name
-        
-        var color = UIColor.whiteColor()
-        
-        if(self.AuditOutcomeList[sender.tag].Colour == "amber")
-        {
-            color = UIColor(rgba: "#FFC200")
-        }
-        else
-            if(self.AuditOutcomeList[sender.tag].Colour == "blue")
-            {
-                color = UIColor(rgba: "#235396")
-            }
-            else
-                if(self.AuditOutcomeList[sender.tag].Colour == "green")
-                {
-                    color = UIColor(rgba: "#3EB55B")
-                }
-                else
-                    if(self.AuditOutcomeList[sender.tag].Colour == "red")
-                    {
-                        color = UIColor(rgba: "#E32444")
-        }
-        
-        self.selectedOutcomeId = self.AuditOutcomeList[sender.tag].Id
-        
-        self.bt_Select.setTitleColor(color, forState: .Normal)
-        
-        self.bt_Select.setTitle(temp, forState: .Normal)
-        
-        closePicker()
-    }
-    
-    func openPicker()
-    {
-        self.picker.hidden = false
-        
-        UIView.animateWithDuration(0.3,
-            animations: {
-                self.picker.frame = CGRect(x: self.bt_Select.frame.origin.x, y: self.bt_Select.frame.origin.y + self.bt_Select.frame.height , width: self.bt_Select.frame.width, height: 291)
-                self.picker.alpha = 1
-        })
-    }
-    
-    func closePicker()
-    {
-        UIView.animateWithDuration(0.3,
-            animations: {
-                self.picker.frame = CGRect(x: self.bt_Select.frame.origin.x, y: self.bt_Select.frame.origin.y + self.bt_Select.frame.height , width: self.bt_Select.frame.width, height: 291)
-                self.picker.alpha = 0
-            },
-            completion: { finished in
-                self.picker.hidden = true
-            }
-        )
-    }
-
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
-    {
-        return UIModalPresentationStyle.None
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToActivity" {

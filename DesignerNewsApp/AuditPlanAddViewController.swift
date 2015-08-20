@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreActionSheetPicker
 
 class AuditPlanAddViewController: UIViewController {
 
     var addMode : Bool = false
     
+    @IBOutlet weak var bt_Time: UIButton!
     var selectedDayId : Int = 0
     var selectedAuditActivityId : Int = 0
     var selectedAuditPlanId : Int = 0
@@ -21,10 +23,25 @@ class AuditPlanAddViewController: UIViewController {
     
     @IBOutlet weak var lbl_Title: UILabel!
     
-    @IBOutlet weak var tf_Resource: UITextField!
-    @IBOutlet weak var tf_Activity: UITextField!
+
+    @IBOutlet weak var tf_Resource: UITextView!
+
+    @IBOutlet weak var tf_Activity: UITextView!
+    
     @IBOutlet weak var tf_Time: UITextField!
     
+    @IBAction func TimeSelected(sender: AnyObject) {
+        
+        var datePicker = ActionSheetDatePicker(title: "Time:", datePickerMode: UIDatePickerMode.Time, selectedDate: NSDate(), target: self, action: "datePicked:", origin: sender)
+        
+        datePicker.minuteInterval = 20
+        
+        datePicker.showActionSheetPicker()
+    }
+    
+    func datePicked(obj: NSDate) {
+        self.bt_Time.setTitle(obj.toShortTimeString(), forState: UIControlState.Normal)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +70,8 @@ class AuditPlanAddViewController: UIViewController {
                
                 self.tf_Activity.text = self.AuditPlanItem.Activity
                 self.tf_Resource.text = self.AuditPlanItem.ResoucesRequired
-                self.tf_Time.text = self.AuditPlanItem.TimeText
-                
+                self.bt_Time.setTitle(self.AuditPlanItem.TimeText , forState: UIControlState.Normal)
+
             }
         }
 
@@ -75,7 +92,9 @@ class AuditPlanAddViewController: UIViewController {
         
         self.AuditPlanItem.AuditActivityDayId = self.selectedDayId
         
-        self.AuditPlanItem.TimeText = self.tf_Time.text
+        if let text = self.bt_Time.titleLabel?.text {
+           self.AuditPlanItem.TimeText = text
+        }
         
         self.AuditPlanItem.Activity = self.tf_Activity.text
         
@@ -121,6 +140,4 @@ class AuditPlanAddViewController: UIViewController {
     @IBAction func ButtonCancelClicked(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-
 }

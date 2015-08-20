@@ -30,7 +30,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     var height: Int = 0
     var selectQuestionReponseId : Int = 0
     
-    
+    var filterQuestion = AuditActivityQuestionSetQuestionResponseModel()
 
     override func viewDidLoad() {
         
@@ -150,8 +150,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     }
     
     //handle when device rotate
-    func rotated()
-    {
+    func rotated(){
         if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation))
         {
 
@@ -191,21 +190,18 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
             var index = 0
             
             for item in self.questionSet {
-                
-                var QuestionRespond = AuditActivityQuestionSetQuestionResponseModel()
-                
-                QuestionRespond.AuditActivityQuestionSetId = item.AuditActivityQuestionSetId
-                
+
+                self.filterQuestion.AuditActivityQuestionSetId = item.AuditActivityQuestionSetId
                 
                 //load question set by Id
-                WebApiService.getAuditActivityQuestionSetQuestionResponseList(LocalStore.accessToken()!, QuestionRespond: QuestionRespond ) { objectReturn in
+                WebApiService.getAuditActivityQuestionSetQuestionResponseList(LocalStore.accessToken()!, QuestionRespond: self.filterQuestion ) { objectReturn in
                     
                     if let temp1 = objectReturn {
                         item.QuestionBySectionList = temp1.QuestionBySectionList
                         
                         
                         //load chart data By Id
-                        WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: QuestionRespond.AuditActivityQuestionSetId ) { objectReturn in
+                        WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: self.filterQuestion.AuditActivityQuestionSetId ) { objectReturn in
                             
                             if let temp2 = objectReturn {
                                 item.QuestionChart = temp2
@@ -461,8 +457,16 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                     webViewController.url = url
                 }
         }
+        else
+            if segue.identifier == "GoToSearch" {
+                    let SearchViewController = segue.destinationViewController as! QuestionSetSearchViewController
+                    SearchViewController.delegate = self
+        }
+        
 
     }
+    
+
     @IBAction func ButtonSearchClicked(sender: AnyObject) {
         performSegueWithIdentifier("GoToSearch", sender: sender)
     }
@@ -471,3 +475,40 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.performSegueWithIdentifier("GoToSubmit", sender: sender)
     }
 }
+
+extension  QuestionSetViewController : QuestionSetSearchViewControllerDelegate {
+    
+    func DidSelectClose(controller: QuestionSetSearchViewController) {
+        
+        if(controller.filterQuestion.Priority != "0" ){
+            self.filterQuestion.Priority = controller.filterQuestion.Priority
+        }
+        else
+        {
+            self.filterQuestion.Priority = ""
+        }
+        
+        if(controller.filterQuestion.QuestionStatus != "0" ){
+            self.filterQuestion.QuestionStatus = controller.filterQuestion.QuestionStatus
+        }
+        else
+        {
+            self.filterQuestion.QuestionStatus = ""
+        }
+        
+        if(controller.filterQuestion.ResponseCategory != "0"){
+            self.filterQuestion.ResponseCategory = controller.filterQuestion.ResponseCategory
+        }
+        else
+        {
+            self.filterQuestion.ResponseCategory = ""
+        }
+        
+        self.LoadQuestionData()
+        
+        self.QuestionView.reloadData()
+        
+    }
+
+}
+

@@ -8,7 +8,8 @@
 
 import UIKit
 
-let themeColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+let themeColor = UIColor.whiteColor()
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,9 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        window?.tintColor = themeColor
         
-       
+        window?.tintColor = themeColor
 
         return true
     }

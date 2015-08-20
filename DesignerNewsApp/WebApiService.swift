@@ -10,6 +10,7 @@ struct WebApiService {
     private enum ResourcePath: Printable {
         case Login
         case Download
+        case ResponseCategoryList
         case AuditRequestList
         case AuditRequestStartAudit
         case AuditRequestStatusList
@@ -56,6 +57,7 @@ struct WebApiService {
                 case .Download: return "/Api/GetFileDocument/?fileId="
                 case .AuditRequestList: return "/Api/AuditRequestList"
                 case .AuditRequestStartAudit: return "/Api/AuditRequestStartAudit"
+                case .ResponseCategoryList: return "/Api/ResponseCategoryList"
                 
                 case .AuditRequestStatusList: return "/Api/AuditRequestStatusList"
                 case .AuditActivitySiteDetail : return "/Api/AuditActivitySiteDetail"
@@ -1087,6 +1089,7 @@ struct WebApiService {
             "Item" : [
                 "AuditActivityQuestionSetId" : QuestionRespond.AuditActivityQuestionSetId,
                 "Priority" : QuestionRespond.Priority,
+                "QuestionStatus" : QuestionRespond.QuestionStatus,
                 "ResponseCategory" : QuestionRespond.ResponseCategory
             ]
         ]
@@ -1376,5 +1379,41 @@ struct WebApiService {
         
         response (objectReturn : nil)
     }
+    
+    static func getResponseCategoryList(token: String, response : (objectReturn : [ResponseCategoryModel]?) -> ()) {
+        
+        
+        let urlString = baseURL + ResourcePath.ResponseCategoryList.description
+        
+        
+        var parameters = [
+            "TokenNumber" : token
+        ]
+        
+        var arrayReturn = [ResponseCategoryModel]()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Item"].arrayObject {
+                            
+                            arrayReturn = JSONParser.parseResponseCategoryModel(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
+
 
 }

@@ -29,8 +29,9 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
     
     @IBOutlet weak var txt_Reponse: UITextView!
     @IBOutlet weak var lbl_Priority: UILabel!
-    @IBOutlet weak var lbl_Question: UILabel!
     @IBOutlet weak var lbl_Number: UILabel!
+    
+    @IBOutlet weak var txt_Question: UITextView!
     
     var radioButtonController: SSRadioButtonsController?
     
@@ -82,7 +83,7 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
                 
                 self.lbl_Number.text = "Q - " + self.QuestionRespone.SerialNumber.description
                 
-                self.lbl_Question.text = self.QuestionRespone.Name
+                self.txt_Question.text = self.QuestionRespone.Name
                 
                 self.lbl_Priority.text = self.QuestionRespone.Priority
                 

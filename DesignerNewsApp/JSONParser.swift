@@ -829,4 +829,38 @@ struct JSONParser {
     }
 
 
+    static func parseResponseCategoryObject(story: NSDictionary) -> ResponseCategoryModel {
+        
+        
+        let Object =  ResponseCategoryModel()
+        
+        Object.Id = story["Id"] as? Int ?? 0
+        
+        Object.Name = story["Name"] as? String ?? ""
+        
+        
+        return Object
+    }
+    
+    static func parseResponseCategoryModel(story: NSArray) -> [ResponseCategoryModel] {
+        
+        var PlanArray = [ResponseCategoryModel]()
+        
+        if let Items = story as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseResponseCategoryObject(Item as NSDictionary)
+                    
+                    PlanArray.append(temp)
+                }
+            }
+        }
+        
+        return PlanArray
+    }
+
+
 }
