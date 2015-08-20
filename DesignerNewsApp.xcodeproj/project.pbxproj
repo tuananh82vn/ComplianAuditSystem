@@ -49,6 +49,7 @@
 		663067211B671604001EE543 /* PopDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 663067201B671604001EE543 /* PopDateViewController.xib */; };
 		663067231B671616001EE543 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663067221B671616001EE543 /* DateUtils.swift */; };
 		663067271B6764BE001EE543 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663067261B6764BE001EE543 /* Serializable.swift */; };
+		664321D51B855A0600212F28 /* QuestionSetSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664321D41B855A0600212F28 /* QuestionSetSearchViewController.swift */; };
 		6647ABD01B748E6100E6DAF5 /* QuestionSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647ABCF1B748E6100E6DAF5 /* QuestionSetViewController.swift */; };
 		6647ABE61B74A33E00E6DAF5 /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647ABE51B74A33E00E6DAF5 /* AKPickerView.swift */; };
 		664AB6EE1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664AB6ED1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift */; };
@@ -82,7 +83,6 @@
 		66D7B3091B5F670600B7FAE2 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D7B3081B5F670600B7FAE2 /* NavigationController.swift */; };
 		66DD85141B731E4D004B9C30 /* AuditPlanAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DD85131B731E4D004B9C30 /* AuditPlanAddViewController.swift */; };
 		66E666B11B5F1FE100D7FF78 /* AuditRequestHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E666B01B5F1FE100D7FF78 /* AuditRequestHeaderView.swift */; };
-		961889B81A680D3800295A64 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961889B71A680D3800295A64 /* LearnViewController.swift */; };
 		964892671A63F5D900214D53 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964892661A63F5D900214D53 /* MenuViewController.swift */; };
 		966128551A4DA63100A54A23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966128541A4DA63100A54A23 /* AppDelegate.swift */; };
 		9661285C1A4DA63100A54A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9661285B1A4DA63100A54A23 /* Images.xcassets */; };
@@ -307,6 +307,7 @@
 		663067201B671604001EE543 /* PopDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopDateViewController.xib; sourceTree = "<group>"; };
 		663067221B671616001EE543 /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		663067261B6764BE001EE543 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		664321D41B855A0600212F28 /* QuestionSetSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetSearchViewController.swift; sourceTree = "<group>"; };
 		6647ABCF1B748E6100E6DAF5 /* QuestionSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetViewController.swift; sourceTree = "<group>"; };
 		6647ABE51B74A33E00E6DAF5 /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
 		664AB6ED1B65B94A006B47F9 /* AuditRequestDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestDetailViewCell.swift; sourceTree = "<group>"; };
@@ -340,7 +341,6 @@
 		66D7B3081B5F670600B7FAE2 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		66DD85131B731E4D004B9C30 /* AuditPlanAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditPlanAddViewController.swift; sourceTree = "<group>"; };
 		66E666B01B5F1FE100D7FF78 /* AuditRequestHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditRequestHeaderView.swift; sourceTree = "<group>"; };
-		961889B71A680D3800295A64 /* LearnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
 		964892661A63F5D900214D53 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		9661284F1A4DA63100A54A23 /* DesignerNewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesignerNewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		966128531A4DA63100A54A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -596,10 +596,10 @@
 				66570D311B74446F002248A2 /* MeetingAttendanceViewController.swift */,
 				666780221B7471CF00204038 /* MeetingAttendanceAddViewController.swift */,
 				6647ABCF1B748E6100E6DAF5 /* QuestionSetViewController.swift */,
+				664321D41B855A0600212F28 /* QuestionSetSearchViewController.swift */,
 				666A1E5C1B7C65D600432670 /* QuestionSetEditViewController.swift */,
 				662DC8DD1B815D3B00867625 /* ConfirmSubmitViewController.swift */,
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
-				961889B71A680D3800295A64 /* LearnViewController.swift */,
 				66D7B3081B5F670600B7FAE2 /* NavigationController.swift */,
 				669304EF1B60CF6E001B855D /* TableViewController.swift */,
 			);
@@ -899,7 +899,6 @@
 			files = (
 				964892671A63F5D900214D53 /* MenuViewController.swift in Sources */,
 				662DC8DE1B815D3B00867625 /* ConfirmSubmitViewController.swift in Sources */,
-				961889B81A680D3800295A64 /* LearnViewController.swift in Sources */,
 				66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */,
 				966128551A4DA63100A54A23 /* AppDelegate.swift in Sources */,
 				1A7D78A01A70F8FE0061D6F6 /* DragDropBehavior.swift in Sources */,
@@ -954,6 +953,7 @@
 				663067271B6764BE001EE543 /* Serializable.swift in Sources */,
 				B779F6C61AB7851100DDF3AA /* SafariActivity.swift in Sources */,
 				66570D441B744B93002248A2 /* AuditActivityMeetingModel.swift in Sources */,
+				664321D51B855A0600212F28 /* QuestionSetSearchViewController.swift in Sources */,
 				662C80DD1B57950300371598 /* AuditRequestCollectionViewCell.swift in Sources */,
 				6630670F1B6715F1001EE543 /* PopDatePicker.swift in Sources */,
 				666780231B7471CF00204038 /* MeetingAttendanceAddViewController.swift in Sources */,

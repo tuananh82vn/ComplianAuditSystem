@@ -41,8 +41,8 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
     
     var radioButtonController: SSRadioButtonsController?
     
-    var popDateFromPicker : PopDatePicker?
-    var popDateToPicker : PopDatePicker?
+//    var popDateFromPicker : PopDatePicker?
+//    var popDateToPicker : PopDatePicker?
     
     var popFactoryDay1Picker : PopDatePicker?
     var popFactoryDay2Picker : PopDatePicker?
@@ -81,11 +81,11 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         radioButtonController!.delegate = self
         radioButtonController!.shouldLetDeSelect = true
         
-        popDateFromPicker = PopDatePicker(forTextField: DateFrom)
-        DateFrom.delegate = self
-        
-        popDateToPicker = PopDatePicker(forTextField: DateTo)
-        DateTo.delegate = self
+//        popDateFromPicker = PopDatePicker(forTextField: DateFrom)
+//        DateFrom.delegate = self
+//        
+//        popDateToPicker = PopDatePicker(forTextField: DateTo)
+//        DateTo.delegate = self
         
         popFactoryDay1Picker = PopDatePicker(forTextField: FactoryDay1)
         FactoryDay1.delegate = self
@@ -248,21 +248,21 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        if (textField === DateFrom) {
-            
-            PopUpPickerHandle(textField,controlPicker : popDateFromPicker)
-            
-            return false
-        }
-        else
-            if (textField === DateTo) {
-                
-                PopUpPickerHandle(textField,controlPicker : popDateToPicker)
-                
-                return false
-            }
-                
-            else
+//        if (textField === DateFrom) {
+//            
+//            PopUpPickerHandle(textField,controlPicker : popDateFromPicker)
+//            
+//            return false
+//        }
+//        else
+//            if (textField === DateTo) {
+//                
+//                PopUpPickerHandle(textField,controlPicker : popDateToPicker)
+//                
+//                return false
+//            }
+//                
+//            else
                 if (textField === FactoryDay1) {
                     
                     PopUpPickerHandle(textField,controlPicker : popFactoryDay1Picker)

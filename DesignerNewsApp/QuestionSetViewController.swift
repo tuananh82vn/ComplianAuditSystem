@@ -149,6 +149,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
     }
     
+    //handle when device rotate
     func rotated()
     {
         if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation))
@@ -461,6 +462,9 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                 }
         }
 
+    }
+    @IBAction func ButtonSearchClicked(sender: AnyObject) {
+        performSegueWithIdentifier("GoToSearch", sender: sender)
     }
     
     @IBAction func ButtonConfirmClicked(sender: AnyObject) {

@@ -69,7 +69,7 @@ public class ChartLegend: ChartComponentBase
     public var position = ChartLegendPosition.RightOfChartCenter
     public var direction = ChartLegendDirection.LeftToRight
 
-    public var font: UIFont = UIFont.systemFontOfSize(10.0)
+    public var font: UIFont = UIFont.systemFontOfSize(14.0)
     public var textColor = UIColor.blackColor()
 
     public var form = ChartLegendForm.Square
