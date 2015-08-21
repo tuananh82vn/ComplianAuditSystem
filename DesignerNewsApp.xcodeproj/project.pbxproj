@@ -36,7 +36,6 @@
 		6617A5781B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */; };
 		6617A58C1B6F31AE00066C73 /* AuditBookingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */; };
 		6617A58E1B6F3B1100066C73 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6617A58D1B6F3B1100066C73 /* Photos.framework */; };
-		6617A5901B6F3B5F00066C73 /* PhotoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58F1B6F3B5F00066C73 /* PhotoThumbnail.swift */; };
 		6622E5B61B72D8DD00C262CF /* AuditPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622E5B51B72D8DD00C262CF /* AuditPlanViewController.swift */; };
 		6622E5C61B72D97500C262CF /* AuditPlanMasterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622E5C51B72D97500C262CF /* AuditPlanMasterTableViewCell.swift */; };
 		6622E5C81B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6622E5C71B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift */; };
@@ -63,6 +62,7 @@
 		666A1E571B7C285E00432670 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666A1E521B7C251700432670 /* Charts.framework */; };
 		666A1E581B7C285E00432670 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 666A1E521B7C251700432670 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		666A1E5D1B7C65D600432670 /* QuestionSetEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666A1E5C1B7C65D600432670 /* QuestionSetEditViewController.swift */; };
+		667E5D301B86BCF9001FDF59 /* PhotoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667E5D2F1B86BCF9001FDF59 /* PhotoThumbnail.swift */; };
 		667F4A5F1B563F4400257DF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667F4A5D1B563F4400257DF8 /* Main.storyboard */; };
 		66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF71B56260C0058FF09 /* SwiftyJSON.swift */; };
 		66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF91B5626200058FF09 /* LoginModel.swift */; };
@@ -317,7 +317,6 @@
 		6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityBookingDetailModel.swift; sourceTree = "<group>"; };
 		6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditBookingAddViewController.swift; sourceTree = "<group>"; };
 		6617A58D1B6F3B1100066C73 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		6617A58F1B6F3B5F00066C73 /* PhotoThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoThumbnail.swift; path = "../../../../Downloads/PhotosGalleryApp-master/Photos Gallery App/PhotoThumbnail.swift"; sourceTree = "<group>"; };
 		6622E5B51B72D8DD00C262CF /* AuditPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditPlanViewController.swift; sourceTree = "<group>"; };
 		6622E5C51B72D97500C262CF /* AuditPlanMasterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditPlanMasterTableViewCell.swift; sourceTree = "<group>"; };
 		6622E5C71B72DEF800C262CF /* AuditActivityAudtiPlanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityAudtiPlanModel.swift; sourceTree = "<group>"; };
@@ -344,6 +343,7 @@
 		666A1E371B7C238200432670 /* libQLCharts.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libQLCharts.dylib; path = usr/lib/libQLCharts.dylib; sourceTree = SDKROOT; };
 		666A1E4D1B7C251700432670 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		666A1E5C1B7C65D600432670 /* QuestionSetEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetEditViewController.swift; sourceTree = "<group>"; };
+		667E5D2F1B86BCF9001FDF59 /* PhotoThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumbnail.swift; sourceTree = "<group>"; };
 		667F4A5E1B563F4400257DF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66919EF71B56260C0058FF09 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		66919EF91B5626200058FF09 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -541,8 +541,8 @@
 		66BA22D81B67056D00B755D7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				667E5D2F1B86BCF9001FDF59 /* PhotoThumbnail.swift */,
 				6647ABE51B74A33E00E6DAF5 /* AKPickerView.swift */,
-				6617A58F1B6F3B5F00066C73 /* PhotoThumbnail.swift */,
 				6630671E1B6715FB001EE543 /* PopDateViewController.swift */,
 				663067201B671604001EE543 /* PopDateViewController.xib */,
 				6630670E1B6715F1001EE543 /* PopDatePicker.swift */,
@@ -966,12 +966,12 @@
 				66B5E4361B6B4814001B7EC7 /* BookingViewCell.swift in Sources */,
 				1A935E2F1A837A670059BCBC /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				1A935E321A837A670059BCBC /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				667E5D301B86BCF9001FDF59 /* PhotoThumbnail.swift in Sources */,
 				66B2ED9E1B7879D800FE55A6 /* QuestionSetViewCell.swift in Sources */,
 				66E666B11B5F1FE100D7FF78 /* AuditRequestHeaderView.swift in Sources */,
 				B78F90381A6EF75800883A5B /* WebApiService.swift in Sources */,
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
 				661133131B83098D00C3CAE4 /* Keychain.swift in Sources */,
-				6617A5901B6F3B5F00066C73 /* PhotoThumbnail.swift in Sources */,
 				662DC8EE1B81C92000867625 /* UIColor.swift in Sources */,
 				66570D321B74446F002248A2 /* MeetingAttendanceViewController.swift in Sources */,
 				669304F01B60CF6E001B855D /* TableViewController.swift in Sources */,

@@ -1,5 +1,4 @@
 
-
 import Alamofire
 
 struct WebApiService {
@@ -134,6 +133,7 @@ struct WebApiService {
         }
     }
     
+    
     static func getAuditRequestList(token: String, filter : AuditRequestFilter, response : (objectReturn : [AuditRequestModel]) -> ()) {
         
         let urlString = baseURL + ResourcePath.AuditRequestList.description
@@ -180,8 +180,6 @@ struct WebApiService {
             
             let jsonObject = JSON(json!)
             
-            //println(jsonObject)
-            
             if let Items = jsonObject["Items"].array {
                 
                 for var index = 0; index < Items.count; ++index {
@@ -215,7 +213,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                println(jsonObject)
+                //println(jsonObject)
                 
                 if let Item = jsonObject["Item"].dictionaryObject {
                     
@@ -556,7 +554,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                println(jsonObject)
+                //println(jsonObject)
                 
                 if let Item = jsonObject["Item"].dictionaryObject {
                     

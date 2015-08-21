@@ -46,8 +46,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         passwordTextField.delegate = self
         
         
-        LocalStore.setDomain("http://wsandypham:8080")
-        //LocalStore.setDomain("http://complianceauditsystem.softwarestaging.com.au")
+        //LocalStore.setDomain("http://wsandypham:8080")
+        LocalStore.setDomain("http://complianceauditsystem.softwarestaging.com.au")
         
         let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton

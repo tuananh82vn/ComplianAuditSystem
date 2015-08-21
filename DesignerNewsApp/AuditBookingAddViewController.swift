@@ -18,7 +18,9 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
     @IBOutlet weak var lbl_Title: UILabel!
     @IBOutlet weak var txt_FileName: UITextField!
     @IBOutlet weak var txt_Notes: UITextView!
-    @IBOutlet weak var txt_Item: UITextField!
+
+    
+    @IBOutlet weak var txt_Item: UITextView!
     
     var albumFound : Bool = false
     
@@ -211,48 +213,49 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
         
         imageOptions.resizeMode = PHImageRequestOptionsResizeMode.Fast
 
-        
-        let asset: PHAsset = self.photosAsset.lastObject as! PHAsset
-        
-        self.assetThumbnailSize = CGSizeMake(CGFloat(asset.pixelHeight),CGFloat(asset.pixelWidth))
-        
-        //println(asset.creationDate.ToDateTimeString())
-        
-        if(asset.mediaType.rawValue == 1)
-        {
-            self.txt_FileName.text = asset.creationDate.ToDateTimeString() + ".jpg"
-            bookingAttachment.FileName = self.txt_FileName.text
-            bookingAttachment.ContentType = "Image/jpeg"
+
             
-        }
-        
-        
-        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) { (data:NSData!, string:String!, orientation:UIImageOrientation, object:[NSObject : AnyObject]!) -> Void in
-            //transform into image
-            var image = UIImage(data: data)
+            let asset: PHAsset = self.photosAsset.lastObject as! PHAsset
             
-            //Get bytes size of image
-            var imageSize = Float(data.length)
+            self.assetThumbnailSize = CGSizeMake(CGFloat(asset.pixelHeight),CGFloat(asset.pixelWidth))
             
-            self.bookingAttachment.Size = imageSize
+            //println(asset.creationDate.ToDateTimeString())
             
-        }
-        
-        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: imageOptions, resultHandler: {(result, info)in
+            if(asset.mediaType.rawValue == 1)
+            {
+                self.txt_FileName.text = asset.creationDate.ToDateTimeString() + ".jpg"
+                bookingAttachment.FileName = self.txt_FileName.text
+                bookingAttachment.ContentType = "Image/jpeg"
+                
+            }
             
-            self.img_Thumbnail.image = result
             
-            if let temp = result {
+            PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) { (data:NSData!, string:String!, orientation:UIImageOrientation, object:[NSObject : AnyObject]!) -> Void in
+                //transform into image
+                var image = UIImage(data: data)
+                
+                //Get bytes size of image
+                var imageSize = Float(data.length)
+                
+                self.bookingAttachment.Size = imageSize
+                
+            }
             
-                var imageData = UIImageJPEGRepresentation(temp, 1)
-                if let imageNotNull = imageData {
+            PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: imageOptions, resultHandler: {(result, info)in
+                
+                self.img_Thumbnail.image = result
+                
+                if let temp = result {
+                    
+                    var imageData = UIImageJPEGRepresentation(temp, 1)
+                    if let imageNotNull = imageData {
                         let base64String = imageNotNull.base64EncodedStringWithOptions(.allZeros)
                         self.bookingAttachment.FileContent = base64String
                         //println(base64String)
+                    }
                 }
-            }
-        })
-    
+            })
+
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController){

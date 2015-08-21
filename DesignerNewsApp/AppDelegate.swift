@@ -8,7 +8,7 @@
 
 import UIKit
 
-let themeColor = UIColor.whiteColor()
+let themeColor = UIColor.blackColor()
 
 
 @UIApplicationMain
