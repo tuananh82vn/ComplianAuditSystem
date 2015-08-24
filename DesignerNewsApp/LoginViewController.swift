@@ -167,7 +167,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     }
     
     @IBAction func ButtonForgotClicked(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string:"http://complianceauditsystem.softwarestaging.com.au/login/forgotpassword")!)
+        let URL = LocalStore.accessDomain()!+"/login/forgotpassword"
+        
+        UIApplication.sharedApplication().openURL(NSURL(string:URL)!)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

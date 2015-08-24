@@ -9,8 +9,9 @@
 import UIKit
 import CoreActionSheetPicker
 
-class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationControllerDelegate {
+class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationControllerDelegate , UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var tableView1: UITableView!
     @IBOutlet weak var txt_Notes: UITextView!
     @IBOutlet weak var QuestionSetCompleted: UISwitch!
     @IBOutlet weak var MeetingRecordCompleted: UISwitch!
@@ -37,12 +38,21 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     
     var selectOutcome : Int = 0
     
+    var height: Int = 0
+    
+    var color = UIColor.blackColor()
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var viewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var viewWidthConstraint : NSLayoutConstraint!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         InitData()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
 
     }
 
@@ -74,7 +84,32 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
                 }
                 else
                 {
+                    
+                    
+                    if(self.AuditConfirm.AuditOutcomeColorName == "amber")
+                    {
+                        self.color = UIColor(rgba: "#FFC200")
+                    }
+                    else
+                        if(self.AuditConfirm.AuditOutcomeColorName  == "blue")
+                        {
+                            self.color = UIColor(rgba: "#235396")
+                        }
+                        else
+                            if(self.AuditConfirm.AuditOutcomeColorName  == "green")
+                            {
+                                self.color = UIColor(rgba: "#3EB55B")
+                            }
+                            else
+                                if(self.AuditConfirm.AuditOutcomeColorName  == "red")
+                                {
+                                    self.color = UIColor(rgba: "#E32444")
+                                }
+                    
                     self.bt_Select.setTitle(self.AuditConfirm.AuditOutcomeName, forState: .Normal)
+                    self.bt_Select.setTitleColor(self.color, forState: .Normal)
+                    
+                    self.selectedOutcomeId = self.AuditConfirm.AuditOutcomeId
                 }
                 
                 dispatch_async(dispatch_get_main_queue()) {
@@ -99,6 +134,16 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
                                     self.view.hideLoading()
                                     
                                     self.AuditHistoryList = temp2
+                                    
+                                    self.height = (self.AuditHistoryList.count * 44)
+                                    
+                                    self.viewHeightConstraint.constant = CGFloat(self.height)
+                                    
+                                    self.view.layoutIfNeeded()
+                                    
+                                    self.scrollView.contentSize = CGSizeMake(self.tableView1.frame.width, CGFloat(self.height + 100))
+                                    
+                                    self.tableView1.reloadData()
                                 }
                             }
                         }
@@ -120,7 +165,29 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         ActionSheetStringPicker.showPickerWithTitle("Select", rows: OutcomeList as [AnyObject] , initialSelection: self.selectOutcome, doneBlock: {
             picker, value, index in
             
+            if((index as! String) == "Amber")
+            {
+                self.color = UIColor(rgba: "#FFC200")
+            }
+            else
+                if((index as! String)  == "Blue")
+                {
+                    self.color = UIColor(rgba: "#235396")
+                }
+                else
+                    if((index as! String)  == "Green")
+                    {
+                        self.color = UIColor(rgba: "#3EB55B")
+                    }
+                    else
+                        if((index as! String)  == "Red")
+                        {
+                            self.color = UIColor(rgba: "#E32444")
+            }
+            
             self.bt_Select.setTitle((index as! String), forState: .Normal)
+            self.bt_Select.setTitleColor(self.color, forState: .Normal)
+            
             self.selectOutcome =  value
             self.selectedOutcomeId = self.AuditOutcomeList[self.selectOutcome].Id
             
@@ -207,7 +274,55 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         self.presentViewController(refreshAlert, animated: true, completion: nil)
 
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if(self.AuditHistoryList.count > 0 )
+        {
+            return self.AuditHistoryList.count 
+        }
+        else
+        {
+            return 0
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
+        //println("cellForRowAtIndexPath")
+        
+        var cell1 = self.tableView1.dequeueReusableCellWithIdentifier("DetailCell") as! AuditHistoryTableViewCell
+        
+        cell1.lbl_Name.text = self.AuditHistoryList[indexPath.row].UserName
+        cell1.lbl_Date.text = self.AuditHistoryList[indexPath.row].CreatedDateDisplay
+        cell1.lbl_Status.text = self.AuditHistoryList[indexPath.row].AuditActivityStatusName
+        cell1.lbl_Comment.text = self.AuditHistoryList[indexPath.row].Comment
+        
+        return cell1
+        
+    }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func rotated(){
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation))
+        {
+            
+        }
+        
+        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation))
+        {
+            
+        }
+        
+        self.viewWidthConstraint.constant = self.scrollView.frame.width
+        self.view.layoutIfNeeded()
+        
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToActivity" {
