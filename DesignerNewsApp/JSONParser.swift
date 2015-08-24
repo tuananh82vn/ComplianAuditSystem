@@ -861,6 +861,51 @@ struct JSONParser {
         
         return PlanArray
     }
+    
+    static func parseAuditActivityHistoryList(story: NSArray) -> [AuditActivityHistoryModel] {
+        
+        var PlanArray = [AuditActivityHistoryModel]()
+        
+        if let Items = story as Array? {
+            
+            for var index = 0; index < Items.count; ++index {
+                
+                if let Item = Items[index] as? NSDictionary {
+                    
+                    let temp = JSONParser.parseObjectAuditActivityHistoryModel(Item as NSDictionary)
+                    
+                    PlanArray.append(temp)
+                }
+            }
+        }
+        
+        return PlanArray
+    }
+    
+    static func parseObjectAuditActivityHistoryModel(story: NSDictionary) -> AuditActivityHistoryModel {
+        
+        
+        let Object =  AuditActivityHistoryModel()
+        
+        Object.AuditActivityStatusId = story["AuditActivityStatusId"] as? Int ?? 0
+        
+        Object.PhotoId = story["PhotoId"] as? Int ?? 0
+        
+        Object.UserName = story["UserName"] as? String ?? ""
+        
+        Object.AuditActivityStatusName = story["AuditActivityStatusName"] as? String ?? ""
+        
+        Object.AuditActivityStatusColor = story["AuditActivityStatusColor"] as? String ?? ""
+        
+        Object.Comment = story["Comment"] as? String ?? ""
+        
+        Object.CreatedDate = story["CreatedDate"] as? String ?? ""
+        
+        Object.CreatedDateDisplay = story["CreatedDateDisplay"] as? String ?? ""
+        
+        return Object
+    }
+
 
 
 }

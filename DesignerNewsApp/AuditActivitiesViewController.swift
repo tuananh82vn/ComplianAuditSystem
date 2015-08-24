@@ -221,17 +221,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         return cell
     }
     
-//    func StartAuditButtonClicked(sender : UIButton)
-//    {
-//        self.CallStartAudit(sender.tag)
-//    }
-    
-//    func collectionView(collectionView: UICollectionView,
-//        layout collectionViewLayout: UICollectionViewLayout,
-//        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//            
-//    }
-    
     func CallStartAudit(index : Int){
         
         var refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure want to start audit?", preferredStyle: UIAlertControllerStyle.Alert)
@@ -265,21 +254,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         self.presentViewController(refreshAlert, animated: true, completion: nil)
 
     }
-    
-//    func yourButtonClicked(sender : UIButton)
-//    {
-//        if (auditRequest[sender.tag].AuditActivityStatusId == 0 )
-//        {
-//            self.CallStartAudit(sender.tag)
-//        }
-//        else
-//        {
-//            LocalStore.setAuditActivityUrlId(auditRequest[sender.tag].AuditActivityUrlId)
-//        
-//            self.performSegueWithIdentifier("GoToAuditDetail", sender: sender)
-//        }
-//
-//    }
     
     //display Header of Colllection View
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -379,6 +353,12 @@ extension  AuditActivitiesViewController : MenuViewControllerDelegate {
         
         performSegueWithIdentifier("GoToLogin", sender: nil)
     }
+    
+    func menuViewControllerDidSelectChangeDomainMenu(controller: MenuViewController) {
+        
+        performSegueWithIdentifier("GoToChangeDomain", sender: nil)
+    }
+    
 }
 
 

@@ -9,6 +9,8 @@
 import UIKit
 import Spring
 
+var keychain = Keychain()
+
 class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehaviorDelegate {
 
     @IBOutlet weak var switchRememberMe: UISwitch!
@@ -20,9 +22,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     @IBOutlet weak var passwordTextField: DesignableTextField!
     
     var originalCenter: CGPoint!
-    
-    var keychain = Keychain()
-    
+
     var userProfile = LoginModel()
     
     override func viewDidLoad() {
@@ -47,7 +47,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         
         
         //LocalStore.setDomain("http://wsandypham:8080")
-        LocalStore.setDomain("http://complianceauditsystem.softwarestaging.com.au")
+        //LocalStore.setDomain("http://complianceauditsystem.softwarestaging.com.au")
+        
+        //keychain["domain"] = "http://complianceauditsystem.softwarestaging.com.au"
+
+        
+        if(keychain["domain"] == nil)
+        {
+            keychain["domain"] = "http://complianceauditsystem.softwarestaging.com.au"
+        }
+        if let domain = keychain["domain"]
+        {
+            //LocalStore.deleteDomain()
+            LocalStore.setDomain(domain)
+        }
         
         let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
@@ -79,13 +92,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
 
                 if (self.switchRememberMe.on)
                 {
-                    self.keychain["username"] = self.emailTextField.text
-                    self.keychain["password"] = self.passwordTextField.text
+                    keychain["username"] = self.emailTextField.text
+                    keychain["password"] = self.passwordTextField.text
                 }
                 else
                 {
-                    self.keychain["username"] = ""
-                    self.keychain["password"] = ""
+                    keychain["username"] = ""
+                    keychain["password"] = ""
                 }
                 
                 self.userProfile = temp

@@ -338,7 +338,8 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         if self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].FileId == 0 {
             cell1.bt_Download.hidden = true
         }
-        else{
+        else
+        {
             cell1.bt_Download.hidden = false
         }
         
@@ -362,6 +363,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         }
         else
         {
+            cell1.bt_Download.hidden = false
             
             cell1.bt_Download.tag = self.questionSet[self.selectedIndex].QuestionBySectionList[indexPath.section].QuestionResponseModelList[indexPath.row].FileId
             

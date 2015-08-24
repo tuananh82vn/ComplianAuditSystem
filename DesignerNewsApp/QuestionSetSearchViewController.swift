@@ -81,7 +81,7 @@ class QuestionSetSearchViewController: UIViewController {
         ActionSheetStringPicker.showPickerWithTitle("Select", rows: StatusList as [AnyObject] , initialSelection: self.selectStatus, doneBlock: {
             picker, value, index in
             
-            self.bt_Status.setTitle(index as! String, forState: .Normal)
+            self.bt_Status.setTitle((index as! String), forState: .Normal)
             self.filterQuestion.QuestionStatus  = value.description
             
             self.selectStatus = value
@@ -95,7 +95,7 @@ class QuestionSetSearchViewController: UIViewController {
         ActionSheetStringPicker.showPickerWithTitle("Select", rows: ReponseList as [AnyObject] , initialSelection: self.selectResponse, doneBlock: {
             picker, value, index in
             
-            self.bt_Reponse.setTitle(index as! String, forState: .Normal)
+            self.bt_Reponse.setTitle((index as! String), forState: .Normal)
             self.filterQuestion.ResponseCategory  = value.description
             self.selectResponse = value
             
@@ -108,7 +108,7 @@ class QuestionSetSearchViewController: UIViewController {
             ActionSheetStringPicker.showPickerWithTitle("Select", rows: priorityList as [AnyObject] , initialSelection: self.selectPriority, doneBlock: {
             picker, value, index in
         
-            self.bt_priority.setTitle(index as! String, forState: .Normal)
+            self.bt_priority.setTitle((index as! String), forState: .Normal)
             self.filterQuestion.Priority  = value.description
             self.selectPriority = value
 

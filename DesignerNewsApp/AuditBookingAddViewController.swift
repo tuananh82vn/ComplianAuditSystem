@@ -208,6 +208,8 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
     
     func DisplayImage() {
         
+        view.showLoading()
+        
         // Create options for retrieving image (Degrades quality if using .Fast)
         let imageOptions = PHImageRequestOptions()
         
@@ -247,11 +249,12 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 
                 if let temp = result {
                     
-                    var imageData = UIImageJPEGRepresentation(temp, 1)
+                    var imageData = UIImageJPEGRepresentation(temp, 0.7)
                     if let imageNotNull = imageData {
                         let base64String = imageNotNull.base64EncodedStringWithOptions(.allZeros)
                         self.bookingAttachment.FileContent = base64String
-                        //println(base64String)
+                        
+                        self.view.hideLoading()
                     }
                 }
             })

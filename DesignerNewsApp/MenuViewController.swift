@@ -11,6 +11,8 @@ protocol MenuViewControllerDelegate : class {
     
     func menuViewControllerDidSelectLogoutMenu(controller:MenuViewController)
     
+    func menuViewControllerDidSelectChangeDomainMenu(controller:MenuViewController)
+ 
 }
 
 class MenuViewController: UIViewController {
@@ -37,18 +39,17 @@ class MenuViewController: UIViewController {
         }
     }
     
-    // MARK: Buttons
-    @IBAction func topButtonPressed(sender: AnyObject) {
-    }
     
     @IBAction func ActivitiesButtonPressed(sender: AnyObject) {
         animateView()
         delegate?.menuViewControllerDidSelectActivitiesMenu(self)
         closeButtonPressed(self)
     }
-    
-    @IBAction func creditsButtonPressed(sender: AnyObject) {
+
+    @IBAction func ChangeDomainButtonPressed(sender: AnyObject) {
         animateView()
+        delegate?.menuViewControllerDidSelectChangeDomainMenu(self)
+        closeButtonPressed(self)
     }
     
     @IBAction func logoutButtonPressed(sender: AnyObject) {

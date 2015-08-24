@@ -67,6 +67,7 @@
 		66919EF81B56260C0058FF09 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF71B56260C0058FF09 /* SwiftyJSON.swift */; };
 		66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66919EF91B5626200058FF09 /* LoginModel.swift */; };
 		669304F01B60CF6E001B855D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669304EF1B60CF6E001B855D /* TableViewController.swift */; };
+		66AA1AF11B8AB374002F2009 /* ChangeDomainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA1AF01B8AB374002F2009 /* ChangeDomainViewController.swift */; };
 		66B2ED8E1B7829AD00FE55A6 /* AuditActivityQuestionSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B2ED8D1B7829AD00FE55A6 /* AuditActivityQuestionSetModel.swift */; };
 		66B2ED9E1B7879D800FE55A6 /* QuestionSetViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B2ED9D1B7879D800FE55A6 /* QuestionSetViewCell.swift */; };
 		66B2EDA01B787B8900FE55A6 /* QuestionSetHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B2ED9F1B787B8900FE55A6 /* QuestionSetHeaderViewCell.swift */; };
@@ -348,6 +349,7 @@
 		66919EF71B56260C0058FF09 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		66919EF91B5626200058FF09 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		669304EF1B60CF6E001B855D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		66AA1AF01B8AB374002F2009 /* ChangeDomainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeDomainViewController.swift; sourceTree = "<group>"; };
 		66B2ED8D1B7829AD00FE55A6 /* AuditActivityQuestionSetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityQuestionSetModel.swift; sourceTree = "<group>"; };
 		66B2ED9D1B7879D800FE55A6 /* QuestionSetViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetViewCell.swift; sourceTree = "<group>"; };
 		66B2ED9F1B787B8900FE55A6 /* QuestionSetHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetHeaderViewCell.swift; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 				9694F20A1A6123D000A6376A /* WebViewController.swift */,
 				66D7B3081B5F670600B7FAE2 /* NavigationController.swift */,
 				669304EF1B60CF6E001B855D /* TableViewController.swift */,
+				66AA1AF01B8AB374002F2009 /* ChangeDomainViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -998,6 +1001,7 @@
 				66C364AF1B60679D00BE3903 /* AuditDetailViewController.swift in Sources */,
 				66BA22EA1B67059A00B755D7 /* SSRadioButton.swift in Sources */,
 				66B2ED8E1B7829AD00FE55A6 /* AuditActivityQuestionSetModel.swift in Sources */,
+				66AA1AF11B8AB374002F2009 /* ChangeDomainViewController.swift in Sources */,
 				1A935E3C1A837C640059BCBC /* SoundPlayer+DesignerNewsApp.swift in Sources */,
 				66D7B3091B5F670600B7FAE2 /* NavigationController.swift in Sources */,
 				66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */,

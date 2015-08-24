@@ -31,6 +31,8 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
         WebApiService.getAuditActivityBookingDetailList(LocalStore.accessToken()!, AuditActivityUrlId: LocalStore.accessAuditActivityUrlId()!) { objectReturn in
             
             if let temp = objectReturn {
+                
+                println("init data")
             
                 self.auditBooking = temp
                 
@@ -82,7 +84,8 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
             }
             else
             {
-        
+                cell.ButtonDownload.hidden = false
+                
                 cell.ButtonDownload.tag = self.auditBooking[indexPath.row].FileId
         
                 cell.ButtonDownload.addTarget(self, action: "ButtonDownloadClicked:", forControlEvents: .TouchUpInside)

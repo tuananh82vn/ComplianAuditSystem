@@ -4,10 +4,12 @@ import Alamofire
 struct WebApiService {
 
 
-    private static let baseURL = LocalStore.accessDomain()!
+    
     
     private enum ResourcePath: Printable {
         case Login
+        case Verify
+        
         case Download
         case ResponseCategoryList
         case AuditRequestList
@@ -53,6 +55,8 @@ struct WebApiService {
         var description: String {
             switch self {
                 case .Login: return "/Api/Login"
+                case .Verify: return "/Api/Verify"
+                
                 case .Download: return "/Api/GetFileDocument/?fileId="
                 case .AuditRequestList: return "/Api/AuditRequestList"
                 case .AuditRequestStartAudit: return "/Api/AuditRequestStartAudit"
@@ -95,6 +99,8 @@ struct WebApiService {
 
     static func loginWithUsername(Username: String, password: String, response: (object: LoginModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+        
         let urlString = baseURL + ResourcePath.Login.description
 
         
@@ -133,8 +139,48 @@ struct WebApiService {
         }
     }
     
-    
+    static func postVerify(domain: String,  response : (objectReturn : JsonReturnModel?) -> ()) {
+        
+        let urlString = domain + ResourcePath.Verify.description
+        
+
+        var JsonReturn = JsonReturnModel()
+        
+        Alamofire.request(.POST, urlString, parameters: nil , encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if let jsonReturn1: AnyObject = json {
+                
+                let jsonObject = JSON(jsonReturn1)
+                
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    JsonReturn.IsSuccess = IsSuccess
+                    
+                }
+                
+                if let Errors = jsonObject["Errors"].arrayObject {
+                    
+                    let ErrorsReturn = JSONParser.parseError(Errors)
+                    
+                    JsonReturn.Errors = ErrorsReturn
+                    
+                }
+                
+                response (objectReturn : JsonReturn)
+            }
+            else
+            {
+                response (objectReturn : nil)
+            }
+            
+        }
+        
+    }
+
     static func getAuditRequestList(token: String, filter : AuditRequestFilter, response : (objectReturn : [AuditRequestModel]) -> ()) {
+        
+        let baseURL = LocalStore.accessDomain()!
         
         let urlString = baseURL + ResourcePath.AuditRequestList.description
         
@@ -198,7 +244,7 @@ struct WebApiService {
     
     static func postAuditRequestStartAudit(token: String, AuditRequestUrlId: String, response : (objectReturn : AuditRequestStartAuditModel?) -> ()) {
         
-        
+        let baseURL = LocalStore.accessDomain()!
         let urlString = baseURL + ResourcePath.AuditRequestStartAudit.description
         
         
@@ -229,7 +275,8 @@ struct WebApiService {
     
     
     static func getAuditRequestStatusList(token: String, response : (objectReturn : [AuditRequestStatusModel]) -> ()) {
-
+        
+        let baseURL = LocalStore.accessDomain()!
 
         let urlString = baseURL + ResourcePath.AuditRequestStatusList.description
         
@@ -272,7 +319,7 @@ struct WebApiService {
     }
     
     static func getAuditActivitySiteDetail(token: String, AuditActivityUrlId: String, response : (objectReturn : AuditActivitySiteDetailModel?) -> ()) {
-        
+        let baseURL = LocalStore.accessDomain()!
         
         let urlString = baseURL + ResourcePath.AuditActivitySiteDetail.description
         
@@ -306,6 +353,8 @@ struct WebApiService {
     static func getAuditActivityAuditDetail(token: String, AuditActivityUrlId: String, response : (objectReturn : AuditActivityAuditDetailModel?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityAuditDetail.description
         
         
@@ -336,6 +385,8 @@ struct WebApiService {
     static func postAuditActivityAuditDetail(token: String, AuditActivityDetail: AuditActivityAuditDetailModel, response : (objectReturn : JsonReturnModel?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityAuditDetailEdit.description
         
         
@@ -391,6 +442,8 @@ struct WebApiService {
     static func getAuditActivityBookingDetailList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityBookingDetaiModel]?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityBookingDetailList.description
         
         
@@ -407,7 +460,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                //println(jsonObject)
+                println(jsonObject)
                 
                 if let IsSuccess = jsonObject["IsSuccess"].bool {
                     
@@ -428,6 +481,8 @@ struct WebApiService {
     
     static func postAuditActivityBookingDetail(token: String, bookingItem: AuditActivityBookingDetaiModel, Type : Bool, response : (objectReturn : JsonReturnModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         var urlString : String = ""
         
         if Type {
@@ -466,7 +521,6 @@ struct WebApiService {
                 
                 let jsonObject = JSON(jsonReturn1)
                 
-                
                 if let IsSuccess = jsonObject["IsSuccess"].bool {
                     
                     JsonReturn.IsSuccess = IsSuccess
@@ -494,6 +548,8 @@ struct WebApiService {
     
     static func postAuditActivityBookingDetailDelete(token: String, Id: Int,  response : (objectReturn : JsonReturnModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityBookingDetailDelete.description
         
         
@@ -538,6 +594,8 @@ struct WebApiService {
     
     static func getAuditActivityBookingDetail(token: String, Id: Int, response : (objectReturn : AuditActivityBookingDetaiModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         
         let urlString = baseURL + ResourcePath.AuditActivityBookingDetailSelect.description
         
@@ -570,6 +628,8 @@ struct WebApiService {
     
     static func getFile(fileId : Int , func_response : (objectReturn : NSURL) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.Download.description + fileId.description
         
         var tempURL = NSURL()
@@ -607,6 +667,8 @@ struct WebApiService {
     
     static func getAuditActivityAudtiPlanList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityAuditPlanModel]?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         
         let urlString = baseURL + ResourcePath.AuditActivityAudtiPlanList.description
         
@@ -646,6 +708,8 @@ struct WebApiService {
     static func postAuditActivityAuditPlanAdd(token: String, object : AuditActivityAuditPlanModel, type : Bool,  response : (objectReturn : JsonReturnModel?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         var urlString : String = ""
         
         if type {
@@ -707,6 +771,8 @@ struct WebApiService {
     
     static func postAuditActivityAuditPlanDelete(token: String, Id: Int,  response : (objectReturn : JsonReturnModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityAuditPlanDelete.description
         
         
@@ -751,6 +817,8 @@ struct WebApiService {
     
     static func getAuditActivityAuditPlan(token: String, Id: Int, response : (objectReturn : AuditActivityAuditPlanModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         
         let urlString = baseURL + ResourcePath.AuditActivityAuditPlanSelect.description
         
@@ -783,6 +851,8 @@ struct WebApiService {
     static func getAuditActivityMeeting(token: String, AuditActivityUrlId: String, response : (objectReturn : AuditActivityMeetingModel?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityMeetingDateSelect.description
         
         
@@ -814,6 +884,8 @@ struct WebApiService {
     
     static func postAuditActivityMeeting(token: String, AuditActivityMeeting: AuditActivityMeetingModel, response : (objectReturn : JsonReturnModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         
         let urlString = baseURL + ResourcePath.AuditActivityMeetingDateEdit.description
         
@@ -866,6 +938,8 @@ struct WebApiService {
     static func getAuditActivityMeetingAttendanceRecordList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityMeetingAttendanceRecordModel]?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityMeetingAttendanceRecordList.description
         
         
@@ -904,6 +978,8 @@ struct WebApiService {
     static func postAuditActivityMeetingAttendanceRecord(token: String, MeetingRecord: AuditActivityMeetingAttendanceRecordModel, AddMode : Bool, response : (objectReturn : JsonReturnModel?) -> ()){
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         var urlString : String = ""
         
         if AddMode {
@@ -964,6 +1040,8 @@ struct WebApiService {
     
     static func postMeetingAttendanceRecordDelete(token: String, Id: Int,  response : (objectReturn : JsonReturnModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityMeetingAttendanceRecordDelete.description
         
         
@@ -1009,6 +1087,8 @@ struct WebApiService {
     static func getAuditActivityMeetingAttendanceRecordModel(token: String, Id: Int, response : (objectReturn : AuditActivityMeetingAttendanceRecordModel?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityMeetingAttendanceRecordSelect.description
         
         
@@ -1040,6 +1120,8 @@ struct WebApiService {
     static func getAuditActivityQuestionSetList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityQuestionSetModel]?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityQuestionSetList.description
         
         
@@ -1079,6 +1161,8 @@ struct WebApiService {
     static func getAuditActivityQuestionSetQuestionResponseList(token: String, QuestionRespond: AuditActivityQuestionSetQuestionResponseModel, response : (objectReturn : AuditActivityQuestionSetModel?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityQuestionSetQuestionResponseList.description
         
         
@@ -1123,6 +1207,8 @@ struct WebApiService {
     static func getAuditActivityQuestionSetQuestionResponsePieChart(token: String, AuditActivityQuestionSetId: Int, response : (objectReturn : QuestionChartList?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityQuestionSetQuestionResponsePieChart.description
         
         
@@ -1161,6 +1247,8 @@ struct WebApiService {
     static func getAuditActivityQuestionSetQuestionResponseSelect(token: String, Id: Int, response : (objectReturn : QuestionResponseModel?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityQuestionSetQuestionResponseSelect.description
         
         
@@ -1198,6 +1286,8 @@ struct WebApiService {
     
     static func postAuditActivityQuestionSetQuestionResponseEdit(token: String, object: QuestionResponseModel,  response : (objectReturn : JsonReturnModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityQuestionSetQuestionResponseEdit.description
         
         
@@ -1253,6 +1343,8 @@ struct WebApiService {
     static func getAuditActivityConfirmSubmitSelect(token: String, AuditActivityUrlId: String, response : (objectReturn : AuditActivityConfirmSubmitModel?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityConfirmSubmitSelect.description
         
         
@@ -1290,6 +1382,8 @@ struct WebApiService {
     
     static func postAuditActivityConfirmSubmitEdit(token: String, object: AuditActivityConfirmSubmitModel,  response : (objectReturn : JsonReturnModel?) -> ()) {
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditActivityConfirmSubmitEdit.description
         
         
@@ -1303,7 +1397,7 @@ struct WebApiService {
                 "IsMeetingAttendanceRecordCompleted" : object.IsMeetingAttendanceRecordCompleted,
                 "IsQuestionSetCompleted" : object.IsQuestionSetCompleted,
                 "Notes" : object.Notes,
-                "AuditOutcomeId" : object.AuditOutcomeId
+                "AuditOutcome" : object.AuditOutcomeId
             ]
         ]
         
@@ -1344,6 +1438,8 @@ struct WebApiService {
     static func getAuditOutcomeList(token: String, response : (objectReturn : [AuditOutcomeModel]?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.AuditOutcomeList.description
         
         
@@ -1381,6 +1477,8 @@ struct WebApiService {
     static func getResponseCategoryList(token: String, response : (objectReturn : [ResponseCategoryModel]?) -> ()) {
         
         
+        let baseURL = LocalStore.accessDomain()!
+
         let urlString = baseURL + ResourcePath.ResponseCategoryList.description
         
         
@@ -1413,5 +1511,44 @@ struct WebApiService {
         response (objectReturn : nil)
     }
 
+    static func getAuditActivityHistoryList(token: String, AuditActivityUrlId: String, response : (objectReturn : [AuditActivityHistoryModel]?) -> ()) {
+        
+        
+        let baseURL = LocalStore.accessDomain()!
+        
+        let urlString = baseURL + ResourcePath.AuditActivityHistoryList.description
+        
+        
+        var parameters = [
+            "TokenNumber" : token,
+            "AuditActivityUrlId" : AuditActivityUrlId
+        ]
+        
+        var arrayReturn = [AuditActivityHistoryModel]()
+        
+        Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
+            
+            if(json != nil) {
+                
+                let jsonObject = JSON(json!)
+                
+                println(jsonObject)
+                
+                if let IsSuccess = jsonObject["IsSuccess"].bool {
+                    
+                    if IsSuccess {
+                        
+                        if let Items = jsonObject["Items"].arrayObject {
+                            
+                            arrayReturn = JSONParser.parseAuditActivityHistoryList(Items)
+                            response (objectReturn : arrayReturn)
+                        }
+                    }
+                }
+            }
+        }
+        
+        response (objectReturn : nil)
+    }
 
 }

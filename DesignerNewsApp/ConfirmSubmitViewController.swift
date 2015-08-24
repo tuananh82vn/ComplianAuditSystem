@@ -21,6 +21,8 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     
     var AuditOutcomeList = [AuditOutcomeModel]()
     var AuditConfirm = AuditActivityConfirmSubmitModel()
+    var AuditHistoryList = [AuditActivityHistoryModel]()
+    
     var selectedOutcomeId : Int = 0
     
     var userProfile = LoginModel()
@@ -76,6 +78,7 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
                 }
                 
                 dispatch_async(dispatch_get_main_queue()) {
+                    
                     WebApiService.getAuditOutcomeList(LocalStore.accessToken()!) { objectReturn in
                         
                         if let temp = objectReturn {
@@ -88,11 +91,20 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
                                 self.OutcomeList.insert(temp.Name, atIndex: index)
                                 index++
                             }
-
-
-                            self.view.hideLoading()
+                            
+                            WebApiService.getAuditActivityHistoryList(LocalStore.accessToken()! , AuditActivityUrlId : LocalStore.accessAuditActivityUrlId()! ) { objectReturn in
+                                
+                                if let temp2 = objectReturn {
+                                    
+                                    self.view.hideLoading()
+                                    
+                                    self.AuditHistoryList = temp2
+                                }
+                            }
                         }
                     }
+                    
+                    
                 }
             }
         }
@@ -108,7 +120,7 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         ActionSheetStringPicker.showPickerWithTitle("Select", rows: OutcomeList as [AnyObject] , initialSelection: self.selectOutcome, doneBlock: {
             picker, value, index in
             
-            self.bt_Select.setTitle(index as! String, forState: .Normal)
+            self.bt_Select.setTitle((index as! String), forState: .Normal)
             self.selectOutcome =  value
             self.selectedOutcomeId = self.AuditOutcomeList[self.selectOutcome].Id
             
@@ -196,43 +208,7 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
 
     }
 
-    
-//    func ButtonEditClicked(sender : UIButton)
-//    {
-//        let temp = self.AuditOutcomeList[sender.tag].Name
-//        
-//        var color = UIColor.whiteColor()
-//        
-//        if(self.AuditOutcomeList[sender.tag].Colour == "amber")
-//        {
-//            color = UIColor(rgba: "#FFC200")
-//        }
-//        else
-//            if(self.AuditOutcomeList[sender.tag].Colour == "blue")
-//            {
-//                color = UIColor(rgba: "#235396")
-//            }
-//            else
-//                if(self.AuditOutcomeList[sender.tag].Colour == "green")
-//                {
-//                    color = UIColor(rgba: "#3EB55B")
-//                }
-//                else
-//                    if(self.AuditOutcomeList[sender.tag].Colour == "red")
-//                    {
-//                        color = UIColor(rgba: "#E32444")
-//        }
-//        
-//        self.selectedOutcomeId = self.AuditOutcomeList[sender.tag].Id
-//        
-//        self.bt_Select.setTitleColor(color, forState: .Normal)
-//        
-//        self.bt_Select.setTitle(temp, forState: .Normal)
-//        
-//        closePicker()
-//    }
-    
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToActivity" {
             let GoToActivity = segue.destinationViewController as! AuditActivitiesViewController
