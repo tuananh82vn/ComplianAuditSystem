@@ -5769,7 +5769,8 @@
                                         <exclude reference="r3W-Ii-eOc"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="470" y="61" width="256" height="25"/>
                                     <mask key="constraints">
                                         <include reference="PWy-HC-d7b"/>
                                         <include reference="RGU-oN-KeG"/>
@@ -5798,7 +5799,8 @@
                                         <exclude reference="u8t-lH-9TV"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="734" y="49" width="50" height="50"/>
                                     <mask key="constraints">
                                         <include reference="soD-oX-lC6"/>
                                         <include reference="u8t-lH-9TV"/>
@@ -5837,7 +5839,8 @@
                                         <exclude reference="scd-ue-1GY"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="16" y="107" width="768" height="50"/>
                                     <mask key="constraints">
                                         <include reference="2jv-ac-DAX"/>
                                         <include reference="q2q-Mm-brj"/>
@@ -5930,7 +5933,8 @@
                                         <exclude reference="sxo-gR-ZtQ"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="16" y="165" width="768" height="100"/>
                                     <mask key="subviews">
                                         <include reference="DDj-YI-Hhs"/>
                                         <include reference="lW4-Nr-Gg9"/>
@@ -6148,7 +6152,8 @@
                                         <exclude reference="qNa-wQ-iF4"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="16" y="273" width="768" height="30"/>
                                     <mask key="subviews">
                                         <include reference="xW6-sB-6wg"/>
                                         <include reference="ChI-uM-v88"/>
@@ -6538,7 +6543,8 @@
                                         <exclude reference="jFt-FG-OBJ"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="16" y="311" width="768" height="445"/>
                                     <mask key="subviews">
                                         <include reference="JFn-TB-4ml"/>
                                     </mask>
