@@ -55,6 +55,13 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
 
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.viewWidthConstraint.constant = self.scrollView.frame.width
+        self.view.layoutIfNeeded()
+        
+    }
 
     func InitData(){
         view.showLoading()

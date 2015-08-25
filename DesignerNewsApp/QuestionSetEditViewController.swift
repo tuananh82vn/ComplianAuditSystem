@@ -170,6 +170,8 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
 
     @IBAction func ButtonSaveClicked(sender: AnyObject) {
         
+        view.showLoading()
+        
         self.QuestionRespone.AuditResponse = self.txt_Reponse.text
         
         if self.radio_NotApplicable.selected {
@@ -363,7 +365,7 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
             
             if let temp = result {
                 
-                var imageData = UIImageJPEGRepresentation(temp, 0.7)
+                var imageData = UIImageJPEGRepresentation(temp, 0.5)
                 if let imageNotNull = imageData {
                     let base64String = imageNotNull.base64EncodedStringWithOptions(.allZeros)
                     self.bookingAttachment.FileContent = base64String

@@ -249,7 +249,7 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 
                 if let temp = result {
                     
-                    var imageData = UIImageJPEGRepresentation(temp, 0.7)
+                    var imageData = UIImageJPEGRepresentation(temp, 0.5)
                     if let imageNotNull = imageData {
                         let base64String = imageNotNull.base64EncodedStringWithOptions(.allZeros)
                         self.bookingAttachment.FileContent = base64String
