@@ -232,6 +232,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     func CallStartAudit(index : Int){
         
+
         var refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure want to start audit?", preferredStyle: UIAlertControllerStyle.Alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
@@ -351,7 +352,21 @@ extension  AuditActivitiesViewController : MenuViewControllerDelegate {
     }
     
     func menuViewControllerDidSelectActivitiesMenu(controller: MenuViewController) {
-        //performSegueWithIdentifier("ActivitiesSegue", sender: nil)
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.initData()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
     }
     
     func menuViewControllerDidSelectLogoutMenu(controller: MenuViewController) {

@@ -95,7 +95,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
     
     func DoLogin(){
         
-        view.showLoading()
+        self.view.showLoading()
         
         WebApiService.loginWithUsername(emailTextField.text, password: passwordTextField.text) { object in
             

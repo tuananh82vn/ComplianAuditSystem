@@ -219,82 +219,106 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
     
-    func doSave(){
-        var refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure to submit the audit ?", preferredStyle: UIAlertControllerStyle.Alert)
+    func doSave()
+    {
+        var alertview = JSSAlertView().show2(self, title: "Confirm", text: "Are you sure to submit the audit?", buttonText: "Yes", cancelButtonText: "No", color: UIColorFromHex(0xf1c40f, alpha: 1))
+        alertview.setTextTheme(.Light)
+        alertview.addAction(yesSubmitCallBack)
+    }
+    
+    @IBAction func ButtonDoneClicked(sender: AnyObject) {
         
-        refreshAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
+        var alertview = JSSAlertView().show2(self, title: "Notice", text: "Go back to home screen without submit?", buttonText: "Yes", cancelButtonText: "No", color: UIColorFromHex(0x3498db, alpha: 1))
+        alertview.setTextTheme(.Light)
+        alertview.addAction(yesDoneCallback)
+    }
+    
+    func yesDoneCallback() {
+        
+        WebApiService.loginWithUsername(self.keychain["username"]!, password: self.keychain["password"]!) { object in
             
-            
-            self.view.showLoading()
-            
-            self.AuditConfirm.IsAuditDetailsCompleted = self.AuditDetailCompleted.on
-            
-            self.AuditConfirm.IsBookingDetailsCompleted = self.BookingDetailCompleted.on
-            
-            self.AuditConfirm.IsAuditPlanCompleted = self.AuditPlanCompleted.on
-            
-            self.AuditConfirm.IsMeetingAttendanceRecordCompleted = self.MeetingRecordCompleted.on
-            
-            self.AuditConfirm.IsQuestionSetCompleted = self.QuestionSetCompleted.on
-            
-            self.AuditConfirm.Notes = self.txt_Notes.text
-            
-            self.AuditConfirm.AuditOutcomeId = self.selectedOutcomeId
-            
-            WebApiService.postAuditActivityConfirmSubmitEdit(LocalStore.accessToken()!, object : self.AuditConfirm) { objectReturn in
+            if let temp = object {
                 
-                if let temp = objectReturn {
+                self.userProfile = temp
+                
+                LocalStore.setToken(self.userProfile.TokenNumber)
+                
+                self.performSegueWithIdentifier("GoToActivity", sender: nil)
+                
+            }
+        }
+        
+    }
+    
+    func yesSubmitCallBack(){
+        
+        self.view.showLoading()
+        
+        self.AuditConfirm.IsAuditDetailsCompleted = self.AuditDetailCompleted.on
+        
+        self.AuditConfirm.IsBookingDetailsCompleted = self.BookingDetailCompleted.on
+        
+        self.AuditConfirm.IsAuditPlanCompleted = self.AuditPlanCompleted.on
+        
+        self.AuditConfirm.IsMeetingAttendanceRecordCompleted = self.MeetingRecordCompleted.on
+        
+        self.AuditConfirm.IsQuestionSetCompleted = self.QuestionSetCompleted.on
+        
+        self.AuditConfirm.Notes = self.txt_Notes.text
+        if (self.selectedOutcomeId != 0)
+        {
+            self.AuditConfirm.AuditOutcomeId = self.selectedOutcomeId
+        }
+        else
+        {
+            self.AuditConfirm.AuditOutcomeId = nil
+        }
+        
+        WebApiService.postAuditActivityConfirmSubmitEdit(LocalStore.accessToken()!, object : self.AuditConfirm) { objectReturn in
+            
+            if let temp = objectReturn {
+                
+                self.view.hideLoading()
+                
+                if(temp.IsSuccess){
                     
-                    self.view.hideLoading()
-                    
-                    if(temp.IsSuccess){
+                    dispatch_async(dispatch_get_main_queue()) {
                         
-                        dispatch_async(dispatch_get_main_queue()) {
+                        WebApiService.loginWithUsername(self.keychain["username"]!, password: self.keychain["password"]!) { object in
                             
-                            WebApiService.loginWithUsername(self.keychain["username"]!, password: self.keychain["password"]!) { object in
+                            if let temp = object {
                                 
-                                if let temp = object {
-                                    
-                                    self.userProfile = temp
-                                    
-                                    LocalStore.setToken(self.userProfile.TokenNumber)
-                                    
-                                    self.performSegueWithIdentifier("GoToActivity", sender: nil)
-                                    
-                                }
+                                self.userProfile = temp
+                                
+                                LocalStore.setToken(self.userProfile.TokenNumber)
+                                
+                                self.performSegueWithIdentifier("GoToActivity", sender: nil)
+                                
                             }
                         }
                     }
-                    else
-                    {
-                        var errorMessage : String = ""
-                        
-                        for var index = 0; index < temp.Errors.count; ++index {
-                            
-                            errorMessage += temp.Errors[index].ErrorMessage
-                        }
-                        
-                        
-                        let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                        
-                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-                        
-                        alertController.view.tintColor = UIColor.blackColor()
-                        
-                        self.presentViewController(alertController, animated: true, completion: nil)
-                    }
                 }
-                
+                else
+                {
+                    var errorMessage : String = ""
+                    
+                    for var index = 0; index < temp.Errors.count; ++index {
+                        
+                        errorMessage += temp.Errors[index].ErrorMessage
+                    }
+                    
+                    
+                    let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    alertController.view.tintColor = UIColor.blackColor()
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
             }
             
-        }))
-        
-        refreshAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction!) in
-        }))
-        
-        refreshAlert.view.tintColor = UIColor.blackColor()
-        
-        self.presentViewController(refreshAlert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func ButtonSubmitClicked(sender: AnyObject) {

@@ -28,7 +28,7 @@ class AuditActivityConfirmSubmitModel : Serializable {
     var IsMeetingAttendanceRecordCompletedstring : String
     var IsQuestionSetCompletedstring : String
     var Notes : String
-    var AuditOutcomeId : Int
+    var AuditOutcomeId : Int!
     var AuditOutcomeName : String
     var AuditOutcomeColorName : String
     

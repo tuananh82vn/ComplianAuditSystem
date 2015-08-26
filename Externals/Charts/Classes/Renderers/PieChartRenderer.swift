@@ -232,7 +232,7 @@ public class PieChartRenderer: ChartDataRendererBase
                 {
                     if (drawAtCenter)
                     {
-                        println("drawAtCenter")
+                        //println("drawAtCenter")
                         
                         ChartUtils.drawText(context: context, text: val, point: CGPoint(x: center.x, y: center.y - lineHeight / 2.0), align: .Center, attributes: [NSFontAttributeName: valueFont, NSForegroundColorAttributeName: valueTextColor]);
                     }

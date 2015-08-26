@@ -352,7 +352,8 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
 
     
     func doSave(){
-        view.showLoading()
+        
+        self.view.showLoading()
         
         self.AuditActivityDayListJson.removeAll(keepCapacity: false)
         

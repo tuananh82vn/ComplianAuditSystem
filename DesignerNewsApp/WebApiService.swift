@@ -419,7 +419,7 @@ struct WebApiService {
                 "UrlId": AuditActivityDetail.UrlId,
                 "AuditStartDate" : AuditActivityDetail.AuditStartDateDisplay,
                 "AuditEndDate" : AuditActivityDetail.AuditEndDateDisplay,
-                "AuditTypeId" : AuditActivityDetail.AuditTypeId,
+                "AuditType" : AuditActivityDetail.AuditTypeId,
                 "ScopeOfAudit" :  AuditActivityDetail.ScopeOfAudit,
                 "LeadAuditor" : AuditActivityDetail.LeadAuditor,
                  "Phone" : AuditActivityDetail.Phone,
@@ -1408,6 +1408,11 @@ struct WebApiService {
 
         let urlString = baseURL + ResourcePath.AuditActivityConfirmSubmitEdit.description
         
+        var AuditOutcome = ""
+        
+        if let temp = object.AuditOutcomeId {
+            AuditOutcome = temp.description
+        }
         
         var parameters   : [String:AnyObject] = [
             "TokenNumber" : token,
@@ -1419,9 +1424,11 @@ struct WebApiService {
                 "IsMeetingAttendanceRecordCompleted" : object.IsMeetingAttendanceRecordCompleted,
                 "IsQuestionSetCompleted" : object.IsQuestionSetCompleted,
                 "Notes" : object.Notes,
-                "AuditOutcome" : object.AuditOutcomeId
+                "AuditOutcome" : AuditOutcome
             ]
         ]
+        
+        println(parameters)
         
         var JsonReturn = JsonReturnModel()
         
