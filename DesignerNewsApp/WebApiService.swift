@@ -482,7 +482,7 @@ struct WebApiService {
                 
                 let jsonObject = JSON(json!)
                 
-                println(jsonObject)
+                //println(jsonObject)
                 
                 if let IsSuccess = jsonObject["IsSuccess"].bool {
                     
@@ -1183,6 +1183,9 @@ struct WebApiService {
     static func getAuditActivityQuestionSetQuestionResponseList(token: String, QuestionRespond: AuditActivityQuestionSetQuestionResponseModel, response : (objectReturn : AuditActivityQuestionSetModel?) -> ()) {
         
         
+        
+        //println("Load question :\(QuestionRespond.AuditActivityQuestionSetId)")
+        
         let baseURL = LocalStore.accessDomain()!
 
         let urlString = baseURL + ResourcePath.AuditActivityQuestionSetQuestionResponseList.description
@@ -1226,13 +1229,16 @@ struct WebApiService {
     }
     
     
-    static func getAuditActivityQuestionSetQuestionResponsePieChart(token: String, AuditActivityQuestionSetId: Int, response : (objectReturn : QuestionChartList?) -> ()) {
+    static func getAuditActivityQuestionSetQuestionResponsePieChart(token: String, AuditActivityQuestionSetId: Int,LoadIndex : Int, response : (objectReturn : QuestionChartList?) -> ()) {
         
+        
+        //println("Load chart :\(AuditActivityQuestionSetId) : \(LoadIndex)")
         
         let baseURL = LocalStore.accessDomain()!
 
         let urlString = baseURL + ResourcePath.AuditActivityQuestionSetQuestionResponsePieChart.description
         
+        //println("Load data chart for question set id\(AuditActivityQuestionSetId)")
         
         var parameters : [String:AnyObject] = [
             "TokenNumber" : token,
@@ -1240,6 +1246,7 @@ struct WebApiService {
         ]
         
         var arrayReturn = QuestionChartList()
+        
         
         Alamofire.request(.POST, urlString, parameters: parameters, encoding: .JSON).responseJSON { (_, _, json, _) in
             
@@ -1256,6 +1263,9 @@ struct WebApiService {
                         if let Items = jsonObject["Item"].dictionaryObject {
                             
                             arrayReturn = JSONParser.parseQuestionChartList(Items)
+                            
+                            //println("Finish:\(LoadIndex)")
+                            
                             response (objectReturn : arrayReturn)
                         }
                     }

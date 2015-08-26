@@ -34,7 +34,7 @@ class AuditPlanAddViewController: UIViewController {
         
         var datePicker = ActionSheetDatePicker(title: "Time:", datePickerMode: UIDatePickerMode.Time, selectedDate: NSDate(), target: self, action: "datePicked:", origin: sender)
         
-        datePicker.minuteInterval = 20
+        datePicker.minuteInterval = 1
         
         datePicker.showActionSheetPicker()
     }

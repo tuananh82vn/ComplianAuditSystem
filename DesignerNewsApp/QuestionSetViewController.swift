@@ -29,8 +29,8 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     var selectedIndex : Int = 0
     var height: Int = 0
     var selectQuestionReponseId : Int = 0
-    
     var filterQuestion = AuditActivityQuestionSetQuestionResponseModel()
+    var IndexLoaded :Int = 0
 
     override func viewDidLoad() {
         
@@ -183,59 +183,66 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func InitData(){
         
-            view.showLoading()
-        
-            WebApiService.getAuditActivityQuestionSetList(LocalStore.accessToken()!, AuditActivityUrlId: LocalStore.accessAuditActivityUrlId()!) { objectReturn in
-                
-                if let temp = objectReturn {
+                self.view.showLoading()
 
-                    self.questionSet = temp
+                WebApiService.getAuditActivityQuestionSetList(LocalStore.accessToken()!, AuditActivityUrlId: LocalStore.accessAuditActivityUrlId()!) { objectReturn in
+                
+                    if let temp = objectReturn {
+
+                        self.questionSet = temp
                     
-                    self.LoadQuestionData()
+                        self.LoadQuestionData()
                     
-                    self.QuestionView.reloadData()
+                        self.QuestionView.reloadData()
+                    }
+                }
+    }
+    
+    func LoadDataOfQuestionSet(Index : Int){
+        
+            var item = self.questionSet[Index]
+        
+            self.filterQuestion.AuditActivityQuestionSetId = item.AuditActivityQuestionSetId
+        
+            //println("1 Question Set Id : \(item.AuditActivityQuestionSetId)")
+        
+            //load question set by Id
+            WebApiService.getAuditActivityQuestionSetQuestionResponseList(LocalStore.accessToken()!, QuestionRespond: self.filterQuestion ) { objectReturn in
+                
+                if let temp1 = objectReturn {
+                    
+                    item.QuestionBySectionList = temp1.QuestionBySectionList
+                        
+                }
+            }
+        
+            //load chart data By Id
+            WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: self.filterQuestion.AuditActivityQuestionSetId, LoadIndex: Index ) { objectReturn in
+            
+                if let temp2 = objectReturn {
+                
+                    item.QuestionChart = temp2
+                    
+                    self.IndexLoaded++
+                    
+                    if( self.IndexLoaded == self.questionSet.count) {
+                        
+                        println("Da load du")
+                        self.view.hideLoading()
+                        self.displayById(self.selectedIndex)
+                    }
                 }
             }
     }
     
+    
     func LoadQuestionData(){
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            
+            self.IndexLoaded = 0
             var index = 0
-            
-            for item in self.questionSet {
-
-                self.filterQuestion.AuditActivityQuestionSetId = item.AuditActivityQuestionSetId
-                
-                //load question set by Id
-                WebApiService.getAuditActivityQuestionSetQuestionResponseList(LocalStore.accessToken()!, QuestionRespond: self.filterQuestion ) { objectReturn in
-                    
-                    if let temp1 = objectReturn {
-                        item.QuestionBySectionList = temp1.QuestionBySectionList
-                        
-                        
-                        //load chart data By Id
-                        WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: self.filterQuestion.AuditActivityQuestionSetId ) { objectReturn in
-                            
-                            if let temp2 = objectReturn {
-                                item.QuestionChart = temp2
-                                
-                                if(index == self.questionSet.count-1)
-                                {
-                                    self.view.hideLoading()
-                                    self.displayById(self.selectedIndex)
-                                }
-                                else
-                                {
-                                    index++
-                                }
-                            }
-                        }
-                    }
-                }
+            while index <= self.questionSet.count-1 {
+                self.LoadDataOfQuestionSet(index)
+                index++
             }
-        }
     }
     
    	func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
