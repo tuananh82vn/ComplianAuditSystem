@@ -32,7 +32,21 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
         
         super.viewDidLoad()
         
-        InitData()
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.InitData()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
         
         popCloseDatePicker = PopDatePicker(forTextField: txt_CloseDate)
         txt_CloseDate.delegate = self
@@ -187,9 +201,7 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
         self.performSegueWithIdentifier("GoToMeetingRecordAdd", sender: sender)
     }
     
-    
-    @IBAction func ButtonSaveClicked(sender: AnyObject) {
-        
+    func doSave(){
         self.view.showLoading()
         
         let formatter = NSDateFormatter()
@@ -202,11 +214,11 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
         var dateFormatter = NSDateFormatter()
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
-
+        
         self.auditMeeting.CloseMeetingDate = dateFormatter.stringFromDate(date1!)
-
+        
         self.auditMeeting.OpenMeetingDate = dateFormatter.stringFromDate(date2!)
-
+        
         WebApiService.postAuditActivityMeeting(LocalStore.accessToken()!, AuditActivityMeeting: self.auditMeeting) { objectReturn in
             
             if let temp = objectReturn {
@@ -214,7 +226,7 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
                 self.view.hideLoading()
                 
                 if(temp.IsSuccess){
-
+                    
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
                 else
@@ -238,6 +250,24 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
                 
             }
         }
+    }
+    @IBAction func ButtonSaveClicked(sender: AnyObject) {
+        
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.doSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
     }
     
     

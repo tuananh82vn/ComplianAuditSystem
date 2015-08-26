@@ -82,8 +82,7 @@ class AuditPlanAddViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func ButtonSaveClicked(sender: AnyObject) {
-        
+    func doSave(){
         view.showLoading()
         
         self.AuditPlanItem.AuditActivityAuditPlanId = self.selectedAuditPlanId
@@ -93,7 +92,7 @@ class AuditPlanAddViewController: UIViewController {
         self.AuditPlanItem.AuditActivityDayId = self.selectedDayId
         
         if let text = self.bt_Time.titleLabel?.text {
-           self.AuditPlanItem.TimeText = text
+            self.AuditPlanItem.TimeText = text
         }
         
         self.AuditPlanItem.Activity = self.tf_Activity.text
@@ -134,6 +133,25 @@ class AuditPlanAddViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func ButtonSaveClicked(sender: AnyObject) {
+        
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.doSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
 
     }
 

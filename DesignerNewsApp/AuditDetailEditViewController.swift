@@ -350,8 +350,8 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         //println(aButton)
     }
 
-    @IBAction func ButtonSaveClicked(sender: AnyObject) {
-        
+    
+    func doSave(){
         view.showLoading()
         
         self.AuditActivityDayListJson.removeAll(keepCapacity: false)
@@ -359,7 +359,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         let formatter = NSDateFormatter()
         
         formatter.dateFormat =  NSDateFormatter.dateFormatFromTemplate("MMddyyyy", options: 0, locale: NSLocale(localeIdentifier: "en-AU"))
-
+        
         self.auditActivityDetail.AuditStartDate = formatter.dateFromString(DateFrom.text)
         
         self.auditActivityDetail.AuditEndDate = formatter.dateFromString(DateTo.text)
@@ -382,7 +382,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         self.auditActivityDetail.Phone = Phone.text
         self.auditActivityDetail.EmailAddress = Email.text
         
-       // self.auditActivityDetail.AuditActivityDayListJson += "["
+        // self.auditActivityDetail.AuditActivityDayListJson += "["
         
         AddAuditDay(FactoryDay1,DayType: 1,DayNumber: 1)
         AddAuditDay(FactoryDay2,DayType: 1,DayNumber: 2)
@@ -396,7 +396,7 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
         AddAuditDay(SiteDay4,DayType: 2,DayNumber: 4)
         AddAuditDay(SiteDay5,DayType: 2,DayNumber: 5)
         
-
+        
         let jsonCompatibleArray = AuditActivityDayListJson.map { model in
             return [
                 "DayNumber":model.DayNumber,
@@ -432,8 +432,8 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
                     
                     for var index = 0; index < temp.Errors.count; ++index {
                         
-                            errorMessage += temp.Errors[index].ErrorMessage
-                        }
+                        errorMessage += temp.Errors[index].ErrorMessage
+                    }
                     
                     
                     let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
@@ -447,6 +447,25 @@ class AuditDetailEditViewController: UIViewController , UITextFieldDelegate , SS
                 
             }
         }
+    }
+    
+    @IBAction func ButtonSaveClicked(sender: AnyObject) {
+        
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.doSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
     }
     
     @IBAction func ButtonCancelClicked(sender: AnyObject) {

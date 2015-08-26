@@ -48,7 +48,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         
         //LocalStore.setDomain("http://wsandypham:8080")
         //LocalStore.setDomain("http://complianceauditsystem.softwarestaging.com.au")
-        
         //keychain["domain"] = "http://complianceauditsystem.softwarestaging.com.au"
 
         
@@ -58,26 +57,40 @@ class LoginViewController: UIViewController, UITextFieldDelegate, DragDropBehavi
         }
         if let domain = keychain["domain"]
         {
-            //LocalStore.deleteDomain()
             LocalStore.setDomain(domain)
         }
         
+        //set no back button for Login screen
         let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
-    }
-    
+        
 
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
         dialogView.animate()
+
     }
     
     // MARK: Button
     @IBAction func signupButtonPressed(sender: AnyObject) {
-
-        DoLogin()
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.DoLogin()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
     }
     
     func DoLogin(){

@@ -34,7 +34,24 @@ class ChangeDomainViewController: UIViewController ,UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
-        DoSave()
+        
+        
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.DoSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
+
         txt_DomainName.resignFirstResponder()
         return true
     }
@@ -45,7 +62,7 @@ class ChangeDomainViewController: UIViewController ,UITextFieldDelegate {
     
     func DoSave(){
         
-        view.showLoading()
+        self.view.showLoading()
         
         WebApiService.postVerify(txt_DomainName.text){ objectReturn in
             
@@ -87,6 +104,20 @@ class ChangeDomainViewController: UIViewController ,UITextFieldDelegate {
     }
     
     @IBAction func ButtonSaveClicked(sender: AnyObject) {
-        DoSave()
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.DoSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
     }
 }

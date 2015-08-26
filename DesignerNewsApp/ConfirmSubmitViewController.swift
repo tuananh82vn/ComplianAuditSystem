@@ -50,7 +50,21 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         
         super.viewDidLoad()
         
-        InitData()
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.InitData()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
 
@@ -64,7 +78,8 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     }
 
     func InitData(){
-        view.showLoading()
+        
+        self.view.showLoading()
         
         WebApiService.getAuditActivityConfirmSubmitSelect(LocalStore.accessToken()! , AuditActivityUrlId : LocalStore.accessAuditActivityUrlId()! ) { objectReturn in
             
@@ -172,104 +187,105 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         ActionSheetStringPicker.showPickerWithTitle("Select", rows: OutcomeList as [AnyObject] , initialSelection: self.selectOutcome, doneBlock: {
             picker, value, index in
             
-            if((index as! String) == "Amber")
-            {
-                self.color = UIColor(rgba: "#FFC200")
-            }
-            else
-                if((index as! String)  == "Blue")
+            if(index != nil){
+                if((index as! String) == "Amber")
                 {
-                    self.color = UIColor(rgba: "#235396")
+                    self.color = UIColor(rgba: "#FFC200")
                 }
                 else
-                    if((index as! String)  == "Green")
+                    if((index as! String)  == "Blue")
                     {
-                        self.color = UIColor(rgba: "#3EB55B")
+                        self.color = UIColor(rgba: "#235396")
                     }
                     else
-                        if((index as! String)  == "Red")
+                        if((index as! String)  == "Green")
                         {
-                            self.color = UIColor(rgba: "#E32444")
+                            self.color = UIColor(rgba: "#3EB55B")
+                        }
+                        else
+                            if((index as! String)  == "Red")
+                            {
+                                self.color = UIColor(rgba: "#E32444")
+                            }
+            
+                self.bt_Select.setTitle((index as! String), forState: .Normal)
+                self.bt_Select.setTitleColor(self.color, forState: .Normal)
+            
+                self.selectOutcome =  value
+                self.selectedOutcomeId = self.AuditOutcomeList[self.selectOutcome].Id
             }
-            
-            self.bt_Select.setTitle((index as! String), forState: .Normal)
-            self.bt_Select.setTitleColor(self.color, forState: .Normal)
-            
-            self.selectOutcome =  value
-            self.selectedOutcomeId = self.AuditOutcomeList[self.selectOutcome].Id
             
             return
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
-
-    @IBAction func ButtonSubmitClicked(sender: AnyObject) {
-        
+    
+    func doSave(){
         var refreshAlert = UIAlertController(title: "Confirm", message: "Are you sure to submit the audit ?", preferredStyle: UIAlertControllerStyle.Alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
             
+            
+            self.view.showLoading()
+            
+            self.AuditConfirm.IsAuditDetailsCompleted = self.AuditDetailCompleted.on
+            
+            self.AuditConfirm.IsBookingDetailsCompleted = self.BookingDetailCompleted.on
+            
+            self.AuditConfirm.IsAuditPlanCompleted = self.AuditPlanCompleted.on
+            
+            self.AuditConfirm.IsMeetingAttendanceRecordCompleted = self.MeetingRecordCompleted.on
+            
+            self.AuditConfirm.IsQuestionSetCompleted = self.QuestionSetCompleted.on
+            
+            self.AuditConfirm.Notes = self.txt_Notes.text
+            
+            self.AuditConfirm.AuditOutcomeId = self.selectedOutcomeId
+            
+            WebApiService.postAuditActivityConfirmSubmitEdit(LocalStore.accessToken()!, object : self.AuditConfirm) { objectReturn in
+                
+                if let temp = objectReturn {
+                    
+                    self.view.hideLoading()
+                    
+                    if(temp.IsSuccess){
                         
-                        self.view.showLoading()
-                        
-                        self.AuditConfirm.IsAuditDetailsCompleted = self.AuditDetailCompleted.on
-                        
-                        self.AuditConfirm.IsBookingDetailsCompleted = self.BookingDetailCompleted.on
-                        
-                        self.AuditConfirm.IsAuditPlanCompleted = self.AuditPlanCompleted.on
-                        
-                        self.AuditConfirm.IsMeetingAttendanceRecordCompleted = self.MeetingRecordCompleted.on
-                        
-                        self.AuditConfirm.IsQuestionSetCompleted = self.QuestionSetCompleted.on
-                        
-                        self.AuditConfirm.Notes = self.txt_Notes.text
-                        
-                        self.AuditConfirm.AuditOutcomeId = self.selectedOutcomeId
-                        
-                        WebApiService.postAuditActivityConfirmSubmitEdit(LocalStore.accessToken()!, object : self.AuditConfirm) { objectReturn in
+                        dispatch_async(dispatch_get_main_queue()) {
                             
-                            if let temp = objectReturn {
+                            WebApiService.loginWithUsername(self.keychain["username"]!, password: self.keychain["password"]!) { object in
                                 
-                                self.view.hideLoading()
-                                
-                                if(temp.IsSuccess){
+                                if let temp = object {
                                     
-                                    dispatch_async(dispatch_get_main_queue()) {
-                                        
-                                        WebApiService.loginWithUsername(self.keychain["username"]!, password: self.keychain["password"]!) { object in
-                                        
-                                            if let temp = object {
-                                            
-                                                self.userProfile = temp
-                                            
-                                                LocalStore.setToken(self.userProfile.TokenNumber)
-                                            
-                                                self.performSegueWithIdentifier("GoToActivity", sender: sender)
-                                            
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    var errorMessage : String = ""
+                                    self.userProfile = temp
                                     
-                                    for var index = 0; index < temp.Errors.count; ++index {
-                                        
-                                        errorMessage += temp.Errors[index].ErrorMessage
-                                    }
+                                    LocalStore.setToken(self.userProfile.TokenNumber)
                                     
+                                    self.performSegueWithIdentifier("GoToActivity", sender: nil)
                                     
-                                    let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                                    
-                                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-                                    
-                                    alertController.view.tintColor = UIColor.blackColor()
-                                    
-                                    self.presentViewController(alertController, animated: true, completion: nil)
                                 }
                             }
-                            
                         }
+                    }
+                    else
+                    {
+                        var errorMessage : String = ""
+                        
+                        for var index = 0; index < temp.Errors.count; ++index {
+                            
+                            errorMessage += temp.Errors[index].ErrorMessage
+                        }
+                        
+                        
+                        let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                        
+                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                        
+                        alertController.view.tintColor = UIColor.blackColor()
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+                
+            }
             
         }))
         
@@ -279,6 +295,25 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         refreshAlert.view.tintColor = UIColor.blackColor()
         
         self.presentViewController(refreshAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func ButtonSubmitClicked(sender: AnyObject) {
+        
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.doSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
 
     }
     
@@ -286,7 +321,7 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
         
         if(self.AuditHistoryList.count > 0 )
         {
-            return self.AuditHistoryList.count 
+            return self.AuditHistoryList.count
         }
         else
         {

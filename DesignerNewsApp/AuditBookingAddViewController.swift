@@ -271,7 +271,7 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
 
     }
     
-    @IBAction func ButtonSaveClicked(sender: AnyObject) {
+    func doSave(){
         
         self.view.showLoading()
         
@@ -288,7 +288,7 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 
                 if(temp.IsSuccess){
                     
-
+                    
                     NSNotificationCenter.defaultCenter().postNotificationName("refeshBooking", object: nil)
                     
                     self.dismissViewControllerAnimated(true, completion: nil)
@@ -314,5 +314,24 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 
             }
         }
+    }
+    
+    @IBAction func ButtonSaveClicked(sender: AnyObject) {
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.doSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
+
     }
 }

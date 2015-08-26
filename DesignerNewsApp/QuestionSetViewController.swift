@@ -36,24 +36,39 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         super.viewDidLoad()
 
-        InitData()
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.InitData()
+                    self.QuestionView.delegate = self
+                    self.QuestionView.dataSource = self
+                    
+                    self.QuestionView.font = UIFont(name: "HelveticaNeue-Light", size: 20)!
+                    self.QuestionView.highlightedFont = UIFont(name: "HelveticaNeue", size: 20)!
+                    self.QuestionView.pickerViewStyle = .Wheel
+                    self.QuestionView.maskDisabled = false
+                    self.QuestionView.reloadData()
+                    
+                    
+                    self.viewHeightConstraint.constant = CGFloat(0)
+                    
+                    self.scrollView.contentSize = CGSizeMake(self.tableView1.frame.width-1, CGFloat(0))
+                    
+                    self.view.layoutIfNeeded()
 
-        self.QuestionView.delegate = self
-        self.QuestionView.dataSource = self
-        
-        self.QuestionView.font = UIFont(name: "HelveticaNeue-Light", size: 20)!
-        self.QuestionView.highlightedFont = UIFont(name: "HelveticaNeue", size: 20)!
-        self.QuestionView.pickerViewStyle = .Wheel
-        self.QuestionView.maskDisabled = false
-        self.QuestionView.reloadData()
-        
-        
-        self.viewHeightConstraint.constant = CGFloat(0)
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
 
-        self.scrollView.contentSize = CGSizeMake(tableView1.frame.width-1, CGFloat(0))
         
-        self.view.layoutIfNeeded()
-
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
 

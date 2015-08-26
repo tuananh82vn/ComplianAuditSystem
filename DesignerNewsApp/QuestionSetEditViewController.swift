@@ -167,10 +167,9 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
         picker.allowsEditing = false
         self.presentViewController(picker, animated: true, completion: nil)
     }
-
-    @IBAction func ButtonSaveClicked(sender: AnyObject) {
-        
-        view.showLoading()
+    
+    func doSave(){
+        self.view.showLoading()
         
         self.QuestionRespone.AuditResponse = self.txt_Reponse.text
         
@@ -180,28 +179,28 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
         else
             if self.radio_Confirm.selected {
                 self.QuestionRespone.ResponseCategoryId = 2
-        }
-        else
+            }
+            else
                 if self.radio_Critical.selected {
                     self.QuestionRespone.ResponseCategoryId = 3
-        }
-        else
+                }
+                else
                     if self.radio_Major.selected {
                         self.QuestionRespone.ResponseCategoryId = 4
-        }
-        else
+                    }
+                    else
                         if self.radio_Minor.selected {
                             self.QuestionRespone.ResponseCategoryId = 5
-        }
-        else
+                        }
+                        else
                             if self.radio_NotAudited.selected {
                                 self.QuestionRespone.ResponseCategoryId = 6
-        }
-        else
+                            }
+                            else
                                 if self.radio_Recomendation.selected {
                                     self.QuestionRespone.ResponseCategoryId = 7
         }
-
+        
         self.QuestionRespone.Attachment = self.bookingAttachment
         
         
@@ -239,6 +238,25 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
                 }
             }
         }
+    }
+
+    @IBAction func ButtonSaveClicked(sender: AnyObject) {
+        
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.doSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
     }
     
     @IBAction func ButtonCancelClicked(sender: AnyObject) {

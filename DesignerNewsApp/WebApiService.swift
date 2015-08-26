@@ -96,6 +96,28 @@ struct WebApiService {
             }
         }
     }
+    
+    static func checkInternet(flag:Bool, completionHandler:(internet:Bool) -> Void)
+    {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        let url = NSURL(string: "http://www.google.com/")
+        let request = NSMutableURLRequest(URL: url!)
+        
+        request.HTTPMethod = "HEAD"
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 10.0
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue:NSOperationQueue.mainQueue(), completionHandler:
+            {(response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                
+                let rsp = response as! NSHTTPURLResponse?
+                
+                completionHandler(internet:rsp?.statusCode == 200)
+        })
+    }
 
     static func loginWithUsername(Username: String, password: String, response: (object: LoginModel?) -> ()) {
         

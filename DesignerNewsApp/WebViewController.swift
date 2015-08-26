@@ -54,14 +54,30 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    let request = NSURLRequest(URL: self.url!)
+                    
+                    self.webView.loadRequest(request)
+                    
+                    self.webView.delegate = self
+                    
+                    self.webView.scrollView.delegate = self
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
 
-        let request = NSURLRequest(URL: url!)
-        
-        webView.loadRequest(request)
-        
-        webView.delegate = self
-        
-        webView.scrollView.delegate = self
+
     }
 
     override func didReceiveMemoryWarning() {

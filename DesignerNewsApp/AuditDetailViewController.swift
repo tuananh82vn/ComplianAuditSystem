@@ -38,7 +38,21 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         super.viewDidLoad()
         
         
-        initSiteData()
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.initData()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
         
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refeshAuditDetail", object: nil)
@@ -46,9 +60,9 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
 
     }
 
-    func initSiteData(){
+    func initData(){
         
-        view.showLoading()
+        self.view.showLoading()
         
         self.ButtonEdit.enabled = false
 
@@ -104,7 +118,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
 
     
     func refesh(notification: NSNotification){
-        initSiteData()
+        self.initData()
     }
     
     

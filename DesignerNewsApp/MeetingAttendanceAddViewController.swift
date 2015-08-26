@@ -65,9 +65,8 @@ class MeetingAttendanceAddViewController: UIViewController {
     @IBAction func ButtonCancelClicked(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    @IBAction func ButtonSaveClicked(sender: AnyObject) {
-        
+    
+    func doSave(){
         view.showLoading()
         
         self.MeetingRecord.Id = self.selectedId
@@ -91,7 +90,7 @@ class MeetingAttendanceAddViewController: UIViewController {
                 if(temp.IsSuccess){
                     
                     NSNotificationCenter.defaultCenter().postNotificationName("refeshMeeting", object: nil)
-
+                    
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
                 else
@@ -114,6 +113,24 @@ class MeetingAttendanceAddViewController: UIViewController {
                 }
             }
         }
+    }
+
+    @IBAction func ButtonSaveClicked(sender: AnyObject) {
+        //Check Internet
+        WebApiService.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                
+                if (internet)
+                {
+                    self.doSave()
+                }
+                else
+                {
+                    var customIcon = UIImage(named: "no-internet")
+                    var alertview = JSSAlertView().show2(self, title: "Warning", text: "No connections are available ", buttonText: "Try later", color: UIColorFromHex(0xe74c3c, alpha: 1), iconImage: customIcon)
+                    alertview.setTextTheme(.Light)
+                }
+        })
     }
 
 
