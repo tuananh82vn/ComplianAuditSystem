@@ -227,7 +227,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                     
                     if( self.IndexLoaded == self.questionSet.count) {
                         
-                        println("Da load du")
+                        //println("Da load du")
                         self.view.hideLoading()
                         self.displayById(self.selectedIndex)
                     }

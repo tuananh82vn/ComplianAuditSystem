@@ -48,7 +48,7 @@ class AuditBookingViewController: UIViewController , UITableViewDelegate, UITabl
             
             if let temp = objectReturn {
                 
-                println("init data")
+                //println("init data")
             
                 self.auditBooking = temp
                 
