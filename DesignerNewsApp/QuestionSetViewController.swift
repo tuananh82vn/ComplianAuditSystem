@@ -226,7 +226,6 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                     self.IndexLoaded++
                     
                     if( self.IndexLoaded == self.questionSet.count) {
-                        
                         //println("Da load du")
                         self.view.hideLoading()
                         self.displayById(self.selectedIndex)
@@ -504,6 +503,7 @@ extension  QuestionSetViewController : QuestionSetSearchViewControllerDelegate {
     
     func DidSelectClose(controller: QuestionSetSearchViewController) {
         
+        
         if(controller.filterQuestion.Priority != "0" ){
             self.filterQuestion.Priority = controller.filterQuestion.Priority
         }
@@ -528,10 +528,9 @@ extension  QuestionSetViewController : QuestionSetSearchViewControllerDelegate {
             self.filterQuestion.ResponseCategory = ""
         }
         
-        self.LoadQuestionData()
+        self.InitData()
         
-        self.QuestionView.reloadData()
-        
+        self.displayById(selectedIndex)
     }
 
 }

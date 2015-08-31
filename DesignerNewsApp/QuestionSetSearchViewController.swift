@@ -78,8 +78,14 @@ class QuestionSetSearchViewController: UIViewController {
                     
                 }
                 
+                self.bt_Status.setTitle("All", forState: .Normal)
+                self.bt_Reponse.setTitle("All", forState: .Normal)
+                self.bt_priority.setTitle("All", forState: .Normal)
             }
-        }}
+        }
+        
+
+    }
     
     
     override func viewDidAppear(animated: Bool) {
