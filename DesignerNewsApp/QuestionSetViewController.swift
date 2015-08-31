@@ -81,7 +81,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         self.view.showLoading()
         
-        LoadQuestionData()
+        self.LoadQuestionData()
         
         //Reload chart view
         var questionText1 = [String]()
@@ -126,6 +126,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.scrollView.contentSize = CGSizeMake(tableView1.frame.width, CGFloat(self.height + 100))
         
         self.tableView1.reloadData()
+        self.QuestionView.reloadData()
     }
 
     func setChart(chart : PieChartView, chartName : String , dataPoints: [String], values: [Double], colors :[UIColor]) {
@@ -190,10 +191,10 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                     if let temp = objectReturn {
 
                         self.questionSet = temp
+                        
+                        self.QuestionView.reloadData()
                     
                         self.LoadQuestionData()
-                    
-                        self.QuestionView.reloadData()
                     }
                 }
     }
@@ -211,31 +212,43 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                 
                 if let temp1 = objectReturn {
                     
+                    println("Finish load Question Data")
+                    
                     item.QuestionBySectionList = temp1.QuestionBySectionList
+                    
+                    self.tableView1.reloadData()
+                    
+                    //load chart data By Id
+                    WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: self.filterQuestion.AuditActivityQuestionSetId, LoadIndex: Index ) { objectReturn in
+                        
+                        if let temp2 = objectReturn {
+                            
+                            item.QuestionChart = temp2
+                            
+                            self.IndexLoaded++
+                            
+                            if( self.IndexLoaded == self.questionSet.count) {
+                                
+                                println("Finish load Chart")
+                                
+                                self.displayById(self.selectedIndex)
+                                
+                                self.view.hideLoading()
+                            }
+                        }
+                    }
                         
                 }
             }
         
-            //load chart data By Id
-            WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: self.filterQuestion.AuditActivityQuestionSetId, LoadIndex: Index ) { objectReturn in
-            
-                if let temp2 = objectReturn {
-                
-                    item.QuestionChart = temp2
-                    
-                    self.IndexLoaded++
-                    
-                    if( self.IndexLoaded == self.questionSet.count) {
-                        //println("Da load du")
-                        self.view.hideLoading()
-                        self.displayById(self.selectedIndex)
-                    }
-                }
-            }
+        
     }
     
     
     func LoadQuestionData(){
+        
+            println("Begin to load Question Data")
+        
             self.IndexLoaded = 0
             var index = 0
             while index <= self.questionSet.count-1 {
@@ -266,6 +279,8 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func displayById(Index : Int)
     {
+        println("Display \(Index)")
+        
         //Reload chart view
         var questionText1 = [String]()
         var questionNumber1 = [Double]()
@@ -530,7 +545,7 @@ extension  QuestionSetViewController : QuestionSetSearchViewControllerDelegate {
         
         self.InitData()
         
-        self.displayById(selectedIndex)
+        //self.displayById(selectedIndex)
     }
 
 }
