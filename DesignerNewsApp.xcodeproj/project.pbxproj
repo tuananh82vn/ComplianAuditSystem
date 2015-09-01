@@ -34,7 +34,6 @@
 		1AED4A711A7BBCCA004C689E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED4A701A7BBCCA004C689E /* Error.swift */; };
 		661133131B83098D00C3CAE4 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661133121B83098D00C3CAE4 /* Keychain.swift */; };
 		6612DB511B9429430034F6BC /* Login2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6612DB501B9429430034F6BC /* Login2ViewController.swift */; };
-		6612DBA21B953D2A0034F6BC /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6612DBA11B953D2A0034F6BC /* TransitionManager.swift */; };
 		6617A5781B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */; };
 		6617A58C1B6F31AE00066C73 /* AuditBookingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */; };
 		6617A58E1B6F3B1100066C73 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6617A58D1B6F3B1100066C73 /* Photos.framework */; };
@@ -93,7 +92,6 @@
 		966128551A4DA63100A54A23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966128541A4DA63100A54A23 /* AppDelegate.swift */; };
 		9661285C1A4DA63100A54A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9661285B1A4DA63100A54A23 /* Images.xcassets */; };
 		9661285F1A4DA63100A54A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9661285D1A4DA63100A54A23 /* LaunchScreen.xib */; };
-		967CFD061A5C10700044B4E3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967CFD051A5C10700044B4E3 /* LoginViewController.swift */; };
 		96879AA01A6E786D00717E59 /* Spring.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4FDA711A6E44B70099D309 /* Spring.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9694F20A1A6123D000A6376A /* WebViewController.swift */; };
 		96AEB7431A5E5C3F005989F4 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96A5800B1A5E4DF500FDE099 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -320,7 +318,6 @@
 		1AED4A701A7BBCCA004C689E /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		661133121B83098D00C3CAE4 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		6612DB501B9429430034F6BC /* Login2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login2ViewController.swift; sourceTree = "<group>"; };
-		6612DBA11B953D2A0034F6BC /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityBookingDetailModel.swift; sourceTree = "<group>"; };
 		6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditBookingAddViewController.swift; sourceTree = "<group>"; };
 		6617A58D1B6F3B1100066C73 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -381,7 +378,6 @@
 		966128541A4DA63100A54A23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9661285B1A4DA63100A54A23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9661285E1A4DA63100A54A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		967CFD051A5C10700044B4E3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9694F20A1A6123D000A6376A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		96A580051A5E4DF400FDE099 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		B779F6B31AB7570700DDF3AA /* ChromeActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChromeActivity.swift; sourceTree = "<group>"; };
@@ -551,7 +547,6 @@
 		66BA22D81B67056D00B755D7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				6612DBA11B953D2A0034F6BC /* TransitionManager.swift */,
 				66B62F981B8D32AB00EFA65C /* JSSAlertView.swift */,
 				667E5D2F1B86BCF9001FDF59 /* PhotoThumbnail.swift */,
 				6647ABE51B74A33E00E6DAF5 /* AKPickerView.swift */,
@@ -630,7 +625,6 @@
 		B70190FA1A754DC900ED4D3D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				967CFD051A5C10700044B4E3 /* LoginViewController.swift */,
 				6612DB501B9429430034F6BC /* Login2ViewController.swift */,
 				665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */,
 				964892661A63F5D900214D53 /* MenuViewController.swift */,
@@ -989,7 +983,6 @@
 				B78F90381A6EF75800883A5B /* WebApiService.swift in Sources */,
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
 				661133131B83098D00C3CAE4 /* Keychain.swift in Sources */,
-				6612DBA21B953D2A0034F6BC /* TransitionManager.swift in Sources */,
 				662DC8EE1B81C92000867625 /* UIColor.swift in Sources */,
 				66570D321B74446F002248A2 /* MeetingAttendanceViewController.swift in Sources */,
 				669304F01B60CF6E001B855D /* TableViewController.swift in Sources */,
@@ -1022,7 +1015,6 @@
 				66D7B3091B5F670600B7FAE2 /* NavigationController.swift in Sources */,
 				66919EFA1B5626200058FF09 /* LoginModel.swift in Sources */,
 				6647ABD01B748E6100E6DAF5 /* QuestionSetViewController.swift in Sources */,
-				967CFD061A5C10700044B4E3 /* LoginViewController.swift in Sources */,
 				663067271B6764BE001EE543 /* Serializable.swift in Sources */,
 				B779F6C61AB7851100DDF3AA /* SafariActivity.swift in Sources */,
 				66570D441B744B93002248A2 /* AuditActivityMeetingModel.swift in Sources */,

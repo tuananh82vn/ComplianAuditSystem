@@ -43,7 +43,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     var objectStartAudit = AuditRequestStartAuditModel()
     
-    var transitionManager = TransitionManager()
+    //var transitionManager = TransitionManager()
     
     override func viewDidLoad(){
         
@@ -186,7 +186,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                             cell.ButtonStatus.setImage(imageStartAudit, forState: .Normal)
                             cell.Status.text =  "Start Audit"
                             cell.ButtonStatus.tag = indexPath.row
-                            //cell.ButtonStatus.addTarget(self, action: "StartAuditButtonClicked:", forControlEvents: .TouchUpInside)
+                            cell.ButtonStatus.addTarget(self, action: "StartAuditButtonClicked:", forControlEvents: .TouchUpInside)
                         }
                         else
                         //Reviewing
@@ -198,7 +198,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                             if auditRequest[indexPath.row].AuditActivityStatusId == 2 {
                                 cell.ButtonStatus.setImage(imageOngoing, forState: .Normal)
                                 cell.ButtonStatus.tag = indexPath.row
-                                //cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
+                                cell.ButtonStatus.addTarget(self, action: "yourButtonClicked:", forControlEvents: .TouchUpInside)
                                 cell.Status.text =  "Ongoing"
                             }
                             else // Completed
@@ -232,6 +232,19 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         return cell
     }
     
+    func yourButtonClicked(sender : UIButton){
+        
+        LocalStore.setAuditActivityUrlId(auditRequest[sender.tag].AuditActivityUrlId)
+        
+        self.performSegueWithIdentifier("GoToAuditDetail", sender: self)
+    }
+    
+    func StartAuditButtonClicked(sender : UIButton){
+        
+        self.CallStartAudit(sender.tag)
+        
+    }
+    
     func CallStartAudit(index : Int){
         
 
@@ -250,7 +263,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                     
                     LocalStore.setAuditActivityUrlId(self.objectStartAudit.AuditActivityUrlId)
                     
-                    self.performSegueWithIdentifier("GoToAuditDetail", sender: nil)
+                    self.performSegueWithIdentifier("GoToAuditDetail", sender: self)
                     
                     self.view.hideLoading()
                 }
@@ -337,21 +350,12 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToMenu" {
+            
+            println("Go To Menu")
+            
             let menuViewController = segue.destinationViewController as! MenuViewController
             menuViewController.delegate = self
             menuViewController.userProfile = self.userProfile
-        }
-        else
-        {
-            // this gets a reference to the screen that we're about to transition to
-            let toViewController = segue.destinationViewController as! UIViewController
-            
-            // instead of using the default transition animation, we'll ask
-            // the segue to use our custom TransitionManager object to manage the transition animation
-            self.transitionManager.presenting = true
-            
-            toViewController.transitioningDelegate = self.transitionManager
-
         }
     }
 
@@ -389,11 +393,6 @@ extension  AuditActivitiesViewController : MenuViewControllerDelegate {
         
         performSegueWithIdentifier("GoToLogin", sender: nil)
     }
-    
-//    func menuViewControllerDidSelectChangeDomainMenu(controller: MenuViewController) {
-//        
-//        performSegueWithIdentifier("GoToChangeDomain", sender: nil)
-//    }
     
 }
 

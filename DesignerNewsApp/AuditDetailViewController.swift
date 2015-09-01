@@ -33,7 +33,6 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     
     private var auditActivityAuditDetail = AuditActivityAuditDetailModel()
 
-    let transitionManager = TransitionManager()
     
     override func viewDidLoad() {
         
@@ -215,15 +214,14 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
         }
         else
                 if segue.identifier == "GoBackToActivity" {
-                    
-                    // this gets a reference to the screen that we're about to transition to
-                    let toViewController = segue.destinationViewController as! UIViewController
-                    
-                    // instead of using the default transition animation, we'll ask
-                    // the segue to use our custom TransitionManager object to manage the transition animation
-                    self.transitionManager.presenting = false
-                    
-                    toViewController.transitioningDelegate = self.transitionManager
+
+                    let transition = CATransition()
+                    transition.duration = 0.5
+                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    transition.type = kCATransitionPush
+                    transition.subtype = kCATransitionFromLeft
+                    self.navigationController!.view.layer.addAnimation(transition, forKey: nil)
+                    //self.navigationController?.popViewControllerAnimated(false)
         }
     }
 

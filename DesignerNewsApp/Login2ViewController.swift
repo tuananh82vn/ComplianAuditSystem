@@ -123,11 +123,4 @@ class Login2ViewController: UIViewController {
 
     }
 
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "GoToActivity" {
-//            let GoToActivity = segue.destinationViewController as! AuditActivitiesViewController
-//            GoToActivity.userProfile = self.userProfile
-//        }
-//    }
-
 }
