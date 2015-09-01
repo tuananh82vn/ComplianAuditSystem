@@ -3,17 +3,16 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Recycle Sign-50.png"
+      "filename" : "singin70.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Recycle Sign-100.png"
+      "filename" : "singin140.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Recycle Sign-50-2.png"
+      "scale" : "3x"
     }
   ],
   "info" : {

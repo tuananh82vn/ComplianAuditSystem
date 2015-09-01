@@ -33,6 +33,8 @@
 		1AB33B591A7660E800E3AB55 /* libDTCoreText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB33B501A7660B300E3AB55 /* libDTCoreText.a */; };
 		1AED4A711A7BBCCA004C689E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED4A701A7BBCCA004C689E /* Error.swift */; };
 		661133131B83098D00C3CAE4 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661133121B83098D00C3CAE4 /* Keychain.swift */; };
+		6612DB511B9429430034F6BC /* Login2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6612DB501B9429430034F6BC /* Login2ViewController.swift */; };
+		6612DBA21B953D2A0034F6BC /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6612DBA11B953D2A0034F6BC /* TransitionManager.swift */; };
 		6617A5781B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */; };
 		6617A58C1B6F31AE00066C73 /* AuditBookingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */; };
 		6617A58E1B6F3B1100066C73 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6617A58D1B6F3B1100066C73 /* Photos.framework */; };
@@ -317,6 +319,8 @@
 		1AB33B3F1A7660B300E3AB55 /* DTCoreText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTCoreText.xcodeproj; path = DTCoreText/DTCoreText.xcodeproj; sourceTree = "<group>"; };
 		1AED4A701A7BBCCA004C689E /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		661133121B83098D00C3CAE4 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		6612DB501B9429430034F6BC /* Login2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login2ViewController.swift; sourceTree = "<group>"; };
+		6612DBA11B953D2A0034F6BC /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		6617A5771B6EE6A900066C73 /* AuditActivityBookingDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditActivityBookingDetailModel.swift; sourceTree = "<group>"; };
 		6617A58B1B6F31AE00066C73 /* AuditBookingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditBookingAddViewController.swift; sourceTree = "<group>"; };
 		6617A58D1B6F3B1100066C73 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -547,6 +551,7 @@
 		66BA22D81B67056D00B755D7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6612DBA11B953D2A0034F6BC /* TransitionManager.swift */,
 				66B62F981B8D32AB00EFA65C /* JSSAlertView.swift */,
 				667E5D2F1B86BCF9001FDF59 /* PhotoThumbnail.swift */,
 				6647ABE51B74A33E00E6DAF5 /* AKPickerView.swift */,
@@ -626,6 +631,7 @@
 			isa = PBXGroup;
 			children = (
 				967CFD051A5C10700044B4E3 /* LoginViewController.swift */,
+				6612DB501B9429430034F6BC /* Login2ViewController.swift */,
 				665CEB931B577FC500A5C8BA /* AuditActivitiesViewController.swift */,
 				964892661A63F5D900214D53 /* MenuViewController.swift */,
 				66C364AE1B60679D00BE3903 /* AuditDetailViewController.swift */,
@@ -983,11 +989,13 @@
 				B78F90381A6EF75800883A5B /* WebApiService.swift in Sources */,
 				9694F20B1A6123D000A6376A /* WebViewController.swift in Sources */,
 				661133131B83098D00C3CAE4 /* Keychain.swift in Sources */,
+				6612DBA21B953D2A0034F6BC /* TransitionManager.swift in Sources */,
 				662DC8EE1B81C92000867625 /* UIColor.swift in Sources */,
 				66570D321B74446F002248A2 /* MeetingAttendanceViewController.swift in Sources */,
 				669304F01B60CF6E001B855D /* TableViewController.swift in Sources */,
 				66570D421B744499002248A2 /* MeetingDetailsViewCell.swift in Sources */,
 				66DD85141B731E4D004B9C30 /* AuditPlanAddViewController.swift in Sources */,
+				6612DB511B9429430034F6BC /* Login2ViewController.swift in Sources */,
 				66B5E4241B6B3E37001B7EC7 /* RoundButton.swift in Sources */,
 				6630671F1B6715FB001EE543 /* PopDateViewController.swift in Sources */,
 				1A935E301A837A670059BCBC /* TPKeyboardAvoidingScrollView.m in Sources */,
@@ -1184,7 +1192,7 @@
 				PRODUCT_NAME = "Compliance Audit";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DesignerNewsApp/$(PRODUCT_NAME)-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "Externals/DTCoreText/Core/** Externals/DTCoreText/Externals/DTFoundation/Core/**";
 			};
 			name = Debug;
@@ -1216,7 +1224,7 @@
 				PRODUCT_NAME = "Compliance Audit";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DesignerNewsApp/$(PRODUCT_NAME)-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "Externals/DTCoreText/Core/** Externals/DTCoreText/Externals/DTFoundation/Core/**";
 			};
 			name = Release;

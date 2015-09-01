@@ -43,7 +43,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     var objectStartAudit = AuditRequestStartAuditModel()
     
-    
+    var transitionManager = TransitionManager()
     
     override func viewDidLoad(){
         
@@ -69,6 +69,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     }
     
     func initData(){
+        
+        println("load data Activity")
         
         view.showLoading()
         
@@ -117,7 +119,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         {
             LocalStore.setAuditActivityUrlId(auditRequest[indexPath.row].AuditActivityUrlId)
                 
-            self.performSegueWithIdentifier("GoToAuditDetail", sender: nil)
+            self.performSegueWithIdentifier("GoToAuditDetail", sender: self)
 
         }
     }
@@ -277,19 +279,19 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                 //3
                 let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "AuditRequestHeaderView", forIndexPath: indexPath) as! AuditRequestHeaderView
 
-                headerView.lbl_name.text = self.userProfile.Name
-                headerView.lbl_email.text = self.userProfile.EmailAddress
-                headerView.lbl_phone.text = self.userProfile.Phone
-                headerView.lbl_mobile.text = self.userProfile.Mobile
-                headerView.lbl_companyName.text = self.userProfile.AuditorCompanyName
-                headerView.lbl_companyAddress.text = self.userProfile.AuditorCompanyAddress + ", " + self.userProfile.AuditorCompanySuburb + ", " + self.userProfile.AuditorCompanyPostcode + ", " + self.userProfile.AuditorCompanyStateName
+                headerView.lbl_name.text = keychain["userProfile_Name"]
+                headerView.lbl_email.text = keychain["userProfile_Email"]
+                headerView.lbl_phone.text = keychain["userProfile_Phone"]
+                headerView.lbl_mobile.text = keychain["userProfile_Mobile"]
+                headerView.lbl_companyName.text = keychain["userProfile_Company"]
+                headerView.lbl_companyAddress.text = keychain["userProfile_CompanyAddress"]
                 
                 
-                if(self.userProfile.PhotoId != 0 ) {
+                if(keychain["userProfile_PhotoId"]! != "" ) {
                     
                     var stringURL : String = LocalStore.accessDomain()!
 
-                    stringURL += "/Api/GetFileDocument/?fileId=" + self.userProfile.PhotoId.description
+                    stringURL += "/Api/GetFileDocument/?fileId=" + keychain["userProfile_PhotoId"]!
                 
                     Alamofire.request(.GET, stringURL).response() {
                         (_, _, data, _) in
@@ -299,8 +301,6 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                         headerView.AuditorAvatar.clipsToBounds = true;
                     }
                 }
-                
-                //println("Init Header View \(self.userProfile.AuditorCompanyName)")
                 
                 reusableView =  headerView
             default:
@@ -341,6 +341,18 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
             menuViewController.delegate = self
             menuViewController.userProfile = self.userProfile
         }
+        else
+        {
+            // this gets a reference to the screen that we're about to transition to
+            let toViewController = segue.destinationViewController as! UIViewController
+            
+            // instead of using the default transition animation, we'll ask
+            // the segue to use our custom TransitionManager object to manage the transition animation
+            self.transitionManager.presenting = true
+            
+            toViewController.transitioningDelegate = self.transitionManager
+
+        }
     }
 
 }
@@ -378,10 +390,10 @@ extension  AuditActivitiesViewController : MenuViewControllerDelegate {
         performSegueWithIdentifier("GoToLogin", sender: nil)
     }
     
-    func menuViewControllerDidSelectChangeDomainMenu(controller: MenuViewController) {
-        
-        performSegueWithIdentifier("GoToChangeDomain", sender: nil)
-    }
+//    func menuViewControllerDidSelectChangeDomainMenu(controller: MenuViewController) {
+//        
+//        performSegueWithIdentifier("GoToChangeDomain", sender: nil)
+//    }
     
 }
 

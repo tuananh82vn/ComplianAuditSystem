@@ -10,16 +10,17 @@ import UIKit
 
 class AuditDetailViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
+
     @IBOutlet weak var ButtonBooking: UIButton!
     @IBOutlet weak var ButtonEdit: UIBarButtonItem!
     
     @IBOutlet var tableView1: UITableView!
-    
     @IBOutlet var tableView2: UITableView!
 
-    @IBOutlet weak var lbl_SiteDetailName: UILabel!
-    @IBOutlet weak var lbl_SiteIndustryName: UILabel!
+
     @IBOutlet weak var lbl_SiteCompanyName: UILabel!
+    @IBOutlet weak var lbl_SiteAddress: UILabel!
+    
     @IBOutlet weak var lbl_Phone: UILabel!
     @IBOutlet weak var lbl_Email: UILabel!
     @IBOutlet weak var lbl_LeadAuditor: UILabel!
@@ -32,6 +33,7 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     
     private var auditActivityAuditDetail = AuditActivityAuditDetailModel()
 
+    let transitionManager = TransitionManager()
     
     override func viewDidLoad() {
         
@@ -59,6 +61,10 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
 
 
     }
+    
+    override func viewDidAppear(animated: Bool) {
+
+    }
 
     func initData(){
         
@@ -71,9 +77,33 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
             if let temp1 = objectReturn1 {
                 
                 self.auditSiteDetail = temp1
-                self.lbl_SiteDetailName.text = self.auditSiteDetail.SiteName
-                self.lbl_SiteIndustryName.text = self.auditSiteDetail.SiteIndustryTypeName
-                self.lbl_SiteCompanyName.text = self.auditSiteDetail.SiteCompanyName
+                
+                //self.lbl_SiteCompanyName.text = self.auditSiteDetail.SiteName
+                
+                // 3
+                let NavView = UIView(frame: CGRect(x: 0, y: 0, width: 689, height: 40))
+                NavView.contentMode = .ScaleAspectFit
+                NavView.backgroundColor = UIColor.blackColor()
+                
+                let lbl_SiteName = UILabel(frame: CGRect(x: 0, y: 0, width: 680, height: 18))
+                lbl_SiteName.textAlignment = NSTextAlignment.Left
+                lbl_SiteName.text = self.auditSiteDetail.SiteName
+                lbl_SiteName.textColor = UIColor.whiteColor()
+                lbl_SiteName.font = UIFont (name: "HelveticaNeue-Bold", size: 12)
+                
+                let lbl_SiteAddress = UILabel(frame: CGRect(x: 0, y: 20, width: 680, height: 18))
+                lbl_SiteAddress.textAlignment = NSTextAlignment.Left
+                lbl_SiteAddress.text = self.auditSiteDetail.SiteAddress + ", " + self.auditSiteDetail.SiteSuburb + ", "  + self.auditSiteDetail.SiteState + ", "  + self.auditSiteDetail.SitePostCode
+
+                lbl_SiteAddress.textColor = UIColor.whiteColor()
+                lbl_SiteAddress.font = UIFont (name: "HelveticaNeue", size: 12)
+                
+                NavView.addSubview(lbl_SiteName)
+                NavView.addSubview(lbl_SiteAddress)
+                
+                // 5
+                self.navigationItem.titleView = NavView
+
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
@@ -184,14 +214,25 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
             auditDetailEditViewController.auditActivityDetail = self.auditActivityAuditDetail
         }
         else
-            if segue.identifier == "GoToBooking" {
-//                let auditBookingViewController = segue.destinationViewController as! AuditBookingViewController
-//                auditBookingViewController.AuditActivityUrlId = self.AuditActivityUrlId
+                if segue.identifier == "GoBackToActivity" {
+                    
+                    // this gets a reference to the screen that we're about to transition to
+                    let toViewController = segue.destinationViewController as! UIViewController
+                    
+                    // instead of using the default transition animation, we'll ask
+                    // the segue to use our custom TransitionManager object to manage the transition animation
+                    self.transitionManager.presenting = false
+                    
+                    toViewController.transitioningDelegate = self.transitionManager
         }
     }
 
     @IBAction func ButtonBookingClicked(sender: AnyObject) {
         self.performSegueWithIdentifier("GoToBooking", sender: sender)
+    }
+    
+    @IBAction func ButtonHomeClicked(sender: AnyObject) {
+        self.performSegueWithIdentifier("GoBackToActivity", sender: sender)
     }
 
 }
