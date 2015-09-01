@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import CoreActionSheetPicker
 
 class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
+    @IBOutlet weak var btb_Title: UIButton!
     @IBOutlet weak var tableMaster: UITableView!
     @IBOutlet weak var tableDetail: UITableView!
     
@@ -25,6 +27,10 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        btb_Title.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        btb_Title.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        btb_Title.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
 
         //Check Internet
         WebApiService.checkInternet(false, completionHandler:
@@ -45,6 +51,35 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refeshAuditPlan", object: nil)
         
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        super.viewDidAppear(true)
+        
+        // 3
+        let NavView = UIView(frame: CGRect(x: 0, y: 0, width: 689, height: 40))
+        NavView.contentMode = .ScaleAspectFit
+        NavView.backgroundColor = UIColor.blackColor()
+        
+        let lbl_SiteName = UILabel(frame: CGRect(x: 0, y: 0, width: 680, height: 18))
+        lbl_SiteName.textAlignment = NSTextAlignment.Left
+        lbl_SiteName.text = keychain["SiteName"]
+        lbl_SiteName.textColor = UIColor.whiteColor()
+        lbl_SiteName.font = UIFont (name: "HelveticaNeue-Bold", size: 12)
+        
+        let lbl_SiteAddress = UILabel(frame: CGRect(x: 0, y: 20, width: 680, height: 18))
+        lbl_SiteAddress.textAlignment = NSTextAlignment.Left
+        lbl_SiteAddress.text = keychain["SiteAddress"]
+        
+        lbl_SiteAddress.textColor = UIColor.whiteColor()
+        lbl_SiteAddress.font = UIFont (name: "HelveticaNeue", size: 12)
+        
+        NavView.addSubview(lbl_SiteName)
+        NavView.addSubview(lbl_SiteAddress)
+        
+        // 5
+        self.navigationItem.titleView = NavView
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,6 +107,26 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
                 controller.LastSelected = self.LastSelected!
                 controller.selectedAuditPlanId = self.selectedAuditPlanId
         }
+        else if segue.identifier == "GoBackToBooking" {
+            
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromLeft
+            self.navigationController!.view.layer.addAnimation(transition, forKey: nil)
+        }
+        else
+            if segue.identifier == "GoBackToAuditActivity" {
+                
+                let transition = CATransition()
+                transition.duration = 0.5
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                transition.type = kCATransitionPush
+                transition.subtype = kCATransitionFromTop
+                self.navigationController!.view.layer.addAnimation(transition, forKey: nil)
+        }
+
         
         
     }
@@ -344,6 +399,44 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
     @IBAction func ButtonMeetingClicked(sender: AnyObject) {
         self.performSegueWithIdentifier("GoToMeeting", sender: sender)
     }
+    
 
+    @IBAction func ButtonTitleClicked(sender: AnyObject) {
+        ActionSheetStringPicker.showPickerWithTitle("Select", rows: ScreenList as [AnyObject] , initialSelection: 2, doneBlock: {
+            picker, value, index in
+            
+            if(value == 0)
+            {
+                self.performSegueWithIdentifier("GoToAuditDetail", sender: nil)
+            }
+            else if(value == 1)
+            {
+                self.performSegueWithIdentifier("GoBackToBooking", sender: nil)
+            }
+            else if(value == 3)
+            {
+                self.performSegueWithIdentifier("GoToMeeting", sender: nil)
+            }
+            else if(value == 4)
+            {
+                self.performSegueWithIdentifier("GoToQuestion", sender: nil)
+            }
+            else if(value == 5)
+            {
+                self.performSegueWithIdentifier("GoToSubmit", sender: nil)
+            }
+            
+            
+            return
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
+
+    }
+
+    @IBAction func ButtonHomeClicked(sender: AnyObject) {
+         self.performSegueWithIdentifier("GoBackToAuditActivity", sender: nil)
+    }
+    @IBAction func ButtonBackClicked(sender: AnyObject) {
+        self.performSegueWithIdentifier("GoBackToBooking", sender: nil)
+    }
 
 }

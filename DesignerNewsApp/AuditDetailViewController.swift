@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreActionSheetPicker
 
 class AuditDetailViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
@@ -34,9 +35,15 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     private var auditActivityAuditDetail = AuditActivityAuditDetailModel()
 
     
+    @IBOutlet weak var btb_Title: UIButton!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        btb_Title.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        btb_Title.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        btb_Title.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
         
         
         //Check Internet
@@ -61,9 +68,6 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
 
     }
     
-    override func viewDidAppear(animated: Bool) {
-
-    }
 
     func initData(){
         
@@ -76,8 +80,6 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
             if let temp1 = objectReturn1 {
                 
                 self.auditSiteDetail = temp1
-                
-                //self.lbl_SiteCompanyName.text = self.auditSiteDetail.SiteName
                 
                 // 3
                 let NavView = UIView(frame: CGRect(x: 0, y: 0, width: 689, height: 40))
@@ -102,6 +104,9 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
                 
                 // 5
                 self.navigationItem.titleView = NavView
+                
+                keychain["SiteName"] = self.auditSiteDetail.SiteName
+                keychain["SiteAddress"] = self.auditSiteDetail.SiteAddress + ", " + self.auditSiteDetail.SiteSuburb + ", "  + self.auditSiteDetail.SiteState + ", "  + self.auditSiteDetail.SitePostCode
 
                 
                 dispatch_async(dispatch_get_main_queue()) {
@@ -231,6 +236,35 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
     
     @IBAction func ButtonHomeClicked(sender: AnyObject) {
         self.performSegueWithIdentifier("GoBackToActivity", sender: sender)
+    }
+    @IBAction func ButtonTitleClicked(sender: AnyObject) {
+        ActionSheetStringPicker.showPickerWithTitle("Select", rows: ScreenList as [AnyObject] , initialSelection: 0, doneBlock: {
+            picker, value, index in
+
+            if(value == 1)
+            {
+                self.performSegueWithIdentifier("GoToBooking", sender: nil)
+            }
+            else if(value == 2)
+            {
+                self.performSegueWithIdentifier("GoToAuditPlan", sender: nil)
+            }
+            else if(value == 3)
+            {
+                self.performSegueWithIdentifier("GoToMeeting", sender: nil)
+            }
+            else if(value == 4)
+            {
+                self.performSegueWithIdentifier("GoToQuestion", sender: nil)
+            }
+            else if(value == 5)
+            {
+                self.performSegueWithIdentifier("GoToSubmit", sender: nil)
+            }
+
+            
+            return
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
 
 }

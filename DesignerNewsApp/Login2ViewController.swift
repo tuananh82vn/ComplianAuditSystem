@@ -10,6 +10,7 @@ import UIKit
 import Spring
 
 var keychain = Keychain()
+var ScreenList = ["Audit Detail","Booking","Audit Plan","Meeting Attendance","Question Set","Confirm Submit"]
 
 class Login2ViewController: UIViewController {
 
