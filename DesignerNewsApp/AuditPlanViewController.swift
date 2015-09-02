@@ -11,6 +11,7 @@ import CoreActionSheetPicker
 
 class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
+    @IBOutlet weak var btb_Add: UIBarButtonItem!
     @IBOutlet weak var btb_Title: UIButton!
     @IBOutlet weak var tableMaster: UITableView!
     @IBOutlet weak var tableDetail: UITableView!
@@ -182,6 +183,11 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
                 self.auditPlanList = temp
                 
                 self.auditPlanMaster = self.ConvertToAuditPlanMaster(self.auditPlanList)
+                
+                if(self.auditPlanMaster.count == 0 )
+                {
+                    self.btb_Add.enabled = false
+                }
                 
                 self.view.hideLoading()
                 

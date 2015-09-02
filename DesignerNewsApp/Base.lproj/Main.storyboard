@@ -1826,8 +1826,7 @@
                                         <exclude reference="6vD-kA-GkS"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="646" y="65" width="80" height="17"/>
+                                <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
                                         <include reference="6vD-kA-GkS"/>
                                     </mask>
@@ -2671,9 +2670,8 @@
                                         <exclude reference="wwt-7i-FCJ"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                    <rect key="frame" x="338" y="62" width="125" height="22"/>
                                     <mask key="constraints">
                                         <include reference="PsQ-Mg-kqT"/>
                                         <include reference="wwt-7i-FCJ"/>
@@ -4415,6 +4413,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btb_Add" destination="mWY-hZ-lyd" id="2F1-Bi-aLC"/>
                         <outlet property="btb_Title" destination="LVo-q7-ud9" id="mG8-Rj-tsJ"/>
                         <outlet property="tableDetail" destination="Vvh-rf-0Nn" id="B7g-Wt-5j7"/>
                         <outlet property="tableMaster" destination="HRw-Hi-VM7" id="10s-gf-30f"/>
@@ -12310,17 +12309,17 @@
         <image name="username" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mLz-QW-XaU"/>
-        <segue reference="sGh-AW-pNO"/>
-        <segue reference="ZOM-rl-c7t"/>
-        <segue reference="gSd-93-kjt"/>
-        <segue reference="XNF-lv-3Db"/>
-        <segue reference="kxX-i5-uec"/>
-        <segue reference="ixv-GF-yrr"/>
-        <segue reference="bBx-LK-GoV"/>
-        <segue reference="if3-vP-lkp"/>
-        <segue reference="ecf-Jc-5rP"/>
-        <segue reference="gnP-t1-BDX"/>
+        <segue reference="GFb-PQ-y7X"/>
+        <segue reference="Wbj-WQ-pkX"/>
+        <segue reference="FPM-cN-6P2"/>
+        <segue reference="fQP-K3-EAI"/>
+        <segue reference="YzT-gB-BSw"/>
         <segue reference="0iC-RT-BJ2"/>
+        <segue reference="YwW-DR-C2F"/>
+        <segue reference="7Pa-fb-sXL"/>
+        <segue reference="bBx-LK-GoV"/>
+        <segue reference="eB9-fr-cto"/>
+        <segue reference="if3-vP-lkp"/>
+        <segue reference="ZOM-rl-c7t"/>
     </inferredMetricsTieBreakers>
 </document>
