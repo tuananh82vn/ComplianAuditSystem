@@ -25,6 +25,8 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
     
     var LastSelected :  NSIndexPath?
     
+    var selectedTitle : String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,6 +97,7 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
             controller.selectedDayId = self.selectedDayId
             controller.addMode = true
             controller.LastSelected = self.LastSelected!
+            controller.TitleLabel = self.selectedTitle
             
         }
         else
@@ -106,6 +109,7 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
                 controller.addMode = false
                 controller.LastSelected = self.LastSelected!
                 controller.selectedAuditPlanId = self.selectedAuditPlanId
+                controller.TitleLabel = self.selectedTitle
         }
         else if segue.identifier == "GoBackToBooking" {
             
@@ -279,7 +283,7 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
                tableView.cellForRowAtIndexPath(selected)?.selected = false
             }
             
-            
+            self.selectedTitle = self.auditPlanMaster[indexPath.row].DayTypeName + " - Day " +  self.auditPlanMaster[indexPath.row].DayNumber.description + " - " + self.auditPlanMaster[indexPath.row].DayDateDisplay
             
             //set row selected
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark

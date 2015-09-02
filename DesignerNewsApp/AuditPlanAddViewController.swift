@@ -15,6 +15,9 @@ class AuditPlanAddViewController: UIViewController {
     
     @IBOutlet weak var bt_Time: UIButton!
     var selectedDayId : Int = 0
+    
+    var TitleLabel : String = ""
+    
     var selectedAuditActivityId : Int = 0
     var selectedAuditPlanId : Int = 0
     var LastSelected =  NSIndexPath()
@@ -48,12 +51,12 @@ class AuditPlanAddViewController: UIViewController {
 
         if(addMode)
         {
-            self.lbl_Title.text = "Add Audit Plan Detail"
+            self.lbl_Title.text = "Add (" + self.TitleLabel + ")"
             
         }
         else
         {
-            self.lbl_Title.text = "Edit Audit Plan Detail"
+            self.lbl_Title.text = "Edit (" + self.TitleLabel + ")"
             
             InitData()
         }

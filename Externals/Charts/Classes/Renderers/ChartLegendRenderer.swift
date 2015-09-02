@@ -351,7 +351,15 @@ public class ChartLegendRenderer: ChartRendererBase
                     }
                     
                     // make a step down
-                    posY += labelLineHeight;
+                    if(i == labels.count-2)
+                    {
+                        posY += labelLineHeight * 2
+                    }
+                    else
+                    {
+                        posY += labelLineHeight
+                    }
+                    
                     stack = 0.0;
                 }
                 else

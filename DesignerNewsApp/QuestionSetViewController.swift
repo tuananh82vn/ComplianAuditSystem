@@ -318,26 +318,42 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         var questionNumber1 = [Double]()
         var questionColors1 = [UIColor]()
         
+        var DisplayChart1  = false
+        
         for chart in self.questionSet[Index].QuestionChart.MadatoryQuestionChartList {
+            if(chart.QuestionCount > 0 )
+            {
+                DisplayChart1 = true
+            }
             questionText1.append(chart.QuestionStatusName)
             questionNumber1.append(Double(chart.QuestionCount))
             questionColors1.append(UIColor(hex: chart.ColorCode))
         }
         
-        setChart(self.pieChartMadatory,chartName : "Mandatory Questions",dataPoints : questionText1, values: questionNumber1 , colors : questionColors1)
+        if(DisplayChart1){
+            setChart(self.pieChartMadatory,chartName : "Mandatory Questions",dataPoints : questionText1, values: questionNumber1 , colors : questionColors1)
+        }
         
         var questionText2 = [String]()
         var questionNumber2 = [Double]()
         var questionColors2 = [UIColor]()
         
+        var DisplayChart2  = false
+        
         for chart in self.questionSet[Index].QuestionChart.AllQuestionChartList {
+            if(chart.QuestionCount > 0 )
+            {
+                DisplayChart2 = true
+            }
+            
             questionText2.append(chart.QuestionStatusName)
             questionNumber2.append(Double(chart.QuestionCount))
             questionColors2.append(UIColor(hex: chart.ColorCode))
         }
         
-        setChart(self.pieChartAll,chartName : "All Questions",dataPoints : questionText2, values: questionNumber2 , colors : questionColors2)
-        
+        if(DisplayChart2){
+            setChart(self.pieChartAll,chartName : "All Questions",dataPoints : questionText2, values: questionNumber2 , colors : questionColors2)
+        }
         //Reload table view
         var numberOfSection = self.questionSet[Index].QuestionBySectionList.count
         
@@ -347,7 +363,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
             numberOfRow += section.QuestionResponseModelList.count
         }
         
-        self.height = ((numberOfSection * 51) + (numberOfRow * 44))
+        self.height = ((numberOfSection * 35) + (numberOfRow * 44))
         
         self.viewHeightConstraint.constant = CGFloat(self.height)
         
@@ -507,7 +523,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 35
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

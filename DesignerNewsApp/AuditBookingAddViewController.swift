@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import Alamofire
 
 let reuseIdentifier = "PhotoCell"
 
@@ -40,6 +41,7 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
     
     var selectedBookingId : Int = 0
     
+    var noimageIcon = UIImage(named: "noimage")
     
     override func viewDidLoad() {
         
@@ -72,6 +74,20 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 self.txt_FileName.text = self.uploadBookingItem.DisplayFileName
                 self.txt_Item.text = self.uploadBookingItem.Item
                 self.txt_Notes.text = self.uploadBookingItem.Notes
+                
+                if(self.uploadBookingItem.FileId != 0 ) {
+                    
+                    var stringURL : String = LocalStore.accessDomain()!
+                    
+                    stringURL += "/Api/GetFileDocument/?fileId=" + self.uploadBookingItem.FileId.description
+                    
+                    Alamofire.request(.GET, stringURL).response() {
+                        (_, _, data, _) in
+                        let image = UIImage(data: data! as! NSData)
+                        self.img_Thumbnail.image = image
+                    }
+                }
+
 
             }
         }
@@ -314,6 +330,16 @@ class AuditBookingAddViewController: UIViewController , UIImagePickerControllerD
                 
             }
         }
+    }
+    
+    @IBAction func ButtonClearClicked(sender: AnyObject) {
+        
+        self.bookingAttachment  = BookingAttachment()
+        
+        self.img_Thumbnail.image = noimageIcon
+        
+        self.txt_FileName.text = ""
+    
     }
     
     @IBAction func ButtonSaveClicked(sender: AnyObject) {

@@ -30,6 +30,8 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
     
     var selectedId : Int = 0
     
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -236,6 +238,7 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
     }
     
     func doSave(){
+        
         self.view.showLoading()
         
         let formatter = NSDateFormatter()
@@ -293,7 +296,20 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
                 
                 if (internet)
                 {
-                    self.doSave()
+                    if(self.txt_CloseDate.text == "" || self.txt_CloseDate.text == "" )
+                    {
+                        let alertController = UIAlertController(title: "Error", message: "Please select open date and close date.", preferredStyle: UIAlertControllerStyle.Alert)
+                        
+                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                        
+                        alertController.view.tintColor = UIColor.blackColor()
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                    else
+                    {
+                        self.doSave()
+                    }
                 }
                 else
                 {

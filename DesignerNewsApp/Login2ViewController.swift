@@ -98,8 +98,11 @@ class Login2ViewController: UIViewController {
             }
             else
             {
-//                self.dialogView.animation = "shake"
-//                self.dialogView.animate()
+                JSSAlertView().danger(
+                    self,
+                    title: "Error",
+                    text: "Incorrect username or password"
+                )
             }
         }
     }

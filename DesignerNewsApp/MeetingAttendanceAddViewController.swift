@@ -22,6 +22,8 @@ class MeetingAttendanceAddViewController: UIViewController {
     
     var AddMode : Bool = false
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

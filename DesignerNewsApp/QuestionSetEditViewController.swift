@@ -8,9 +8,7 @@
 
 import UIKit
 import Photos
-
-
-
+import Alamofire
 
 class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerDelegate, UIImagePickerControllerDelegate , UINavigationControllerDelegate{
 
@@ -53,6 +51,8 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
     var bookingAttachment = BookingAttachment()
     
     var selectedIndex : Int = 0
+    
+    var noimageIcon = UIImage(named: "noimage")
     
     override func viewDidLoad() {
         
@@ -121,6 +121,19 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
                                         else{
                                             self.radio_Confirm.selected = true
                                         }
+                
+                if(self.QuestionRespone.FileId != 0 ) {
+                    
+                    var stringURL : String = LocalStore.accessDomain()!
+                    
+                    stringURL += "/Api/GetFileDocument/?fileId=" + self.QuestionRespone.FileId.description
+                    
+                    Alamofire.request(.GET, stringURL).response() {
+                        (_, _, data, _) in
+                        let image = UIImage(data: data! as! NSData)
+                        self.img_Attachment.image = image
+                    }
+                }
                 
 
             }
@@ -393,6 +406,14 @@ class QuestionSetEditViewController: UIViewController , SSRadioButtonControllerD
             }
         })
         
+    }
+    @IBAction func ButtonClearClicked(sender: AnyObject) {
+        
+        self.bookingAttachment  = BookingAttachment()
+        
+        self.img_Attachment.image = noimageIcon
+        
+        self.txt_Attachment.text = ""
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController){

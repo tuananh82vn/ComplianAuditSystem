@@ -339,6 +339,7 @@ public class ChartViewBase: UIView, ChartAnimatorDelegate
         attrs[NSFontAttributeName] = font;
         attrs[NSForegroundColorAttributeName] = descriptionTextColor;
         
+        //println("desciption : \(descriptionText)")
         
         ChartUtils.drawText(context: context, text: descriptionText, point: CGPoint(x: 0, y: frame.height - _viewPortHandler.offsetBottom - 10.0 - font!.lineHeight), align: .Center, attributes: attrs);
         
