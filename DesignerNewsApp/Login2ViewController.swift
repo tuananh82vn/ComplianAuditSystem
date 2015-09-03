@@ -14,7 +14,6 @@ var ScreenList = ["Audit Detail","Booking","Audit Plan","Meeting Attendance","Qu
 
 class Login2ViewController: UIViewController {
 
-    @IBOutlet weak var Switch_RemmeberMe: UISwitch!
     @IBOutlet weak var tft_Password: UITextField!
     @IBOutlet weak var tft_Username: UITextField!
     
@@ -28,16 +27,16 @@ class Login2ViewController: UIViewController {
         
         originalCenter = view.center
         
-        tft_Username.text = keychain["username"]
-        tft_Password.text = keychain["password"]
+        tft_Username.text = "auditorone"
+        tft_Password.text = "password"
         
-        if (tft_Username.text != "" &&  tft_Password.text != ""){
-            Switch_RemmeberMe.on = true
-        }
-        else
-        {
-            Switch_RemmeberMe.on = false
-        }
+//        if (tft_Username.text != "" &&  tft_Password.text != ""){
+//            Switch_RemmeberMe.on = true
+//        }
+//        else
+//        {
+//            Switch_RemmeberMe.on = false
+//        }
         
         if(keychain["domain"] == nil)
         {
@@ -69,16 +68,16 @@ class Login2ViewController: UIViewController {
             
             if let temp = object {
                 
-                if (self.Switch_RemmeberMe.on)
-                {
-                    keychain["username"] = self.tft_Username.text
-                    keychain["password"] = self.tft_Password.text
-                }
-                else
-                {
-                    keychain["username"] = ""
-                    keychain["password"] = ""
-                }
+//                if (self.Switch_RemmeberMe.on)
+//                {
+//                    keychain["username"] = self.tft_Username.text
+//                    keychain["password"] = self.tft_Password.text
+//                }
+//                else
+//                {
+//                    keychain["username"] = ""
+//                    keychain["password"] = ""
+//                }
                 
                 self.userProfile = temp
                 

@@ -513,7 +513,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         label.text = "Section - " + questionSet[selectedIndex].QuestionBySectionList[section].SectionNumber.description + " " + questionSet[selectedIndex].QuestionBySectionList[section].SectionName
         
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.blackColor()
         label.setTranslatesAutoresizingMaskIntoConstraints(false)
 
         let views = ["label": label,"view": view]
