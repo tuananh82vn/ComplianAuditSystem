@@ -51,7 +51,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         
         originalCenter = view.center
         
-        println("Total:\(self.navigationController!.viewControllers.count)")
+        //println("Total:\(self.navigationController!.viewControllers.count)")
 
         //Check Internet
         WebApiService.checkInternet(false, completionHandler:
@@ -76,7 +76,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     
     func initData(){
         
-        println("load data Activity")
+        //println("load data Activity")
         
         view.showLoading()
         
@@ -357,7 +357,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToMenu" {
             
-            println("Go To Menu")
+            //println("Go To Menu")
             
             let menuViewController = segue.destinationViewController as! MenuViewController
             menuViewController.delegate = self

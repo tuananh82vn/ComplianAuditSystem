@@ -256,26 +256,9 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
     
     func doSave()
     {
-        var alertview = JSSAlertView().show2(self, title: "Confirm", text: "Are you sure to submit the audit?", buttonText: "Yes", cancelButtonText: "No", color: UIColorFromHex(0xf1c40f, alpha: 1))
-        alertview.setTextTheme(.Light)
-        alertview.addAction(yesSubmitCallBack)
-    }
-    
-    @IBAction func ButtonDoneClicked(sender: AnyObject) {
-        
-        var alertview = JSSAlertView().show2(self, title: "Notice", text: "Go back to home screen without submit?", buttonText: "Yes", cancelButtonText: "No", color: UIColorFromHex(0x3498db, alpha: 1))
-        alertview.setTextTheme(.Light)
-        alertview.addAction(yesDoneCallback)
-    }
-    
-    func yesDoneCallback() {
-        
-                
-                self.performSegueWithIdentifier("GoBackToAuditActivity", sender: nil)
-        
-    }
-    
-    func yesSubmitCallBack(){
+//        var alertview = JSSAlertView().show2(self, title: "Confirm", text: "Are you sure to submit the audit?", buttonText: "Yes", cancelButtonText: "No", color: UIColorFromHex(0xf1c40f, alpha: 1))
+//        alertview.setTextTheme(.Light)
+//        alertview.addAction(yesSubmitCallBack)
         
         self.view.showLoading()
         
@@ -306,9 +289,9 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
                 self.view.hideLoading()
                 
                 if(temp.IsSuccess){
-
-                   self.performSegueWithIdentifier("GoBackToAuditActivity", sender: nil)
-
+                    
+                    self.performSegueWithIdentifier("GoBackToAuditActivity", sender: nil)
+                    
                 }
                 else
                 {
@@ -329,9 +312,80 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
             }
-            
         }
     }
+    
+    @IBAction func ButtonDoneClicked(sender: AnyObject) {
+        
+        var alertview = JSSAlertView().show2(self, title: "Notice", text: "Go back to home screen without submit?", buttonText: "Yes", cancelButtonText: "No", color: UIColorFromHex(0x3498db, alpha: 1))
+        alertview.setTextTheme(.Light)
+        alertview.addAction(yesDoneCallback)
+    }
+    
+    func yesDoneCallback() {
+        
+                
+                self.performSegueWithIdentifier("GoBackToAuditActivity", sender: nil)
+        
+    }
+    
+//    func yesSubmitCallBack(){
+//        
+//        self.view.showLoading()
+//        
+//        self.AuditConfirm.IsAuditDetailsCompleted = self.AuditDetailCompleted.on
+//        
+//        self.AuditConfirm.IsBookingDetailsCompleted = self.BookingDetailCompleted.on
+//        
+//        self.AuditConfirm.IsAuditPlanCompleted = self.AuditPlanCompleted.on
+//        
+//        self.AuditConfirm.IsMeetingAttendanceRecordCompleted = self.MeetingRecordCompleted.on
+//        
+//        self.AuditConfirm.IsQuestionSetCompleted = self.QuestionSetCompleted.on
+//        
+//        self.AuditConfirm.Notes = self.txt_Notes.text
+//        if (self.selectedOutcomeId != 0)
+//        {
+//            self.AuditConfirm.AuditOutcomeId = self.selectedOutcomeId
+//        }
+//        else
+//        {
+//            self.AuditConfirm.AuditOutcomeId = nil
+//        }
+//        
+//        WebApiService.postAuditActivityConfirmSubmitEdit(LocalStore.accessToken()!, object : self.AuditConfirm) { objectReturn in
+//            
+//            if let temp = objectReturn {
+//                
+//                self.view.hideLoading()
+//                
+//                if(temp.IsSuccess){
+//
+//                   self.performSegueWithIdentifier("GoBackToAuditActivity", sender: nil)
+//
+//                }
+//                else
+//                {
+//                    var errorMessage : String = ""
+//                    
+//                    for var index = 0; index < temp.Errors.count; ++index {
+//                        
+//                        errorMessage += temp.Errors[index].ErrorMessage
+//                    }
+//                    
+//                    
+//                    let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+//                    
+//                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+//                    
+//                    alertController.view.tintColor = UIColor.blackColor()
+//                    
+//                    self.presentViewController(alertController, animated: true, completion: nil)
+//                }
+//            }
+//            
+//        }
+//    }
     
     @IBAction func ButtonSubmitClicked(sender: AnyObject) {
         

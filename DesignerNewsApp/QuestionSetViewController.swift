@@ -248,7 +248,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                 
                 if let temp1 = objectReturn {
                     
-                    println("Finish load Question Data")
+                    //println("Finish load Question Data")
                     
                     item.QuestionBySectionList = temp1.QuestionBySectionList
                     
@@ -265,7 +265,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                             
                             if( self.IndexLoaded == self.questionSet.count) {
                                 
-                                println("Finish load Chart")
+                                //println("Finish load Chart")
                                 
                                 self.displayById(self.selectedIndex)
                                 
@@ -283,7 +283,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func LoadQuestionData(){
         
-            println("Begin to load Question Data")
+            //println("Begin to load Question Data")
         
             self.IndexLoaded = 0
             var index = 0
@@ -315,7 +315,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func displayById(Index : Int)
     {
-        println("Display \(Index)")
+        //println("Display \(Index)")
         
         //Reload chart view
         var questionText1 = [String]()
