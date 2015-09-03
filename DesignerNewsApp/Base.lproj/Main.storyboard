@@ -5855,14 +5855,22 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="DDj-YI-Hhs" firstAttribute="top" secondItem="lW4-Nr-Gg9" secondAttribute="top" id="3y6-YL-i9a"/>
-                                    <constraint firstItem="DDj-YI-Hhs" firstAttribute="top" secondItem="wjT-0u-blE" secondAttribute="top" constant="8" id="DA3-pu-t0y"/>
+                                    <constraint firstItem="DDj-YI-Hhs" firstAttribute="top" secondItem="lW4-Nr-Gg9" secondAttribute="top" id="3y6-YL-i9a">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                    </constraint>
+                                    <constraint firstItem="DDj-YI-Hhs" firstAttribute="top" secondItem="wjT-0u-blE" secondAttribute="top" constant="8" id="DA3-pu-t0y">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                    </constraint>
                                     <constraint firstAttribute="bottom" secondItem="DDj-YI-Hhs" secondAttribute="bottom" id="U0Y-HS-x7N"/>
                                     <constraint firstAttribute="bottom" secondItem="lW4-Nr-Gg9" secondAttribute="bottom" id="UZ5-7O-25J"/>
                                     <constraint firstItem="DDj-YI-Hhs" firstAttribute="leading" secondItem="wjT-0u-blE" secondAttribute="leading" id="cXq-JD-YRT"/>
-                                    <constraint firstAttribute="height" constant="145" id="cfv-7N-8ii"/>
+                                    <constraint firstAttribute="height" constant="145" id="cfv-7N-8ii">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="163"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="lW4-Nr-Gg9" secondAttribute="trailing" id="dRX-Ss-16M"/>
-                                    <constraint firstItem="lW4-Nr-Gg9" firstAttribute="top" secondItem="wjT-0u-blE" secondAttribute="top" constant="8" id="fco-BY-ffL"/>
+                                    <constraint firstItem="lW4-Nr-Gg9" firstAttribute="top" secondItem="wjT-0u-blE" secondAttribute="top" constant="8" id="fco-BY-ffL">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                    </constraint>
                                     <constraint firstItem="lW4-Nr-Gg9" firstAttribute="width" secondItem="DDj-YI-Hhs" secondAttribute="width" id="lzh-24-s7J"/>
                                     <constraint firstItem="lW4-Nr-Gg9" firstAttribute="leading" secondItem="DDj-YI-Hhs" secondAttribute="trailing" id="wte-AV-dlk"/>
                                     <constraint firstItem="lW4-Nr-Gg9" firstAttribute="bottom" secondItem="DDj-YI-Hhs" secondAttribute="bottom" id="y85-MU-3N8"/>
@@ -6395,8 +6403,7 @@
                                                 <exclude reference="eTf-sO-7gc"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="100"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
                                             <mask key="constraints">
                                                 <include reference="LwL-NU-CjN"/>
                                                 <include reference="eTf-sO-7gc"/>
@@ -6444,7 +6451,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="EhV-qf-rQ8"/>
+                                    <constraint firstAttribute="height" constant="58" id="EhV-qf-rQ8">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                    </constraint>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="interitemSpacing">
@@ -6585,7 +6594,9 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="8"/>
                             </constraint>
                             <constraint firstItem="6bW-GV-c2I" firstAttribute="top" secondItem="KEP-eQ-21g" secondAttribute="bottom" constant="39" id="UMd-nS-zlT"/>
-                            <constraint firstItem="wjT-0u-blE" firstAttribute="top" secondItem="D3Z-Z3-Vhf" secondAttribute="bottom" constant="8" id="XUW-4z-hh4"/>
+                            <constraint firstItem="wjT-0u-blE" firstAttribute="top" secondItem="D3Z-Z3-Vhf" secondAttribute="bottom" constant="8" id="XUW-4z-hh4">
+                                <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                            </constraint>
                             <constraint firstItem="Y77-zc-pZX" firstAttribute="top" secondItem="wjT-0u-blE" secondAttribute="bottom" constant="8" id="Xq6-3A-yHx"/>
                             <constraint firstItem="D3Z-Z3-Vhf" firstAttribute="leading" secondItem="v8n-H2-mpc" secondAttribute="leadingMargin" id="YrC-bI-wjm"/>
                             <constraint firstItem="Tq0-dv-WKW" firstAttribute="bottom" secondItem="Bcu-U3-u8R" secondAttribute="top" id="Yrz-ik-cQo"/>
@@ -8435,7 +8446,7 @@
                                     <constraint firstAttribute="width" constant="40" id="WRY-Fd-ESH"/>
                                     <constraint firstAttribute="height" constant="40" id="jp5-B6-3ik"/>
                                 </constraints>
-                                <state key="normal" image="abandond">
+                                <state key="normal" image="abandond2">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -9662,43 +9673,6 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvr-Bs-w4K" customClass="DesignableButton" customModule="Spring">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.38952925389999998" green="0.0" blue="0.38759802780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="1qQ-5y-iYF"/>
-                                    <constraint firstAttribute="width" constant="40" id="GEN-sg-S11"/>
-                                </constraints>
-                                <state key="normal" image="abandond">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.38952925389999998" green="0.0" blue="0.38759802780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="1qQ-5y-iYF"/>
-                                        <exclude reference="GEN-sg-S11"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="1qQ-5y-iYF"/>
-                                        <include reference="GEN-sg-S11"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="ButtonClearClicked:" destination="k6w-BO-hIM" eventType="touchUpInside" id="MTQ-4f-iRW"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyD-Fs-RcP">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <constraints>
@@ -9740,6 +9714,43 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvr-Bs-w4K" customClass="DesignableButton" customModule="Spring">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.38952925389999998" green="0.0" blue="0.38759802780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1qQ-5y-iYF"/>
+                                    <constraint firstAttribute="width" constant="40" id="GEN-sg-S11"/>
+                                </constraints>
+                                <state key="normal" image="abandond2">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.38952925389999998" green="0.0" blue="0.38759802780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1qQ-5y-iYF"/>
+                                        <exclude reference="GEN-sg-S11"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="1qQ-5y-iYF"/>
+                                        <include reference="GEN-sg-S11"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="ButtonClearClicked:" destination="k6w-BO-hIM" eventType="touchUpInside" id="MTQ-4f-iRW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -9811,9 +9822,9 @@
                                 <exclude reference="2qd-3J-ARH"/>
                                 <exclude reference="mDQ-c1-D4l"/>
                                 <exclude reference="IHX-pS-Ing"/>
-                                <exclude reference="fvr-Bs-w4K"/>
                                 <exclude reference="qyD-Fs-RcP"/>
                                 <exclude reference="bWM-iQ-UsO"/>
+                                <exclude reference="fvr-Bs-w4K"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="jrQ-jn-1bQ"/>
@@ -9875,9 +9886,9 @@
                                 <include reference="2qd-3J-ARH"/>
                                 <include reference="mDQ-c1-D4l"/>
                                 <include reference="IHX-pS-Ing"/>
-                                <include reference="fvr-Bs-w4K"/>
                                 <include reference="qyD-Fs-RcP"/>
                                 <include reference="bWM-iQ-UsO"/>
+                                <include reference="fvr-Bs-w4K"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="jrQ-jn-1bQ"/>
@@ -12006,6 +12017,7 @@
     </scenes>
     <resources>
         <image name="abandond" width="26" height="26"/>
+        <image name="abandond2" width="50" height="50"/>
         <image name="approved" width="50" height="50"/>
         <image name="auditactivity" width="50" height="50"/>
         <image name="background" width="768" height="1004"/>
@@ -12032,17 +12044,17 @@
         <image name="username" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DZ2-Qw-lcZ"/>
-        <segue reference="AmN-1z-cSd"/>
-        <segue reference="tOI-Vl-S8Z"/>
-        <segue reference="Wbj-WQ-pkX"/>
-        <segue reference="fo3-Wj-UxJ"/>
-        <segue reference="r0w-1d-yxw"/>
-        <segue reference="x4i-ig-cQe"/>
-        <segue reference="if3-vP-lkp"/>
+        <segue reference="YwW-DR-C2F"/>
+        <segue reference="ecf-Jc-5rP"/>
+        <segue reference="YzT-gB-BSw"/>
         <segue reference="0iC-RT-BJ2"/>
-        <segue reference="I0a-1C-j5e"/>
-        <segue reference="bBx-LK-GoV"/>
+        <segue reference="if3-vP-lkp"/>
+        <segue reference="ixv-GF-yrr"/>
+        <segue reference="kyT-J6-FQW"/>
+        <segue reference="gSd-93-kjt"/>
+        <segue reference="AmN-1z-cSd"/>
         <segue reference="gnP-t1-BDX"/>
+        <segue reference="bBx-LK-GoV"/>
+        <segue reference="I0a-1C-j5e"/>
     </inferredMetricsTieBreakers>
 </document>

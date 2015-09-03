@@ -32,7 +32,11 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     var selectQuestionReponseId : Int = 0
     var filterQuestion = AuditActivityQuestionSetQuestionResponseModel()
     var IndexLoaded :Int = 0
-
+    
+    var noRecordView = UIView()
+    var noimageIcon = UIImage(named: "norecord")
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -40,6 +44,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         btb_Title.transform = CGAffineTransformMakeScale(-1.0, 1.0);
         btb_Title.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
         btb_Title.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        
 
         //Check Internet
         WebApiService.checkInternet(false, completionHandler:
@@ -48,6 +53,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                 if (internet)
                 {
                     self.InitData()
+                    
                     self.QuestionView.delegate = self
                     self.QuestionView.dataSource = self
                     
@@ -112,6 +118,26 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         self.navigationItem.titleView = NavView
         
         self.viewWidthConstraint.constant = self.QuestionView.frame.width
+        
+        //*******************Add image into view and then Hide it *************************//
+        
+        noRecordView = UIView(frame: CGRect(x: 0, y: 0, width: tableView1.frame.width, height: (noimageIcon?.size.height)!))
+        
+        var imageView = UIImageView(image: noimageIcon)
+        
+        imageView.setTranslatesAutoresizingMaskIntoConstraints(true)
+        
+        imageView.autoresizingMask = UIViewAutoresizing.FlexibleLeftMargin |
+            UIViewAutoresizing.FlexibleRightMargin |
+            UIViewAutoresizing.FlexibleTopMargin |
+            UIViewAutoresizing.FlexibleBottomMargin
+        
+        imageView.center = CGPointMake(self.noRecordView.bounds.midX, self.noRecordView.bounds.midY)
+        self.noRecordView.addSubview(imageView)
+        self.noRecordView.hidden = true
+        self.scrollView.addSubview(noRecordView)
+        //*********************************************************************************//
+        
         self.view.layoutIfNeeded()
     }
     
@@ -248,36 +274,36 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                 
                 if let temp1 = objectReturn {
                     
-                    //println("Finish load Question Data")
                     
                     item.QuestionBySectionList = temp1.QuestionBySectionList
                     
                     self.tableView1.reloadData()
                     
-                    //load chart data By Id
-                    WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: self.filterQuestion.AuditActivityQuestionSetId, LoadIndex: Index ) { objectReturn in
-                        
-                        if let temp2 = objectReturn {
-                            
-                            item.QuestionChart = temp2
-                            
-                            self.IndexLoaded++
-                            
-                            if( self.IndexLoaded == self.questionSet.count) {
-                                
-                                //println("Finish load Chart")
-                                
-                                self.displayById(self.selectedIndex)
-                                
-                                self.view.hideLoading()
-                            }
-                        }
-                    }
-                        
                 }
             }
         
+            //println("2 Finish load Question Data")
         
+            //load chart data By Id
+            WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: self.filterQuestion.AuditActivityQuestionSetId, LoadIndex: Index ) { objectReturn in
+            
+                if let temp2 = objectReturn {
+                
+                    item.QuestionChart = temp2
+                
+                    self.IndexLoaded++
+                
+                    if( self.IndexLoaded == self.questionSet.count) {
+                    
+                        //println("3 Finish load Chart")
+                    
+                        self.displayById(self.selectedIndex)
+                    
+                        self.view.hideLoading()
+                    }
+                }
+            }
+
     }
     
     
@@ -359,6 +385,8 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
             setChart(self.pieChartAll,chartName : "All Questions",dataPoints : questionText2, values: questionNumber2 , colors : questionColors2)
         }
         //Reload table view
+        
+        
         var numberOfSection = self.questionSet[Index].QuestionBySectionList.count
         
         var numberOfRow = 0
@@ -367,13 +395,23 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
             numberOfRow += section.QuestionResponseModelList.count
         }
         
+        
         self.height = ((numberOfSection * 35) + (numberOfRow * 44))
         
         self.viewHeightConstraint.constant = CGFloat(self.height)
         
         self.view.layoutIfNeeded()
         
-        self.scrollView.contentSize = CGSizeMake(tableView1.frame.width, CGFloat(self.height + 100))
+        if(numberOfRow == 0)
+        {
+            self.noRecordView.hidden = false
+            self.scrollView.contentSize = CGSizeMake(tableView1.frame.width, (noimageIcon?.size.height)!)
+        }
+        else
+        {
+            self.noRecordView.hidden = true
+            self.scrollView.contentSize = CGSizeMake(tableView1.frame.width, CGFloat(self.height + 100))
+        }
         
         self.tableView1.reloadData()
     }
