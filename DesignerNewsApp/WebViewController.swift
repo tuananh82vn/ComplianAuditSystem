@@ -148,4 +148,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         webView.stopLoading()
         webView.delegate = nil
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController!.viewControllers.removeAtIndex(0)
+    }
 }

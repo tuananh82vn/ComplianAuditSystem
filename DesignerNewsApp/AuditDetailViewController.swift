@@ -266,5 +266,9 @@ class AuditDetailViewController: UIViewController , UITableViewDelegate, UITable
             return
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController!.viewControllers.removeAtIndex(0)
+    }
 
 }

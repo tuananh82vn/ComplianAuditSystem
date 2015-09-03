@@ -93,6 +93,9 @@ class MeetingAttendanceViewController: UIViewController , UITableViewDelegate, U
         self.navigationItem.titleView = NavView
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController!.viewControllers.removeAtIndex(0)
+    }
     
     func PopUpPickerHandle(textField: UITextField, controlPicker : PopDatePicker?){
         

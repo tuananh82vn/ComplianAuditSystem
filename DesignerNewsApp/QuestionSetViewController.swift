@@ -80,6 +80,10 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "refesh:",name:"refeshQuestion", object: nil)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController!.viewControllers.removeAtIndex(0)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(true)

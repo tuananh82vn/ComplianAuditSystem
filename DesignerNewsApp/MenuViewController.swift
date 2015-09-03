@@ -46,11 +46,9 @@ class MenuViewController: UIViewController {
         closeButtonPressed(self)
     }
 
-//    @IBAction func ChangeDomainButtonPressed(sender: AnyObject) {
-//        animateView()
-//        delegate?.menuViewControllerDidSelectChangeDomainMenu(self)
-//        closeButtonPressed(self)
-//    }
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController!.viewControllers.removeAtIndex(0)
+    }
     
     @IBAction func logoutButtonPressed(sender: AnyObject) {
         animateView()

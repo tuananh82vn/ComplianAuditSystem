@@ -50,6 +50,8 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         super.viewDidLoad()
         
         originalCenter = view.center
+        
+        println("Total:\(self.navigationController!.viewControllers.count)")
 
         //Check Internet
         WebApiService.checkInternet(false, completionHandler:
@@ -66,6 +68,10 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
                     alertview.setTextTheme(.Light)
                 }
         })
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController!.viewControllers.removeAtIndex(0)
     }
     
     func initData(){

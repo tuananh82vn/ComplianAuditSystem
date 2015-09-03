@@ -75,6 +75,10 @@ class ConfirmSubmitViewController: UIViewController , UIPopoverPresentationContr
 
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController!.viewControllers.removeAtIndex(0)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         

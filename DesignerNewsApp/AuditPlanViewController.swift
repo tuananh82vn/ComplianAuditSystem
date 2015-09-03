@@ -85,6 +85,10 @@ class AuditPlanViewController: UIViewController , UITableViewDelegate, UITableVi
         self.navigationItem.titleView = NavView
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController!.viewControllers.removeAtIndex(0)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
