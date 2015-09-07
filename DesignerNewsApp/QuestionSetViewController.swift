@@ -41,6 +41,8 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
         
         super.viewDidLoad()
         
+        self.navigationController?.navigationBarHidden = false
+        
         btb_Title.transform = CGAffineTransformMakeScale(-1.0, 1.0);
         btb_Title.titleLabel!.transform = CGAffineTransformMakeScale(-1.0, 1.0);
         btb_Title.imageView!.transform = CGAffineTransformMakeScale(-1.0, 1.0);

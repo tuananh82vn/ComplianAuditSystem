@@ -49,6 +49,9 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
         
         super.viewDidLoad()
         
+        self.navigationController?.navigationBarHidden = false
+
+        
         originalCenter = view.center
         
         //println("Total:\(self.navigationController!.viewControllers.count)")
@@ -71,7 +74,7 @@ class AuditActivitiesViewController: UIViewController, UICollectionViewDataSourc
     }
     
     override func viewDidDisappear(animated: Bool) {
-        self.navigationController!.viewControllers.removeAtIndex(0)
+        //self.navigationController!.viewControllers.removeAtIndex(0)
     }
     
     func initData(){

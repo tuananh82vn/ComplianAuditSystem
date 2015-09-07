@@ -15,7 +15,7 @@ class NavigationController: UINavigationController {
         // Status bar white font
         self.navigationBar.barStyle = UIBarStyle.Black
         self.navigationBar.tintColor = UIColor.whiteColor()
-        
+        self.navigationBar.hidden = false
         // Do any additional setup after loading the view.
     }
 
