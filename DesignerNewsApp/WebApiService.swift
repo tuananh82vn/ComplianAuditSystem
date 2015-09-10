@@ -1218,6 +1218,9 @@ struct WebApiService {
                         if let Items = jsonObject["Item"].dictionaryObject {
                             
                             arrayReturn = JSONParser.parseAuditActivityQuestionSetQuestionResponseList(Items)
+                            
+                            //println("Done - Load Question Data :\(QuestionRespond.AuditActivityQuestionSetId)")
+                            
                             response (objectReturn : arrayReturn)
                         }
                     }
@@ -1264,7 +1267,7 @@ struct WebApiService {
                             
                             arrayReturn = JSONParser.parseQuestionChartList(Items)
                             
-                            //println("Finish:\(LoadIndex)")
+                            //println("Finish Load Question Chart:\(LoadIndex)")
                             
                             response (objectReturn : arrayReturn)
                         }

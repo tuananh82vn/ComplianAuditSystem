@@ -36,6 +36,14 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     var noRecordView = UIView()
     var noimageIcon = UIImage(named: "norecord")
     
+    var GlobalUserInitiatedQueue: dispatch_queue_t {
+        return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)
+    }
+    
+    var GlobalMainQueue: dispatch_queue_t {
+        return dispatch_get_main_queue()
+    }
+    
     
     override func viewDidLoad() {
         
@@ -265,26 +273,35 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func LoadDataOfQuestionSet(Index : Int){
         
+            var downloadGroup = dispatch_group_create() // 2
+        
             var item = self.questionSet[Index]
         
             self.filterQuestion.AuditActivityQuestionSetId = item.AuditActivityQuestionSetId
         
-            //println("1 Question Set Id : \(item.AuditActivityQuestionSetId)")
+            println("1 - Begin Load Question Data Id : \(item.AuditActivityQuestionSetId)")
         
+            dispatch_group_enter(downloadGroup)
+
             //load question set by Id
             WebApiService.getAuditActivityQuestionSetQuestionResponseList(LocalStore.accessToken()!, QuestionRespond: self.filterQuestion ) { objectReturn in
                 
                 if let temp1 = objectReturn {
-                    
-                    
+
                     item.QuestionBySectionList = temp1.QuestionBySectionList
                     
                     self.tableView1.reloadData()
                     
+                    println("1 - Done Load Question Data Id : \(item.AuditActivityQuestionSetId)")
+                    
+                    dispatch_group_leave(downloadGroup)
+ 
                 }
             }
         
-            //println("2 Finish load Question Data")
+            println("2 - Begin Load Question Chart Id : \(self.filterQuestion.AuditActivityQuestionSetId)")
+        
+            dispatch_group_enter(downloadGroup)
         
             //load chart data By Id
             WebApiService.getAuditActivityQuestionSetQuestionResponsePieChart(LocalStore.accessToken()!, AuditActivityQuestionSetId: self.filterQuestion.AuditActivityQuestionSetId, LoadIndex: Index ) { objectReturn in
@@ -292,17 +309,27 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
                 if let temp2 = objectReturn {
                 
                     item.QuestionChart = temp2
+                    
+                    println("2 - Done Load Question Chart Id : \(item.AuditActivityQuestionSetId)")
+                    
+                    dispatch_group_leave(downloadGroup)
+
+                }
+            }
+        
+            dispatch_group_notify(downloadGroup, GlobalMainQueue) { // 2
                 
-                    self.IndexLoaded++
+                self.IndexLoaded++
                 
-                    if( self.IndexLoaded == self.questionSet.count) {
-                    
-                        //println("3 Finish load Chart")
-                    
-                        self.displayById(self.selectedIndex)
-                    
-                        self.view.hideLoading()
-                    }
+                println("3 - Finish both data and chart")
+                
+                if( self.IndexLoaded == self.questionSet.count) {
+                
+                    println("4 - All Done ")
+                
+                    self.displayById(self.selectedIndex)
+                            
+                    self.view.hideLoading()
                 }
             }
 
@@ -311,14 +338,16 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func LoadQuestionData(){
         
-            //println("Begin to load Question Data")
-        
             self.IndexLoaded = 0
             var index = 0
+
             while index <= self.questionSet.count-1 {
+                
                 self.LoadDataOfQuestionSet(index)
                 index++
+                
             }
+
     }
     
    	func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
@@ -343,7 +372,7 @@ class QuestionSetViewController: UIViewController, AKPickerViewDataSource, AKPic
     
     func displayById(Index : Int)
     {
-        //println("Display \(Index)")
+        println("Display Question Dau Tien")
         
         //Reload chart view
         var questionText1 = [String]()
