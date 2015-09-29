@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -17,30 +17,26 @@
                         <constraint firstAttribute="height" constant="32" id="GIC-Co-wSg"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Vff-fb-3s2">
-                    <rect key="frame" x="90" y="252" width="420" height="95"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="95" id="GX4-Jj-I9G"/>
-                        <constraint firstAttribute="width" constant="420" id="TfO-VB-6eU"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Synotive. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="uEv-GS-xYW">
-                    <rect key="frame" x="80" y="571" width="441" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 rulethirteen Pty Ltd. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="uEv-GS-xYW">
+                    <rect key="frame" x="80" y="571" width="453" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="mobiom" translatesAutoresizingMaskIntoConstraints="NO" id="O6U-OG-OWO">
+                    <rect key="frame" x="145" y="266" width="310" height="68"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="uEv-GS-xYW" secondAttribute="trailing" constant="79" id="Ach-0R-4fi"/>
+                <constraint firstAttribute="trailing" secondItem="uEv-GS-xYW" secondAttribute="trailing" constant="67" id="Ach-0R-4fi"/>
                 <constraint firstItem="uEv-GS-xYW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="Bgx-dz-HzL"/>
-                <constraint firstAttribute="centerX" secondItem="uEv-GS-xYW" secondAttribute="centerX" id="Cy8-nP-k0t"/>
-                <constraint firstAttribute="centerY" secondItem="Vff-fb-3s2" secondAttribute="centerY" id="FoW-lA-6EN"/>
+                <constraint firstAttribute="centerX" secondItem="uEv-GS-xYW" secondAttribute="centerX" constant="-6.5" id="Cy8-nP-k0t"/>
+                <constraint firstAttribute="trailing" secondItem="O8H-M0-QKM" secondAttribute="trailing" id="LfU-WO-TkP"/>
+                <constraint firstAttribute="centerY" secondItem="O6U-OG-OWO" secondAttribute="centerY" id="M0v-P9-UG3"/>
                 <constraint firstItem="O8H-M0-QKM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="M61-gt-g2y"/>
+                <constraint firstAttribute="centerX" secondItem="O6U-OG-OWO" secondAttribute="centerX" id="Swy-r1-lxQ"/>
                 <constraint firstAttribute="bottom" secondItem="uEv-GS-xYW" secondAttribute="bottom" constant="8" id="dFH-kO-CFo"/>
-                <constraint firstItem="O8H-M0-QKM" firstAttribute="centerX" secondItem="Vff-fb-3s2" secondAttribute="centerX" id="oZr-aH-XU3"/>
-                <constraint firstAttribute="centerX" secondItem="Vff-fb-3s2" secondAttribute="centerX" id="rCH-Ip-DRs"/>
                 <constraint firstItem="O8H-M0-QKM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vN7-i3-Iup"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -49,6 +45,6 @@
         </view>
     </objects>
     <resources>
-        <image name="logo" width="894" height="175"/>
+        <image name="mobiom" width="310" height="68"/>
     </resources>
 </document>
